@@ -1,6 +1,7 @@
 # ng2-redux
-Angular 2 bindings for Redux.
+###### Angular 2 bindings for Redux.
 
+For Angular 1 see [ng-redux](https://github.com/wbuchwalter/ng-redux)
 
 ##### This is a work very much in progress, use at your own risk :)
 
