@@ -1,0 +1,38 @@
+{
+  "name": "ng2-redux",
+  "version": "0.0.1",
+  "description": "Angular 2 bindings for Redux",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "rm -rf lib && `npm bin`/babel src --out-dir lib",
+    "test": "mocha --compilers js:babel/register --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/wbuchwalter/ng2-redux.git"
+  },
+  "keywords": [
+    "Redux",
+    "Flux",
+    "Angular"
+  ],
+  "author": "William Buchwalter <wbuchwalter@gmail.com> (http://github.com/wbuchwalter)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wbuchwalter/ng2-redux/issues"
+  },
+  "homepage": "https://github.com/wbuchwalter/ng2-redux#readme",
+  "devDependencies": {
+    "babel": "^5.8.12",
+    "babel-loader": "^5.3.2",
+    "expect": "^1.8.0",
+    "mocha": "^2.2.5",
+    "webpack": "^1.10.5"
+  },
+  "peerDependencies": {
+    "redux": "^1.0.0 || 1.0.0-alpha || 1.0.0-rc"
+  },
+  "dependencies": {
+    "invariant": "^2.1.0"
+  }
+}
