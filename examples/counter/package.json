@@ -28,10 +28,11 @@
   "homepage": "https://github.com/gaearon/redux#readme",
   "dependencies": {
     "angular2": "2.0.0-alpha.30",
-    "rtts_assert": "2.0.0-alpha.30",
+    "ng2-redux": "0.0.1",
     "react": "^0.13.3",
     "redux": "^1.0.0-rc",
     "reflect-metadata": "^0.1.0",
+    "rtts_assert": "2.0.0-alpha.30",
     "zone.js": "^0.5.2"
   },
   "devDependencies": {
