@@ -25,7 +25,7 @@ Note: if you are not familiar with this syntax, go and check out the [MDN Guide 
 If you haven't, check out [reselect](https://github.com/faassen/reselect), an awesome tool to create and combine selectors.
 
 
-This returned object will be passed as argument to the callback provided whenever the state changes.
+The returned object will be passed as argument to the callback provided whenever the state changes.
 ngRedux checks for shallow equality of the state's selected slice whenever the Store is updated, and will call the callback only if there is a change.
 ##### Important: It is assumed that you never mutate your states, if you do mutate them, ng-redux will not execute the callback properly.
 See [Redux's doc](http://gaearon.github.io/redux/docs/basics/Reducers.html) to understand why you should not mutate your states.
