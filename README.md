@@ -8,7 +8,6 @@ For Angular 1 see [ng-redux](https://github.com/wbuchwalter/ng-redux)
 ## Overview
 
 ngRedux lets you easily connect your angular components with Redux.
-the API is straightforward: 
 
 ```JS
 ngRedux.connect(selector, callback, disableCaching = false);
