@@ -33,6 +33,7 @@
     "redux": "^1.0.0 || 1.0.0-alpha || 1.0.0-rc"
   },
   "dependencies": {
-    "invariant": "^2.1.0"
+    "invariant": "^2.1.0",
+    "lodash": "^3.10.1"
   }
 }
