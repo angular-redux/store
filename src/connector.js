@@ -8,10 +8,10 @@ export default class Connector {
   constructor(store) {
     this._store = store;
     this._defaultMapStateToTarget = () => ({});
-    this._defaultMapDispatchToTarget = dispatch => ({dispatch});
+    this._defaultMapDispatchToTarget = dispatch => ({ dispatch });
   }
 
-  connect(mapStateToTarget, mapDispatchToTarget) {
+  connect = (mapStateToTarget, mapDispatchToTarget) => {
 
     const finalMapStateToTarget = mapStateToTarget || this._defaultMapStateToTarget;
 
@@ -56,24 +56,24 @@ export default class Connector {
   }
 
 
- updateTarget(target, StateSlice, dispatch) {
-  if(_.isFunction(target)) {
-    target(StateSlice, dispatch);
-  } else {
-    _.assign(target, StateSlice, dispatch);
+  updateTarget(target, StateSlice, dispatch) {
+    if (_.isFunction(target)) {
+      target(StateSlice, dispatch);
+    } else {
+      _.assign(target, StateSlice, dispatch);
+    }
   }
-}
 
- getStateSlice(state, mapStateToScope) {
-  const slice = mapStateToScope(state);
+  getStateSlice(state, mapStateToScope) {
+    const slice = mapStateToScope(state);
 
-  invariant(
-    _.isPlainObject(slice),
-    '`mapStateToScope` must return an object. Instead received %s.',
-    slice
-    );
+    invariant(
+      _.isPlainObject(slice),
+      '`mapStateToScope` must return an object. Instead received %s.',
+      slice
+      );
 
-  return slice;
-}
+    return slice;
+  }
 
 }
