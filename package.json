@@ -31,7 +31,7 @@
     "webpack": "^1.10.5"
   },
   "peerDependencies": {
-    "redux": "^1.0.0 || 1.0.0-alpha || 1.0.0-rc"
+    "redux": "^2.0.0"
   },
   "dependencies": {
     "angular2": "^2.0.0-alpha.30",
