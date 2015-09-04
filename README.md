@@ -117,4 +117,4 @@ This means that you are free to use Redux basic API in advanced cases where `con
 
 
 ## Using DevTools
---Todo
+*Coming soon*
