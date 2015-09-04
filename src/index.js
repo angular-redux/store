@@ -2,7 +2,7 @@ import Connector from './connector';
 import {bind, Injector} from 'angular2/di';
 let redux = require('redux');
 
-export function createRedux(store) {
+export function provide(store) {
   const _connector = new Connector(store);
 
   return bind('ngRedux').toFactory(() => {
