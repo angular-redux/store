@@ -1,5 +1,5 @@
-import shallowEqual from './utils/shallowEqual';
-import wrapActionCreators from './utils/wrapActionCreators';
+import shallowEqual from '../utils/shallowEqual';
+import wrapActionCreators from '../utils/wrapActionCreators';
 import invariant from 'invariant';
 import _ from 'lodash';
 

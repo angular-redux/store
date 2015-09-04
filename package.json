@@ -27,6 +27,7 @@
     "babel-loader": "^5.3.2",
     "expect": "^1.8.0",
     "mocha": "^2.2.5",
+    "sinon": "^1.16.1",
     "webpack": "^1.10.5"
   },
   "peerDependencies": {
