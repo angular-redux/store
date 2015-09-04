@@ -3,6 +3,8 @@
 
 For Angular 1 see [ng-redux](https://github.com/wbuchwalter/ng-redux)
 
+[![npm version](https://img.shields.io/npm/v/ng2-redux.svg?style=flat-square)](https://www.npmjs.com/package/ng2-redux)
+
 ngRedux lets you easily connect your angular components with Redux.
 
 
