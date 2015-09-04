@@ -3,103 +3,116 @@
 
 For Angular 1 see [ng-redux](https://github.com/wbuchwalter/ng-redux)
 
-##### This is a work very much in progress, use at your own risk :)
-
-## Overview
-
 ngRedux lets you easily connect your angular components with Redux.
 
-```JS
-ngRedux.connect(selector, callback, disableCaching = false);
-//OR
-ngRedux.connect([selector1, selector2, ...], callback, disableCaching = false);
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [API](#api)
+- [Using DevTools](#using-devtools)
+
+## Installation
+
+```js
+npm install --save ng2-redux
 ```
 
-Where selector is a function taking for single argument the entire redux Store's state (a plain JS object) and returns another object, which is the slice of the state that your component is interested in.
-e.g:
-```JS
-state => state.todos
-```
-Note: if you are not familiar with this syntax, go and check out the [MDN Guide on fat arrow  functions (ES2015)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
-
-If you haven't, check out [reselect](https://github.com/faassen/reselect), an awesome tool to create and combine selectors.
-
-
-The returned object will be passed as argument to the callback provided whenever the state changes.
-ngRedux checks for shallow equality of the state's selected slice whenever the Store is updated, and will call the callback only if there is a change.
-##### Important: It is assumed that you never mutate your states, if you do mutate them, ng-redux will not execute the callback properly.
-See [Redux's doc](http://gaearon.github.io/redux/docs/basics/Reducers.html) to understand why you should not mutate your states.
-If you have a good reason to mutate your states, you can still [disable caching](#Disable-caching) altogether.
-
-
-## Getting Started
+## Quick Start
 
 #### Initialization
-You need to pass Redux Store to ng-redux via ```$ngReduxProvider``` :
 
 ```JS
+import {bootstrap} from 'angular2/angular2';
+import {bind} from 'angular2/di';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import {App} from './containers/App';
+import {provide} from  'ng2-redux';
+import {rootReducer} from './reducers';
+
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(rootReducer);
 
 bootstrap(
   App,
-  [bind('ngRedux').toFactory(() => {
-   	return new ngRedux(store);
-   })]
-);
+  [provide(store)]
+  );
 ```
 
 #### Usage
+
 ```JS
-@Component(...)
-@View(...)
-class SmartComponent {
+import * as CounterActions from '../actions/CounterActions';
 
-  constructor(@Inject('ngRedux') ngRedux) {
-    this._ngRedux = ngRedux;
-    ngRedux.connect(state => state.counter, counter => this.counter = counter);
+class CounterApp {
+  constructor( @Inject('ngRedux') ngRedux) {
+    this.unsubscribe = ngRedux.connect(this.mapStateToScope, this.mapDispatchToProps)(this);
   }
 
-  onInit() {
-    this.actions = bindActionCreators(CounterActions, this._ngRedux.getStore().dispatch);
-  }
+  onInit() {}
 
   onDestroy() {
-    this._ngRedux.disconnect();
+    this.unsubscribe();
+  }
+
+  mapStateToScope(state) {
+    return {
+      counter: state.counter
+    };
+  }
+
+  mapDispatchToProps(dispatch) {
+    return { actions: bindActionCreators(CounterActions, dispatch) };
   }
 }
 ```
 
-##### Note: The callback provided to ```connect``` will be called once directly after creation to allow initialization of your component states
+## API
 
+### `provide(store)`
 
+Provide the Redux store to `connect`.
 
-You can also grab multiple slices of the state by passing an array of selectors:
+#### Arguments: 
+* `store` \(*Object*): Redux's store instance
 
-```JS
-  ngRedux.connect([
-  state => state.todos,
-  state => state.users
-  ],
-  (todos, users) => { 
-      this.todos = todos
-      this.users = users;
-  });
+### `connect(mapStateToTarget, [mapDispatchToTarget])(target)`
+
+Connects an Angular component to Redux.
+
+#### Arguments
+* `mapStateToTarget` \(*Function*): connect will subscribe to Redux store updates. Any time it updates, mapStateToTarget will be called. Its result must be a plain object, and it will be merged into `target`. If you have a component which simply triggers actions without needing any state you can pass null to `mapStateToTarget`.
+* [`mapDispatchToTarget`] \(*Object* or *Function*): Optional. If an object is passed, each function inside it will be assumed to be a Redux action creator. An object with the same function names, but bound to a Redux store, will be merged onto `target`. If a function is passed, it will be given `dispatch`. It’s up to you to return an object that somehow uses `dispatch` to bind action creators in your own way. (Tip: you may use the [`bindActionCreators()`](http://gaearon.github.io/redux/docs/api/bindActionCreators.html) helper from Redux.).
+
+*You then need to invoke the function a second time, with `target` as parameter:*
+* `target` \(*Object* or *Function*): If passed an object, the results of `mapStateToTarget` and `mapDispatchToTarget` will be merged onto it. If passed a function, the function will receive the results of `mapStateToTarget` and `mapDispatchToTarget` as parameters.
+
+e.g:
+```JS 
+connect(this.mapState, this.mapDispatch)(this);
+//Or
+connect(this.mapState, this.mapDispatch)((selectedState, actions) => {/* ... */});
 ```
 
 
-#### Accessing Redux' Store
-You don't need to create another service to get hold of Redux's store (although you can).
-You can access the store via ```ngRedux.getStore()```:
+#### Remarks
+* The `mapStateToTarget` function takes a single argument of the entire Redux store’s state and returns an object to be passed as props. It is often called a selector. Use reselect to efficiently compose selectors and compute derived data.
+
+
+### Store API
+All of redux's store methods (i.e. `dispatch`, `subscribe` and `getState`) are exposed by $ngRedux and can be accessed directly. For example:
 
 ```JS
-redux.bindActionCreators(actionCreator, ngRedux.getStore().dispatch);
+ngRedux.subscribe(() => {
+    let state = $ngRedux.getState();
+    //...
+})
 ```
 
-#### Disabling caching
-Each time Redux's Store update, ng-redux will check if the slices specified via 'selectors' have changed, and if so will execute the provided callback.
-You can disable this behaviour, and force the callback to be executed even if the slices didn't change by setting ```disableCaching``` to true:
+This means that you are free to use Redux basic API in advanced cases where `connect`'s API would not fill your needs.
 
-```JS
-reduxConnector.connect(state => state.todos, todos => this.todos = todos, true);
-```
+
+## Using DevTools
+--Todo
