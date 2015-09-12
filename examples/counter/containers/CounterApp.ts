@@ -12,7 +12,10 @@ import { Inject } from 'angular2/di';
 @View({
   directives: [Counter],
   template: `
-  <counter [counter]="counter" [actions]="actions"></counter>
+  <counter [counter]="counter"
+    [increment]="increment"
+    [decrement]="decrement"
+    [increment-If-Odd]="incrementIfOdd"></counter>
   `
 })
 export class CounterApp {
@@ -36,6 +39,6 @@ export class CounterApp {
   }
 
   mapDispatchToProps(dispatch) {
-    return { actions: bindActionCreators(CounterActions, dispatch) };
+    return bindActionCreators(CounterActions, dispatch);
   }
 }
