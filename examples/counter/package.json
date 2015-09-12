@@ -31,6 +31,7 @@
     "ng2-redux": "2.0.0-alpha",
     "react": "^0.13.3",
     "redux": "^1.0.0-rc",
+    "redux-thunk": "^0.1.0",
     "reflect-metadata": "^0.1.0",
     "rtts_assert": "2.0.0-alpha.30",
     "zone.js": "^0.5.2"
