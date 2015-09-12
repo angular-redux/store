@@ -2,7 +2,6 @@ import {Component, View, onInit, onDestroy} from 'angular2/angular2';
 import {bindActionCreators} from 'redux';
 import {Counter} from '../components/Counter';
 import * as CounterActions from '../actions/CounterActions';
-import Connector from '../redux/connector';
 import { Inject } from 'angular2/di';
 
 @Component({
@@ -17,6 +16,9 @@ import { Inject } from 'angular2/di';
   `
 })
 export class CounterApp {
+
+  protected unsubscribe: Function;
+
   constructor( @Inject('ngRedux') ngRedux) {
     this.unsubscribe = ngRedux.connect(this.mapStateToScope, this.mapDispatchToProps)(this);
   }
