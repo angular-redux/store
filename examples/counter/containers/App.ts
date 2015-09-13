@@ -1,14 +1,44 @@
-import {Component, View} from 'angular2/angular2';
-import {CounterApp} from './CounterApp';
+import {Component, View, onInit, onDestroy} from 'angular2/angular2';
+import {bindActionCreators} from 'redux';
+import {Counter} from '../components/Counter';
+import * as CounterActions from '../actions/CounterActions';
+import { Inject } from 'angular2/di';
 
 @Component({
   selector: 'root',
+  lifecycle: [onInit, onDestroy],
+  bindings: []
 })
 @View({
-  directives: [ CounterApp ],
+  directives: [Counter],
   template: `
-  <counter-app></counter-app>
+  <counter [counter]="counter"
+    [increment]="increment"
+    [decrement]="decrement"
+    [increment-If-Odd]="incrementIfOdd"></counter>
   `
 })
 export class App {
+
+  protected unsubscribe: Function;
+
+  constructor( @Inject('ngRedux') ngRedux) {
+    this.unsubscribe = ngRedux.connect(this.mapStateToScope, this.mapDispatchToProps)(this);
+  }
+
+  onInit() {}
+
+  onDestroy() {
+    this.unsubscribe();
+  }
+
+  mapStateToScope(state) {
+    return {
+      counter: state.counter
+    };
+  }
+
+  mapDispatchToProps(dispatch) {
+    return bindActionCreators(CounterActions, dispatch);
+  }
 }
