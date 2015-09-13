@@ -15,7 +15,9 @@ import { Inject } from 'angular2/di';
   <counter [counter]="counter"
     [increment]="increment"
     [decrement]="decrement"
-    [increment-If-Odd]="incrementIfOdd"></counter>
+    [increment-If-Odd]="incrementIfOdd"
+    [increment-Async]="incrementAsync">
+  </counter>
   `
 })
 export class App {
