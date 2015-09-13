@@ -1,2 +1,0 @@
-export const INCREMENT_COUNTER:string = 'INCREMENT_COUNTER';
-export const DECREMENT_COUNTER:string = 'DECREMENT_COUNTER';

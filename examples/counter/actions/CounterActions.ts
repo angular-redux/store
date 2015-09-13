@@ -1,4 +1,5 @@
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../constants/ActionTypes';
+export const INCREMENT_COUNTER:string = 'INCREMENT_COUNTER';
+export const DECREMENT_COUNTER:string = 'DECREMENT_COUNTER';
 
 export var increment = () => {
   return {
