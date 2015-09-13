@@ -20,7 +20,7 @@ import { Inject } from 'angular2/di';
   </counter>
   `
 })
-export class App {
+export default class App {
 
   protected unsubscribe: Function;
 
