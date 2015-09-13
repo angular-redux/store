@@ -25,7 +25,7 @@ export default class App {
   protected unsubscribe: Function;
 
   constructor( @Inject('ngRedux') ngRedux) {
-    this.unsubscribe = ngRedux.connect(this.mapStateToScope, this.mapDispatchToProps)(this);
+    this.unsubscribe = ngRedux.connect(this.mapState, this.mapDispatch)(this);
   }
 
   onInit() {}
@@ -34,13 +34,13 @@ export default class App {
     this.unsubscribe();
   }
 
-  mapStateToScope(state) {
+  mapState(state) {
     return {
       counter: state.counter
     };
   }
 
-  mapDispatchToProps(dispatch) {
+  mapDispatch(dispatch) {
     return bindActionCreators(CounterActions, dispatch);
   }
 }
