@@ -1,13 +1,10 @@
 import {bootstrap} from 'angular2/angular2';
 import {bind} from 'angular2/di';
-import {createStore, applyMiddleware} from 'redux';
-const thunk = require('redux-thunk');
-import {App} from './containers/App';
+import App from './containers/App';
+import configureStore from './store/configureStore';
 const provider = require('ng2-redux').provider;
-import rootReducer from './reducers/index';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const store = createStoreWithMiddleware(rootReducer);
+const store = configureStore();
 
 bootstrap(
   App,
