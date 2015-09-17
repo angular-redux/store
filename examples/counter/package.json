@@ -42,7 +42,7 @@
     "node-libs-browser": "^0.5.2",
     "react-hot-loader": "^1.2.7",
     "tsd": "^0.6.4",
-    "typescript": "git://github.com/Microsoft/TypeScript.git#release-1.5",
+    "typescript": "^1.6.2",
     "typescript-simple-loader": "^0.2.0",
     "webpack": "^1.9.11",
     "webpack-dev-server": "^1.9.0"
