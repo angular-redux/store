@@ -1,23 +1,41 @@
 {
-  "version": "1.5.0",
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "declaration": false,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "noLib": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "sourceMap": true,
-    "listFiles": true,
-    "outDir": "dist"
-  },
-  "files": [
-    "./node_modules/typescript/bin/lib.dom.d.ts",
-    "./typings/_custom/custom.d.ts",
-    "./typings/tsd.d.ts",
-    "./containers/App.ts",
-    "./bootstrap.ts"
-  ]
+    "version": "1.6.2",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "listFiles": true,
+        "moduleResolution": "classic",
+        "outDir": "dist"
+    },
+    "filesGlob": [
+        "./**/*.ts",
+        "!./node_modules/**/*.ts"
+    ],
+    "files": [
+        "./actions/CounterActions.ts",
+        "./components/Counter.ts",
+        "./components/hello.ts",
+        "./containers/App.ts",
+        "./index.ts",
+        "./reducers/counter.ts",
+        "./reducers/index.ts",
+        "./store/configureStore.ts",
+        "./typings/_custom/browser.d.ts",
+        "./typings/_custom/custom.d.ts",
+        "./typings/_custom/ng2.d.ts",
+        "./typings/_custom/webpack.d.ts",
+        "./typings/angular2/angular2.d.ts",
+        "./typings/es6-promise/es6-promise.d.ts",
+        "./typings/redux/redux.d.ts",
+        "./typings/rx/rx-lite.d.ts",
+        "./typings/rx/rx.d.ts",
+        "./typings/tsd.d.ts"
+    ]
 }
