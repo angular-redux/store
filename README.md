@@ -119,8 +119,6 @@ This means that you are free to use Redux basic API in advanced cases where `con
 
 ## Using DevTools
 
-## Using DevTools
-
 In order to use Redux DevTools with your angular app, you need to install [react](https://www.npmjs.com/package/react), [react-redux](https://www.npmjs.com/package/react-redux) and [redux-devtools](https://www.npmjs.com/package/redux-devtools) as development dependencies.
 
 You can find a sample devtools implentation in the [counter example](https://github.com/wbuchwalter/ng2-redux/blob/master/examples/counter/devTools.js)
