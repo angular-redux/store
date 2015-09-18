@@ -1,6 +1,6 @@
 {
   "name": "ng2-redux",
-  "version": "2.0.0-alpha.2",
+  "version": "2.0.0-alpha.3",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/index.js",
   "scripts": {
@@ -28,13 +28,14 @@
     "expect": "^1.8.0",
     "mocha": "^2.2.5",
     "sinon": "^1.16.1",
-    "webpack": "^1.10.5"
+    "webpack": "^1.10.5",
+    "angular2": "^2.0.0-alpha.30"
   },
   "peerDependencies": {
-    "redux": "^2.0.0"
+    "redux": "^2.0.0 || ^3.0.0",
+    "angular2": "^2.0.0-alpha.30"
   },
   "dependencies": {
-    "angular2": "^2.0.0-alpha.30",
     "invariant": "^2.1.0",
     "lodash": "^3.10.1"
   }
