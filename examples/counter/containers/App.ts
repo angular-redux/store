@@ -18,13 +18,15 @@ import { Inject } from 'angular2/di';
     [increment-If-Odd]="incrementIfOdd"
     [increment-Async]="incrementAsync">
   </counter>
+  <dev
   `
 })
 export default class App {
 
   protected unsubscribe: Function;
 
-  constructor( @Inject('ngRedux') ngRedux) {
+  constructor( @Inject('ngRedux') ngRedux, @Inject('devTools') devTools) {
+    devTools.start(ngRedux);
     this.unsubscribe = ngRedux.connect(this.mapState, this.mapDispatch)(this);
   }
 

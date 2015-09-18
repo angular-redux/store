@@ -3,10 +3,13 @@ import {bind} from 'angular2/di';
 import App from './containers/App';
 import configureStore from './store/configureStore';
 const provider = require('ng2-redux').provider;
-
+const devTools = require('./devTools');
 const store = configureStore();
 
 bootstrap(
   App,
-  [provider(store)]
-  );
+  [
+    provider(store),
+    devTools
+  ]
+);
