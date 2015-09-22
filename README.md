@@ -51,7 +51,7 @@ import * as CounterActions from '../actions/CounterActions';
 
 class CounterApp {
   constructor( @Inject('ngRedux') ngRedux) {
-    this.unsubscribe = ngRedux.connect(this.mapStateToScope, this.mapDispatchToProps)(this);
+    this.unsubscribe = ngRedux.connect(this.mapStateToThis, this.mapDispatchToThis)(this);
   }
 
   onInit() {}
@@ -60,13 +60,13 @@ class CounterApp {
     this.unsubscribe();
   }
 
-  mapStateToScope(state) {
+  mapStateToThis(state) {
     return {
       counter: state.counter
     };
   }
 
-  mapDispatchToProps(dispatch) {
+  mapDispatchToThis(dispatch) {
     return { actions: bindActionCreators(CounterActions, dispatch) };
   }
 }
@@ -94,7 +94,7 @@ Connects an Angular component to Redux.
 
 e.g:
 ```JS 
-connect(this.mapState, this.mapDispatch)(this);
+connect(this.mapStateToThis, this.mapDispatchToThis)(this);
 //Or
 connect(this.mapState, this.mapDispatch)((selectedState, actions) => {/* ... */});
 ```
