@@ -1,8 +1,7 @@
-import {Component, View, ON_PUSH} from 'angular2/angular2';
+import {Component, View} from 'angular2/angular2';
 
 @Component({
   selector: 'counter',
-  changeDetection: ON_PUSH,
   properties: [
     'counter',
     'increment',
@@ -12,7 +11,6 @@ import {Component, View, ON_PUSH} from 'angular2/angular2';
   ]
 })
 @View({
-  directives: [],
   template: `
   <p>
     Clicked: {{ counter }} times
@@ -23,6 +21,4 @@ import {Component, View, ON_PUSH} from 'angular2/angular2';
   </p>
   `
 })
-export class Counter {
-  constructor() {}
-}
+export class Counter {}
