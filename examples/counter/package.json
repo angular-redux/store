@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/wbuchwalter/ng2-redux#readme",
   "dependencies": {
-    "angular2": "2.0.0-alpha.30",
+    "angular2": "2.0.0-alpha.37",
     "ng2-redux": "2.0.0-alpha.3",
     "react": "^0.13.3",
     "redux": "^3.0.0",
