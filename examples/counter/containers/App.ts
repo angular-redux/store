@@ -2,7 +2,7 @@ import {Component, View, onDestroy} from 'angular2/angular2';
 import {bindActionCreators} from 'redux';
 import {Counter} from '../components/Counter';
 import * as CounterActions from '../actions/CounterActions';
-import { Inject } from 'angular2/di';
+import { Inject } from 'angular2/angular2';
 
 @Component({
   selector: 'root',
