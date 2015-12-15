@@ -1,6 +1,6 @@
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import React, { Component } from 'react';
-import {bind} from 'angular2/angular2';
+import {bind} from 'angular2/core';
 
 let devTools = bind('devTools').toFactory(() => {
     return {

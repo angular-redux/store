@@ -4,15 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'source-map',
   entry: [
-    // Angular 2 Deps
-    'zone.js',
-    'reflect-metadata',
-    'rtts_assert/rtts_assert',
-    'angular2/angular2',
-    //end Angular 2 Deps
-
-    // 'webpack-dev-server/client?http://localhost:3000',
-    // 'webpack/hot/only-dev-server',
+    './vendor.js',
     './index'
   ],
   output: {
@@ -28,7 +20,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.ts$/,  loader: 'typescript-simple', exclude: /node_modules/ },
+      { test: /\.ts$/,  loader: 'ts', exclude: /node_modules/ },
       { test: /\.js$/,  loader: 'babel', exclude: /node_modules/ }
     ]
   },

@@ -1,12 +1,10 @@
-import {Component, View, onDestroy} from 'angular2/angular2';
+import {Component, View, Inject} from 'angular2/core';
 import {bindActionCreators} from 'redux';
 import {Counter} from '../components/Counter';
 import * as CounterActions from '../actions/CounterActions';
-import { Inject } from 'angular2/angular2';
 
 @Component({
-  selector: 'root',
-  lifecycle: [onDestroy]
+  selector: 'root'
 })
 @View({
   directives: [Counter],
@@ -14,8 +12,8 @@ import { Inject } from 'angular2/angular2';
   <counter [counter]="counter"
     [increment]="increment"
     [decrement]="decrement"
-    [increment-if-odd]="incrementIfOdd"
-    [increment-async]="incrementAsync">
+    [incrementIfOdd]="incrementIfOdd"
+    [incrementAsync]="incrementAsync">
   </counter>
   `
 })

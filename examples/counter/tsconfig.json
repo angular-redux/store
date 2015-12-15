@@ -11,7 +11,7 @@
         "experimentalDecorators": true,
         "sourceMap": true,
         "listFiles": true,
-        "moduleResolution": "classic",
+        "moduleResolution": "node",
         "outDir": "dist"
     },
     "filesGlob": [
@@ -21,21 +21,11 @@
     "files": [
         "./actions/CounterActions.ts",
         "./components/Counter.ts",
-        "./components/hello.ts",
         "./containers/App.ts",
         "./index.ts",
         "./reducers/counter.ts",
         "./reducers/index.ts",
         "./store/configureStore.ts",
-        "./typings/_custom/browser.d.ts",
-        "./typings/_custom/custom.d.ts",
-        "./typings/_custom/ng2.d.ts",
-        "./typings/_custom/webpack.d.ts",
-        "./typings/angular2/angular2.d.ts",
-        "./typings/es6-promise/es6-promise.d.ts",
-        "./typings/redux/redux.d.ts",
-        "./typings/rx/rx-lite.d.ts",
-        "./typings/rx/rx.d.ts",
         "./typings/tsd.d.ts"
     ]
 }

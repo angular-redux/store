@@ -1,5 +1,5 @@
 import Connector from './connector';
-import {bind, Injector} from 'angular2/angular2';
+import {bind, Injector} from 'angular2/core';
 let redux = require('redux');
 
 export function provider(store) {
