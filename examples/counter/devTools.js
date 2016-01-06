@@ -1,14 +1,14 @@
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import React, { Component } from 'react';
-import {bind} from 'angular2/core';
+import {provide} from 'angular2/core';
 
-let devTools = bind('devTools').toFactory(() => {
+let devTools = provide('devTools', {useFactory: () => {
     return {
       start: (ngRedux) => {
         startDevTools(ngRedux);
       }
     };
-  });
+  }});
 
 export default devTools;
 
@@ -30,4 +30,3 @@ class DevToolsReactComponent extends Component {
     );
   }
 }
-

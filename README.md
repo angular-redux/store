@@ -27,8 +27,7 @@ npm install --save ng2-redux
 #### Initialization
 
 ```JS
-import {bootstrap} from 'angular2/angular2';
-import {bind} from 'angular2/di';
+import {bootstrap} from 'angular2/platform/browser';
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {App} from './containers/App';
@@ -54,9 +53,9 @@ class CounterApp {
     this.unsubscribe = ngRedux.connect(this.mapStateToThis, this.mapDispatchToThis)(this);
   }
 
-  onInit() {}
+  ngOnInit() {}
 
-  onDestroy() {
+  ngOnDestroy() {
     this.unsubscribe();
   }
 
@@ -78,7 +77,7 @@ class CounterApp {
 
 Provide the Redux store to `connect`.
 
-#### Arguments: 
+#### Arguments:
 * `store` \(*Object*): Redux's store instance
 
 ### `connect(mapStateToTarget, [mapDispatchToTarget])(target)`
@@ -93,7 +92,7 @@ Connects an Angular component to Redux.
 * `target` \(*Object* or *Function*): If passed an object, the results of `mapStateToTarget` and `mapDispatchToTarget` will be merged onto it. If passed a function, the function will receive the results of `mapStateToTarget` and `mapDispatchToTarget` as parameters.
 
 e.g:
-```JS 
+```JS
 connect(this.mapStateToThis, this.mapDispatchToThis)(this);
 //Or
 connect(this.mapState, this.mapDispatch)((selectedState, actions) => {/* ... */});
