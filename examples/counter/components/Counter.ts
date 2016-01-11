@@ -1,16 +1,14 @@
-import {Component, View} from 'angular2/core';
+import {Component} from 'angular2/core';
 
 @Component({
   selector: 'counter',
-  properties: [
+  inputs: [
     'counter',
     'increment',
     'decrement',
     'incrementIfOdd',
     'incrementAsync'
-  ]
-})
-@View({
+  ],
   template: `
   <p>
     Clicked: {{ counter }} times

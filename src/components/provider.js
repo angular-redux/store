@@ -1,13 +1,13 @@
 import Connector from './connector';
-import {bind, Injector} from 'angular2/core';
+import {provide, Injector} from 'angular2/core';
 let redux = require('redux');
 
 export function provider(store) {
   const _connector = new Connector(store);
 
-  return bind('ngRedux').toFactory(() => {
+  return provide('ngRedux', {useFactory: () => {
     return { connect: _connector.connect, ...store};
-  });
+  }});
 }
 
 
@@ -27,6 +27,3 @@ export function applyInjectableMiddleware(middlewares) {
     return redux.applyMiddleware(...resolvedMiddlewares);
 }
 */
-
-
-
