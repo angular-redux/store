@@ -1,14 +1,7 @@
-import {Component} from 'angular2/core';
+import {Component, Input} from 'angular2/core';
 
 @Component({
   selector: 'counter',
-  inputs: [
-    'counter',
-    'increment',
-    'decrement',
-    'incrementIfOdd',
-    'incrementAsync'
-  ],
   template: `
   <p>
     Clicked: {{ counter }} times
@@ -19,4 +12,11 @@ import {Component} from 'angular2/core';
   </p>
   `
 })
-export class Counter {}
+export class Counter {
+  @Input() counter: number;
+  @Input() increment: () => void;
+  @Input() decrement: () => void; 
+  @Input() incrementIfOdd: () => void;
+  @Input() incrementAsync: () => void;
+  
+}

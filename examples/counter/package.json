@@ -4,7 +4,9 @@
   "description": "Counter example for ng2-redux",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "postinstall": "typings install",
+    "start": "webpack-dev-server -d --inline --progress --no-info --config webpack.config.js",
+    "dev": "webpack-dev-server -d --inline --progress --no-info --config webpack.dev.config.js"
   },
   "repository": {
     "type": "git",
@@ -22,24 +24,27 @@
   },
   "homepage": "https://github.com/wbuchwalter/ng2-redux#readme",
   "dependencies": {
-    "angular2": "^2.0.0-beta.0",
-    "ng2-redux": "^2.0.0",
-    "react": "^0.13.3",
-    "redux": "^3.0.0",
-    "redux-devtools": "^2.1.0",
-    "redux-thunk": "^0.1.0",
-    "reflect-metadata": "^0.1.2",
+    "angular2": "2.0.0-beta.15",
+    "es6-shim": "0.35.0",
+    "ng2-redux": "^2.2.2-beta.2",
+    "react": "^0.14.8",
+    "redux": "^3.4.0",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.0.1",
+    "reflect-metadata": "0.1.2",
     "rtts_assert": "2.0.0-alpha.30",
-    "rxjs": "5.0.0-beta.0",
-    "zone.js": "^0.5.10"
+    "rxjs": "^5.0.0-beta.6",
+    "zone.js": "^0.6.10"
   },
   "devDependencies": {
     "babel-core": "^5.5.8",
     "babel-loader": "^5.1.4",
+    "cross-env": "^1.0.7",
     "node-libs-browser": "^0.5.2",
-    "tsd": "^0.6.4",
-    "typescript": "^1.6.2",
-    "typescript-simple-loader": "^0.2.0",
+    "ts-loader": "^0.8.1",
+    "typescript": "^1.8.7",
+    "typescript-simple-loader": "^0.3.8",
+    "typings": "^0.7.2",
     "webpack": "^1.9.11",
     "webpack-dev-server": "^1.9.0"
   }

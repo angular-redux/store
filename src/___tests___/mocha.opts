@@ -1,0 +1,3 @@
+--compilers ts:ts-node/register
+--compilers tsx:ts-node/register
+**/*.spec.ts

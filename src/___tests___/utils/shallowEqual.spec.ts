@@ -1,5 +1,5 @@
-import expect from 'expect';
-import shallowEqual from '../../src/utils/shallowEqual';
+import {expect} from 'chai';
+import shallowEqual from '../../utils/shallowEqual';
 
 describe('Utils', () => {
   describe('shallowEqual', () => {
@@ -9,14 +9,14 @@ describe('Utils', () => {
           { a: 1, b: 2, c: undefined },
           { a: 1, b: 2, c: undefined }
         )
-      ).toBe(true);
+      ).to.equal(true);
 
       expect(
         shallowEqual(
           { a: 1, b: 2, c: 3 },
           { a: 1, b: 2, c: 3 }
         )
-      ).toBe(true);
+      ).to.equal(true);
 
       const o = {};
       expect(
@@ -24,7 +24,7 @@ describe('Utils', () => {
           { a: 1, b: 2, c: o },
           { a: 1, b: 2, c: o }
         )
-      ).toBe(true);
+      ).to.equal(true);
     });
 
     it('should return false if first argument has too many keys', () => {
@@ -33,7 +33,7 @@ describe('Utils', () => {
           { a: 1, b: 2, c: 3 },
           { a: 1, b: 2 }
         )
-      ).toBe(false);
+      ).to.equal(false);
     });
 
     it('should return false if second argument has too many keys', () => {
@@ -42,7 +42,7 @@ describe('Utils', () => {
           { a: 1, b: 2 },
           { a: 1, b: 2, c: 3 }
         )
-      ).toBe(false);
+      ).to.equal(false);
     });
 
     it('should return false if arguments have different keys', () => {
@@ -51,7 +51,7 @@ describe('Utils', () => {
           { a: 1, b: 2, c: undefined },
           { a: 1, bb: 2, c: undefined }
         )
-      ).toBe(false);
+      ).to.equal(false);
     });
   });
 });

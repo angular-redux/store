@@ -1,12 +1,15 @@
 {
   "name": "ng2-redux",
-  "version": "2.0.2",
+  "version": "2.2.2-beta.3",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/index.js",
   "scripts": {
-    "build": "rm -rf lib && `npm bin`/babel src --out-dir lib",
-    "test": "mocha --compilers js:babel/register --recursive"
+    "build": "rimraf ./lib; tsc; rimraf ./lib/___tests___",
+    "postinstall": "typings install",
+    "test": "ts-node ./node_modules/mocha/bin/_mocha  --opts ./src/___tests___/mocha.opts",
+    "typings": "rimraf ./typings && typings install"
   },
+  "typings": "./lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/wbuchwalter/ng2-redux.git"
@@ -17,28 +20,42 @@
     "Angular"
   ],
   "author": "William Buchwalter <wbuchwalter@gmail.com> (http://github.com/wbuchwalter)",
+  "contributors": [
+    {
+      "name": "Evan Schultz",
+      "email": "evan@rangle.io",
+      "url": "https://github.com/e-schultz"
+    },
+    {
+      "name": "Michael Bennett",
+      "url": "https://github.com/bennett000"
+    }
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wbuchwalter/ng2-redux/issues"
+    "url": "https://github.com/angular-redux/ng2-redux/issues"
   },
-  "homepage": "https://github.com/wbuchwalter/ng2-redux#readme",
+  "homepage": "https://github.com/angular-redux/ng2-redux#readme",
   "devDependencies": {
-    "babel": "^5.8.12",
-    "babel-loader": "^5.3.2",
+    "chai": "^3.5.0",
     "expect": "^1.8.0",
-    "mocha": "^2.2.5",
+    "mocha": "^2.4.5",
+    "rimraf": "^2.5.2",
     "sinon": "^1.16.1",
-    "webpack": "^1.10.5",
-    "angular2": "^2.0.0-alpha.53",
-    "react": "^0.13.3",
-    "redux-devtools": "^2.1.0"
-  },
-  "peerDependencies": {
-    "redux": "^2.0.0 || ^3.0.0",
-    "angular2": "^2.0.0-alpha.53"
+    "sinon-chai": "^2.8.0",
+    "ts-loader": "^0.8.1",
+    "ts-node": "^0.5.5",
+    "typescript": "^1.8.7"
   },
   "dependencies": {
+    "angular2": "2.0.0-beta.14",
+    "es6-shim": "^0.35.0",
     "invariant": "^2.1.0",
-    "lodash": "^3.10.1"
+    "lodash": "^3.10.1",
+    "redux": "^3.4.0",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.2",
+    "typings": "^0.7.4",
+    "zone.js": "0.6.10"
   }
 }

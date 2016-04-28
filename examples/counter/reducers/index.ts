@@ -1,7 +1,9 @@
-import { combineReducers } from 'redux';
+import * as Redux from 'redux';
+const { combineReducers } = Redux;
+import { RootState } from '../store/configureStore';
 import counter from './counter';
 
-const rootReducer = combineReducers({
+const rootReducer = combineReducers<RootState>({
   counter
 });
 

@@ -3,7 +3,7 @@
 
 For Angular 1 see [ng-redux](https://github.com/wbuchwalter/ng-redux)
 
-[![build status](https://img.shields.io/travis/wbuchwalter/ng2-redux/master.svg?style=flat-square)](https://travis-ci.org/wbuchwalter/ng2-redux)
+[![Circle CI](https://circleci.com/gh/angular-redux/ng2-redux/tree/master.svg?style=svg)](https://circleci.com/gh/angular-redux/ng2-redux/tree/master)
 [![npm version](https://img.shields.io/npm/v/ng2-redux.svg?style=flat-square)](https://www.npmjs.com/package/ng2-redux)
 
 ngRedux lets you easily connect your angular components with Redux.
@@ -24,7 +24,7 @@ npm install --save ng2-redux
 
 ## Quick Start
 
-#### Initialization
+### Initialization
 
 ```JS
 import {bootstrap} from 'angular2/platform/browser';
@@ -45,11 +45,41 @@ bootstrap(
 
 #### Usage
 
+`ng2-redux` has two ways that it can be used. The first way is using the `ngRedux.connect` API, which will map the state and dispatch actions to the provided target. 
+
+There is also `ngRedux.select`, which will expose a slice of your state as an RxJs observable. 
+
+
+#### ngRedux.select 
 ```JS
 import * as CounterActions from '../actions/CounterActions';
+import {NgRedux} from 'ng2-redux';
+import {Observable} from 'rxjs';
 
 class CounterApp {
-  constructor( @Inject('ngRedux') ngRedux) {
+  count$: Observable<number>;
+  counterSubscription: Function;
+  
+  constructor(private ngRedux: NgRedux) { }
+
+  ngOnInit() {
+    this.count$ = this.ngRedux
+    .select(n=>n.counter)   
+    this.ngRedux.mapDispatchToTarget(CounterActions)
+   
+  }
+
+}
+```
+
+#### ngRedux.connect
+
+```JS
+import * as CounterActions from '../actions/CounterActions';
+import {NgRedux} from 'ng2-redux';
+
+class CounterApp {
+  constructor(ngRedux: NgRedux) {
     this.unsubscribe = ngRedux.connect(this.mapStateToThis, this.mapDispatchToThis)(this);
   }
 
@@ -70,6 +100,7 @@ class CounterApp {
   }
 }
 ```
+
 
 ## API
 
@@ -98,9 +129,33 @@ connect(this.mapStateToThis, this.mapDispatchToThis)(this);
 connect(this.mapState, this.mapDispatch)((selectedState, actions) => {/* ... */});
 ```
 
-
 #### Remarks
 * The `mapStateToTarget` function takes a single argument of the entire Redux store’s state and returns an object to be passed as props. It is often called a selector. Use reselect to efficiently compose selectors and compute derived data.
+
+
+### select(key | function,[comparer]) => Observable
+
+Exposes a slice of state as an observable. Accepts either a key-path, or a selector function.
+
+If using the async pipe, you do not need to subscribe to it explicitly, but can use the angular Async pipe to observe for values.
+
+#### Arguments
+
+* `key` \(*string*): A key within the state that you want to subscribe to. 
+* `selector` \(*Function*): A function that accepts the application state, and returns the slice you want subscribe to for changes. 
+
+
+e.g:
+```JS
+this.counter$ = this.ngRedux.select(state=>state.counter);
+// or 
+this.counterSubscription = this.ngRedux
+  .select(state=>state.counter)
+  .subscribe(count=>this.counter = count);
+// or
+
+this.counter$ = this.ngRedux.select('counter');  
+```
 
 
 ### Store API
@@ -115,9 +170,59 @@ ngRedux.subscribe(() => {
 
 This means that you are free to use Redux basic API in advanced cases where `connect`'s API would not fill your needs.
 
-
 ## Using DevTools
 
-In order to use Redux DevTools with your angular app, you need to install [react](https://www.npmjs.com/package/react), [react-redux](https://www.npmjs.com/package/react-redux) and [redux-devtools](https://www.npmjs.com/package/redux-devtools) as development dependencies.
+Ng2Redux is fully compatible with the Chrome extension version of the Redux dev tools:
 
-You can find a sample devtools implentation in the [counter example](https://github.com/wbuchwalter/ng2-redux/blob/master/examples/counter/devTools.js)
+https://github.com/zalmoxisus/redux-devtools-extension
+
+Here's how to enable them in your app (you probably only want to do
+this in development mode):
+
+1. Add the extension to your storeEnhancers:
+
+```typescript
+const enhancers = [];
+
+// Add Whatever other enhancers you want.
+
+if (__DEVMODE__ && window.devToolsExtension) {
+  enhancers = [ ...enhancers, window.devToolsExtension() ];
+}
+
+const store = compose(
+    applyMiddleware(middleware),
+    ...enhancers
+  )(createStore)(rootReducer, initialState);
+```
+
+2. Make Angular 2 update when store events come from the dev tools
+instead of Ng2Redux:
+
+```typescript
+@Component({
+  // etc.
+})
+export class App {
+  private unsubscribe: () => void;
+
+  constructor(
+    private ngRedux: NgRedux<IAppState>,
+    applicationRef: ApplicationRef) {
+
+    // etc.
+
+    if (__DEVMODE__) {
+      this.unsubscribe = ngRedux.subscribe(() => {
+        applicationRef.tick();
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  }
+};
+```

@@ -1,6 +1,12 @@
 node_modules/
-lib/
 *.tgz
 examples/counter/dist/components/*
 examples/counter/dist/containers/*
 examples/counter/dist/index.*
+.idea
+npm-debug.log
+examples/counter/typings/
+src/typings/
+typings/
+tmp/
+lib/

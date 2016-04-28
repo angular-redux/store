@@ -1,37 +1,21 @@
 {
-    "version": "1.6.2",
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "declaration": false,
-        "noImplicitAny": false,
-        "removeComments": true,
-        "noLib": false,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "sourceMap": true,
-        "listFiles": true,
-        "moduleResolution": "node",
-        "outDir": "dist"
-    },
-    "filesGlob": [
-        "./**/*.ts",
-        "!./node_modules/**/*.ts"
-    ],
-    "files": [
-        "./actions/CounterActions.ts",
-        "./components/Counter.ts",
-        "./containers/App.ts",
-        "./index.ts",
-        "./reducers/counter.ts",
-        "./reducers/index.ts",
-        "./store/configureStore.ts",
-        "./typings/_custom/custom.d.ts",
-        "./typings/_custom/webpack.d.ts",
-        "./typings/redux/redux.d.ts",
-        "./typings/tsd.d.ts"
-    ],
-    "atom": {
-        "rewriteTsconfig": true
-    }
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es5",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "removeComments": false,
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "typings/main",
+    "typings/main.d.ts"
+    
+  ]
 }

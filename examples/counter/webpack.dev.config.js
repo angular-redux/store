@@ -16,7 +16,16 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ],
  resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
+   extensions: ['', '.webpack.js', '.web.js', '.ts', '.js'],
+   fallback: __dirname + '/../../node_modules',
+   root: [
+     __dirname + '/../../node_modules',
+     'node_modules'
+   ],
+   alias: {		
+     angular2$: __dirname + '/../../node_modules/angular2',
+     'ng2-redux$':__dirname + '/../../src'
+     }
   },
 
   module: {

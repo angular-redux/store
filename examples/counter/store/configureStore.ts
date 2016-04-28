@@ -1,13 +1,23 @@
-import {createStore, applyMiddleware, compose} from 'redux';
-const thunk = require('redux-thunk');
+import * as Redux from 'redux';
+const {createStore, applyMiddleware, compose} = Redux;
+const thunk = require('redux-thunk').default;
 import reducer from '../reducers/index';
-const devTools = require('redux-devTools').devTools;
 
-const finalCreateStore = compose(
+const enhancers = [];
+
+if (window.devToolsExtension) {
+  enhancers.push(window.devToolsExtension());
+}
+
+export interface RootState {
+  counter: number;
+}
+
+const finalCreateStore = <Redux.StoreEnhancerStoreCreator<RootState>>compose(
   applyMiddleware(thunk),
-  devTools()
+  ...enhancers
 )(createStore);
 
 export default () => {
-  return finalCreateStore(reducer);
+  return finalCreateStore(reducer, {counter:0} as RootState);
 }

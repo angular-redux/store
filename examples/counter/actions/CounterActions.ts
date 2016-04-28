@@ -1,14 +1,16 @@
 export const INCREMENT_COUNTER:string = 'INCREMENT_COUNTER';
 export const DECREMENT_COUNTER:string = 'DECREMENT_COUNTER';
+import * as Redux from 'redux';
+
 
 export var increment = () => {
-  return {
+  return <Redux.Action>{
     type: INCREMENT_COUNTER
   };
 }
 
 export var decrement = () => {
-  return {
+  return <Redux.Action>{
     type: DECREMENT_COUNTER
   };
 }

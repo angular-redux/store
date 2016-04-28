@@ -1,14 +1,8 @@
 import {bootstrap} from 'angular2/platform/browser';
-import App from './containers/App';
+import {App} from './containers/App';
 import configureStore from './store/configureStore';
-const provider = require('ng2-redux').provider;
-const devTools = require('./devTools');
+import {provider} from 'ng2-redux';
+
 const store = configureStore();
 
-bootstrap(
-  App,
-  [
-    provider(store),
-    devTools
-  ]
-);
+bootstrap(App, [ provider(store) ]);

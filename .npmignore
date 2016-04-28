@@ -1,3 +1,7 @@
 src
 test
 examples
+.travis.yml
+.gitignore
+.babelrc
+lib/___tests___
