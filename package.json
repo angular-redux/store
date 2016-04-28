@@ -1,6 +1,6 @@
 {
   "name": "ng2-redux",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/index.js",
   "scripts": {
@@ -45,17 +45,17 @@
     "sinon-chai": "^2.8.0",
     "ts-loader": "^0.8.1",
     "ts-node": "^0.5.5",
-    "typescript": "^1.8.7"
-  },
-  "dependencies": {
+    "typescript": "^1.8.7",
     "angular2": "2.0.0-beta.14",
     "es6-shim": "^0.35.0",
-    "invariant": "^2.1.0",
-    "lodash": "^3.10.1",
     "redux": "^3.4.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
-    "typings": "^0.7.4",
     "zone.js": "0.6.10"
+  },
+  "dependencies": {
+    "invariant": "^2.1.0",
+    "lodash": "^3.10.1",
+    "typings": "^0.7.4"
   }
 }
