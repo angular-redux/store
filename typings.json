@@ -2,18 +2,13 @@
   "name": "ng2-redux",
   "version": false,
   "ambientDependencies": {
-    "es6-shim": "registry:dt/es6-shim#0.31.2+20160215162030",
-    "invariant": "registry:dt/invariant#2.2.0+20160118023809",
-     "mocha": "registry:dt/mocha#2.2.5+20160317120654",
+    "chai": "registry:dt/chai#3.4.0+20160317120654",
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654",
+    "invariant": "registry:dt/invariant#2.2.0+20160317120654",
     "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts#70bf7e2bfeb0d5b1b651ef3219bcc65c8eec117e",
-    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#20e1eb9616922d382d918cc5a21870a9dbe255f5"
-  },
-  "dependencies": {
-    "redux": "github:reactjs/redux/index.d.ts#324849df224acdfdf88a17bce97ec400031a705c"
-  },
-  "devDependencies": {
-    "sinon-chai": "registry:npm/sinon-chai#2.8.0+20160310030142",
-    "chai": "registry:npm/chai#3.5.0+20160402210230",
-    "sinon": "registry:npm/sinon#1.16.0+20160309002336"
+    "mocha": "registry:dt/mocha#2.2.5+20160317120654",
+    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#20e1eb9616922d382d918cc5a21870a9dbe255f5",
+    "sinon": "registry:dt/sinon#1.16.0+20160317120654",
+    "sinon-chai": "registry:dt/sinon-chai#2.7.0+20160317120654"
   }
 }

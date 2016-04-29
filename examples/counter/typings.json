@@ -4,9 +4,5 @@
   "ambientDependencies": {
     "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c",
     "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#366b936e62a6244a15f011e0ee0559b903d1dd65"
-  },
-  "dependencies": {
-     "redux-thunk": "registry:npm/redux-thunk#1.0.4+20160207154919"
   }
-
 }
