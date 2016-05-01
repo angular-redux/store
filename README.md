@@ -77,30 +77,43 @@ In this approach, we use `ngRedux.select()` to get observables from slices of ou
 state:
 
 ```typescript
-import { NgRedux } from 'ng2-redux';
-import { Observable } from 'rxjs';
-import { increment, decrement } from '../actions/CounterActions';
+import { Component} from 'angular2/core';
+import { Observable} from 'rxjs';
+import { AsyncPipe} from 'angular2/common';
+import { Counter} from '../components/Counter';
+import * as CounterActions from '../actions/CounterActions';
+import { NgRedux} from 'ng2-redux';
 
-export interface IAppState {
+interface IAppState {
   counter: number;
-  // ...
 };
 
 @Component({
-  // ...
+    selector: 'root',
+    directives: [Counter],
+    pipes: [AsyncPipe],
+    template: `
+  <counter [counter]="counter$| async"
+    [increment]="increment"
+    [decrement]="decrement">
+  </counter>
+  `
 })
-export class CounterApp {
-  private count$: Observable<number>;
+export class App {
+  counter$: any;
 
   constructor(private ngRedux: NgRedux<IAppState>) {}
 
   ngOnInit() {
-    this.count$ = this.ngRedux.select('counter');
+    let {increment, decrement } = CounterActions;
+    this.counter$ = this.ngRedux.select('counter');
   }
 
-  increment() {
-    this.ngRedux.dispatch(increment());
-  }
+  incrementIfOdd = () => this.ngRedux.dispatch(
+    <any>CounterActions.incrementIfOdd());
+
+  incrementAsync = () => this.ngRedux.dispatch(
+    <any>CounterActions.incrementAsync());
 }
 ```
 
@@ -113,34 +126,57 @@ Since it's an observable, you can also transform data using observable operators
 Alternately you can use the 'ngRedux.connect' API, which will map your state and action creators
 to the component class directly.
 
-This pattern is handy if your component has a large number of distinct actions and
-properties to feed to its render tree of presentational components:
+This pattern is provided for backwards compatibility. It's worth noting that
+Angular 2's view layer is more optimized for Observables and the `select`
+pattern above.
 
 ```typescript
-import { Component, AsyncPipe } from 'angular2/core';
+import { Component } from 'angular2/core';
+import { Counter } from '../components/Counter';
 import { NgRedux } from 'ng2-redux';
-import { Observable } from 'rxjs';
-import * as CounterActions from '../actions/CounterActions';
+import { bindActionCreators } from 'redux';
 
 export interface IAppState {
   counter: number;
-  // ...
 };
 
-@Component({
-  pipes: [ AsyncPipe ]
-  template: '<p>Count: {{ count$ | async }}</p>'
-  // ...
-})
-export class CounterApp {
-  private count$: Observable<number>;
+// NB: 'import * as CounterActions' won't provide the right type
+// for bindActionCreators.
+const CounterActions = require('../actions/CounterActions');
 
-  constructor(ngRedux: NgRedux<IAppState>) {
-    this.unsubscribe = ngRedux.connect(this.mapStateToTarget, this.mapDispatchToTarget)(this);
+@Component({
+    selector: 'root',
+    directives: [Counter],
+    template: `
+  <counter [counter]="counter"
+    [increment]="actions.increment"
+    [decrement]="actions.decrement">
+  </counter>
+  `
+})
+export class App {
+  private disconnect: (a?:any) => void;
+
+  constructor(private ngRedux: NgRedux<IAppState>) {}
+
+  ngOnInit() {
+    this.disconnect = this.ngRedux.connect(
+      this.mapStateToTarget,
+      this.mapDispatchToTarget)(this);
+  }
+
+  mapDispatchToTarget(dispatch) {
+    return {
+      actions: bindActionCreators(CounterActions, dispatch)
+    };
+  }
+
+  mapStateToTarget(state) {
+    return { counter: state.counter };
   }
 
   ngOnDestroy() {
-    this.unsubscribe();
+    this.disconnect();
   }
 
   // Will result in this.counter being set to the store value of counter
