@@ -24,17 +24,17 @@
   },
   "homepage": "https://github.com/wbuchwalter/ng2-redux#readme",
   "dependencies": {
-    "angular2": "2.0.0-beta.15",
+    "angular2": "2.0.0-beta.17",
     "es6-shim": "0.35.0",
-    "ng2-redux": "^2.2.2-beta.2",
+    "ng2-redux": "^2.2.3",
     "react": "^0.14.8",
     "redux": "^3.4.0",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
     "reflect-metadata": "0.1.2",
     "rtts_assert": "2.0.0-alpha.30",
-    "rxjs": "^5.0.0-beta.6",
-    "zone.js": "^0.6.10"
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "0.6.12"
   },
   "devDependencies": {
     "babel-core": "^5.5.8",
@@ -42,7 +42,7 @@
     "cross-env": "^1.0.7",
     "node-libs-browser": "^0.5.2",
     "ts-loader": "^0.8.1",
-    "typescript": "^1.8.7",
+    "typescript": "^1.8.10",
     "typescript-simple-loader": "^0.3.8",
     "typings": "^0.7.2",
     "webpack": "^1.9.11",
