@@ -54,11 +54,14 @@ Angular 2 components:
 ```typescript
 import { NgRedux } from 'ng2-redux';
 
+interface IAppState {
+  // ...   
+};
 @Component({
   // ... etc.
 })
 class AppComponent {
-  constructor(private ngRedux: NgRedux) {}
+  constructor(private ngRedux: NgRedux<IAppState>) {}
 
   // ...
 }
