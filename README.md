@@ -34,7 +34,7 @@ ng2-redux's `provider` function to inject your store into the Angular 2
 dependency injector:
 
 ```typescript
-import { bootstrap } from 'angular2/platform/browser';
+import {bootstrap} from '@angular/platform-browser-dynamic';
 import { createStore, applyMiddleware } from 'redux';
 import { provider } from  'ng2-redux';
 const thunk = require('redux-thunk').default;
@@ -80,9 +80,9 @@ In this approach, we use `ngRedux.select()` to get observables from slices of ou
 state:
 
 ```typescript
-import { Component} from 'angular2/core';
+import { Component} from '@angular2/core';
 import { Observable} from 'rxjs';
-import { AsyncPipe} from 'angular2/common';
+import { AsyncPipe} from '@angular2/common';
 import { Counter} from '../components/Counter';
 import * as CounterActions from '../actions/CounterActions';
 import { NgRedux} from 'ng2-redux';
@@ -134,7 +134,7 @@ Angular 2's view layer is more optimized for Observables and the `select`
 pattern above.
 
 ```typescript
-import { Component } from 'angular2/core';
+import { Component } from '@angular/core';
 import { Counter } from '../components/Counter';
 import { NgRedux } from 'ng2-redux';
 import { bindActionCreators } from 'redux';
