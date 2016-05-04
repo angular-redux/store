@@ -1,6 +1,6 @@
-import {Component, Inject, OnDestroy, ApplicationRef} from 'angular2/core';
+import {Component, Inject, OnDestroy, ApplicationRef} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AsyncPipe} from 'angular2/common';
+import {AsyncPipe} from '@angular/common';
 import {Counter} from '../components/Counter';
 import * as CounterActions from '../actions/CounterActions';
 import {NgRedux} from 'ng2-redux';

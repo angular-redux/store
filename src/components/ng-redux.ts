@@ -5,7 +5,7 @@ import * as invariant from 'invariant';
 import * as _ from 'lodash';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Store, Action, ActionCreator, Reducer } from 'redux';
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 
 const VALID_SELECTORS = ['string', 'number', 'symbol', 'function'];
 const ERROR_MESSAGE = `Expected selector to be one of: 

@@ -1,4 +1,4 @@
-import { provide, Provider } from 'angular2/core';
+import { provide, Provider } from '@angular/core';
 import { Store }  from 'redux';
 import { NgRedux } from './ng-redux';
 

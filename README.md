@@ -214,8 +214,8 @@ allow for asynchronous actions, and
 * Angular 2's `http` service to make auth requests.
 
 ```typescript
-import { Injectable } from 'angular2/core';
-import { Http } from 'angular2/http';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
 import {
   LOGIN_USER_PENDING,
@@ -254,7 +254,7 @@ To use these action creators, we can just go ahead an map them
 to our container component:
 
 ```typescript
-import { Component } from 'angular2/core';
+import { Component } from '@angular/core';
 import { NgRedux } from 'ng2-redux';
 import { SessionActions } from '../actions/session';
 import { IAppState } from './app-state';
@@ -297,7 +297,7 @@ which is available post-bootstrap:
 
 ```typescript
 import { provider } from 'ng2-redux';
-import { HTTP_PROVIDERS } from 'angular2/http';
+import { HTTP_PROVIDERS } from '@angular/http';
 import { setAppInjector } from './utils/app-injector';
 
 bootstrap(RioSampleApp, [
@@ -312,7 +312,7 @@ bootstrap(RioSampleApp, [
 Note `utils/app-injector`, which provides a place to save it:
 
 ```typescript
-import { Injector } from 'angular2/core';
+import { Injector } from '@angular/core';
 
 let appInjector: Injector;
 
@@ -331,7 +331,7 @@ manually to get access to Angular services like HTTP:
 `log-name-middleware.ts`:
 
 ```typescript
-import { Http } from 'angular2/http';
+import { Http } from '@angular/http';
 import { getAppInjector } from '../utils/app-injector';
 
 export const logNameMiddleware = store => next => action => {
