@@ -233,12 +233,12 @@ export class SessionActions {
   // Here's an action creator that uses HTTP.
   loginUser(credentials) {
     return (dispatch, getState) => {
-      dispatch(LOGIN_USER_PENDING);
+      dispatch({type: LOGIN_USER_PENDING});
 
       this.http.post('/auth/login', credentials)
         .toPromise()
-        .then(response => dispatch(LOGIN_USER_SUCCESS, response.json())
-        .catch(error => dispatch(LOGIN_USER_ERROR, error);
+        .then(response => dispatch({type: LOGIN_USER_SUCCESS, payload: response.json()})
+        .catch(error => dispatch({type: LOGIN_USER_ERROR, payload: error, error: true });
       });
     };
   }
