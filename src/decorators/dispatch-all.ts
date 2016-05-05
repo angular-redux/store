@@ -1,4 +1,4 @@
-import { NgRedux } from './ng-redux';
+import { NgRedux } from '../components/ng-redux';
 
 /**
  * Wraps all the functions on the object it receives in Redux Dispatch calls and

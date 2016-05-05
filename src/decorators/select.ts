@@ -1,4 +1,4 @@
-import { NgRedux } from './ng-redux';
+import { NgRedux } from '../components/ng-redux';
 
 /**
  * Selects an observable from the store, and attaches it to the decorated 
