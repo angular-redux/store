@@ -1,4 +1,4 @@
-import { NgRedux } from './ng-redux';
+import { NgRedux } from '../components/ng-redux';
 
 /**
  * Decorates the class property into a function that dispatches the action 
