@@ -29,30 +29,25 @@ npm install --save ng2-redux
 
 ### Initialization
 
-Configure your store as you would with any redux application.  Then use
-ng2-redux's `provider` function to inject your store into the Angular 2
-dependency injector:
+Import the `NgRedux` class and add it to your application as an Angular 2
+provider.
 
 ```typescript
 import {bootstrap} from '@angular/platform-browser-dynamic';
-import { createStore, applyMiddleware } from 'redux';
-import { provider } from  'ng2-redux';
-const thunk = require('redux-thunk').default;
-
 import { App } from './containers/App';
-import { rootReducer } from './reducers';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const store = createStoreWithMiddleware(rootReducer);
-
-bootstrap(App, [provider(store)]);
+bootstrap(App, [ NgRedux ]);
 ```
 
 Once you've done this, you'll be able to inject 'NgRedux' into your
-Angular 2 components:
+Angular 2 components. In your top-level app component, you
+can configure your Redux store with reducers, initiali state, 
+and optionally middlewares and enhancers as you would in Redux directly.
 
 ```typescript
 import { NgRedux } from 'ng2-redux';
+const thunk = require('redux-thunk').default;
+import { rootReducer } from './reducers';
 
 interface IAppState {
   // ...   
@@ -60,12 +55,16 @@ interface IAppState {
 @Component({
   // ... etc.
 })
-class AppComponent {
-  constructor(private ngRedux: NgRedux<IAppState>) {}
+class App {
+  constructor(private ngRedux: NgRedux) {
+    this.ngRedux.configureSture(rootReducer, {}, [ thunk ]);
+  }
 
   // ...
 }
 ```
+
+Now your Angular 2 app has been reduxified!
 
 ## Usage
 
@@ -102,8 +101,8 @@ interface IAppState {
   </counter>
   `
 })
-export class App {
-  counter$: any;
+export class Counter {
+  private count$: Observable<number>;
 
   constructor(private ngRedux: NgRedux<IAppState>) {}
 
@@ -157,22 +156,8 @@ const CounterActions = require('../actions/CounterActions');
   </counter>
   `
 })
-export class App {
-  private disconnect: (a?:any) => void;
-
-  constructor(private ngRedux: NgRedux<IAppState>) {}
-
-  ngOnInit() {
-    this.disconnect = this.ngRedux.connect(
-      this.mapStateToTarget,
-      this.mapDispatchToTarget)(this);
-  }
-
-  mapDispatchToTarget(dispatch) {
-    return {
-      actions: bindActionCreators(CounterActions, dispatch)
-    };
-  }
+export class Counter {
+  private count$: Observable<number>;
 
   mapStateToTarget(state) {
     return { counter: state.counter };
@@ -204,6 +189,7 @@ In order to use services in your action creators, you need to integrate
 them into Angular 2's dependency injector.
 
 This means attaching your action creators to a class so that:
+
 1. you can make it `@Injectable()`, and
 2. you can inject other services into its constructor for your
 action creators to use.
@@ -268,84 +254,77 @@ export class LoginPage {
   constructor(
     private ngRedux: NgRedux<IAppState>,
     private sessionActions: SessionActions) {
+  }
 
-    ngRedux.mapDispatchToTarget((dispatch) => {
-      return {
-        login: (credentials) => dispatch(
-          this.sessionActions.loginUser(credentials)),
-        logout: () => dispatch(
-          this.sessionActions.logoutUser())
-      };
-    })(this);
+  login(credentials) {
+    this.ngRedux.dispatch(
+      <any>this.sessionActions.loginUser(credentials));
+  }
+
+  logout() {
+    this.ngRedux.dispatch(this.sessionActions.logoutUser());
   }
 };
 ```
 
 ### Using Angular 2 Services in your Middleware
 
-This is a bit more complicated, due to the fact that the redux store is configured
-before the app's dependency injector is bootstrapped. We're investigating alternatives
-for an upcoming release.
+Again, we just want to use Angular DI the way it was meant to be used.
 
-However in the short term, you can inject into your middlewares manually as shown
-below.
-
-In the main application component, we save a reference to the app's root injector,
-which is available post-bootstrap:
-
-`app.ts`:
+Here's a contrived example that fetches a name from a remote API using Angular's
+`Http` service:
 
 ```typescript
-import { provider } from 'ng2-redux';
-import { HTTP_PROVIDERS } from '@angular/http';
-import { setAppInjector } from './utils/app-injector';
-
-bootstrap(RioSampleApp, [
-  provider(store),
-  HTTP_PROVIDERS,
-  //...
-]).then((appRef: ComponentRef) => {
-  setAppInjector(appRef.injector);
-});
-```
-
-Note `utils/app-injector`, which provides a place to save it:
-
-```typescript
-import { Injector } from '@angular/core';
-
-let appInjector: Injector;
-
-export function setAppInjector(injector: Injector): void {
-  appInjector = injector;
-}
-
-export function getAppInjector(): Injector {
-  return appInjector;
-}
-```
-
-Then when we write a middleware, we can access the root injector
-manually to get access to Angular services like HTTP:
-
-`log-name-middleware.ts`:
-
-```typescript
+import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { getAppInjector } from '../utils/app-injector';
+import 'rxjs/add/operator/toPromise';
 
-export const logNameMiddleware = store => next => action => {
-  const http = getAppInjector().get(Http);
-  
-  console.log('getting user name');
-  http.get('http://jsonplaceholder.typicode.com/users/1')
-    .toPromise()
-    .then(response => {
-      console.log('got name:', response.json().name);
-      return next(action);
-    })
-    .catch(err => console.log('get name failed:', err));
-};
+@Injectable()
+export class LogRemoteName {
+  constructor(private http: Http) {}
+
+  middleware = store => next => action => {
+    console.log('getting user name');
+    this.http.get('http://jsonplaceholder.typicode.com/users/1')
+      .toPromise()
+      .then(response => {
+        console.log('got name:', response.json().name);
+        return next(action);
+      })
+      .catch(err => console.log('get name failed:', err));
+    }
+}
+```
+
+As with the action example above, we've attached our middleware function to
+an `@Injectable` class that can itself receive services from Angular's dependency
+injector.
+
+Note the arrow function called `middleware`: this is what we can pass to the middlewares
+parameter when we initialize ngRedux in our top-level component. We use an arrow function
+to make sure that what we pass to ngRedux has a properly-bound function context.
+
+```typescript
+import { LogRemoteName } from './middleware/log-remote-name';
+const thunk = require('redux-thunk').default;
+const reduxLogger = require('redux-logger');
+
+@Component({
+  providers: [ LogRemoteName ],
+  // ...
+})
+class App {
+  constructor(
+    private ngRedux: NgRedux
+    logRemoteName: LogRemoteName) {
+
+    const middleware = [ thunk, reduxLogger(), logRemoteName.middleware ];
+    this.ngRedux.configureStore(
+      rootReducer,
+      initialState,
+      middleware);
+  }
+}
 ```
 
 ### Using DevTools
@@ -357,8 +336,6 @@ https://github.com/zalmoxisus/redux-devtools-extension
 Here's how to enable them in your app (you probably only want to do
 this in development mode):
 
-__Step 1:__ Add the extension to your storeEnhancers:
-
 ```typescript
 const enhancers = [];
 
@@ -368,53 +345,31 @@ if (__DEVMODE__ && window.devToolsExtension) {
   enhancers = [ ...enhancers, window.devToolsExtension() ];
 }
 
-const store = compose(
-    applyMiddleware(middleware),
-    ...enhancers
-  )(createStore)(rootReducer, initialState);
-```
-
-__Step 2:__ Make Angular 2 update when store events come from the dev tools
-instead of Ng2Redux:
-
-```typescript
+// Add the dev tools enhancer your ngRedux.configureStore called
+// when you initialize your root component:
 @Component({
-  // etc.
+  // ...
 })
-export class App {
-  private unsubscribe: () => void;
-
-  constructor(
-    private ngRedux: NgRedux<IAppState>,
-    applicationRef: ApplicationRef) {
-
-    // etc.
-
-    if (__DEVMODE__) {
-      this.unsubscribe = ngRedux.subscribe(() => {
-        applicationRef.tick();
-      });
-    }
+class App {
+  constructor(private ngRedux: NgRedux) {
+    this.ngRedux.configureStore(rootReducer, initialState, [], enhancers);
   }
-
-  ngOnDestroy() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-  }
-};
+}
 ```
 
 ## API
 
-### `provider()`
+### `configureStore()`
 
-Binds an NgRedux instance to your Redux store and makes it available to Angular's
-dependency injector as an injectable service.
+Initializes your ngRedux store. This should be called once, typically in your
+top-level app component's constructor.
 
 __Arguments:__
 
-* `store` \(*Object*): Redux's store instance
+* `rootReducer` \(*Reducer*): Your top-level Redux reducer.
+* `initialState` \(*Object): The desired initial state of your store.
+* `middleware` \(*Middleware[]*): An optional array of Redux middleware functions.
+* `enhancers` \(*StoreEnhancer[StoreEnhancer]*): An optional array of Redux store enhancer functions.
 
 ### select(key | function,[comparer]) => Observable
 
