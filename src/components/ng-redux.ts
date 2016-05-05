@@ -14,6 +14,7 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { Injectable, ApplicationRef } from '@angular/core';
@@ -33,6 +34,8 @@ export class NgRedux<RootState> {
     private _defaultMapStateToTarget: Function;
     private _defaultMapDispatchToTarget: Function;
 
+    static instance;
+
     /**
      * Creates an instance of NgRedux.
      *
@@ -40,7 +43,9 @@ export class NgRedux<RootState> {
      *  lets redux dev tools refresh the Angular 2 view when it changes
      *  the store.
      */
-    constructor(private _applicationRef: ApplicationRef) {}
+    constructor(private _applicationRef: ApplicationRef) {
+      NgRedux.instance = this;
+    }
 
     /**
      * configures a Redux store and allows NgRedux to observe and dispatch
@@ -278,3 +283,4 @@ export class NgRedux<RootState> {
         return finalMapDispatchToTarget(this._store.dispatch);
     };
 }
+
