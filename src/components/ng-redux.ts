@@ -65,10 +65,11 @@ export class NgRedux<RootState> {
 
         invariant(!this._store, 'Store already configured!');
 
-        const finalCreateStore = <Redux.StoreEnhancerStoreCreator<RootState>>compose(
-            applyMiddleware(...middleware),
-            ...enhancers
-            )(createStore);
+        const finalCreateStore
+            = <Redux.StoreEnhancerStoreCreator<RootState>>compose(
+                applyMiddleware(...middleware),
+                ...enhancers
+                )(createStore);
         const store = finalCreateStore(reducer, initState);
 
         this._store = store;
@@ -97,11 +98,16 @@ export class NgRedux<RootState> {
 
     /**
      * Select a slice of state to expose as an observable. 
-     * 
+     *
      * @template S
-     * @param {(string | number | symbol | ((state: RootState) => S))} selector key or function to select a part of the state
-     * @param {(x: any, y: any) => boolean} [comparer]  optional comparison function called to test if an item is distinct from the previous item in the source.
-     * @returns {Observable<S>} an Observable that emits items from the source Observable with distinct values.
+     * @param {(string | number | symbol | ((state: RootState) => S))}
+     * selector key or function to select a part of the state
+     * @param {(x: any, y: any) => boolean} [comparer] Optional
+     * comparison function called to test if an item is distinct
+     * from the previous item in the source.
+     *
+     * @returns {Observable<S>} an Observable that emits items from the
+     * source Observable with distinct values.
      */
     select<S>(
         selector: string | number | symbol | ((state: RootState) => S),
@@ -135,12 +141,26 @@ export class NgRedux<RootState> {
 
     /**
      * Connect your component to your redux state. 
-     *
-     * @deprecated The 'select' API is a better, more performant fit for Angular 2 applications.
-     *
-     * @param {*} mapStateToTarget connect will subscribe to Redux store updates. Any time it updates, mapStateToTarget will be called. Its result must be a plain object, and it will be merged into `target`. If you have a component which simply triggers actions without needing any state you can pass null to `mapStateToTarget`.
-     * @param {*} mapDispatchToTarget  Optional. If an object is passed, each function inside it will be assumed to be a Redux action creator. An object with the same function names, but bound to a Redux store, will be merged onto `target`. If a function is passed, it will be given `dispatch`. It’s up to you to return an object that somehow uses `dispatch` to bind action creators in your own way. (Tip: you may use the [`bindActionCreators()`](http://gaearon.github.io/redux/docs/api/bindActionCreators.html) helper from Redux.).
-     * @returns a function that accepts a target object to map the state and/or dispatch onto, or a function that will recieve the result of mapStateToTarget and mapDispatchToTarget as paramaters
+     * 
+     * @param {*} mapStateToTarget connect will subscribe to Redux store
+     * updates. Any time it updates, mapStateToTarget will be called. Its
+     * result must be a plain object, and it will be merged into `target`.
+     * If you have a component which simply triggers actions without needing
+     * any state you can pass null to `mapStateToTarget`.
+     * 
+     * @param {*} mapDispatchToTarget  Optional. If an object is passed,
+     * each function inside it will be assumed to be a Redux action creator.
+     * An object with the same function names, but bound to a Redux store,
+     * will be merged onto `target`. If a function is passed, it will be given
+     * `dispatch`. It’s up to you to return an object that somehow uses
+     * `dispatch` to bind action creators in your own way. (Tip: you may
+     * use the 
+     * [`bindActionCreators()`]
+     * (http://gaearon.github.io/redux/docs/api/bindActionCreators.html)
+     * helper from Redux.).
+     * @returns a function that accepts a target object to map the state
+     * and/or dispatch onto, or a function that will recieve the result of
+     * mapStateToTarget and mapDispatchToTarget as paramaters
      */
     connect = (mapStateToTarget: any, mapDispatchToTarget: any) => {
 

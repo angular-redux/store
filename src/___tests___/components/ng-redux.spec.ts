@@ -13,7 +13,7 @@ function returnPojo() {
 }
 
 class MockApplicationRef {
-  tick: ()=> void;
+  tick: () => void;
 }
 
 describe('Connector', () => {
@@ -35,7 +35,7 @@ describe('Connector', () => {
     targetObj = {};
     mockAppRef = {
       tick: sinon.spy()
-    }
+    };
     ngRedux = new NgRedux(mockAppRef);
     ngRedux.configureStore(rootReducer, defaultState);
   });
@@ -52,7 +52,6 @@ describe('Connector', () => {
       .not.to.throw(Error);
     expect(ngRedux.connect(returnPojo).bind(ngRedux, returnPojo))
       .not.to.throw(Error);
-
   });
 
   it('Should throw when selector does not return a plain object', () => {
@@ -89,7 +88,7 @@ describe('Connector', () => {
 
       targetObj.baz = 0;
 
-      //this should not replace our mutation, since the state didn't change
+      // This should not replace our mutation, since the state didn't change.
       ngRedux.dispatch({ type: 'ACTION', payload: 5 });
 
       expect(targetObj.baz).to.equal(0);
@@ -107,23 +106,21 @@ describe('Connector', () => {
     ngRedux.dispatch({ type: 'ACTION', payload: 5 });
 
     expect(targetObj.baz).to.equal(5);
-
     unsubscribe();
 
     ngRedux.dispatch({ type: 'ACTION', payload: 7 });
 
     expect(targetObj.baz).to.equal(5);
-
   });
 
   it('Should provide dispatch to mapDispatchToTarget when receiving a ' +
     'Function', () => {
       let receivedDispatch;
+
       ngRedux.connect(
-        returnPojo, dispatch => { receivedDispatch = dispatch })(targetObj);
+        returnPojo, dispatch => { receivedDispatch = dispatch; })(targetObj);
       expect(receivedDispatch).to.be.a('Function');
     });
-
 });
 
 describe('NgRedux Observable Store', () => {
@@ -162,16 +159,17 @@ describe('NgRedux Observable Store', () => {
 
     mockAppRef = {
       tick: sinon.spy()
-    }
+    };
 
     ngRedux = new NgRedux<IAppState>(mockAppRef);
     ngRedux.configureStore(rootReducer, defaultState);
-  })
+  });
 
   it('should throw when the store is configured twice', () => {
     // Configured once in beforeEach, now we try to configure
     // it a second time.
-    expect(ngRedux.configureStore.bind(ngRedux, rootReducer, defaultState)).to.throw(Error);
+    expect(ngRedux.configureStore.bind(ngRedux, rootReducer, defaultState))
+      .to.throw(Error);
   });
 
   it('should get the initial state', (done) => {
@@ -231,28 +229,32 @@ describe('NgRedux Observable Store', () => {
       foo$.unsubscribe();
     });
 
-  it('should not call the sub if the result of the function is the same', () => {
-    let fooData;
-    let spy = sinon.spy((foo) => { fooData = foo; });
-    let foo$ = ngRedux
-      .select(state => `${state.foo}-${state.baz}`)
-      .subscribe(spy);
+  it('should not call the sub if the result of the function is the same',
+    () => {
+      let fooData;
+      let spy = sinon.spy((foo) => { fooData = foo; });
+      let foo$ = ngRedux
+        .select(state => `${state.foo}-${state.baz}`)
+        .subscribe(spy);
 
-    expect(spy).to.have.been.calledOnce;
-    expect(fooData).to.equal('bar--1');
+      expect(spy).to.have.been.calledOnce;
+      expect(fooData).to.equal('bar--1');
 
-    ngRedux.dispatch({ type: 'UPDATE_BAR', payload: 'bar' });
-    expect(spy).to.have.been.calledOnce;
-    expect(fooData).to.equal('bar--1');
+      expect(spy).to.have.been.calledOnce;
+      expect(fooData).to.equal('bar--1');
 
-    ngRedux.dispatch({ type: 'UPDATE_FOO', payload: 'update' });
-    expect(fooData).to.equal('update--1');
-    expect(spy).to.have.been.calledTwice;
+      ngRedux.dispatch({ type: 'UPDATE_BAR', payload: 'bar' });
+      expect(spy).to.have.been.calledOnce;
+      expect(fooData).to.equal('bar--1');
 
-    ngRedux.dispatch({ type: 'UPDATE_BAZ', payload: 2 });
-    expect(fooData).to.equal('update-2');
-    expect(spy).to.have.been.calledThrice;
-  });
+      ngRedux.dispatch({ type: 'UPDATE_FOO', payload: 'update' });
+      expect(fooData).to.equal('update--1');
+      expect(spy).to.have.been.calledTwice;
+
+      ngRedux.dispatch({ type: 'UPDATE_BAZ', payload: 2 });
+      expect(fooData).to.equal('update-2');
+      expect(spy).to.have.been.calledThrice;
+    });
 
   it(`should accept a custom compare function`, () => {
     let fooData;
@@ -278,9 +280,10 @@ describe('NgRedux Observable Store', () => {
     expect(fooData.data).to.equal('update-2');
     expect(spy).to.have.been.calledThrice;
   });
-  
-  it('should force the Angular UI to update when a change is made externally', () => {
-    ngRedux.dispatch({ type: 'UPDATE_FOO', payload: 'update' });
-    expect(mockAppRef.tick).to.have.been.calledOnce;
-  });
+
+  it('should force the Angular UI to update when a change is made externally',
+    () => {
+      ngRedux.dispatch({ type: 'UPDATE_FOO', payload: 'update' });
+      expect(mockAppRef.tick).to.have.been.calledOnce;
+    });
 });
