@@ -2,14 +2,10 @@ import 'reflect-metadata';
 import 'es6-shim';
 import { expect, use } from 'chai';
 import { createStore } from 'redux';
-<<<<<<< 11b5eaa933177b36bdf6e39d1c1518abf186c2e7
 import { NgRedux } from '../../components/ng-redux';
 import { dispatch } from '../../components/dispatch';
 import { dispatchAll } from '../../components/dispatchAll';
 import { select } from '../../components/select';
-=======
-import {NgRedux} from '../../components/ng-redux';
->>>>>>> chore(decorators): Move decorators (#91)
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
