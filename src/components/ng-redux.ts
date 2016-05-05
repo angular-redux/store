@@ -1,5 +1,5 @@
 import * as invariant from 'invariant';
-import * as _ from 'lodash';
+import { isFunction, isObject, isPlainObject, omit, assign } from 'lodash';
 import * as Redux from 'redux';
 
 import {
@@ -86,7 +86,7 @@ export class NgRedux<RootState> {
         this._defaultMapStateToTarget = () => ({});
         this._defaultMapDispatchToTarget = dispatch => ({ dispatch });
 
-        const cleanedStore = _.omit(store, [
+        const cleanedStore = omit(store, [
             'dispatch',
             'getState',
             'subscribe',
@@ -175,7 +175,7 @@ export class NgRedux<RootState> {
             || this._defaultMapStateToTarget;
 
         invariant(
-            _.isFunction(finalMapStateToTarget),
+            isFunction(finalMapStateToTarget),
             'mapStateToTarget must be a Function. Instead received %s.',
             finalMapStateToTarget);
 
@@ -187,7 +187,7 @@ export class NgRedux<RootState> {
         return (target) => {
 
             invariant(
-                _.isFunction(target) || _.isObject(target),
+                isFunction(target) || isObject(target),
                 'The target parameter passed to connect must be a Function or' +
                 'a plain object.'
             );
@@ -250,10 +250,10 @@ export class NgRedux<RootState> {
     };
 
     private updateTarget(target, StateSlice, dispatch) {
-        if (_.isFunction(target)) {
+        if (isFunction(target)) {
             target(StateSlice, dispatch);
         } else {
-            _.assign(target, StateSlice, dispatch);
+            assign(target, StateSlice, dispatch);
         }
     }
 
@@ -261,7 +261,7 @@ export class NgRedux<RootState> {
         const slice = mapStateToScope(state);
 
         invariant(
-            _.isPlainObject(slice),
+            isPlainObject(slice),
             '`mapStateToScope` must return an object. Instead received %s.',
             slice
         );
@@ -270,12 +270,12 @@ export class NgRedux<RootState> {
     }
 
     private getBoundActions = (actions) => {
-        const finalMapDispatchToTarget = _.isPlainObject(actions) ?
+        const finalMapDispatchToTarget = isPlainObject(actions) ?
             wrapActionCreators(actions) :
             actions || this._defaultMapDispatchToTarget;
         invariant(
-            _.isPlainObject(finalMapDispatchToTarget)
-            || _.isFunction(finalMapDispatchToTarget),
+            isPlainObject(finalMapDispatchToTarget)
+            || isFunction(finalMapDispatchToTarget),
             'mapDispatchToTarget must be a plain Object or a Function. ' +
             'Instead received % s.',
             finalMapDispatchToTarget);
