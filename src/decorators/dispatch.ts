@@ -8,5 +8,7 @@ import { NgRedux } from '../components/ng-redux';
  * A Redux Action Creator.
  */
 export const dispatch = (func) => (targetClass, key) => {
-    targetClass[key] = () => NgRedux.instance.dispatch(<any>func());
+    targetClass[key] = function() {
+        NgRedux.instance.dispatch(<any>func.apply(null, arguments));
+    };
 };
