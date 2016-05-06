@@ -12,7 +12,9 @@ import { NgRedux } from '../components/ng-redux';
 export const dispatchAll = (obj) => (targetClass) => {
     Object.keys(obj)
         .filter(key => typeof obj[key] === 'function')
-        .forEach(key => targetClass.prototype[key] =
-                 () => NgRedux.instance.dispatch(<any>obj[key]()));
+        .forEach(key => targetClass.prototype[key] = function() {
+                  NgRedux.instance
+                      .dispatch(<any>obj[key].apply(null, arguments));
+                });
 };
 

@@ -12,7 +12,7 @@ import * as CounterActions from '../actions/CounterActions';
     <button (click)="increment()">+</button>
     <button (click)="decrement()">-</button>
     <button (click)="incrementIfOdd()">Increment if odd</button>
-    <button (click)="incrementAsync()">Increment async</button>
+    <button (click)="incrementAsync(2222)">Increment async</button>
   </p>
   `
 })
