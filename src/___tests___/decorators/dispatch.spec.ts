@@ -9,57 +9,60 @@ import * as _ from 'lodash';
 
 use(sinonChai);
 
-function returnPojo() {
-  return {};
+function mockActionCreator() {
+  return {
+    type: 'INCREMENT_COUNTER'
+  };
 }
 
-class MockApplicationRef {
-  tick: () => void;
-}
+describe('@dispatch', () => {
 
+  let store;
+  let connector;
+  let targetObj;
+  let defaultState;
 
-
-
-describe('Decorator Interface', () => {
-
-  function mockActionCreator() {
-    return {
-      type: 'INCREMENT_COUNTER'
+  beforeEach(() => {
+    defaultState = {
+      foo: 'bar',
+      baz: -1
     };
-  }
-
-  describe('@dispatch', () => {
-
-    let store;
-    let connector;
-    let targetObj;
-    let defaultState;
-
-    beforeEach(() => {
-      defaultState = {
-        foo: 'bar',
-        baz: -1
-      };
-      store = createStore((state = defaultState, action) => {
-        const newState = Object.assign({}, state, { baz: action.payload });
-        return newState;
-      });
-      targetObj = {};
-      connector = new NgRedux(store);
+    store = createStore((state = defaultState, action) => {
+      const newState = Object.assign({}, state, { baz: action.payload });
+      return newState;
     });
-
-
-    it('attaches an instance method on the decorated property', () => {
-
-      class MockClass {
-        @dispatch(mockActionCreator) anInstanceMethod;
-      }
-      const mockInstance = new MockClass();
-      expect(mockInstance.anInstanceMethod).to.be.instanceOf(Function);
-
-    });
-
+    targetObj = {};
+    connector = new NgRedux(store);
   });
 
 
+  it('attaches an instance method on the decorated property', () => {
+
+    class MockClass {
+      @dispatch(mockActionCreator) anInstanceMethod;
+    }
+    const mockInstance = new MockClass();
+    expect(mockInstance.anInstanceMethod).to.be.instanceOf(Function);
+
+  });
+
+  it('configures the attached method to call dispatch with the result ' +
+     'from the action creator', () => {
+
+    let dispatchSpyMock = sinon.spy();
+    connector.dispatch = dispatchSpyMock;
+
+    class MockClass {
+      @dispatch(mockActionCreator) anInstanceMethod;
+    }
+    const mockInstance = new MockClass();
+    mockInstance.anInstanceMethod();
+
+    expect(connector.dispatch.calledOnce).to.be.true;
+    expect(connector.dispatch.getCall(0).args[0]).to.eql(mockActionCreator());
+
+  });
+
 });
+
+
