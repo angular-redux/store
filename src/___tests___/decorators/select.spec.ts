@@ -9,111 +9,122 @@ import * as _ from 'lodash';
 
 use(sinonChai);
 
-function returnPojo() {
-  return {};
-}
+describe('@select', () => {
 
-class MockApplicationRef {
-  tick: () => void;
-}
+  let ngRedux;
+  let targetObj;
+  let defaultState;
+  let rootReducer;
+  let mockAppRef;
 
-
-
-
-describe('Decorator Interface', () => {
-
-  function mockActionCreator() {
-    return {
-      type: 'INCREMENT_COUNTER'
+  beforeEach(() => {
+    defaultState = {
+      foo: 'bar',
+      baz: -1
     };
-  }
+    rootReducer = (state = defaultState, action) => {
+      const newState = Object.assign({}, state, { baz: action.payload });
+      return newState;
+    };
+    targetObj = {};
+    mockAppRef = {
+      tick: sinon.spy()
+    };
+    ngRedux = new NgRedux(mockAppRef);
+    ngRedux.configureStore(rootReducer, defaultState);
+  });
 
- 
-  describe('@select', () => {
+  describe('when passed no arguments', () => {
 
-    let ngRedux;
-    let targetObj;
-    let defaultState;
-    let rootReducer;
-    let mockAppRef;
-  
-    beforeEach(() => {
-      defaultState = {
-        foo: 'bar',
-        baz: -1
-      };
-      rootReducer = (state = defaultState, action) => {
-        const newState = Object.assign({}, state, { baz: action.payload });
-        return newState;
-      };
-      targetObj = {};
-      mockAppRef = {
-        tick: sinon.spy()
-      };
-      ngRedux = new NgRedux(mockAppRef);
-      ngRedux.configureStore(rootReducer, defaultState);
-    });
+    it('automatically attempts to bind to a store property that matches the' +
+       ' name of the class property', () => {
 
-    describe('when left empty', () => {
+      class MockClass {
+        @select() baz: any;
+      }
 
-      it('automatically attempts to bind to a store property that matches the' +
-         ' name of the class property', () => {
+      let mockInstance = new MockClass();
+      let value;
+      let expectedValue = 1;
 
-        class MockClass {
-          @select() foo: any;
-        }
-
-        let mockInstance = new MockClass();
-
-        expect(mockInstance.foo.subscribe).to.be.instanceOf(Function);
-
+      mockInstance.baz.subscribe((val) => {
+        value = val;
       });
 
-      it('attempts to bind by name ignoring any $ characters in the class ' +
-         'property name', () => {
+      ngRedux.dispatch({type: 'nvm', payload: expectedValue});
 
-         class MockClass {
-          @select() foo$: any;
-        }
-
-        let mockInstance = new MockClass();
-
-        expect(mockInstance.foo$.subscribe).to.be.instanceOf(Function);
-
-      });
+      expect(value).to.equal(expectedValue);
 
     });
 
-    describe('when passed a string', () => {
+    it('attempts to bind by name ignoring any $ characters in the class ' +
+       'property name', () => {
 
-      it('attempts to bind to the store property whose name matches the ' +
-         'string value', () => {
+      class MockClass {
+        @select() baz$: any;
+      }
 
-        class MockClass {
-          @select('foo') asdf: any;
-        }
+      let mockInstance = new MockClass();
+      let value;
+      let expectedValue = 2;
 
-        let mockInstance = new MockClass();
-
-        expect(mockInstance.asdf.subscribe).to.be.instanceOf(Function);
-
+      mockInstance.baz$.subscribe((val) => {
+        value = val;
       });
+
+      ngRedux.dispatch({type: 'nvm', payload: expectedValue});
+
+      expect(value).to.equal(expectedValue);
+
 
     });
 
-    describe('when passed a function', () => {
+  });
 
-      it('attempts to use that function as the selector function', () => {
+  describe('when passed a string', () => {
 
-        class MockClass {
-          @select(state => state.foo) asdf: any;
-        }
+    it('attempts to bind to the store property whose name matches the ' +
+       'string value', () => {
 
-        let mockInstance = new MockClass();
+      class MockClass {
+        @select('baz') asdf: any;
+      }
 
-        expect(mockInstance.asdf.subscribe).to.be.instanceOf(Function);
+      let mockInstance = new MockClass();
+      let value;
+      let expectedValue = 3;
 
+      mockInstance.asdf.subscribe((val) => {
+        value = val;
       });
+
+      ngRedux.dispatch({type: 'nvm', payload: expectedValue});
+
+      expect(value).to.equal(expectedValue);
+
+    });
+
+  });
+
+  describe('when passed a function', () => {
+
+    it('attempts to use that function as the selector function', () => {
+
+      class MockClass {
+        @select(state => state.baz * 2) asdf: any;
+      }
+
+      let mockInstance = new MockClass();
+      let value;
+      let expectedValue = 10;
+
+      mockInstance.asdf.subscribe((val) => {
+        value = val;
+      });
+
+      ngRedux.dispatch({type: 'nvm', payload: expectedValue / 2});
+
+      expect(value).to.equal(expectedValue);
 
     });
 
