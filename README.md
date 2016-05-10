@@ -5,8 +5,9 @@ Angular 2 bindings for [Redux](https://github.com/reactjs/redux).
 
 For Angular 1 see [ng-redux](https://github.com/wbuchwalter/ng-redux)
 
-[![Circle CI](https://circleci.com/gh/angular-redux/ng2-redux/tree/master.svg?style=svg)](https://circleci.com/gh/angular-redux/ng2-redux/tree/master)
+[![CircleCI](https://img.shields.io/circleci/project/angular-redux/ng2-redux/master.svg?maxAge=2592000&style=flat-square)](https://circleci.com/gh/angular-redux/ng2-redux/tree/master)
 [![npm version](https://img.shields.io/npm/v/ng2-redux.svg?style=flat-square)](https://www.npmjs.com/package/ng2-redux)
+[![npm downloads](https://img.shields.io/npm/dt/ng2-redux.svg?style=flat-square)](https://www.npmjs.com/package/ng2-redux)
 
 ng2-redux lets you easily connect your Angular 2 components with Redux.
 
