@@ -1,4 +1,6 @@
 # ng2-redux
+
+[![Join the chat at https://gitter.im/angular-redux/ng2-redux](https://badges.gitter.im/angular-redux/ng2-redux.svg)](https://gitter.im/angular-redux/ng2-redux?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Angular 2 bindings for [Redux](https://github.com/reactjs/redux).
 
 For Angular 1 see [ng-redux](https://github.com/wbuchwalter/ng-redux)
