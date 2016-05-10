@@ -1,13 +1,13 @@
 # ng2-redux
 
-[![Join the chat at https://gitter.im/angular-redux/ng2-redux](https://badges.gitter.im/angular-redux/ng2-redux.svg)](https://gitter.im/angular-redux/ng2-redux?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Angular 2 bindings for [Redux](https://github.com/reactjs/redux).
 
 For Angular 1 see [ng-redux](https://github.com/wbuchwalter/ng-redux)
 
-[![CircleCI](https://img.shields.io/circleci/project/angular-redux/ng2-redux/master.svg?maxAge=2592000&style=flat-square)](https://circleci.com/gh/angular-redux/ng2-redux/tree/master)
-[![npm version](https://img.shields.io/npm/v/ng2-redux.svg?style=flat-square)](https://www.npmjs.com/package/ng2-redux)
-[![npm downloads](https://img.shields.io/npm/dt/ng2-redux.svg?style=flat-square)](https://www.npmjs.com/package/ng2-redux)
+[![Join the chat at https://gitter.im/angular-redux/ng2-redux](https://badges.gitter.im/angular-redux/ng2-redux.svg)](https://gitter.im/angular-redux/ng2-redux?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![CircleCI](https://img.shields.io/circleci/project/angular-redux/ng2-redux/master.svg?maxAge=2592000)](https://circleci.com/gh/angular-redux/ng2-redux/tree/master)
+[![npm version](https://img.shields.io/npm/v/ng2-redux.svg)](https://www.npmjs.com/package/ng2-redux)
+[![npm downloads](https://img.shields.io/npm/dt/ng2-redux.svg)](https://www.npmjs.com/package/ng2-redux)
 
 ng2-redux lets you easily connect your Angular 2 components with Redux.
 
