@@ -4,7 +4,6 @@
   "ambientDependencies": {
     "chai": "registry:dt/chai#3.4.0+20160317120654",
     "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654",
-    "invariant": "registry:dt/invariant#2.2.0+20160317120654",
     "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts#70bf7e2bfeb0d5b1b651ef3219bcc65c8eec117e",
     "mocha": "registry:dt/mocha#2.2.5+20160317120654",
     "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#20e1eb9616922d382d918cc5a21870a9dbe255f5",

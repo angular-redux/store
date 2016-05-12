@@ -58,7 +58,6 @@
     "zone.js": "0.6.12"
   },
   "dependencies": {
-    "invariant": "^2.1.0",
     "lodash": "^3.10.1",
     "typings": "^0.7.4"
   }

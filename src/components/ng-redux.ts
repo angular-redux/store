@@ -1,11 +1,11 @@
 import shallowEqual from '../utils/shallowEqual';
 import wrapActionCreators from '../utils/wrapActionCreators';
 import * as Redux from 'redux';
-import * as invariant from 'invariant';
 import * as _ from 'lodash';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Store, Action, ActionCreator, Reducer } from 'redux';
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
+import { invariant } from '../utils/invariant';
 
 const VALID_SELECTORS = ['string', 'number', 'symbol', 'function'];
 const ERROR_MESSAGE = `Expected selector to be one of: 
@@ -44,7 +44,6 @@ export class NgRedux<RootState> {
     observableFromStore = (store: Store<RootState>) => {
         return new BehaviorSubject(store.getState());
     };
-
 
     /**
      * Select a slice of state to expose as an observable. 
@@ -207,5 +206,4 @@ export class NgRedux<RootState> {
 
         return finalMapDispatchToTarget(this._store.dispatch);
     };
-
 }
