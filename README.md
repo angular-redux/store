@@ -177,10 +177,6 @@ export class App {
     };
   }
 
-  mapStateToTarget(state) {
-    return { counter: state.counter };
-  }
-
   ngOnDestroy() {
     this.disconnect();
   }
