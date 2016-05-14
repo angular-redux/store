@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { select } from 'ng2-redux';
 import 'rxjs/add/operator/combineLatest';
@@ -28,6 +28,4 @@ export class CounterInfo {
             this.foo = n;
         })
     }
-
 }
-    

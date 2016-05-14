@@ -4,11 +4,9 @@ import { NgRedux, select } from 'ng2-redux';
 
 import { Counter } from '../components/Counter';
 import { CounterInfo } from '../components/CounterInfo';
-import * as CounterActions from '../actions/CounterActions';
-import { RootState, enhancers } from '../store/configureStore';
+import { RootState, enhancers } from '../store';
 
 import reducer from '../reducers/index';
-const thunk = require('redux-thunk').default;
 const createLogger = require('redux-logger');
 
 @Component({
@@ -28,7 +26,7 @@ export class App {
         this.ngRedux.configureStore(
             reducer,
             { counter: 0 },
-            [ thunk, createLogger()  ],
+            [ createLogger() ],
             enhancers
         );
 

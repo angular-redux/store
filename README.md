@@ -52,7 +52,7 @@ bootstrap(App, [ NgRedux ]);
 
 Once you've done this, you'll be able to inject 'NgRedux' into your
 Angular 2 components. In your top-level app component, you
-can configure your Redux store with reducers, initiali state, 
+can configure your Redux store with reducers, initial state,
 and optionally middlewares and enhancers as you would in Redux directly.
 
 ```typescript
@@ -371,86 +371,97 @@ if you need to support IE.
 
 ### Using Angular 2 Services in your Action Creators
 
-In order to use services in your action creators, you need to integrate
+In order to use services in action creators, we need to integrate
 them into Angular 2's dependency injector.
 
-This means attaching your action creators to a class so that:
+We may as well adopt a more class-based approach to satisfy
+Angular 2's OOP idiom, and to allow us to
 
-1. you can make it `@Injectable()`, and
-2. you can inject other services into its constructor for your
-action creators to use.
+1. make our actions `@Injectable()`, and
+2. inject other services for our action creators to use.
 
-Take a look at this example, which uses
-* [redux-thunk](https://github.com/gaearon/redux-thunk) to
-allow for asynchronous actions, and
-* Angular 2's `http` service to make auth requests.
+Take a look at this example, which injects NgRedux to access
+`dispatch` and `getState` (a replacement for `redux-thunk`),
+and a simple `RandomNumberService` to show a side effect.
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { NgRedux } from 'ng2-redux';
+import * as Redux from 'redux';
+import { RootState } from '../store';
+import { RandomNumberService } from '../services/random-number';
 
-import {
-  LOGIN_USER_PENDING,
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_ERROR,
-  LOGOUT_USER
-} from '../constants';
-
-// Wrap our action creators in a class and make it @Injectable.
-// Don't forget to add it to your app's `providers`.
 @Injectable()
-export class SessionActions {
-  constructor(private http: Http) {}
+export class CounterActions {
+  constructor (
+    private ngRedux: NgRedux<RootState>,
+    private randomNumberService: RandomNumberService) {}
 
-  // Here's an action creator that uses HTTP.
-  loginUser(credentials) {
-    return (dispatch, getState) => {
-      dispatch({type: LOGIN_USER_PENDING});
+  static INCREMENT_COUNTER: string = 'INCREMENT_COUNTER';
+  static DECREMENT_COUNTER: string = 'DECREMENT_COUNTER';
+  static RANDOMIZE_COUNTER: string = 'RANDOMIZE_COUNTER';
 
-      this.http.post('/auth/login', credentials)
-        .toPromise()
-        .then(response => dispatch({type: LOGIN_USER_SUCCESS, payload: response.json()})
-        .catch(error => dispatch({type: LOGIN_USER_ERROR, payload: error, error: true });
-      });
-    };
+  // Basic action
+  increment(): void {
+    this.ngRedux.dispatch({ type: CounterActions.INCREMENT_COUNTER });
   }
 
-  // Just a regular, synchronous action creator.
-  logoutUser() {
-    return { type: LOGOUT_USER };
+  // Basic action
+  decrement(): void {
+    this.ngRedux.dispatch({ type: CounterActions.DECREMENT_COUNTER });
+  }
+
+  // Async action.
+  incrementAsync(delay: number = 1000): void {
+    setTimeout(this.increment.bind(this), delay);
+  }
+
+  // State-dependent action
+  incrementIfOdd(): void {
+    const { counter } = this.ngRedux.getState();
+    if (counter % 2 !== 0) {
+      this.increment();
+    }
+  }
+
+  // Service-dependent action
+  randomize(): void {
+    this.ngRedux.dispatch({
+      type: CounterActions.RANDOMIZE_COUNTER,
+      payload: this.randomNumberService.pick()
+    });
   }
 }
 ```
 
-To use these action creators, we can just go ahead an map them
-to our container component:
+To use these action creators, we can just go ahead and inject
+them into our component:
 
 ```typescript
 import { Component } from '@angular/core';
-import { NgRedux } from 'ng2-redux';
-import { SessionActions } from '../actions/session';
-import { IAppState } from './app-state';
+import { NgRedux, select } from 'ng2-redux';
+import { CounterActions } from '../actions/counter-actions';
+import { RandomNumberService } from '../services/random-number';
 
 @Component({
-  // ... etc.
+  selector: 'counter',
+  providers: [ CounterActions, RandomNumberService ],
+  template: `
+  <p>
+    Clicked: {{ counter$ | async }} times
+    <button (click)="actions.increment()">+</button>
+    <button (click)="actions.decrement()">-</button>
+    <button (click)="actions.incrementIfOdd()">Increment if odd</button>
+    <button (click)="actions.incrementAsync(2222)">Increment async</button>
+    <button (click)="actions.randomize()">Set to random number</button>
+  </p>
+  `
 })
-export class LoginPage {
-  // Here we inject the SessionActions instance into our
-  // smart component.
-  constructor(
-    private ngRedux: NgRedux<IAppState>,
-    private sessionActions: SessionActions) {
-  }
+export class Counter {
+  @select('counter') counter$: any;
 
-  login(credentials) {
-    this.ngRedux.dispatch(
-      <any>this.sessionActions.loginUser(credentials));
-  }
-
-  logout() {
-    this.ngRedux.dispatch(this.sessionActions.logoutUser());
-  }
-};
+  constructor(private actions: CounterActions) {}
+}
 ```
 
 ### Using Angular 2 Services in your Middleware
