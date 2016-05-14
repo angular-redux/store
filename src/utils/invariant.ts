@@ -3,7 +3,7 @@ export function invariant(condition: boolean, message: string, context?: any) {
     let errorMessage = message;
 
     if (context) {
-      errorMessage = (message.indexOf('%s') != -1) ?
+      errorMessage = (message.indexOf('%s') !== -1) ?
         message.replace('%s', context) :
         errorMessage = `${message}: ${context}`;
     }
