@@ -12,18 +12,14 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { Injectable, ApplicationRef } from '@angular/core';
-
 import shallowEqual from '../utils/shallowEqual';
 import wrapActionCreators from '../utils/wrapActionCreators';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/distinctUntilChanged';
-import { invariant } from '../utils/invariant';
 import { isObject, isFunction, isPlainObject} from '../utils/type-checks';
 import { omit } from '../utils/omit';
+import { invariant } from '../utils/invariant';
 
 const VALID_SELECTORS = ['string', 'number', 'symbol', 'function'];
 const ERROR_MESSAGE = `Expected selector to be one of:
