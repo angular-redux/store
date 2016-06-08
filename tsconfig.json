@@ -22,8 +22,6 @@
     "tmp",
     "test",
     "src/tests.entry.ts",
-    "typings/browser",
-    "typings/browser.d.ts",
     "src/test"
   ]
 }

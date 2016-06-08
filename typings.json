@@ -1,11 +1,11 @@
 {
   "name": "ng2-redux",
   "version": false,
-  "ambientDependencies": {
+  "globalDependencies": {
     "chai": "registry:dt/chai#3.4.0+20160317120654",
     "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654",
     "mocha": "registry:dt/mocha#2.2.5+20160317120654",
-    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#20e1eb9616922d382d918cc5a21870a9dbe255f5",
+    "node": "registry:dt/node#6.0.0+20160602155235",
     "sinon": "registry:dt/sinon#1.16.0+20160317120654",
     "sinon-chai": "registry:dt/sinon-chai#2.7.0+20160317120654"
   }

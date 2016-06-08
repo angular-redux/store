@@ -47,7 +47,7 @@
     "ts-loader": "^0.8.1",
     "typescript": "^1.8.10",
     "typescript-simple-loader": "^0.3.8",
-    "typings": "^0.7.2",
+    "typings": "^1.0.4",
     "webpack": "^1.9.11",
     "webpack-dev-server": "^1.9.0"
   }
