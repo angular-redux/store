@@ -1,10 +1,11 @@
 import 'reflect-metadata';
-import {expect, use} from 'chai';
+import 'es6-shim';
+import { expect, use } from 'chai';
 import { createStore } from 'redux';
-import {NgRedux} from '../../components/ng-redux';
+import { NgRedux } from '../../components/ng-redux';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
-import * as _ from 'lodash';
+
 use(sinonChai);
 
 function returnPojo() {
@@ -88,8 +89,8 @@ describe('Connector', () => {
   it('Should extend target (object) with actionCreators', () => {
     connector.connect(returnPojo,
       { ac1: returnPojo, ac2: () => { } })(targetObj);
-    expect(_.isFunction(targetObj.ac1)).to.equal(true);
-    expect(_.isFunction(targetObj.ac2)).to.equal(true);
+    expect(targetObj.ac1).to.be.a('Function');
+    expect(targetObj.ac2).to.be.a('Function');
   });
 
   it('Should return an unsubscribing function', () => {

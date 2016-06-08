@@ -16,6 +16,7 @@ ng2-redux lets you easily connect your Angular 2 components with Redux.
 - [Installation](#installation)
 - [Quick Start](#quick-start)
 - [Usage](#usage)
+- [A Note about Internet Explorer](#a-note-about-internet-explorer)
 - [Cookbooks](#cookbooks)
   - [Using Angular 2 Services in your Action Creators](#using-angular-2-services-in-your-action-creators)
   - [Using Angular 2 Services in your Middleware](#using-angular-2-services-in-your-middleware)
@@ -194,6 +195,14 @@ export class App {
   }
 }
 ```
+
+## A Note about Internet Explorer
+
+This library relies on the presence of `Object.assign` and `Array.forEach`.
+Internet Explorer requires polyfills for these; however these same functions
+are also needed for Angular 2 itself to work.  Just make sure you include
+[core-js](https://npmjs.com/package/core-js) or [es6-shim](https://npmjs.com/packages/es6-shim)
+if you need to support IE.
 
 ## Cookbooks
 

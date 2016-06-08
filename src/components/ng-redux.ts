@@ -1,11 +1,15 @@
 import shallowEqual from '../utils/shallowEqual';
 import wrapActionCreators from '../utils/wrapActionCreators';
 import * as Redux from 'redux';
-import * as _ from 'lodash';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/distinctUntilChanged';
 import { Store, Action, ActionCreator, Reducer } from 'redux';
 import { Injectable } from '@angular/core';
 import { invariant } from '../utils/invariant';
+import { isObject, isFunction, isPlainObject} from '../utils/type-checks';
+import { omit } from '../utils/omit';
 
 const VALID_SELECTORS = ['string', 'number', 'symbol', 'function'];
 const ERROR_MESSAGE = `Expected selector to be one of: 
@@ -31,13 +35,13 @@ export class NgRedux<RootState> {
         this._store.subscribe(() => this._store$.next(this._store.getState()));
         this._defaultMapStateToTarget = () => ({});
         this._defaultMapDispatchToTarget = dispatch => ({ dispatch });
-        const cleanedStore = _.omit(store, ['dispatch', 'getState', 'subscribe', 'replaceReducer'])
+        const cleanedStore = omit(store, ['dispatch', 'getState', 'subscribe', 'replaceReducer'])
         Object.assign(this, cleanedStore);
     }
 
     /**
      * Create an observable from a Redux store. 
-     * 
+     *  
      * @param {Store<RootState>} store Redux store to create an observable from
      * @returns {BehaviorSubject<RootState>}
      */
@@ -96,7 +100,7 @@ export class NgRedux<RootState> {
             || this._defaultMapStateToTarget;
 
         invariant(
-            _.isFunction(finalMapStateToTarget),
+            isFunction(finalMapStateToTarget),
             'mapStateToTarget must be a Function. Instead received %s.',
             finalMapStateToTarget);
 
@@ -108,7 +112,7 @@ export class NgRedux<RootState> {
         return (target) => {
 
             invariant(
-                _.isFunction(target) || _.isObject(target),
+                isFunction(target) || isObject(target),
                 'The target parameter passed to connect must be a Function or' +
                 'a plain object.'
             );
@@ -174,10 +178,10 @@ export class NgRedux<RootState> {
     };
 
     private updateTarget(target, StateSlice, dispatch) {
-        if (_.isFunction(target)) {
+        if (isFunction(target)) {
             target(StateSlice, dispatch);
         } else {
-            _.assign(target, StateSlice, dispatch);
+            Object.assign(target, StateSlice, dispatch);
         }
     }
 
@@ -185,7 +189,7 @@ export class NgRedux<RootState> {
         const slice = mapStateToScope(state);
 
         invariant(
-            _.isPlainObject(slice),
+            isPlainObject(slice),
             '`mapStateToScope` must return an object. Instead received %s.',
             slice
         );
@@ -194,12 +198,12 @@ export class NgRedux<RootState> {
     }
 
     private getBoundActions = (actions) => {
-        const finalMapDispatchToTarget = _.isPlainObject(actions) ?
+        const finalMapDispatchToTarget = isPlainObject(actions) ?
             wrapActionCreators(actions) :
             actions || this._defaultMapDispatchToTarget;
         invariant(
-            _.isPlainObject(finalMapDispatchToTarget)
-            || _.isFunction(finalMapDispatchToTarget),
+            isPlainObject(finalMapDispatchToTarget)
+            || isFunction(finalMapDispatchToTarget),
             'mapDispatchToTarget must be a plain Object or a Function. ' +
             'Instead received % s.',
             finalMapDispatchToTarget);
