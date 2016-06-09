@@ -57,18 +57,18 @@ and optionally middlewares and enhancers as you would in Redux directly.
 
 ```typescript
 import { NgRedux } from 'ng2-redux';
-const thunk = require('redux-thunk').default;
+const reduxLogger = require('redux-logger');
 import { rootReducer } from './reducers';
 
 interface IAppState {
-  // ...   
+  // ...
 };
 @Component({
   // ... etc.
 })
 class App {
   constructor(private ngRedux: NgRedux) {
-    this.ngRedux.configureSture(rootReducer, {}, [ thunk ]);
+    this.ngRedux.configureSture(rootReducer, {}, [ reduxLogger ]);
   }
 
   // ...
@@ -503,7 +503,6 @@ to make sure that what we pass to ngRedux has a properly-bound function context.
 
 ```typescript
 import { LogRemoteName } from './middleware/log-remote-name';
-const thunk = require('redux-thunk').default;
 const reduxLogger = require('redux-logger');
 
 @Component({
@@ -515,7 +514,7 @@ class App {
     private ngRedux: NgRedux
     logRemoteName: LogRemoteName) {
 
-    const middleware = [ thunk, reduxLogger(), logRemoteName.middleware ];
+    const middleware = [ reduxLogger(), logRemoteName.middleware ];
     this.ngRedux.configureStore(
       rootReducer,
       initialState,
