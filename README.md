@@ -16,11 +16,6 @@ ng2-redux lets you easily connect your Angular 2 components with Redux.
 - [Installation](#installation)
 - [Quick Start](#quick-start)
 - [Usage](#usage)
-  - [The decorator interface](#the-decorator-interface)
-    - [The @dispatch decorator](#the-dispatch-decorator)
-    - [The @select decorator](#the-select-decorator)
-    - [The @dispatchAll decorator](#the-dispatchall-decorator)
-    - [The decorator interface: putting it all together](#the-decorator-interface-putting-it-all-together)
   - [The select pattern](#the-select-pattern)
   - [The connect pattern](#the-connect-pattern)
 - [A Note about Internet Explorer](#a-note-about-internet-explorer)
@@ -79,50 +74,21 @@ Now your Angular 2 app has been reduxified!
 
 ## Usage
 
-`ng2-redux` has three main usage patterns: `the decorator interface`, the `select` pattern and the `connect` pattern.
+`ng2-redux` has two main usage patterns: the `select` pattern and the `connect` pattern.
 
-### The Decorator Interface
+### The Select Pattern
 
-This is the simplest and cleanest approach. It attempts to reduce boiler plate code, separates Redux concerns allowing the class's code to focus on it's business concerns and smoothens the learning curve. It also enables more modular components to be created with minimum effort, some of which can be seen in the examples below.
+The select pattern allows you to get slices of your state as RxJS observables.
 
-The decorator interface currently consists of 3 decorators: 
-- `@dispatch` ( configures new methods on the class to dispatch Redux actions )
-- `@select` ( selects store slices and makes them available as properties on the class )
-- `@dispatchAll` ( just like `@dispatch`, but in batches )
-
-> Note: all decorators rely on NgRedux to be injected and configured in the angular app's Root Component. Aside from that, the decorators fully encapsulate the Redux connectivity and the NgRedux injectable doesn't need to be injected in any other class that needs to use the decorators, removing the need to implement a constructor and call functions within the component's lifecycle only for the purpose of NgRedux.
-
-#### The @dispatch decorator
-
-The `@dispatch` decorator can be added to the property of any angular component/injectable class to allow it to dispatch an action creator.
-It will decorate a property of a class, replacing it with a function that will dispatch the action creator it receives as a parameter. 
-
-```typescript
-import { Component } from '@angular2/core';
-import { dispatch } from 'ng2-redux';
-
-// import the action creator function
-import { increment } from '../actions/CounterActions';
-
-@Component({
-    selector: 'increment-button',
-    template: `
-    <button (click)="increment()"></button>
-    `
- })
- export class IncrementButton {
-    // decorate a function on the class called increment
-    // which will dispatch the increment action creator 
-    //   imported from '../actions/CounterActions'
-    @dispatch(increment) increment;
- }
-
-```
+These plug in very efficiently to Angular 2's change detection mechanism and is the
+preferred approach to accessing store data in Angular 2.
 
 #### The @select decorator
 
-The `@select` decorator can be added to the property of any class or angular component/injectable.
-It will decorate the property into an observable which observes the Redux Store Value which is selected by the decorator's parameter.
+The `@select` decorator can be added to the property of any class or angular 
+component/injectable. It will turn the property into an observable which observes
+the Redux Store value which is selected by the decorator's parameter.
+
 The decorator expects to receive a `string`, a `function` or no parameter at all. 
 
 - If a `string` is passed the `@select` decorator will attempt to observe a store property whose name matches the value represented by the `string`.
@@ -164,101 +130,13 @@ export class CounterValue {
     // this selects `counter` from the store and multiples it by two
     @select(state => state.counter * 2) 
     counterSelectedWithFuntionAndMultipliedByTwo: Observable<any>;
-
 }
 ```
 
-#### The @dispatchAll decorator
+### Select Without Decorators
 
-A class decorator that does the exact same thing that the old `ngRedux.mapDispatchToThis` used to do.
-The benefit of using this decorator is that it reduces code even further ( and quite significantly, the more actions need to be added ).
-A potential caveat however could be that this decorator magically attaches functions to your class without making it very obvious in the code. Some teams could find this confusing. In that case the `@dispatch` decorator offers the perfect alternative.
-
-
-```typescript
-import { Component } from '@angular2/core';
-import { dispatchAll } from 'ng2-redux';
-
-// assuming that this module file exports 4 action creator functions called:
-// increment, decrement, incrementIfOdd, incrementAsync
-import * as CounterActions from '../actions/CounterActions';
-
-@Component({
-    selector: 'counter-menu',
-    template: `
-    <button (click)="increment()">+</button>
-    <button (click)="decrement()">-</button>
-    <button (click)="incrementIfOdd()">Increment if odd</button>
-    <button (click)="incrementAsync()">Increment async</button>
-    `
-})
-@dispatchAll(CounterActions)
-export class CounterMenu {}
-```
-
-> Note: Since the `@dispatchAll` decorates the class with new methods which are never declared as properties of the class, the methods will only be available within the template. In order to call the methods from the class's code, their names can be predefined in the class, otherwise typescript won't know they exist, and will not compile.
-
-#### The decorator interface: putting it all together
-
-The decorator interface allows classes to focus on what they represent. Through this simplification it makes it easier to design better encapsulated components which can aggregate their behaviour and data internally, from multiple reducers and store slices, without complicating the code.
-
-In the example below we can see a fully encapsulated `counter` component, which doesn't require a smart component to pass it's data, aggregates behaviour from multiple reducers using the `@dispatch` decorator to easily attach action creators imported from anywhere, and showcases some internal logic combining multiple values selected from the store using the versatile `@select` decorator.
-
-```typescript
-import { Component } from '@angular2/core';
-import { dispatch, 
-         dispatchAll,
-         select } from 'ng2-redux';
-import { AsyncPipe } from '@angular2/common';
-import * as CounterActions from '../actions/CounterActions';
-import { logout } from '../actions/UserSessionActions';
-import 'rxjs/add/operator/combineLatest';
-
-@Component({
-    pipes: [AsyncPipe],
-    selector: 'counter',
-    template: `
-    <p>Clicked: {{ counter | async }} times</p>
-    <p>Value from combined observables: {{ doublePlusCounter | async }}</p>
-    <button (click)="increment()">+</button>
-    <button (click)="decrement()">-</button>
-    <button (click)="incrementIfOdd()">Increment if odd</button>
-    <button (click)="incrementAsync()">Increment async</button></p>
-    <button (click)="actionFromAnotherReducer()">Logout</button></p>
-    `
-})
-@dispatchAll(CounterActions)
-export class Counter {
-
-    @select() counter;
-    @select(state => state.counter * state.counter) counterDouble;
-
-    doublePlusCounter: any;
-
-    @dispatch(logout) actionFromAnotherReducer;
-		
-    ngOnInit() {
-        this.counter
-            .combineLatest(this.counterDouble, 
-                (latestCounter, latestCounterDouble) => {
-                    return latestCounter + latestCounterDouble;
-             })
-            .subscribe(n => {
-                this.doublePlusCounter = n;
-            });
-    }
-}
-```
-
-
-
-### The Select Pattern
-
-This is a good approach for those that don't want to use decorators yet still want to use Observables to interface
-more cleanly with common Angular 2 usage patterns.
-
-In this approach, we use `ngRedux.select()` to get observables from slices of our store
-state:
+If you like RxJS, but aren't comfortable with decorators, you can also make
+store selections using the `ngRedux.select()` function.
 
 ```typescript
 import { Component } from '@angular2/core';
@@ -339,7 +217,11 @@ const CounterActions = require('../actions/CounterActions');
   `
 })
 export class Counter {
-  private count$: Observable<number>;
+  private counter: number;
+
+  constructor(private ngRedux: NgRedux<IAppState>) {
+    ngRedux.connect(this.mapStateToTarget, this.mapDispatchToThis)(this);
+  }
 
   ngOnDestroy() {
     this.disconnect();

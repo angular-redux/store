@@ -2,15 +2,12 @@
 
 ### Features
 
-#### Decorators
-* This release introduces the new decorator interface:
-  * `@select` to create an observable from a slice of store state
-  * `@dispatch` to attach an action creator to a class method
-  * `@dispatchAll` (experimental) as a declarative shorthand for
-  `mapDispatchToTarget(actionCreators)(this)`
+#### Select Decorator
+This release introduces the new decorator interface. You can now use 
+`@select`  to create an observable from a slice of store state.
 
-See README.md for a complete description of how to use the new
-decorators.
+See 'the select pattern' in [README.md](README.md#the-select-pattern)
+for a complete description of how to use this new decorator.
 
 #### Simpler Redux DevTools Integration
 
@@ -100,7 +97,7 @@ export class App {
 
 #### Example App Updates
 
-The example app has been updated to use the decorator interface and a
+The example app has been updated to use `@select` and a
 DI-aware action creator service (`counter-actions.ts`). It now also
 shows examples of using middleware and enhancers from the Redux
 community: `redux-logger` and `redux-localstorage`.
