@@ -1,11 +1,10 @@
 import 'reflect-metadata';
-import {expect, use} from 'chai';
+import { expect, use } from 'chai';
 import { createStore } from 'redux';
-import {NgRedux} from '../../components/ng-redux';
-import {dispatchAll} from '../../decorators';
+import { NgRedux } from '../../components/ng-redux';
+import { dispatchAll } from '../../decorators';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
-import * as _ from 'lodash';
 
 use(sinonChai);
 

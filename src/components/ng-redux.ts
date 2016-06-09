@@ -84,7 +84,11 @@ export class NgRedux<RootState> {
 
         this._defaultMapStateToTarget = () => ({});
         this._defaultMapDispatchToTarget = dispatch => ({ dispatch });
-        const cleanedStore = omit(store, ['dispatch', 'getState', 'subscribe', 'replaceReducer'])
+        const cleanedStore = omit(store, [
+            'dispatch',
+            'getState',
+            'subscribe',
+            'replaceReducer']);
         Object.assign(this, cleanedStore);
     }
 

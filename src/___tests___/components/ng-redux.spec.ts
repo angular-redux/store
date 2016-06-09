@@ -3,9 +3,9 @@ import 'es6-shim';
 import { expect, use } from 'chai';
 import { createStore } from 'redux';
 import { NgRedux } from '../../components/ng-redux';
-import { dispatch } from '../../components/dispatch';
-import { dispatchAll } from '../../components/dispatchAll';
-import { select } from '../../components/select';
+import { dispatch } from '../../decorators/dispatch';
+import { dispatchAll } from '../../decorators/dispatch-all';
+import { select } from '../../decorators/select';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 

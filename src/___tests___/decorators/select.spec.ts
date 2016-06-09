@@ -1,16 +1,14 @@
 import 'reflect-metadata';
-import {expect, use} from 'chai';
+import { expect, use } from 'chai';
 import { createStore } from 'redux';
-import {NgRedux} from '../../components/ng-redux';
-import {select} from '../../decorators/select';
+import { NgRedux } from '../../components/ng-redux';
+import { select } from '../../decorators/select';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
-import * as _ from 'lodash';
 
 use(sinonChai);
 
 describe('@select', () => {
-
   let ngRedux;
   let targetObj;
   let defaultState;
@@ -35,7 +33,6 @@ describe('@select', () => {
   });
 
   describe('when passed no arguments', () => {
-
     it('automatically attempts to bind to a store property that matches the' +
        ' name of the class property', () => {
 
@@ -54,7 +51,6 @@ describe('@select', () => {
       ngRedux.dispatch({type: 'nvm', payload: expectedValue});
 
       expect(value).to.equal(expectedValue);
-
     });
 
     it('attempts to bind by name ignoring any $ characters in the class ' +
@@ -75,14 +71,10 @@ describe('@select', () => {
       ngRedux.dispatch({type: 'nvm', payload: expectedValue});
 
       expect(value).to.equal(expectedValue);
-
-
     });
-
   });
 
   describe('when passed a string', () => {
-
     it('attempts to bind to the store property whose name matches the ' +
        'string value', () => {
 
@@ -101,9 +93,7 @@ describe('@select', () => {
       ngRedux.dispatch({type: 'nvm', payload: expectedValue});
 
       expect(value).to.equal(expectedValue);
-
     });
-
   });
 
   describe('when passed a function', () => {
@@ -125,9 +115,6 @@ describe('@select', () => {
       ngRedux.dispatch({type: 'nvm', payload: expectedValue / 2});
 
       expect(value).to.equal(expectedValue);
-
     });
-
   });
-
 });
