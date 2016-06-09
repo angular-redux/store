@@ -55,12 +55,12 @@
     "ts-loader": "^0.8.1",
     "ts-node": "^0.5.5",
     "typescript": "^1.8.10",
-    "typings": "^1.0.4",
     "zone.js": "0.6.12"
   },
   "peerDependencies": {
     "rxjs": "5.0.0-beta.6",
     "@angular/core": "2.0.0-rc.1",
+    "typings": "^1.0.4",
     "zone.js": "0.6.12"
   },
   "dependencies": {}
