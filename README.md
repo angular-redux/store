@@ -68,7 +68,7 @@ interface IAppState {
 })
 class App {
   constructor(private ngRedux: NgRedux) {
-    this.ngRedux.configureSture(rootReducer, {}, [ reduxLogger ]);
+    this.ngRedux.configureSture(rootReducer, {}, [ reduxLogger() ]);
   }
 
   // ...
