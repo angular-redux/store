@@ -55,6 +55,7 @@
     "ts-loader": "^0.8.1",
     "ts-node": "^0.5.5",
     "typescript": "^1.8.10",
+    "typings": "^1.0.4",
     "zone.js": "0.6.12"
   },
   "peerDependencies": {
