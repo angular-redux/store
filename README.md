@@ -16,6 +16,8 @@ ng2-redux lets you easily connect your Angular 2 components with Redux.
 - [Installation](#installation)
 - [Quick Start](#quick-start)
 - [Usage](#usage)
+  - [The select pattern](#the-select-pattern)
+  - [The connect pattern](#the-connect-pattern)
 - [A Note about Internet Explorer](#a-note-about-internet-explorer)
 - [Cookbooks](#cookbooks)
   - [Using Angular 2 Services in your Action Creators](#using-angular-2-services-in-your-action-creators)
@@ -33,43 +35,42 @@ npm install --save ng2-redux
 
 ### Initialization
 
-Configure your store as you would with any redux application.  Then use
-ng2-redux's `provider` function to inject your store into the Angular 2
-dependency injector:
+Import the `NgRedux` class and add it to your application as an Angular 2
+provider.
 
 ```typescript
 import {bootstrap} from '@angular/platform-browser-dynamic';
-import { createStore, applyMiddleware } from 'redux';
-import { provider } from  'ng2-redux';
-const thunk = require('redux-thunk').default;
-
 import { App } from './containers/App';
-import { rootReducer } from './reducers';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const store = createStoreWithMiddleware(rootReducer);
-
-bootstrap(App, [provider(store)]);
+bootstrap(App, [ NgRedux ]);
 ```
 
 Once you've done this, you'll be able to inject 'NgRedux' into your
-Angular 2 components:
+Angular 2 components. In your top-level app component, you
+can configure your Redux store with reducers, initial state,
+and optionally middlewares and enhancers as you would in Redux directly.
 
 ```typescript
 import { NgRedux } from 'ng2-redux';
+const reduxLogger = require('redux-logger');
+import { rootReducer } from './reducers';
 
 interface IAppState {
-  // ...   
+  // ...
 };
 @Component({
   // ... etc.
 })
-class AppComponent {
-  constructor(private ngRedux: NgRedux<IAppState>) {}
+class App {
+  constructor(private ngRedux: NgRedux) {
+    this.ngRedux.configureSture(rootReducer, {}, [ reduxLogger() ]);
+  }
 
   // ...
 }
 ```
+
+Now your Angular 2 app has been reduxified!
 
 ## Usage
 
@@ -77,19 +78,73 @@ class AppComponent {
 
 ### The Select Pattern
 
-This is the preferred approach for Angular 2, since it uses Observables to interface
-more cleanly with common Angular 2 usage patterns.
+The select pattern allows you to get slices of your state as RxJS observables.
 
-In this approach, we use `ngRedux.select()` to get observables from slices of our store
-state:
+These plug in very efficiently to Angular 2's change detection mechanism and is the
+preferred approach to accessing store data in Angular 2.
+
+#### The @select decorator
+
+The `@select` decorator can be added to the property of any class or angular 
+component/injectable. It will turn the property into an observable which observes
+the Redux Store value which is selected by the decorator's parameter.
+
+The decorator expects to receive a `string`, a `function` or no parameter at all. 
+
+- If a `string` is passed the `@select` decorator will attempt to observe a store property whose name matches the value represented by the `string`.
+- If a `function` is passed the `@select` decorator will attempt to use that function as a selector on the RxJs observable. 
+- If nothing is passed then the `@select` decorator will attempt to use the name of the class property to find a matching value in the Redux store. Note that a utility is in place here where any $ characters will be ignored from the class property's name.
 
 ```typescript
-import { Component} from '@angular2/core';
-import { Observable} from 'rxjs';
-import { AsyncPipe} from '@angular2/common';
-import { Counter} from '../components/Counter';
+import { Component } from '@angular2/core';
+import { AsyncPipe } from '@angular2/common';
+import { Observable } from 'rxjs/Observable';
+import { select } from 'ng2-redux';
+
+@Component({
+    pipes: [AsyncPipe],
+    selector: 'counter-value-printed-many-times',
+    template: `
+    <p>{counter$ | async}</p>
+    <p>{counter | async}</p>
+    <p>{counterSelectedWithString | async}</p>
+    <p>{counterSelectedWithFunction | async}</p>
+    <p>{counterSelectedWithFunctionAndMultipliedByTwo | async}</p>
+    `
+})
+export class CounterValue {
+
+    // this selects `counter` from the store and attaches it to this property
+    // it uses the property name to select, and ignores the $ from it
+    @select() counter$;
+
+    // this selects `counter` from the store and attaches it to this property
+    @select() counter;
+
+    // this selects `counter` from the store and attaches it to this property
+    @select('counter') counterSelectedWithString;
+
+    // this selects `counter` from the store and attaches it to this property
+    @select(state => state.counter) counterSelectedWithFunction;
+
+    // this selects `counter` from the store and multiples it by two
+    @select(state => state.counter * 2) 
+    counterSelectedWithFuntionAndMultipliedByTwo: Observable<any>;
+}
+```
+
+### Select Without Decorators
+
+If you like RxJS, but aren't comfortable with decorators, you can also make
+store selections using the `ngRedux.select()` function.
+
+```typescript
+import { Component } from '@angular2/core';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular2/common';
+import { Counter } from '../components/Counter';
 import * as CounterActions from '../actions/CounterActions';
-import { NgRedux} from 'ng2-redux';
+import { NgRedux } from 'ng2-redux';
 
 interface IAppState {
   counter: number;
@@ -106,8 +161,8 @@ interface IAppState {
   </counter>
   `
 })
-export class App {
-  counter$: any;
+export class Counter {
+  private count$: Observable<number>;
 
   constructor(private ngRedux: NgRedux<IAppState>) {}
 
@@ -161,21 +216,11 @@ const CounterActions = require('../actions/CounterActions');
   </counter>
   `
 })
-export class App {
-  private disconnect: (a?:any) => void;
+export class Counter {
+  private counter: number;
 
-  constructor(private ngRedux: NgRedux<IAppState>) {}
-
-  ngOnInit() {
-    this.disconnect = this.ngRedux.connect(
-      this.mapStateToTarget,
-      this.mapDispatchToTarget)(this);
-  }
-
-  mapDispatchToTarget(dispatch) {
-    return {
-      actions: bindActionCreators(CounterActions, dispatch)
-    };
+  constructor(private ngRedux: NgRedux<IAppState>) {
+    ngRedux.connect(this.mapStateToTarget, this.mapDispatchToThis)(this);
   }
 
   ngOnDestroy() {
@@ -208,152 +253,156 @@ if you need to support IE.
 
 ### Using Angular 2 Services in your Action Creators
 
-In order to use services in your action creators, you need to integrate
+In order to use services in action creators, we need to integrate
 them into Angular 2's dependency injector.
 
-This means attaching your action creators to a class so that:
-1. you can make it `@Injectable()`, and
-2. you can inject other services into its constructor for your
-action creators to use.
+We may as well adopt a more class-based approach to satisfy
+Angular 2's OOP idiom, and to allow us to
 
-Take a look at this example, which uses
-* [redux-thunk](https://github.com/gaearon/redux-thunk) to
-allow for asynchronous actions, and
-* Angular 2's `http` service to make auth requests.
+1. make our actions `@Injectable()`, and
+2. inject other services for our action creators to use.
+
+Take a look at this example, which injects NgRedux to access
+`dispatch` and `getState` (a replacement for `redux-thunk`),
+and a simple `RandomNumberService` to show a side effect.
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { NgRedux } from 'ng2-redux';
+import * as Redux from 'redux';
+import { RootState } from '../store';
+import { RandomNumberService } from '../services/random-number';
 
-import {
-  LOGIN_USER_PENDING,
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_ERROR,
-  LOGOUT_USER
-} from '../constants';
-
-// Wrap our action creators in a class and make it @Injectable.
-// Don't forget to add it to your app's `providers`.
 @Injectable()
-export class SessionActions {
-  constructor(private http: Http) {}
+export class CounterActions {
+  constructor (
+    private ngRedux: NgRedux<RootState>,
+    private randomNumberService: RandomNumberService) {}
 
-  // Here's an action creator that uses HTTP.
-  loginUser(credentials) {
-    return (dispatch, getState) => {
-      dispatch({type: LOGIN_USER_PENDING});
+  static INCREMENT_COUNTER: string = 'INCREMENT_COUNTER';
+  static DECREMENT_COUNTER: string = 'DECREMENT_COUNTER';
+  static RANDOMIZE_COUNTER: string = 'RANDOMIZE_COUNTER';
 
-      this.http.post('/auth/login', credentials)
-        .toPromise()
-        .then(response => dispatch({type: LOGIN_USER_SUCCESS, payload: response.json()})
-        .catch(error => dispatch({type: LOGIN_USER_ERROR, payload: error, error: true });
-      });
-    };
+  // Basic action
+  increment(): void {
+    this.ngRedux.dispatch({ type: CounterActions.INCREMENT_COUNTER });
   }
 
-  // Just a regular, synchronous action creator.
-  logoutUser() {
-    return { type: LOGOUT_USER };
+  // Basic action
+  decrement(): void {
+    this.ngRedux.dispatch({ type: CounterActions.DECREMENT_COUNTER });
+  }
+
+  // Async action.
+  incrementAsync(delay: number = 1000): void {
+    setTimeout(this.increment.bind(this), delay);
+  }
+
+  // State-dependent action
+  incrementIfOdd(): void {
+    const { counter } = this.ngRedux.getState();
+    if (counter % 2 !== 0) {
+      this.increment();
+    }
+  }
+
+  // Service-dependent action
+  randomize(): void {
+    this.ngRedux.dispatch({
+      type: CounterActions.RANDOMIZE_COUNTER,
+      payload: this.randomNumberService.pick()
+    });
   }
 }
 ```
 
-To use these action creators, we can just go ahead an map them
-to our container component:
+To use these action creators, we can just go ahead and inject
+them into our component:
 
 ```typescript
 import { Component } from '@angular/core';
-import { NgRedux } from 'ng2-redux';
-import { SessionActions } from '../actions/session';
-import { IAppState } from './app-state';
+import { NgRedux, select } from 'ng2-redux';
+import { CounterActions } from '../actions/counter-actions';
+import { RandomNumberService } from '../services/random-number';
 
 @Component({
-  // ... etc.
+  selector: 'counter',
+  providers: [ CounterActions, RandomNumberService ],
+  template: `
+  <p>
+    Clicked: {{ counter$ | async }} times
+    <button (click)="actions.increment()">+</button>
+    <button (click)="actions.decrement()">-</button>
+    <button (click)="actions.incrementIfOdd()">Increment if odd</button>
+    <button (click)="actions.incrementAsync(2222)">Increment async</button>
+    <button (click)="actions.randomize()">Set to random number</button>
+  </p>
+  `
 })
-export class LoginPage {
-  // Here we inject the SessionActions instance into our
-  // smart component.
-  constructor(
-    private ngRedux: NgRedux<IAppState>,
-    private sessionActions: SessionActions) {
+export class Counter {
+  @select('counter') counter$: any;
 
-    ngRedux.mapDispatchToTarget((dispatch) => {
-      return {
-        login: (credentials) => dispatch(
-          this.sessionActions.loginUser(credentials)),
-        logout: () => dispatch(
-          this.sessionActions.logoutUser())
-      };
-    })(this);
-  }
-};
+  constructor(private actions: CounterActions) {}
+}
 ```
 
 ### Using Angular 2 Services in your Middleware
 
-This is a bit more complicated, due to the fact that the redux store is configured
-before the app's dependency injector is bootstrapped. We're investigating alternatives
-for an upcoming release.
+Again, we just want to use Angular DI the way it was meant to be used.
 
-However in the short term, you can inject into your middlewares manually as shown
-below.
-
-In the main application component, we save a reference to the app's root injector,
-which is available post-bootstrap:
-
-`app.ts`:
+Here's a contrived example that fetches a name from a remote API using Angular's
+`Http` service:
 
 ```typescript
-import { provider } from 'ng2-redux';
-import { HTTP_PROVIDERS } from '@angular/http';
-import { setAppInjector } from './utils/app-injector';
-
-bootstrap(RioSampleApp, [
-  provider(store),
-  HTTP_PROVIDERS,
-  //...
-]).then((appRef: ComponentRef) => {
-  setAppInjector(appRef.injector);
-});
-```
-
-Note `utils/app-injector`, which provides a place to save it:
-
-```typescript
-import { Injector } from '@angular/core';
-
-let appInjector: Injector;
-
-export function setAppInjector(injector: Injector): void {
-  appInjector = injector;
-}
-
-export function getAppInjector(): Injector {
-  return appInjector;
-}
-```
-
-Then when we write a middleware, we can access the root injector
-manually to get access to Angular services like HTTP:
-
-`log-name-middleware.ts`:
-
-```typescript
+import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { getAppInjector } from '../utils/app-injector';
+import 'rxjs/add/operator/toPromise';
 
-export const logNameMiddleware = store => next => action => {
-  const http = getAppInjector().get(Http);
-  
-  console.log('getting user name');
-  http.get('http://jsonplaceholder.typicode.com/users/1')
-    .toPromise()
-    .then(response => {
-      console.log('got name:', response.json().name);
-      return next(action);
-    })
-    .catch(err => console.log('get name failed:', err));
-};
+@Injectable()
+export class LogRemoteName {
+  constructor(private http: Http) {}
+
+  middleware = store => next => action => {
+    console.log('getting user name');
+    this.http.get('http://jsonplaceholder.typicode.com/users/1')
+      .toPromise()
+      .then(response => {
+        console.log('got name:', response.json().name);
+        return next(action);
+      })
+      .catch(err => console.log('get name failed:', err));
+    }
+}
+```
+
+As with the action example above, we've attached our middleware function to
+an `@Injectable` class that can itself receive services from Angular's dependency
+injector.
+
+Note the arrow function called `middleware`: this is what we can pass to the middlewares
+parameter when we initialize ngRedux in our top-level component. We use an arrow function
+to make sure that what we pass to ngRedux has a properly-bound function context.
+
+```typescript
+import { LogRemoteName } from './middleware/log-remote-name';
+const reduxLogger = require('redux-logger');
+
+@Component({
+  providers: [ LogRemoteName ],
+  // ...
+})
+class App {
+  constructor(
+    private ngRedux: NgRedux
+    logRemoteName: LogRemoteName) {
+
+    const middleware = [ reduxLogger(), logRemoteName.middleware ];
+    this.ngRedux.configureStore(
+      rootReducer,
+      initialState,
+      middleware);
+  }
+}
 ```
 
 ### Using DevTools
@@ -365,8 +414,6 @@ https://github.com/zalmoxisus/redux-devtools-extension
 Here's how to enable them in your app (you probably only want to do
 this in development mode):
 
-__Step 1:__ Add the extension to your storeEnhancers:
-
 ```typescript
 const enhancers = [];
 
@@ -376,53 +423,31 @@ if (__DEVMODE__ && window.devToolsExtension) {
   enhancers = [ ...enhancers, window.devToolsExtension() ];
 }
 
-const store = compose(
-    applyMiddleware(middleware),
-    ...enhancers
-  )(createStore)(rootReducer, initialState);
-```
-
-__Step 2:__ Make Angular 2 update when store events come from the dev tools
-instead of Ng2Redux:
-
-```typescript
+// Add the dev tools enhancer your ngRedux.configureStore called
+// when you initialize your root component:
 @Component({
-  // etc.
+  // ...
 })
-export class App {
-  private unsubscribe: () => void;
-
-  constructor(
-    private ngRedux: NgRedux<IAppState>,
-    applicationRef: ApplicationRef) {
-
-    // etc.
-
-    if (__DEVMODE__) {
-      this.unsubscribe = ngRedux.subscribe(() => {
-        applicationRef.tick();
-      });
-    }
+class App {
+  constructor(private ngRedux: NgRedux) {
+    this.ngRedux.configureStore(rootReducer, initialState, [], enhancers);
   }
-
-  ngOnDestroy() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-  }
-};
+}
 ```
 
 ## API
 
-### `provider()`
+### `configureStore()`
 
-Binds an NgRedux instance to your Redux store and makes it available to Angular's
-dependency injector as an injectable service.
+Initializes your ngRedux store. This should be called once, typically in your
+top-level app component's constructor.
 
 __Arguments:__
 
-* `store` \(*Object*): Redux's store instance
+* `rootReducer` \(*Reducer*): Your top-level Redux reducer.
+* `initialState` \(*Object): The desired initial state of your store.
+* `middleware` \(*Middleware[]*): An optional array of Redux middleware functions.
+* `enhancers` \(*StoreEnhancer[StoreEnhancer]*): An optional array of Redux store enhancer functions.
 
 ### select(key | function,[comparer]) => Observable
 
@@ -447,6 +472,19 @@ this.counterSubscription = this.ngRedux
 
 this.counter$ = this.ngRedux.select('counter');  
 ```
+
+### @select(key | function)
+
+Property decorator.
+
+Attaches an observable to the property which will reflect the latest value in the Redux store.
+
+__Arguments:__
+
+* `key` \(*string*): A key within the state that you want to subscribe to.
+* `selector` \(*Function*): A function that accepts the application state, and returns the slice you want to subscribe to for changes.
+
+e.g. see [the @select decorator](#the-select-decorator)
 
 ### `connect(mapStateToTarget, mapDispatchToTarget)(target)`
 

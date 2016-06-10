@@ -1,61 +1,35 @@
-import {Component, Inject, OnDestroy, ApplicationRef} from '@angular/core';
-import {Observable} from 'rxjs';
-import {AsyncPipe} from '@angular/common';
-import {Counter} from '../components/Counter';
-import * as CounterActions from '../actions/CounterActions';
-import {NgRedux} from 'ng2-redux';
+import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { NgRedux, select } from 'ng2-redux';
 
-import {RootState} from '../store/configureStore';
+import { Counter } from '../components/Counter';
+import { CounterInfo } from '../components/CounterInfo';
+import { RootState, enhancers } from '../store';
+
+import reducer from '../reducers/index';
+const createLogger = require('redux-logger');
 
 @Component({
     selector: 'root',
-    directives: [Counter],
+    directives: [Counter, CounterInfo],
     pipes: [AsyncPipe],
     template: `
-  <counter [counter]="counter$| async"
-    [increment]="increment"
-    [decrement]="decrement"
-    [incrementIfOdd]="incrementIfOdd"
-    [incrementAsync]="incrementAsync">
-  </counter>
+    <counter></counter>
+    <counter-info></counter-info>
   `
 })
-
 export class App {
-    
-    counter$: any;
-    unsubscribe: () => void;
 
-    // Will be added to instance with mapDispatchToTarget
+    constructor(private ngRedux: NgRedux<RootState>) {
 
-    increment: () => any;
-    decrement: () => any;
+        // Do this once in the top-level app component.
+        this.ngRedux.configureStore(
+            reducer,
+            { counter: 0 },
+            [ createLogger() ],
+            enhancers
+        );
 
-    constructor(
-        private ngRedux: NgRedux<RootState>,
-        private applicationRef: ApplicationRef) {}
-
-    ngOnInit() {
-        let {increment, decrement } = CounterActions;
-        this.counter$ = this.ngRedux
-            .select(state => state.counter)
-        this.ngRedux.mapDispatchToTarget({ increment, decrement })(this);
-
-        this.unsubscribe = this.ngRedux.subscribe(() => {
-          this.applicationRef.tick();
-        });
     }
-
-    ngOnDestroy() {
-        this.unsubscribe();
-    }
-
-    // Can also call ngRedux.dispatch directly
-
-    incrementIfOdd = () => this.ngRedux
-        .dispatch(<any>CounterActions.incrementIfOdd());
-
-    incrementAsync = () => this.ngRedux
-        .dispatch(<any>CounterActions.incrementAsync());
 
 }
