@@ -63,7 +63,7 @@ interface IAppState {
 })
 class App {
   constructor(private ngRedux: NgRedux) {
-    this.ngRedux.configureSture(rootReducer, {}, [ reduxLogger() ]);
+    this.ngRedux.configureStore(rootReducer, {}, [ reduxLogger() ]);
   }
 
   // ...
@@ -80,7 +80,7 @@ Now your Angular 2 app has been reduxified!
 
 The select pattern allows you to get slices of your state as RxJS observables.
 
-These plug in very efficiently to Angular 2's change detection mechanism and is the
+These plug in very efficiently to Angular 2's change detection mechanism and this is the
 preferred approach to accessing store data in Angular 2.
 
 #### The @select decorator
