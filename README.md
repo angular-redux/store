@@ -486,42 +486,6 @@ __Arguments:__
 
 e.g. see [the @select decorator](#the-select-decorator)
 
-### @dispatch(func)
-
-Property decorator.
-
-Attaches a class instance method which will dispatch the action creator passed as the function.
-
-__Arguments:__
-
-* `func` \(*Function*): A redux action creator function
-
-e.g. see [the @dispatch decorator](#the-dispatch-decorator)
-
-### @dispatchAll(obj)
-
-Class decorator.
-
-Attaches class instance methods to the class which will dispatch every action creator function found on the received object. 
-
-__Arguments:__
-
-* `obj` \(*Object*): An object containing Action Creator functions. Anything else other than a function will be ignored. 
-
-That is if: 
-
-```typescript
-@dispatchAll({
-    increment: () => (<Redux.Action>{ type: 'INCREMENT' }),
-    decrement: () => (<Redux.Action>{ type: 'DECREMENT' })
-})
-class Counter {}
-```
-
-then the counter component will have two methods: `this.increment` and `this.decrement` which will dispatch the action creators from the received object.
-
-e.g. see [the @dispatchAll decorator](#the-dispatchall-decorator)
-
 ### `connect(mapStateToTarget, mapDispatchToTarget)(target)`
 
 Connects an Angular component to Redux, and maps action creators and store
