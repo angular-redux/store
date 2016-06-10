@@ -1,24 +1,22 @@
-import { Component } from '@angular/core';
-import { NgRedux, select } from 'ng2-redux';
-import { CounterActions } from '../actions/counter-actions';
-import { RandomNumberService } from '../services/random-number';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'counter',
-  providers: [ CounterActions, RandomNumberService ],
   template: `
   <p>
-    Clicked: {{ counter$ | async }} times
-    <button (click)="actions.increment()">+</button>
-    <button (click)="actions.decrement()">-</button>
-    <button (click)="actions.incrementIfOdd()">Increment if odd</button>
-    <button (click)="actions.incrementAsync(2222)">Increment async</button>
-    <button (click)="actions.randomize()">Set to random number</button>
+    Clicked: {{ counter }} times
+    <button (click)="increment()">+</button>
+    <button (click)="decrement()">-</button>
+    <button (click)="incrementIfOdd()">Increment if odd</button>
+    <button (click)="incrementAsync()">Increment async</button>
   </p>
   `
 })
 export class Counter {
-  @select('counter') counter$: any;
-
-  constructor(private actions: CounterActions) {}
+  @Input() counter: number;
+  @Input() increment: () => void;
+  @Input() decrement: () => void; 
+  @Input() incrementIfOdd: () => void;
+  @Input() incrementAsync: () => void;
+  
 }

@@ -1,15 +1,13 @@
 {
   "name": "ng2-redux",
-  "version": "3.0.0",
+  "version": "2.3.5",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/index.js",
   "scripts": {
     "build": "rimraf ./lib; tsc; rimraf ./lib/___tests___",
     "postinstall": "typings install",
-    "test": "npm run lint && npm run mocha",
-    "typings": "rimraf ./typings && typings install",
-    "mocha": "ts-node ./node_modules/mocha/bin/_mocha  --opts ./src/___tests___/mocha.opts",
-    "lint": "tslint 'src/**/*.ts' 'examples/counter/**.ts --exclude 'examples/counter/node_modules"
+    "test": "ts-node ./node_modules/mocha/bin/_mocha  --opts ./src/___tests___/mocha.opts",
+    "typings": "rimraf ./typings && typings install"
   },
   "typings": "./lib/index.d.ts",
   "repository": {
@@ -35,10 +33,6 @@
     {
       "name": "Seth Davenport",
       "url": "https://github.com/SethDavenport"
-    },
-    {
-      "name": "Cosmin Ronnin",
-      "url": "https://github.com/kosz"
     }
   ],
   "license": "MIT",
@@ -60,7 +54,6 @@
     "sinon-chai": "^2.8.0",
     "ts-loader": "^0.8.1",
     "ts-node": "^0.5.5",
-    "tslint": "^3.11.0",
     "typescript": "^1.8.10",
     "typings": "^1.0.4",
     "zone.js": "0.6.12"

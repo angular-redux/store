@@ -1,5 +1,8 @@
-import { bootstrap } from '@angular/platform-browser-dynamic';
-import { App } from './containers/App';
-import { NgRedux } from 'ng2-redux';
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import {App} from './containers/App';
+import configureStore from './store/configureStore';
+import {provider} from 'ng2-redux';
 
-bootstrap(App, [ NgRedux ]);
+const store = configureStore();
+
+bootstrap(App, [ provider(store) ]);
