@@ -1,3 +1,3 @@
 export { NgRedux } from './components/ng-redux';
-export { select } from './decorators';
+export { select } from './decorators/select';
 
