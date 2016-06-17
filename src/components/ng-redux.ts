@@ -3,7 +3,6 @@ import * as Redux from 'redux';
 import {
     Store,
     Action,
-    ActionCreator,
     Reducer,
     createStore,
     applyMiddleware,

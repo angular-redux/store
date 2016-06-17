@@ -1,6 +1,5 @@
 import 'reflect-metadata';
 import { expect, use } from 'chai';
-import { createStore } from 'redux';
 import { NgRedux } from '../../components/ng-redux';
 import { select } from '../../decorators/select';
 import * as sinon from 'sinon';
@@ -117,4 +116,64 @@ describe('@select', () => {
       expect(value).to.equal(expectedValue);
     });
   });
+
+  describe('when passed a comparer', () => {
+
+    function comparer(x: any, y: any): boolean {
+      return y === 1;
+    }
+
+    it('should not trigger next when comparer returns true', () => {
+
+      class MockClass {
+        @select(state => state.baz, comparer) asdf: any;
+      }
+
+      const mockInstance = new MockClass();
+
+      mockInstance.asdf.subscribe(val => {
+        expect(val).to.not.equal(1);
+      });
+      ngRedux.dispatch({type: 'nvm', payload: 1});
+    });
+
+    it('should trigger next when comparer returns false', () => {
+
+      class MockClass {
+        @select(state => state.baz, comparer) asdf: any;
+      }
+
+      const mockInstance = new MockClass();
+      let value;
+
+      mockInstance.asdf.subscribe(val => {
+        value = val;
+      });
+      ngRedux.dispatch({type: 'nvm', payload: 2});
+      expect(value).to.equal(2);
+    });
+
+    it('should receive previous and next value for comparison', () => {
+
+      const spy = sinon.spy();
+      
+      class MockClass {
+        @select(state => state.baz, spy) asdf: any;
+      }
+
+      const mockInstance = new MockClass();
+      mockInstance.asdf.subscribe(val => null);
+
+      ngRedux.dispatch({type: 'nvm', payload: 1});
+      ngRedux.dispatch({type: 'nvm', payload: 2});
+
+      expect(spy.getCall(0).args[0]).to.equal(undefined);
+      expect(spy.getCall(0).args[1]).to.equal(1);
+
+      expect(spy.getCall(1).args[0]).to.equal(1);
+      expect(spy.getCall(1).args[1]).to.equal(2);
+    });
+
+  });
+
 });
