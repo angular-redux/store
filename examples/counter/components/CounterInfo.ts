@@ -4,8 +4,8 @@ import { select } from 'ng2-redux';
 import 'rxjs/add/operator/combineLatest';
 
 @Component({
-  selector: 'counter-info',
-  template: `
+    selector: 'counter-info',
+    template: `
   <ul>
      <li>{{ funcCounter$ | async }}</li>
      <li>{{ stringKey$ | async }}</li>
@@ -22,10 +22,11 @@ export class CounterInfo {
     foo: any;
 
     ngOnInit() {
-        this.counterX2$.combineLatest(this.stringKey$, (x, y) => {
-            return { x: x * 2, y: y * 3 };
-        }).subscribe(n => {
-            this.foo = n;
-        })
+        this.counterX2$.combineLatest(this.stringKey$,
+            (x: number, y: number) => {
+                return { x: x * 2, y: y * 3 };
+            }).subscribe(n => {
+                this.foo = n;
+            });
     }
 }
