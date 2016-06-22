@@ -46,7 +46,7 @@
   },
   "homepage": "https://github.com/angular-redux/ng2-redux#readme",
   "devDependencies": {
-    "@angular/core": "2.0.0-rc.2",
+    "@angular/core": "2.0.0-rc.3",
     "chai": "^3.5.0",
     "es6-shim": "^0.35.0",
     "expect": "^1.8.0",
@@ -66,7 +66,7 @@
   },
   "peerDependencies": {
     "rxjs": "5.0.0-beta.6",
-    "@angular/core": "2.0.0-rc.2",
+    "@angular/core": "2.0.0-rc.3",
     "typings": "^1.0.4",
     "zone.js": "0.6.12"
   },
