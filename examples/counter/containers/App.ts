@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { NgRedux, select } from 'ng2-redux';
+import { NgRedux } from 'ng2-redux';
 
 import { Counter } from '../components/Counter';
 import { CounterInfo } from '../components/CounterInfo';
@@ -25,7 +25,7 @@ export class App {
         // Do this once in the top-level app component.
         this.ngRedux.configureStore(
             reducer,
-            { counter: 0 },
+            {},
             [ createLogger() ],
             enhancers
         );

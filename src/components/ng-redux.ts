@@ -19,11 +19,13 @@ import wrapActionCreators from '../utils/wrapActionCreators';
 import { isObject, isFunction, isPlainObject} from '../utils/type-checks';
 import { omit } from '../utils/omit';
 import { invariant } from '../utils/invariant';
+import { getIn } from '../utils/get-in';
 
-const VALID_SELECTORS = ['string', 'number', 'symbol', 'function'];
+const VALID_SELECTORS = ['string', 'string[]', 'number', 'symbol', 'function'];
 const ERROR_MESSAGE = `Expected selector to be one of:
     ${VALID_SELECTORS.join(',')}. Instead recieved %s`;
-const checkSelector = (s) => VALID_SELECTORS.indexOf(typeof s, 0) >= 0;
+const checkSelector = (s) => VALID_SELECTORS.indexOf(typeof s, 0) >= 0 ||
+    Array.isArray(s);
 
 @Injectable()
 export class NgRedux<RootState> {
@@ -114,7 +116,11 @@ export class NgRedux<RootState> {
      * source Observable with distinct values.
      */
     select<S>(
-        selector: string | number | symbol | ((state: RootState) => S),
+        selector: string |
+            number |
+            symbol |
+            (string | number)[] |
+            ((s: RootState) => S),
         comparer?: (x: any, y: any) => boolean): Observable<S> {
 
         invariant(checkSelector(selector), ERROR_MESSAGE, selector);
@@ -125,6 +131,10 @@ export class NgRedux<RootState> {
             typeof selector === 'symbol') {
             return this._store$
                 .map(state => state[selector])
+                .distinctUntilChanged(comparer);
+        } else if (Array.isArray(selector)) {
+            return this._store$
+                .map(state => getIn(state, selector))
                 .distinctUntilChanged(comparer);
         } else if (typeof selector === 'function') {
             return this._store$

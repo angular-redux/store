@@ -10,4 +10,5 @@ if (window.devToolsExtension) {
 
 export interface RootState {
   counter: number;
+  pathDemo: Object;
 }

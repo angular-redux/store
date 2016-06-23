@@ -4,26 +4,28 @@ import { NgRedux } from '../components/ng-redux';
  * Selects an observable from the store, and attaches it to the decorated 
  * property.
  *
- * @param {string | function} stateKeyOrFunc
+ * @param {string | string[] | function} statePathOrFunc 
+ * An Rxjs selector function, property name string, or property name path
+ * (array of strings/array indices) that locates the store data to be 
+ * selected
+ *
  * @param {function} comparer function for this selector
- * An Rxjs selector function or a string indicating the name of the store
- * property to be selected.
- * */
+ */
 export const select = <T>(
-    stateKeyOrFunc?,
+    statePathOrFunc?: string |
+        (string | number)[] |
+        Function,
     comparer?: (x: any, y: any) => boolean) => (target, key) => {
 
-    let bindingKey = (key.lastIndexOf('$') === key.length - 1) ?
-        key.substring(0, key.length - 1) : key;
-
-    if (typeof stateKeyOrFunc === 'string') {
-        bindingKey = stateKeyOrFunc;
+    let bindingKey = statePathOrFunc;
+    if (!statePathOrFunc) {
+        bindingKey = (key.lastIndexOf('$') === key.length - 1) ?
+            key.substring(0, key.length - 1) :
+            key;
     }
-
+    
     function getter() {
-      const isFunction = typeof stateKeyOrFunc === 'function';
-        return NgRedux.instance
-            .select(isFunction ? stateKeyOrFunc : bindingKey, comparer);
+        return NgRedux.instance.select(bindingKey, comparer);
     }
 
     // Delete property.

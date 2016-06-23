@@ -89,10 +89,15 @@ The `@select` decorator can be added to the property of any class or angular
 component/injectable. It will turn the property into an observable which observes
 the Redux Store value which is selected by the decorator's parameter.
 
-The decorator expects to receive a `string`, a `function` or no parameter at all. 
+The decorator expects to receive a `string`, an array of `string`s, a `function` or no
+parameter at all. 
 
-- If a `string` is passed the `@select` decorator will attempt to observe a store property whose name matches the value represented by the `string`.
-- If a `function` is passed the `@select` decorator will attempt to use that function as a selector on the RxJs observable. 
+- If a `string` is passed the `@select` decorator will attempt to observe a store
+property whose name matches the `string`.
+- If an array of strings is passed, the decorator will attempt to match that path
+through the store (similar to `immutableJS`'s `getIn`).
+- If a `function` is passed the `@select` decorator will attempt to use that function
+as a selector on the RxJs observable. 
 - If nothing is passed then the `@select` decorator will attempt to use the name of the class property to find a matching value in the Redux store. Note that a utility is in place here where any $ characters will be ignored from the class property's name.
 
 ```typescript
@@ -123,6 +128,10 @@ export class CounterValue {
 
     // this selects `counter` from the store and attaches it to this property
     @select('counter') counterSelectedWithString;
+
+    // this selects `pathDemo.foo.bar` from the store and attaches it to this
+    // property.
+    @select(['pathDemo', 'foo', 'bar']) pathSelection;
 
     // this selects `counter` from the store and attaches it to this property
     @select(state => state.counter) counterSelectedWithFunction;
@@ -473,7 +482,7 @@ this.counterSubscription = this.ngRedux
 this.counter$ = this.ngRedux.select('counter');  
 ```
 
-### @select(key | function)
+### @select(key | path | function)
 
 Property decorator.
 
@@ -482,6 +491,7 @@ Attaches an observable to the property which will reflect the latest value in th
 __Arguments:__
 
 * `key` \(*string*): A key within the state that you want to subscribe to.
+* `path` \(*string[]*): A path of nested keys within the state you want to subscribe to.
 * `selector` \(*Function*): A function that accepts the application state, and returns the slice you want to subscribe to for changes.
 
 e.g. see [the @select decorator](#the-select-decorator)
