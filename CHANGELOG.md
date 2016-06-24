@@ -1,10 +1,28 @@
-# 3.0.6
+# 3.1.0
 
 ### Features
 
-Added a 'path' option to `ngRedux.select()` and `@select()`. Now you can
+* Added a 'path' option to `ngRedux.select()` and `@select()`. Now you can
 do stuff like `@select(['foo', 'bar'])` to select `state.foo.bar` into
 an observable.
+
+* Add ability to provide custom comparer to @select decorator to keep consistent with ngRedux.select
+
+```js
+import { is } from 'immutablejs'
+
+export class SomeComponent { 
+  @select(n=n.some.selector, is) someSelector$: Observable<any>
+}
+
+```
+### Features
+
+# 3.0.8
+
+### Fix
+
+* AppliicationRef is optional dependency, fixes#127
 
 # 3.0.0
 
