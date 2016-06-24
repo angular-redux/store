@@ -20,7 +20,7 @@ const createLogger = require('redux-logger');
 })
 export class App {
 
-    constructor(private ngRedux: NgRedux<RootState>) {
+    constructor(private ngRedux: NgRedux<any>) {
 
         // Do this once in the top-level app component.
         this.ngRedux.configureStore(
