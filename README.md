@@ -39,7 +39,7 @@ Import the `NgRedux` class and add it to your application as an Angular 2
 provider.
 
 ```typescript
-import {bootstrap} from '@angular/platform-browser-dynamic';
+import { bootstrap } from '@angular/platform-browser-dynamic';
 import { App } from './containers/App';
 
 bootstrap(App, [ NgRedux ]);
