@@ -52,7 +52,7 @@ and optionally middlewares and enhancers as you would in Redux directly.
 
 ```typescript
 import { NgRedux } from 'ng2-redux';
-const reduxLogger = require('redux-logger');
+import reduxLogger from 'redux-logger';
 import { rootReducer } from './reducers';
 
 interface IAppState {
@@ -394,7 +394,7 @@ to make sure that what we pass to ngRedux has a properly-bound function context.
 
 ```typescript
 import { LogRemoteName } from './middleware/log-remote-name';
-const reduxLogger = require('redux-logger');
+import reduxLogger from 'redux-logger';
 
 @Component({
   providers: [ LogRemoteName ],
@@ -424,7 +424,7 @@ Here's how to enable them in your app (you probably only want to do
 this in development mode):
 
 ```typescript
-const enhancers = [];
+let enhancers = [];
 
 // Add Whatever other enhancers you want.
 
