@@ -13,10 +13,6 @@ function returnPojo() {
   return {};
 }
 
-class MockApplicationRef {
-  tick: () => void;
-}
-
 describe('Connector', () => {
   let ngRedux;
   let targetObj;
@@ -37,7 +33,7 @@ describe('Connector', () => {
     mockAppRef = {
       tick: sinon.spy()
     };
-    ngRedux = new NgRedux(mockAppRef);
+    ngRedux = new NgRedux();
     ngRedux.configureStore(rootReducer, defaultState);
   });
 
@@ -59,7 +55,6 @@ describe('Connector', () => {
     expect(ngRedux.connect.bind(ngRedux, state => state.foo))
       .to.throw(Error);
   });
-
 
   it('Should extend target (Object) with selected state once directly after ' +
     'creation', () => {
@@ -158,11 +153,7 @@ describe('NgRedux Observable Store', () => {
       }
     };
 
-    mockAppRef = {
-      tick: sinon.spy()
-    };
-
-    ngRedux = new NgRedux<IAppState>(mockAppRef);
+    ngRedux = new NgRedux<IAppState>();
     ngRedux.configureStore(rootReducer, defaultState);
   });
 
@@ -281,12 +272,4 @@ describe('NgRedux Observable Store', () => {
     expect(fooData.data).to.equal('update-2');
     expect(spy).to.have.been.calledThrice;
   });
-
-  it('should force the Angular UI to update when a change is made externally',
-    () => {
-      ngRedux.dispatch({ type: 'UPDATE_FOO', payload: 'update' });
-      expect(mockAppRef.tick).to.have.been.calledOnce;
-    });
-
 });
-

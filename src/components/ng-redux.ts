@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
-import { Injectable, ApplicationRef, Optional } from '@angular/core';
+import { Injectable } from '@angular/core';
 import shallowEqual from '../utils/shallowEqual';
 import wrapActionCreators from '../utils/wrapActionCreators';
 import { isObject, isFunction, isPlainObject} from '../utils/type-checks';
@@ -38,12 +38,8 @@ export class NgRedux<RootState> {
 
     /**
      * Creates an instance of NgRedux.
-     *
-     * @param {ApplicationRef} applicationRef Angular application ref:
-     *  lets redux dev tools refresh the Angular 2 view when it changes
-     *  the store.
      */
-    constructor(@Optional() private _applicationRef?: ApplicationRef) {
+    constructor() {
       NgRedux.instance = this;
     }
 
@@ -76,14 +72,7 @@ export class NgRedux<RootState> {
 
         this._store = store;
         this._store$ = new BehaviorSubject(store.getState());
-        this._store.subscribe(() => {
-            this._store$.next(this._store.getState());
-
-            // For devTools support.
-            if (this._applicationRef) {
-                this._applicationRef.tick();
-            }    
-        });
+        this._store.subscribe(() => this._store$.next(this._store.getState()));
 
         this._defaultMapStateToTarget = () => ({});
         this._defaultMapDispatchToTarget = dispatch => ({ dispatch });

@@ -24,10 +24,7 @@ describe('@select', () => {
       return newState;
     };
     targetObj = {};
-    mockAppRef = {
-      tick: sinon.spy()
-    };
-    ngRedux = new NgRedux(mockAppRef);
+    ngRedux = new NgRedux();
     ngRedux.configureStore(rootReducer, defaultState);
   });
 
@@ -156,7 +153,7 @@ describe('@select', () => {
     it('should receive previous and next value for comparison', () => {
 
       const spy = sinon.spy();
-      
+
       class MockClass {
         @select(state => state.baz, spy) asdf: any;
       }
@@ -173,7 +170,5 @@ describe('@select', () => {
       expect(spy.getCall(1).args[0]).to.equal(1);
       expect(spy.getCall(1).args[1]).to.equal(2);
     });
-
   });
-
 });
