@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "typings install",
     "start": "webpack-dev-server -d --inline --progress --no-info --config webpack.config.js",
-    "dev": "webpack-dev-server -d --inline --progress --no-info --config webpack.dev.config.js"
+    "dev": "webpack-dev-server -d --inline --progress --no-info --config webpack.dev.config.js --host 127.0.0.1"
   },
   "repository": {
     "type": "git",

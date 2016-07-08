@@ -1,11 +1,11 @@
 {
   "name": "ng2-redux",
-  "version": "3.2.0",
+  "version": "3.2.1-beta.0",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/index.js",
   "scripts": {
     "build": "npm run typings && rimraf ./lib; tsc; rimraf ./lib/___tests___",
-    "test": "npm run typings && npm run lint && npm run mocha",
+    "test": "npm run typings  && npm run mocha",
     "typings": "rimraf ./typings && typings install",
     "mocha": "ts-node ./node_modules/mocha/bin/_mocha  --opts ./src/___tests___/mocha.opts",
     "lint": "tslint 'src/**/*.ts' 'examples/counter/**.ts --exclude 'examples/counter/node_modules"
@@ -57,6 +57,7 @@
     "rxjs": "5.0.0-beta.6",
     "sinon": "^1.16.1",
     "sinon-chai": "^2.8.0",
+    "symbol-observable": "^1.0.1",
     "ts-loader": "^0.8.1",
     "ts-node": "^0.5.5",
     "tslint": "^3.11.0",
