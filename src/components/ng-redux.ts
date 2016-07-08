@@ -14,8 +14,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { Injectable, Optional, ApplicationRef } from '@angular/core';
-import shallowEqual from '../utils/shallowEqual';
-import wrapActionCreators from '../utils/wrapActionCreators';
+
+import shallowEqual from '../utils/shallow-equal';
+import wrapActionCreators from '../utils/wrap-action-creators';
 import { isObject, isFunction, isPlainObject} from '../utils/type-checks';
 import { omit } from '../utils/omit';
 import { invariant } from '../utils/invariant';

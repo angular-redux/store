@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import shallowEqual from '../../utils/shallowEqual';
+import shallowEqual from '../../utils/shallow-equal';
 
 describe('Utils', () => {
   describe('shallowEqual', () => {

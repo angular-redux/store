@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import wrapActionCreators from '../../utils/wrapActionCreators';
+import wrapActionCreators from '../../utils/wrap-action-creators';
 import {ActionCreator, ActionCreatorsMapObject}  from 'redux';
 
 
