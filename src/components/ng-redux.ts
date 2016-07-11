@@ -50,7 +50,7 @@ export class NgRedux<RootState> {
     /**
      * configures a Redux store and allows NgRedux to observe and dispatch
      * to it.
-     * 
+     *
      * This should only be called once for the lifetime of your app, for
      * example in the constructor of your root component.
      *
@@ -74,19 +74,24 @@ export class NgRedux<RootState> {
                 )(createStore);
         const store = finalCreateStore(reducer, initState);
 
-        this._store = store;
-        this._store$ = new BehaviorSubject(store.getState());
-        this._store.subscribe(() => this._store$.next(this._store.getState()));
-
-        this._defaultMapStateToTarget = () => ({});
-        this._defaultMapDispatchToTarget = dispatch => ({ dispatch });
-        const cleanedStore = omit(store, [
-            'dispatch',
-            'getState',
-            'subscribe',
-            'replaceReducer']);
-        Object.assign(this, cleanedStore);
+        this.setStore(store);
     }
+
+    /**
+     * Accepts a Redux store, then sets it in NgRedux and
+     * allows NgRedux to observe and dispatch to it.
+     *
+     * This should only be called once for the lifetime of your app, for
+     * example in the constructor of your root component. If configureStore
+     * has been used this cannot be used.
+     *
+     * @param {Redux.Store} store Your app's store
+     */
+    provideStore(store: Store<RootState>) {
+        invariant(!this._store, 'Store already configured!');
+
+        this.setStore(store);
+    };
 
     /**
      * Get an observable from the attached Redux store.
@@ -98,7 +103,7 @@ export class NgRedux<RootState> {
     };
 
     /**
-     * Select a slice of state to expose as an observable. 
+     * Select a slice of state to expose as an observable.
      *
      * @template S
      * @param {(string | number | symbol | ((state: RootState) => S))}
@@ -149,21 +154,21 @@ export class NgRedux<RootState> {
     };
 
     /**
-     * Connect your component to your redux state. 
-     * 
+     * Connect your component to your redux state.
+     *
      * @param {*} mapStateToTarget connect will subscribe to Redux store
      * updates. Any time it updates, mapStateToTarget will be called. Its
      * result must be a plain object, and it will be merged into `target`.
      * If you have a component which simply triggers actions without needing
      * any state you can pass null to `mapStateToTarget`.
-     * 
+     *
      * @param {*} mapDispatchToTarget  Optional. If an object is passed,
      * each function inside it will be assumed to be a Redux action creator.
      * An object with the same function names, but bound to a Redux store,
      * will be merged onto `target`. If a function is passed, it will be given
      * `dispatch`. It’s up to you to return an object that somehow uses
      * `dispatch` to bind action creators in your own way. (Tip: you may
-     * use the 
+     * use the
      * [`bindActionCreators()`]
      * (http://gaearon.github.io/redux/docs/api/bindActionCreators.html)
      * helper from Redux.).
@@ -223,7 +228,7 @@ export class NgRedux<RootState> {
 
     /**
      * Subscribe to the Redux store changes
-     * 
+     *
      * @param {() => void} listener callback to invoke when the state is updated
      * @returns a function to unsubscribe
      */
@@ -245,7 +250,7 @@ export class NgRedux<RootState> {
     };
 
     /**
-     * Dispatch an action to Redux 
+     * Dispatch an action to Redux
      */
     dispatch = <A extends Action>(action: A): any => {
         return this._store.dispatch(action);
@@ -284,5 +289,25 @@ export class NgRedux<RootState> {
 
         return finalMapDispatchToTarget(this._store.dispatch);
     };
-}
 
+    /**
+     * Helper function to set the store to NgRedux and
+     * allow NgRedux to observe and dispatch to it.
+     *
+     * @param {Redux.Store} store The redux store
+     */
+    private setStore(store: Store<RootState>) {
+        this._store = store;
+        this._store$ = new BehaviorSubject(store.getState());
+        this._store.subscribe(() => this._store$.next(this._store.getState()));
+
+        this._defaultMapStateToTarget = () => ({});
+        this._defaultMapDispatchToTarget = dispatch => ({ dispatch });
+        const cleanedStore = omit(store, [
+            'dispatch',
+            'getState',
+            'subscribe',
+            'replaceReducer']);
+        Object.assign(this, cleanedStore);
+    }
+}

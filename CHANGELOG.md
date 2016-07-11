@@ -1,3 +1,63 @@
+# 3.2.0
+
+### Features
+
+* Added a `provideStore()` function which lets you pass in a already created
+store. It can be used as this:
+
+Create your store:
+```typescript
+// store.ts
+
+import {
+  applyMiddleware,
+  Store,
+  combineReducers,
+  compose,
+  createStore
+} from 'redux';
+import thunk from 'redux-thunk';
+import reduxLogger from 'redux-logger';
+
+import { myReducer } from './reducers/my-reducer';
+
+const rootReducer = combineReducers({
+  myReducer,
+});
+
+export const store = createStore(
+  rootReducer,
+  compose(
+    applyMiddleware(
+      thunk,
+      reduxLogger
+    )
+  )
+) as Store
+```
+
+Create your App and call `provideStore` with your newly created store:
+```typescript
+// app.ts
+
+import { NgRedux } from 'ng2-redux';
+import { store } from './store.ts';
+
+interface IAppState {
+  // ...
+};
+@Component({
+  // ... etc.
+})
+class App {
+  constructor(private ngRedux: NgRedux) {
+    this.ngRedux.provideStore(store);
+  }
+
+  // ...
+}
+```
+
 # 3.1.0
 
 ### Features
@@ -11,7 +71,7 @@ an observable.
 ```js
 import { is } from 'immutablejs'
 
-export class SomeComponent { 
+export class SomeComponent {
   @select(n=n.some.selector, is) someSelector$: Observable<any>
 }
 
@@ -29,7 +89,7 @@ export class SomeComponent {
 ### Features
 
 #### Select Decorator
-This release introduces the new decorator interface. You can now use 
+This release introduces the new decorator interface. You can now use
 `@select`  to create an observable from a slice of store state.
 
 See 'the select pattern' in [README.md](README.md#the-select-pattern)
@@ -132,9 +192,9 @@ community: `redux-logger` and `redux-localstorage`.
 
 ### Features
 
-* **Type definitions**: 
+* **Type definitions**:
   * Ported to typescript
-  * Supports typed stores / reducers 
+  * Supports typed stores / reducers
   * Uses offical Redux type definitions
 * **Type Injectable**:
   * Able to inject `NgRedux` into your component by type, and not need `@Inject('ngRedux')`
@@ -142,7 +202,7 @@ community: `redux-logger` and `redux-localstorage`.
 
 ```typescript
 import { NgRedux } from 'ng2-redux';
-// ... 
+// ...
 export class MyComponent {
   constructor(private ngRedux: NgRedux) {}
 }
@@ -181,7 +241,7 @@ export class MyComponent implements OnInit {
   person$: Observable<Map<string,any>>;
 
   constructor(private ngRedux: ngRedux) {
-    // even if the reference of the object has changed, 
+    // even if the reference of the object has changed,
     // if the data is the same - it wont be treated as a change
     this.person$ = this.ngRedux.select(state=>state.people.get(0),is);
   }

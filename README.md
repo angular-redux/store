@@ -70,6 +70,62 @@ class App {
 }
 ```
 
+Or if you prefer to create the Redux store yourself you can do that and use the
+`provideStore()` function instead.
+
+Create your store:
+```typescript
+// store.ts
+
+import {
+  applyMiddleware,
+  Store,
+  combineReducers,
+  compose,
+  createStore
+} from 'redux';
+import thunk from 'redux-thunk';
+import reduxLogger from 'redux-logger';
+
+import { myReducer } from './reducers/my-reducer';
+
+const rootReducer = combineReducers({
+  myReducer,
+});
+
+export const store = createStore(
+  rootReducer,
+  compose(
+    applyMiddleware(
+      thunk,
+      reduxLogger
+    )
+  )
+) as Store
+```
+
+Create your App and call `provideStore` with your newly created store:
+```typescript
+// app.ts
+
+import { NgRedux } from 'ng2-redux';
+import { store } from './store.ts';
+
+interface IAppState {
+  // ...
+};
+@Component({
+  // ... etc.
+})
+class App {
+  constructor(private ngRedux: NgRedux) {
+    this.ngRedux.provideStore(store);
+  }
+
+  // ...
+}
+```
+
 Now your Angular 2 app has been reduxified!
 
 ## Usage
@@ -85,19 +141,19 @@ preferred approach to accessing store data in Angular 2.
 
 #### The @select decorator
 
-The `@select` decorator can be added to the property of any class or angular 
+The `@select` decorator can be added to the property of any class or angular
 component/injectable. It will turn the property into an observable which observes
 the Redux Store value which is selected by the decorator's parameter.
 
 The decorator expects to receive a `string`, an array of `string`s, a `function` or no
-parameter at all. 
+parameter at all.
 
 - If a `string` is passed the `@select` decorator will attempt to observe a store
 property whose name matches the `string`.
 - If an array of strings is passed, the decorator will attempt to match that path
 through the store (similar to `immutableJS`'s `getIn`).
 - If a `function` is passed the `@select` decorator will attempt to use that function
-as a selector on the RxJs observable. 
+as a selector on the RxJs observable.
 - If nothing is passed then the `@select` decorator will attempt to use the name of the class property to find a matching value in the Redux store. Note that a utility is in place here where any $ characters will be ignored from the class property's name.
 
 ```typescript
@@ -137,7 +193,7 @@ export class CounterValue {
     @select(state => state.counter) counterSelectedWithFunction;
 
     // this selects `counter` from the store and multiples it by two
-    @select(state => state.counter * 2) 
+    @select(state => state.counter * 2)
     counterSelectedWithFuntionAndMultipliedByTwo: Observable<any>;
 }
 ```
@@ -448,7 +504,7 @@ class App {
 
 ### `configureStore()`
 
-Initializes your ngRedux store. This should be called once, typically in your
+Adds your ngRedux store to NgRedux. This should be called once, typically in your
 top-level app component's constructor.
 
 __Arguments:__
@@ -467,13 +523,47 @@ Async pipe to bind its values into your template.
 
 __Arguments:__
 
-* `key` \(*string*): A key within the state that you want to subscribe to. 
-* `selector` \(*Function*): A function that accepts the application state, and returns the slice you want subscribe to for changes. 
+* `key` \(*string*): A key within the state that you want to subscribe to.
+* `selector` \(*Function*): A function that accepts the application state, and returns the slice you want subscribe to for changes.
 
 e.g:
 ```typescript
 this.counter$ = this.ngRedux.select(state=>state.counter);
-// or 
+// or
+this.counterSubscription = this.ngRedux
+  .select(state=>state.counter)
+  .subscribe(count=>this.counter = count);
+// or
+
+this.counter$ = this.ngRedux.select('counter');  
+```
+
+### `provideStore()`
+
+Initializes your ngRedux store. This should be called once, typically in your
+top-level app component's constructor. If `configureStore`
+has been used this cannot be used.
+
+__Arguments:__
+
+* `store` \(*Store*): Your app's store.
+
+### select(key | function,[comparer]) => Observable
+
+Exposes a slice of state as an observable. Accepts either a property name or a selector function.
+
+If using the async pipe, you do not need to subscribe to it explicitly, but can use the angular
+Async pipe to bind its values into your template.
+
+__Arguments:__
+
+* `key` \(*string*): A key within the state that you want to subscribe to.
+* `selector` \(*Function*): A function that accepts the application state, and returns the slice you want subscribe to for changes.
+
+e.g:
+```typescript
+this.counter$ = this.ngRedux.select(state=>state.counter);
+// or
 this.counterSubscription = this.ngRedux
   .select(state=>state.counter)
   .subscribe(count=>this.counter = count);

@@ -125,11 +125,12 @@ describe('NgRedux Observable Store', () => {
     bar: string;
     baz: number;
   };
-  
+
   let connector;
   let targetObj;
   let defaultState;
   let rootReducer;
+  let store;
   let ngRedux;
   let mockAppRef;
 
@@ -153,6 +154,7 @@ describe('NgRedux Observable Store', () => {
       }
     };
 
+    store = createStore(rootReducer);
     ngRedux = new NgRedux<IAppState>();
     ngRedux.configureStore(rootReducer, defaultState);
   });
@@ -271,5 +273,34 @@ describe('NgRedux Observable Store', () => {
     ngRedux.dispatch({ type: 'UPDATE_BAZ', payload: 2 });
     expect(fooData.data).to.equal('update-2');
     expect(spy).to.have.been.calledThrice;
+  });
+
+  it('should throw when the store is provided after it has been configured',
+    () => {
+    // Configured once in beforeEach, now we try to provide a store when
+    // we already have configured one.
+
+    expect(ngRedux.provideStore.bind(store))
+      .to.throw(Error);
+  });
+
+  it('should set the store when a store is provided',
+    () => {
+
+    delete ngRedux._store;
+    delete ngRedux._$store;
+
+    expect(ngRedux._store).to.be.undefined;
+    expect(ngRedux._$store).to.be.undefined;
+
+    expect(ngRedux.provideStore.bind(ngRedux, store))
+      .to.not.throw(Error);
+
+    expect(ngRedux._store).to.have.all.keys(
+      'dispatch',
+      'subscribe',
+      'getState',
+      'replaceReducer'
+    );
   });
 });
