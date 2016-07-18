@@ -19,6 +19,7 @@ ng2-redux lets you easily connect your Angular 2 components with Redux.
   - [The select pattern](#the-select-pattern)
   - [The connect pattern](#the-connect-pattern)
 - [A Note about Internet Explorer](#a-note-about-internet-explorer)
+- [Examples](#examples)
 - [Cookbooks](#cookbooks)
   - [Using Angular 2 Services in your Action Creators](#using-angular-2-services-in-your-action-creators)
   - [Using Angular 2 Services in your Middleware](#using-angular-2-services-in-your-middleware)
@@ -314,6 +315,14 @@ Internet Explorer requires polyfills for these; however these same functions
 are also needed for Angular 2 itself to work.  Just make sure you include
 [core-js](https://npmjs.com/package/core-js) or [es6-shim](https://npmjs.com/packages/es6-shim)
 if you need to support IE.
+
+## Examples
+
+Here are some examples of Ng2Redux in action:
+
+* [Counter: basic select pattern example](examples/counter)
+* [Trendy Brunch: multi-reducer example with redux-localstorage](https://github.com/e-schultz/ng2-camp-example)
+* [Plnkr: smart & presentational components example](https://plnkr.co/edit/m910XrXyFrUty2nXUJ1q?p=preview)
 
 ## Cookbooks
 
