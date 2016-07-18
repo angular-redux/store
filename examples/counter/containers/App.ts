@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { NgRedux } from 'ng2-redux';
+import { NgRedux, DevToolsExtension } from 'ng2-redux';
 
 import { Counter } from '../components/Counter';
 import { CounterInfo } from '../components/CounterInfo';
@@ -14,22 +14,22 @@ const createLogger = require('redux-logger');
     directives: [Counter, CounterInfo],
     pipes: [AsyncPipe],
     template: `
-    <counter></counter>
-    <counter-info></counter-info>
-  `
+        <counter></counter>
+        <counter-info></counter-info>
+    `,
+    providers: [ DevToolsExtension ]
 })
 export class App {
-
-    constructor(private ngRedux: NgRedux<any>) {
-
+    constructor(
+        private ngRedux: NgRedux<any>,
+        private devTool: DevToolsExtension) {
         // Do this once in the top-level app component.
         this.ngRedux.configureStore(
             reducer,
             {},
             [ createLogger() ],
-            enhancers
-        );
-
+            devTool.isEnabled() ?
+                [ ...enhancers, devTool.enhancer() ] :
+                enhancers);
     }
-
 }
