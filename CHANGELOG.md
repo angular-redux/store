@@ -1,3 +1,17 @@
+# 3.3.0 
+
+### Features 
+
+* DevToolsExtension - convience wrapper for dev tools (#115)
+* Select - seamless support for ImmutableJS (#160)
+
+
+### Fixes 
+
+* Able to use `@select` in services 
+* Behavior of `select` with chained dispatches, (fixes #149, #153)
+
+
 # 3.2.0
 
 ### Features
