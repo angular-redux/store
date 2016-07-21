@@ -4,6 +4,8 @@ import { NgRedux, DevToolsExtension } from 'ng2-redux';
 
 import { Counter } from '../components/Counter';
 import { CounterInfo } from '../components/CounterInfo';
+import { Search } from '../components/search.component';
+import { SearchInfo } from '../components/search-info.component';
 import { RootState, enhancers } from '../store';
 
 import reducer from '../reducers/index';
@@ -11,13 +13,17 @@ const createLogger = require('redux-logger');
 
 @Component({
     selector: 'root',
-    directives: [Counter, CounterInfo],
+    directives: [Counter, CounterInfo, Search, SearchInfo],
     pipes: [AsyncPipe],
-    template: `
-        <counter></counter>
-        <counter-info></counter-info>
-    `,
-    providers: [ DevToolsExtension ]
+    providers: [ DevToolsExtension ],
+    template: `   
+    <br/>
+    <counter></counter>
+    <counter-info></counter-info>
+    <search-info></search-info>
+    <search></search>
+  `
+
 })
 export class App {
     constructor(

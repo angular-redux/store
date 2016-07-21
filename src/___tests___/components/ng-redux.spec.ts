@@ -6,7 +6,8 @@ import { NgRedux } from '../../components/ng-redux';
 import { select } from '../../decorators/select';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
-
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/combineLatest';
 use(sinonChai);
 
 function returnPojo() {
@@ -302,5 +303,230 @@ describe('NgRedux Observable Store', () => {
       'getState',
       'replaceReducer'
     );
+    });
+  
+  it('should wait until store is configured before emitting values',
+    () => {
+      class SomeService {
+        foo: string;
+        bar: string;
+        baz: number;
+
+        constructor(private _ngRedux: NgRedux<any>) {
+          _ngRedux.select(n => n.foo).subscribe(foo => this.foo = foo);
+          _ngRedux.select(n => n.bar).subscribe(bar => this.bar = bar);
+          _ngRedux.select(n => n.baz).subscribe(baz => this.baz = baz);
+        }
+      }
+      ngRedux = new NgRedux<IAppState>(mockAppRef);
+
+      let someService = new SomeService(ngRedux);
+      ngRedux.configureStore(rootReducer, defaultState);
+      expect(someService.foo).to.be.equal('bar');
+      expect(someService.bar).to.be.equal('foo');
+      expect(someService.baz).to.be.equal(-1);
+
+    });
+
+  it('should have select decorators work before store is configured',
+    (done) => {
+      class SomeService {
+        @select() foo$: any;
+        @select() bar$: any;
+        @select() baz$: any;
+
+      }
+      ngRedux = new NgRedux<IAppState>(mockAppRef);
+
+      let someService = new SomeService();
+      someService
+        .foo$
+        .combineLatest(someService.bar$, someService.baz$)
+        .subscribe(([foo, bar, baz]) => {
+          expect(foo).to.be.equal('bar');
+          expect(bar).to.be.equal('foo');
+          expect(baz).to.be.equal(-1);
+          done();
+        });
+
+      ngRedux.configureStore(rootReducer, defaultState);
+
+    });
+});
+
+describe('Chained actions in subscriptions', () => {
+  interface IAppState {
+    keyword: string;
+    keywordLength: number;
+  };
+
+  let defaultState: IAppState;
+  let rootReducer;
+  let ngRedux;
+  let doSearch = (word) => {
+    ngRedux.dispatch({ type: 'SEARCH', payload: word });
+  };
+  let doFetch = (word) => {
+    ngRedux.dispatch({ type: 'SEARCH_RESULT', payload: word.length });
+  };
+
+  beforeEach(() => {
+    defaultState = {
+      keyword: '',
+      keywordLength: -1
+
+    };
+
+    rootReducer = (state = defaultState, action) => {
+      switch (action.type) {
+        case 'SEARCH':
+          return Object.assign({}, state, { keyword: action.payload });
+        case 'SEARCH_RESULT':
+          return Object.assign({}, state, { keywordLength: action.payload });
+        default:
+          return state;
+      }
+    };
+
+    ngRedux = new NgRedux<IAppState>();
+    ngRedux.configureStore(rootReducer, defaultState);
   });
+
+
+  describe('dispatching an action in a keyword$ before length$ happens', () => {
+    it(`length sub should be called twice`, () => {
+
+      let keyword$ = ngRedux.select(n => n.keyword);
+      let keyword = '';
+      let length;
+      let length$ = ngRedux.select(n => n.keywordLength);
+      let lengthSpy = sinon.spy((n) => length = n);
+      let lenSub;
+      let keywordSub;
+      keywordSub = keyword$.
+        filter(n => n !== '')
+        .subscribe(n => {
+          keyword = n;
+          doFetch(n);
+        });
+
+      lenSub = length$.subscribe(lengthSpy);
+
+      expect(keyword).to.equal('');
+      expect(length).to.equal(-1);
+
+      expect(lengthSpy.calledOnce).to.be.equal(true);
+
+      doSearch('test');
+
+      expect(lengthSpy.calledTwice).to.be.equal(true);
+
+      expect(keyword).to.equal('test');
+      expect(length).to.equal(4);
+      keywordSub.unsubscribe();
+      lenSub.unsubscribe();
+    });
+
+    it(`second sub should get most current state value`, () => {
+
+      let keyword$ = ngRedux.select(n => n.keyword);
+      let keyword = '';
+      let length;
+      let length$ = ngRedux.select(n => n.keywordLength);
+      let lengthSpy = sinon.spy((n) => length = n);
+      let lenSub;
+      let keywordSub;
+      keywordSub = keyword$.
+        filter(n => n !== '')
+        .subscribe(n => {
+          keyword = n;
+          doFetch(n);
+        });
+
+      lenSub = length$.subscribe(lengthSpy);
+
+      expect(keyword).to.equal('');
+      expect(length).to.equal(-1);
+
+      expect(lengthSpy.calledOnce).to.be.equal(true);
+
+      doSearch('test');
+
+      expect(keyword).to.equal('test');
+      expect(length).to.equal(4);
+      keywordSub.unsubscribe();
+      lenSub.unsubscribe();
+    });
+  });
+
+  describe('dispatching an action in a keyword$ after length$ happens', () => {
+    it(`length sub should be called twice`, () => {
+
+      let keyword$ = ngRedux.select(n => n.keyword);
+      let keyword = '';
+      let length;
+      let length$ = ngRedux.select(n => n.keywordLength);
+      let lengthSpy = sinon.spy((n) => length = n);
+      let lenSub;
+      let keywordSub;
+      
+      lenSub = length$.subscribe(lengthSpy);
+      keywordSub = keyword$.
+        filter(n => n !== '')
+        .subscribe(n => {
+          keyword = n;
+          doFetch(n);
+        });
+
+
+
+      expect(keyword).to.equal('');
+      expect(length).to.equal(-1);
+
+      expect(lengthSpy.calledOnce).to.be.equal(true);
+
+      doSearch('test');
+
+      expect(lengthSpy.calledTwice).to.be.equal(true);
+
+      expect(keyword).to.equal('test');
+      expect(length).to.equal(4);
+      keywordSub.unsubscribe();
+      lenSub.unsubscribe();
+    });
+
+    it(`first sub should get most current state value`, () => {
+
+      let keyword$ = ngRedux.select(n => n.keyword);
+      let keyword = '';
+      let length;
+      let length$ = ngRedux.select(n => n.keywordLength);
+      let lengthSpy = sinon.spy((n) => length = n);
+      let lenSub;
+      let keywordSub;
+      lenSub = length$.subscribe(lengthSpy);
+      keywordSub = keyword$.
+        filter(n => n !== '')
+        .subscribe(n => {
+          keyword = n;
+          doFetch(n);
+        });
+
+      
+
+      expect(keyword).to.equal('');
+      expect(length).to.equal(-1);
+
+      expect(lengthSpy.calledOnce).to.be.equal(true);
+
+      doSearch('test');
+
+      expect(keyword).to.equal('test');
+      expect(length).to.equal(4);
+      keywordSub.unsubscribe();
+      lenSub.unsubscribe();
+    });
+  });
+
+
 });

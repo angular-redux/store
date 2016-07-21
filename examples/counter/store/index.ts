@@ -7,4 +7,4 @@ export const enhancers = [
 export interface RootState {
   counter: number;
   pathDemo: Object;
-}
+};

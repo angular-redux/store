@@ -12,7 +12,10 @@ import {
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
 import { Injectable, Optional, ApplicationRef } from '@angular/core';
 
 import shallowEqual from '../utils/shallow-equal';
@@ -30,8 +33,8 @@ const checkSelector = (s) => VALID_SELECTORS.indexOf(typeof s, 0) >= 0 ||
 
 @Injectable()
 export class NgRedux<RootState> {
-    private _store: Store<RootState>;
-    private _store$: BehaviorSubject<RootState>;
+    private _store: Store<RootState> = null;
+    private _store$: BehaviorSubject<RootState> = null;
     private _defaultMapStateToTarget: Function;
     private _defaultMapDispatchToTarget: Function;
 
@@ -43,8 +46,13 @@ export class NgRedux<RootState> {
      * The parameter is deprecated and left for backwards compatibility.
      * It doesn't do anything. It will be removed in a future major version.
      */
-    constructor(@Optional() deprecated?: ApplicationRef) {
-      NgRedux.instance = this;
+    constructor( @Optional() deprecated?: ApplicationRef) {
+        NgRedux.instance = this;
+        this._store$ = new BehaviorSubject<RootState>(null)
+            .filter(n => n !== null)
+            .switchMap(n => {
+                return Observable.from(n as any);
+            }) as BehaviorSubject<RootState>;
     }
 
     /**
@@ -71,7 +79,7 @@ export class NgRedux<RootState> {
             = <Redux.StoreEnhancerStoreCreator<RootState>>compose(
                 applyMiddleware(...middleware),
                 ...enhancers
-                )(createStore);
+            )(createStore);
         const store = finalCreateStore(reducer, initState);
 
         this.setStore(store);
@@ -91,15 +99,6 @@ export class NgRedux<RootState> {
         invariant(!this._store, 'Store already configured!');
 
         this.setStore(store);
-    };
-
-    /**
-     * Get an observable from the attached Redux store.
-     *
-     * @returns {BehaviorSubject<RootState>}
-     */
-    observableFromStore(): BehaviorSubject<RootState> {
-        return this._store$;
     };
 
     /**
@@ -124,6 +123,7 @@ export class NgRedux<RootState> {
         comparer?: (x: any, y: any) => boolean): Observable<S> {
 
         invariant(checkSelector(selector), ERROR_MESSAGE, selector);
+
 
         if (
             typeof selector === 'string' ||
@@ -298,9 +298,7 @@ export class NgRedux<RootState> {
      */
     private setStore(store: Store<RootState>) {
         this._store = store;
-        this._store$ = new BehaviorSubject(store.getState());
-        this._store.subscribe(() => this._store$.next(this._store.getState()));
-
+        this._store$.next(store as any);
         this._defaultMapStateToTarget = () => ({});
         this._defaultMapDispatchToTarget = dispatch => ({ dispatch });
         const cleanedStore = omit(store, [
@@ -310,4 +308,5 @@ export class NgRedux<RootState> {
             'replaceReducer']);
         Object.assign(this, cleanedStore);
     }
-}
+};
+
