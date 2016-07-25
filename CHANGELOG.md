@@ -1,3 +1,10 @@
+# 3.3.1
+
+### Fixes 
+
+* Argument to DevTools enhancer is now optional (#164)
+* Decorator deletes key on target, not `this`. (#168, fixes #166) 
+
 # 3.3.0 
 
 ### Features 
