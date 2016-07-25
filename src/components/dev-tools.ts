@@ -17,7 +17,7 @@ export class DevToolsExtension {
    * format as described here: 
    * [zalmoxisus/redux-devtools-extension/blob/master/docs/API/Arguments.md]
    */
-  enhancer = (options) => {
+  enhancer = (options?: Object) => {
     if (!this.isEnabled()) {
       return null;
     }
