@@ -29,7 +29,7 @@ export const select = <T>(
     }
 
     // Delete property.
-    if (delete this[key]) {
+    if (delete target[key]) {
         // Create new property with getter and setter
         Object.defineProperty(target, key, {
             get: getter,
