@@ -2,8 +2,8 @@
 
 ### Features 
 
-* DevToolsExtension - convience wrapper for dev tools (#115)
-* Select - seamless support for ImmutableJS (#160)
+* [DevToolsExtension - convience wrapper for dev tools](docs/redux-dev-tools.md) (#115)
+* [Select - seamless support for ImmutableJS](docs/immutable-js.md) (#160)
 
 
 ### Fixes 
