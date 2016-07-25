@@ -15,7 +15,7 @@ module.exports = {
   plugins: [
     new webpack.NoErrorsPlugin()
   ],
- resolve: {
+  resolve: {
     extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
   },
 

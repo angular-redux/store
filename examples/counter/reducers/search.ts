@@ -9,7 +9,7 @@ export interface SearchState {
 const searchInitState: SearchState = {
   onSearch: false,
   keyword: '',
-  total: -1
+  total: 0
 };
 
 export default function searchReducer(state = searchInitState, action):
