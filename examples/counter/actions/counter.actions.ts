@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NgRedux } from 'ng2-redux';
 import { RootState } from '../store';
-import { RandomNumberService } from '../services/random-number';
+import { RandomNumberService } from '../services/random-number.service';
 
 /**
  * Action creators in Angular 2. We may as well adopt a more

@@ -1,4 +1,4 @@
-import { CounterActions } from '../actions/counter-actions';
+import { CounterActions } from '../actions/counter.actions';
 
 export default (state: any = {
   foo: {

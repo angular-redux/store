@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { NgRedux, DevToolsExtension } from 'ng2-redux';
 
-import { Counter } from '../components/Counter';
-import { CounterInfo } from '../components/CounterInfo';
+import { Counter } from '../components/counter.component';
+import { CounterInfo } from '../components/counter-info.component';
 import { Search } from '../components/search.component';
 import { RootState, enhancers } from '../store';
 

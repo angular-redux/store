@@ -1,4 +1,4 @@
-import { CounterActions } from '../actions/counter-actions';
+import { CounterActions } from '../actions/counter.actions';
 
 export default (state: number = 0, action:any) => {
   switch (action.type) {

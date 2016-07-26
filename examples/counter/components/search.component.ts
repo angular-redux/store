@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NgRedux, select } from 'ng2-redux';
-import { SearchActions } from '../actions/search-actions';
 import { Observable } from 'rxjs/Rx';
+import { SearchActions } from '../actions/search.actions';
+import { RootState } from '../store';
 
 @Component({
   selector: 'search',
@@ -20,8 +21,8 @@ import { Observable } from 'rxjs/Rx';
 })
 export class Search {
   // Selected observables to test async pipe model.
-  @select(s => s.searchReducer.total) numChars$: Observable<number>;
-  @select(s => s.searchReducer.keyword) search$: Observable<string>;
+  @select(['searchReducer', 'total']) numChars$: Observable<number>;
+  @select(['searchReducer', 'keyword']) search$: Observable<string>;
 
   // Members to test subscribe model.
   numChars: number;
@@ -29,7 +30,7 @@ export class Search {
 
   constructor(
     private actions: SearchActions,
-    private ngRedux: NgRedux<any>) { }
+    private ngRedux: NgRedux<RootState>) { }
 
   ngOnInit() {
     // Exercise the flow where a state change results in a new action.

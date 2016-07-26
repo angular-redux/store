@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NgRedux, select } from 'ng2-redux';
-import { CounterActions } from '../actions/counter-actions';
-import { RandomNumberService } from '../services/random-number';
+import { Observable } from 'rxjs/Observable';
+import { CounterActions } from '../actions/counter.actions';
+import { RandomNumberService } from '../services/random-number.service';
 
 @Component({
   selector: 'counter',
@@ -14,18 +15,15 @@ import { RandomNumberService } from '../services/random-number';
     <button (click)="actions.incrementIfOdd()">Increment if odd</button>
     <button (click)="actions.incrementAsync(2222)">Increment async</button>
     <button (click)="actions.randomize()">Set to random number</button>
-
-    <br>
-    foo$: {{ foo$ | async | json }}
-    <br>
-    bar$: {{ bar$ | async}}
   </p>
+  <p>foo$: {{ foo$ | async | json }}</p>
+  <p>bar$: {{ bar$ | async }}</p>
   `
 })
 export class Counter {
-  @select('counter') counter$: any;
-  @select([ 'pathDemo', 'foo' ]) foo$;
-  @select([ 'pathDemo', 'foo', 'bar', 0 ]) bar$: number;
+  @select('counter') counter$: Observable<number>;
+  @select([ 'pathDemo', 'foo' ]) foo$: Observable<Object>;
+  @select([ 'pathDemo', 'foo', 'bar', 0 ]) bar$: Observable<number>;
 
   constructor(private actions: CounterActions) {}
 }

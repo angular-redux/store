@@ -1,4 +1,4 @@
-import { SEARCH_ACTIONS } from '../actions/search-actions';
+import { SEARCH_ACTIONS } from '../actions/search.actions';
 
 export interface SearchState {
   onSearch: boolean;
