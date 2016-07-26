@@ -1,3 +1,9 @@
+# 3.3.2 
+
+### Fixes 
+
+* Change seamless immutable integration to not need conditional require (#169)
+
 # 3.3.1
 
 ### Fixes 
