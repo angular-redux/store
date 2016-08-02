@@ -1,19 +1,21 @@
 import { SEARCH_ACTIONS } from '../actions/search.actions';
 
-export interface SearchState {
+export interface ISearchState {
   onSearch: boolean;
   keyword: string;
   total: number;
 }
 
-const searchInitState: SearchState = {
+const INIT_STATE: ISearchState = {
   onSearch: false,
   keyword: '',
   total: 0
 };
 
-export default function searchReducer(state = searchInitState, action):
-  SearchState {
+export function searchReducer(
+  state = INIT_STATE,
+  action): ISearchState {
+
   switch (action.type) {
     case SEARCH_ACTIONS.SEARCH:
       return Object.assign({}, state, {

@@ -1,6 +1,8 @@
 import { CounterActions } from '../actions/counter.actions';
 
-export default (state: number = 0, action:any) => {
+const INITIAL_STATE: number = 0;
+
+export function counterReducer(state: number = INITIAL_STATE, action:any) {
   switch (action.type) {
     case CounterActions.INCREMENT_COUNTER:
       return state + 1;

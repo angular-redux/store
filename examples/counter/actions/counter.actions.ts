@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgRedux } from 'ng2-redux';
-import { RootState } from '../store';
+import { IAppState } from '../store';
 import { RandomNumberService } from '../services/random-number.service';
 
 /**
@@ -12,7 +12,7 @@ import { RandomNumberService } from '../services/random-number.service';
 @Injectable()
 export class CounterActions {
   constructor (
-    private ngRedux: NgRedux<RootState>,
+    private ngRedux: NgRedux<IAppState>,
     private randomNumberService: RandomNumberService) {}
 
   static INCREMENT_COUNTER: string = 'INCREMENT_COUNTER';

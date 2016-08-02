@@ -5,9 +5,7 @@ import { NgRedux, DevToolsExtension } from 'ng2-redux';
 import { Counter } from '../components/counter.component';
 import { CounterInfo } from '../components/counter-info.component';
 import { Search } from '../components/search.component';
-import { RootState, enhancers } from '../store';
-
-import reducer from '../reducers/index';
+import { IAppState, rootReducer, enhancers } from '../store/index';
 const createLogger = require('redux-logger');
 
 @Component({
@@ -27,15 +25,13 @@ const createLogger = require('redux-logger');
 })
 export class App {
   constructor(
-    private ngRedux: NgRedux<any>,
+    private ngRedux: NgRedux<IAppState>,
     private devTool: DevToolsExtension) {
     // Do this once in the top-level app component.
     this.ngRedux.configureStore(
-      reducer,
+      rootReducer,
       {},
       [ createLogger() ],
-      devTool.isEnabled() ?
-      [ ...enhancers, devTool.enhancer() ] :
-      enhancers);
-    }
+      [ ...enhancers, devTool.isEnabled() ? devTool.enhancer() : f => f]);
+  }
 }
