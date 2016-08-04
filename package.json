@@ -16,9 +16,10 @@
     "url": "git+ssh://git@github.com/wbuchwalter/ng2-redux.git"
   },
   "keywords": [
-    "Redux",
-    "Flux",
-    "Angular"
+    "redux",
+    "ng2",
+    "angular2",
+    "angular"
   ],
   "author": "William Buchwalter <wbuchwalter@gmail.com> (http://github.com/wbuchwalter)",
   "contributors": [
