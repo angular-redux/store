@@ -1,4 +1,6 @@
 import { Injectable, ApplicationRef } from '@angular/core';
+
+declare const window: any;
 const environment: any = window || this;
 
 /**
