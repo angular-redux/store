@@ -1,3 +1,9 @@
+# 3.3.3
+
+### Fixes 
+
+* Fix window is undefined in Universal (#178, fixes #172)
+
 # 3.3.2 
 
 ### Fixes 
