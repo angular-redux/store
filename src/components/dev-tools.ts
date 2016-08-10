@@ -1,7 +1,7 @@
 import { Injectable, ApplicationRef } from '@angular/core';
 
 declare const window: any;
-const environment: any = window || this;
+const environment: any = typeof window !== 'undefined' ? window : this;
 
 /**
  * An angular-2-ified version of the Redux DevTools chrome extension.
