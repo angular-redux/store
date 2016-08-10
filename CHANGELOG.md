@@ -1,3 +1,16 @@
+# 3.3.4
+
+
+### Chore 
+
+* Update to RC5 (#184, fixes #183)
+* Include src in npm package (#182, fixes #180)
+
+### Fixes 
+
+* Fix window in Universal (#185, fixes #172)
+ 
+
 # 3.3.3
 
 ### Fixes 
