@@ -1,6 +1,6 @@
 {
   "name": "ng2-redux",
-  "version": "3.3.4",
+  "version": "3.3.5",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/index.js",
   "scripts": {
@@ -69,7 +69,7 @@
   },
   "peerDependencies": {
     "@angular/core": "2.0.0-rc.3 || ^2.0.0-rc.4 || ^2.0.0-rc.5",
-    "redux": "^3.4.0",
+    "redux": "^3.5.0",
     "rxjs": "5.0.0-beta.6",
     "typings": "^1.0.4",
     "zone.js": "0.6.12"

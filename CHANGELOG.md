@@ -1,5 +1,11 @@
-# 3.3.4
+# 3.3.5
 
+### Fixes
+
+* Update redux peer dependency to 3.5.0 
+  * observable shim which we depend on was introduced in 3.5.0, not 3.4.0 
+
+# 3.3.4
 
 ### Chore 
 

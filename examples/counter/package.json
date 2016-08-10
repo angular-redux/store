@@ -32,7 +32,7 @@
     "@angular/platform-browser-dynamic": "2.0.0-rc.5",
     "core-js": "^2.3.0",
     "ng2-redux": "^3.3.3",
-    "redux": "^3.4.0",
+    "redux": "^3.5.0",
     "redux-logger": "^2.6.1",
     "redux-localstorage": "^0.4.0",
     "reflect-metadata": "0.1.3",
