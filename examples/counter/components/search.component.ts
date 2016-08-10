@@ -12,8 +12,7 @@ import { IAppState } from '../store';
     id='search-input'
     type="text"
     class="search"
-    [(ngModel)]="keyword"
-    (ngModelChange)="actions.searchDispatch($event)"/>
+    #field (keyup)="handleKeyUp(field.value)"/>
   <p>Number of characters (from subscription): {{ numChars }}</p>
   <p>Number of characters (from async pipe): {{ numChars$ | async }}</p>
   <p>You entered: {{ search$ | async }}<p>
@@ -45,5 +44,10 @@ export class Search {
     this.numChars$.subscribe(state => {
       this.numChars = state;
     });
+  }
+
+  handleKeyUp(value) {
+    this.keyword = value;
+    this.actions.searchDispatch(value);
   }
 }
