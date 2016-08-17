@@ -124,6 +124,10 @@ Here are some examples of Ng2Redux in action:
 * [Plnkr: smart & presentational components example](https://plnkr.co/edit/m910XrXyFrUty2nXUJ1q?p=preview)
 * [Angular2-redux-starter from Rangle.io (with Epic, devtools)](https://github.com/rangle/angular2-redux-starter)
 
+## Companion Packages
+
+* [Reduxify your Routing with Ng2-Redux-Router](https://github.com/dagstuan/ng2-redux-router)
+
 ## Resources
 
 * [Using Redux with Angular 2 - JS Toronto Meetup 2016-07-12](https://www.youtube.com/watch?v=s4xr2avwv3s)
