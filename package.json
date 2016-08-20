@@ -65,13 +65,13 @@
     "tslint": "^3.11.0",
     "typescript": "^1.8.10",
     "typings": "^1.0.4",
-    "zone.js": "0.6.12"
+    "zone.js": "^0.6.12"
   },
   "peerDependencies": {
     "@angular/core": "2.0.0-rc.3 || ^2.0.0-rc.4 || ^2.0.0-rc.5",
     "redux": "^3.5.0",
     "rxjs": "5.0.0-beta.6",
     "typings": "^1.0.4",
-    "zone.js": "0.6.12"
+    "zone.js": "^0.6.12"
   }
 }
