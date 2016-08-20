@@ -1,4 +1,4 @@
-import { getIn } from '../../utils/get-in';
+import { getIn } from './get-in';
 import { expect } from 'chai';
 
 describe('getIn', () => {

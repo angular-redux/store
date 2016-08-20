@@ -31,6 +31,11 @@ const ERROR_MESSAGE = `Expected selector to be one of:
 const checkSelector = (s) => VALID_SELECTORS.indexOf(typeof s, 0) >= 0 ||
     Array.isArray(s);
 
+export type PropertySelector = string | number | symbol;
+export type PathSelector = (string | number)[];
+export type FunctionSelector<RootState, S> = ((s: RootState) => S);
+export type Comparator = (x: any, y: any) => boolean;
+
 @Injectable()
 export class NgRedux<RootState> {
     private _store: Store<RootState> = null;
@@ -105,9 +110,11 @@ export class NgRedux<RootState> {
      * Select a slice of state to expose as an observable.
      *
      * @template S
-     * @param {(string | number | symbol | ((state: RootState) => S))}
+     * @param { PropertySelector |
+     *  PathSelector |
+     *  FunctionSelector<RootState, S>}
      * selector key or function to select a part of the state
-     * @param {(x: any, y: any) => boolean} [comparer] Optional
+     * @param { Comparator } [comparer] Optional
      * comparison function called to test if an item is distinct
      * from the previous item in the source.
      *
@@ -115,31 +122,30 @@ export class NgRedux<RootState> {
      * source Observable with distinct values.
      */
     select<S>(
-        selector: string |
-            number |
-            symbol |
-            (string | number)[] |
-            ((s: RootState) => S),
-        comparer?: (x: any, y: any) => boolean): Observable<S> {
+        selector: PropertySelector |
+            PathSelector |
+            FunctionSelector<RootState, S>,
+        comparator?: Comparator): Observable<S> {
 
         invariant(checkSelector(selector), ERROR_MESSAGE, selector);
 
+        let result: Observable<S>;
 
-        if (
-            typeof selector === 'string' ||
+        if (typeof selector === 'string' ||
             typeof selector === 'number' ||
             typeof selector === 'symbol') {
-            return this._store$
-                .map(state => state[selector])
-                .distinctUntilChanged(comparer);
+
+            result = this._store$
+                .map(state => state[selector as PropertySelector]);
         } else if (Array.isArray(selector)) {
-            return this._store$
-                .map(state => getIn(state, selector))
-                .distinctUntilChanged(comparer);
-        } else if (typeof selector === 'function') {
-            return this._store$
-                .map(selector).distinctUntilChanged(comparer);
+            result = this._store$
+                .map(state => getIn(state, selector as PathSelector));
+        } else {
+            result = this._store$
+                .map(selector as FunctionSelector<RootState, S>);
         }
+
+        return result.distinctUntilChanged(comparator);
     }
 
     wrapActionCreators = (actions) => wrapActionCreators(actions);

@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import {expect, use} from 'chai';
 
-import { invariant } from '../../utils/invariant';
+import { invariant } from './invariant';
 
 describe('invariant', () => {
   it('shouldn\'t throw an error for a true condition', () => {

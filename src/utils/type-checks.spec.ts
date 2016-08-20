@@ -1,6 +1,6 @@
 import { expect, use } from 'chai';
 
-import { isObject, isFunction, isPlainObject} from '../../utils/type-checks';
+import { isObject, isFunction, isPlainObject} from './type-checks';
 
 describe('typeChecks', () => {
   describe('isObject', () => {

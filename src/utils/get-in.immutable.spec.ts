@@ -1,6 +1,6 @@
 const proxyquire = require('proxyquire');
 
-const { getIn: getInWithImmutable } = proxyquire('../../utils/get-in', {
+const { getIn: getInWithImmutable } = proxyquire('./get-in', {
   immutable: {
     Iterable: {
       isIterable: value => typeof value.getIn === 'function',
@@ -9,7 +9,7 @@ const { getIn: getInWithImmutable } = proxyquire('../../utils/get-in', {
   },
 });
 
-const { getIn: getInWithNoImmutable } = require('../../utils/get-in');
+const { getIn: getInWithNoImmutable } = require('./get-in');
 
 import { expect } from 'chai';
 

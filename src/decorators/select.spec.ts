@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { expect, use } from 'chai';
-import { NgRedux } from '../../components/ng-redux';
-import { select } from '../../decorators/select';
+import { NgRedux } from '../components/ng-redux';
+import { select } from './select';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 

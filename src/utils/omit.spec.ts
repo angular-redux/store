@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { expect, use } from 'chai';
 
-import { omit } from '../../utils/omit';
+import { omit } from './omit';
 
 describe('omit', () => {
   it('should omit the specified properties', () => {
