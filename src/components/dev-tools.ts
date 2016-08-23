@@ -1,5 +1,6 @@
 import { Injectable, ApplicationRef } from '@angular/core';
-
+import { NgRedux } from './ng-redux';
+import { NgZone } from '@angular/core';
 declare const window: any;
 const environment: any = typeof window !== 'undefined' ? window : this;
 
@@ -8,7 +9,8 @@ const environment: any = typeof window !== 'undefined' ? window : this;
  */
 @Injectable()
 export class DevToolsExtension {
-  constructor(private appRef: ApplicationRef) {}
+  constructor(private appRef: ApplicationRef,
+    private ngRedux: NgRedux<any>) { }
 
   /**
    * A wrapper for the Chrome Extension Redux DevTools.
@@ -20,12 +22,24 @@ export class DevToolsExtension {
    * [zalmoxisus/redux-devtools-extension/blob/master/docs/API/Arguments.md]
    */
   enhancer = (options?: Object) => {
+    let subscription;
     if (!this.isEnabled()) {
       return null;
     }
 
     // Make sure changes from dev tools update angular's view.
-    environment.devToolsExtension.listen(() => this.appRef.tick());
+    environment.devToolsExtension.listen(({type}) => {
+      if (type === 'START') {
+        subscription = this.ngRedux.subscribe(() => {
+          if (!NgZone.isInAngularZone()) {
+            this.appRef.tick();
+          }
+        });
+      } else if (type === 'STOP') {
+        subscription();
+      }
+
+    });
     return environment.devToolsExtension(options);
   }
 
