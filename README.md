@@ -36,17 +36,14 @@ npm install --save ng2-redux
 
 ## Quick Start
 
-Import the `NgRedux` class and add it to your application as an Angular 2
-provider.
-
 ```typescript
-import { bootstrap } from '@angular/platform-browser-dynamic';
-import { App } from './containers/App';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './containers/app.module';
 
-bootstrap(App, [ NgRedux ]);
+platformBrowserDynamic().bootstrapModule(AppModule);
 ```
-
-Once you've done this, you'll be able to inject 'NgRedux' into your
+Import the `NgRedux` class and add it to your application as an Angular 2 `@NgModule`
+provider. Once you've done this, you'll be able to inject `NgRedux` into your
 Angular 2 components. In your top-level app module, you
 can configure your Redux store with reducers, initial state,
 and optionally middlewares and enhancers as you would in Redux directly.
