@@ -83,16 +83,21 @@ This allows us to configure our Redux store with the new epic as follows:
 **app.component.ts:**
 
 ```typescript
-import { Component } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { NgRedux } from 'ng2-redux';
 import { createEpicMiddleware } from 'redux-observable';
 import rootReducer from './reducers';
 import { SessionEpics } from './epics';
 
-@Component({
+@NgModule({
   /* ... */
-  providers: [ NgRedux, SessionEpics ]
+  providers: [
+    NgRedux,
+    SessionEpics,
+    /* ... */
+  ]
 })
-export class App {
+export class AppModule {
   constructor(
     private ngRedux: NgRedux<IAppState>,
     private epics: SessionEpics) {
@@ -102,7 +107,7 @@ export class App {
       ];
       ngRedux.configureStore(rootReducer, {}, middleware);
   }
-};
+}
 ```
 
 Now, whenever you dispatch a "USER_LOGIN" action, the epic will trigger the

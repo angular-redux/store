@@ -1,6 +1,4 @@
-import { bootstrap } from '@angular/platform-browser-dynamic';
-import { App } from './containers/app.component';
-import { NgRedux } from 'ng2-redux';
-import { SearchActions } from './actions/search.actions';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app/app.module';
 
-bootstrap(App, [ NgRedux, SearchActions]);
+platformBrowserDynamic().bootstrapModule(AppModule);

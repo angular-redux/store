@@ -19,11 +19,14 @@ import { DevToolsExtension } from 'ng2-redux';
 
 // Add the dev tools enhancer your ngRedux.configureStore called
 // when you initialize your root component:
-@Component({
-  // ...
-  providers: [ DevToolsExtension ]
-})
-class App {
+@NgModule({
+  /* ... */
+  providers: [
+    DevToolsExtension,
+    NgRedux,
+    /* ... */
+  ]
+})export class AppModule {
   constructor(
     private ngRedux: NgRedux,
     private devTools: DevToolsExtension) {

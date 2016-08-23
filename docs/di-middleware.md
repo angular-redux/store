@@ -36,23 +36,26 @@ use an arrow function to make sure that what we pass to ngRedux has a
 properly-bound function context.
 
 ```typescript
+import { NgModule } from '@angular/core';
 import { LogRemoteName } from './middleware/log-remote-name';
 import reduxLogger from 'redux-logger';
+import { NgRedux } from 'ng2-redux';
 
-@Component({
-  providers: [ LogRemoteName ],
-  // ...
+@NgModule({
+  /* ... */
+  providers: [
+    NgRedux,
+    LogRemoteName,
+    /* ... */
+  ]
 })
-class App {
+export class AppModule {
   constructor(
-    private ngRedux: NgRedux
+    private ngRedux: NgRedux<IAppState>,
     logRemoteName: LogRemoteName) {
 
     const middleware = [ reduxLogger(), logRemoteName.middleware ];
-    this.ngRedux.configureStore(
-      rootReducer,
-      initialState,
-      middleware);
+    this.ngRedux.configureStore(rootReducer, {}, middleware);
   }
 }
 ```

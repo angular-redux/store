@@ -47,7 +47,7 @@ bootstrap(App, [ NgRedux ]);
 ```
 
 Once you've done this, you'll be able to inject 'NgRedux' into your
-Angular 2 components. In your top-level app component, you
+Angular 2 components. In your top-level app module, you
 can configure your Redux store with reducers, initial state,
 and optionally middlewares and enhancers as you would in Redux directly.
 
@@ -58,10 +58,13 @@ import { rootReducer } from './reducers';
 
 interface IAppState { /* ... */ };
 
-@Component({ /* ... */ })
-class App {
+@NgModule({
+  /* ... */
+  providers: [ NgRedux, /* ... */ ]
+})
+export class AppModule {
   constructor(private ngRedux: NgRedux<IAppState>) {
-    this.ngRedux.configureStore(rootReducer, {}, [ reduxLogger() ]);
+    this.ngRedux.configureStore(rootReducer, {}, [ createLogger() ]);
   }
 }
 ```
@@ -87,8 +90,11 @@ export const store: Store<IAppState> = createStore(
   rootReducer,
   compose(applyMiddleware(reduxLogger)));
 
-@Component({ /* ... */ })
-class App {
+@NgModule({
+  /* ... */
+  providers: [ NgRedux, /* ... */ ]
+})
+class AppModule {
   constructor(private ngRedux: NgRedux<IAppState>) {
     this.ngRedux.provideStore(store);
   }
