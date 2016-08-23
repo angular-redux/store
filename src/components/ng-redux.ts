@@ -51,7 +51,7 @@ export class NgRedux<RootState> {
      * The parameter is deprecated and left for backwards compatibility.
      * It doesn't do anything. It will be removed in a future major version.
      */
-    constructor( @Optional() deprecated?: ApplicationRef) {
+    constructor(@Optional() deprecated?: ApplicationRef) {
         NgRedux.instance = this;
         this._store$ = new BehaviorSubject<RootState>(null)
             .filter(n => n !== null)
@@ -259,6 +259,12 @@ export class NgRedux<RootState> {
      * Dispatch an action to Redux
      */
     dispatch = <A extends Action>(action: A): any => {
+        invariant(
+            !!this._store,
+            'Dispatch failed: did you forget to configure your store? ' +
+                'https://github.com/angular-redux/ng2-redux/blob/master/' +
+                'README.md#quick-start');
+
         return this._store.dispatch(action);
     };
 
