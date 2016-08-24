@@ -6,5 +6,5 @@ import '@angular/compiler';
 import '@angular/core';
 import '@angular/platform-browser';
 import '@angular/platform-browser-dynamic';
-import 'redux'
-import 'redux-logger'
+import 'redux';
+import 'redux-logger';

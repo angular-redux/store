@@ -3,4 +3,7 @@ examples
 .travis.yml
 .gitignore
 .babelrc
-lib/___tests___
+.nyc_output/
+coverage/
+.vscode/
+docs/

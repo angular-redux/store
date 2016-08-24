@@ -10,3 +10,5 @@ src/typings/
 typings/
 tmp/
 lib/
+.nyc_output/
+coverage/
