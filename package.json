@@ -85,7 +85,8 @@
       "**/*.spec.ts",
       "lib",
       "docs",
-      "coverage"
+      "coverage",
+      ".nyc_output"
     ],
     "extension": [
       ".ts"
