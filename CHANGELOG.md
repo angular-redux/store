@@ -1,3 +1,15 @@
+# 3.3.9
+
+### Fixes
+
+* Temp update to npm build to uninstall typings for chai/sinon-chai so `///  <reference types="chai" />` doesn't get added to files.
+
+# 3.3.8
+
+### Fixes 
+
+* Manual fix of build to remove chai type reference 
+
 # 3.3.7
 
 ### Features
