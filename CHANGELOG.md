@@ -1,3 +1,21 @@
+# 3.3.6
+
+### Features
+
+* Improved error if trying to dispatch before store is configured - #118, #198
+
+### Fixes
+
+* Relax Zone JS version - #189, #187
+* Fix DevTools being out of sync for actions dispatched from tool, #192
+
+### Chores/Misc
+
+* Upgrade to TypeScript 2 - #189, #190
+* Add Code Coverage - #193, #206, #207
+
+
+
 # 3.3.5
 
 ### Fixes
