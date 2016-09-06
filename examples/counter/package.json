@@ -44,7 +44,7 @@
     "awesome-typescript-loader": "^2.2.1",
     "cross-env": "^1.0.7",
     "node-libs-browser": "^0.5.2",
-    "typescript": "^2.0.0",
+    "typescript": "2.0.0",
     "webpack": "^1.9.11",
     "webpack-dev-server": "^1.9.0"
   }

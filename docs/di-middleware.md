@@ -37,14 +37,14 @@ properly-bound function context.
 
 ```typescript
 import { NgModule } from '@angular/core';
-import { LogRemoteName } from './middleware/log-remote-name';
+import { NgReduxModule, NgRedux } from 'ng2-redux';
 import reduxLogger from 'redux-logger';
-import { NgRedux } from 'ng2-redux';
+import { LogRemoteName } from './middleware/log-remote-name';
 
 @NgModule({
   /* ... */
+  imports: [ /* ... */, NgReduxModule ],
   providers: [
-    NgRedux,
     LogRemoteName,
     /* ... */
   ]

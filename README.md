@@ -42,14 +42,14 @@ import { AppModule } from './containers/app.module';
 
 platformBrowserDynamic().bootstrapModule(AppModule);
 ```
-Import the `NgRedux` class and add it to your application as an Angular 2 `@NgModule`
-provider. Once you've done this, you'll be able to inject `NgRedux` into your
+Import the `NgReduxModule` class and add it to your application module as an
+`import`. Once you've done this, you'll be able to inject `NgRedux` into your
 Angular 2 components. In your top-level app module, you
 can configure your Redux store with reducers, initial state,
 and optionally middlewares and enhancers as you would in Redux directly.
 
 ```typescript
-import { NgRedux } from 'ng2-redux';
+import { NgReduxModule, NgRedux } from 'ng2-redux';
 import reduxLogger from 'redux-logger';
 import { rootReducer } from './reducers';
 
@@ -57,11 +57,11 @@ interface IAppState { /* ... */ };
 
 @NgModule({
   /* ... */
-  providers: [ NgRedux, /* ... */ ]
+  imports: [ /* ... */, NgReduxModule ]
 })
 export class AppModule {
-  constructor(private ngRedux: NgRedux<IAppState>) {
-    this.ngRedux.configureStore(rootReducer, {}, [ createLogger() ]);
+  constructor(ngRedux: NgRedux<IAppState>) {
+    ngRedux.configureStore(rootReducer, {}, [ createLogger() ]);
   }
 }
 ```
@@ -77,7 +77,7 @@ import {
   compose,
   createStore
 } from 'redux';
-import { NgRedux } from 'ng2-redux';
+import { NgReduxModule, NgRedux } from 'ng2-redux';
 import reduxLogger from 'redux-logger';
 import { rootReducer } from './reducers';
 
@@ -89,11 +89,11 @@ export const store: Store<IAppState> = createStore(
 
 @NgModule({
   /* ... */
-  providers: [ NgRedux, /* ... */ ]
+  imports: [ /* ... */, NgReduxModule ]
 })
 class AppModule {
-  constructor(private ngRedux: NgRedux<IAppState>) {
-    this.ngRedux.provideStore(store);
+  constructor(ngRedux: NgRedux<IAppState>) {
+    ngRedux.provideStore(store);
   }
 }
 ```
@@ -102,15 +102,15 @@ Now your Angular 2 app has been reduxified! Use the `@select` decorator to
 access your store state, and `.dispatch()` to dispatch actions:
 
 ```typescript
+import { select } from 'ng2-redux';
+
 @Component({
   template: '<button (click)="onClick()">Clicked {{ count | async }} times</button>'
 })
 class App {
   @select() count$: Observable<number>;
 
-  constructor(private ngRedux: NgRedux<IAppState>) {
-    this.ngRedux.provideStore(store);
-  }
+  constructor(private ngRedux: NgRedux<IAppState>) {}
 
   onClick() {
     this.ngRedux.dispatch({ type: INCREMENT });

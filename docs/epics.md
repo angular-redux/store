@@ -84,15 +84,15 @@ This allows us to configure our Redux store with the new epic as follows:
 
 ```typescript
 import { NgModule } from '@angular/core';
-import { NgRedux } from 'ng2-redux';
+import { NgReduxModule, NgRedux } from 'ng2-redux';
 import { createEpicMiddleware } from 'redux-observable';
 import rootReducer from './reducers';
 import { SessionEpics } from './epics';
 
 @NgModule({
   /* ... */
+  imports: [ /* ... */, NgReduxModule ],
   providers: [
-    NgRedux,
     SessionEpics,
     /* ... */
   ]
