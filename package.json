@@ -1,6 +1,6 @@
 {
   "name": "ng2-redux",
-  "version": "3.3.9",
+  "version": "4.0.0-beta.0",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/index.js",
   "scripts": {
@@ -97,9 +97,9 @@
     ],
     "all": true,
     "check-coverage": true,
-    "lines": 77,
-    "branches": 75,
-    "functions": 67,
-    "statements": 75
+    "lines": 60,
+    "branches": 60,
+    "functions": 60,
+    "statements": 60    
   }
 }
