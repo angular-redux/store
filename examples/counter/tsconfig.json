@@ -9,7 +9,10 @@
     "experimentalDecorators": true,
     "noImplicitAny": false,
     "removeComments": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "types": [
+      "core-js", "node"
+    ]
   },
   "exclude": [
     "node_modules"
