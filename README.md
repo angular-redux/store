@@ -131,6 +131,7 @@ Here are some examples of Ng2Redux in action:
 ## Companion Packages
 
 * [Reduxify your Routing with Ng2-Redux-Router](https://github.com/dagstuan/ng2-redux-router)
+* [Reduxify your Forms with Ng2-Redux-Form](https://github.com/clbond/ng2-redux-form)
 
 ## Resources
 
