@@ -1,6 +1,6 @@
 {
   "name": "ng2-redux",
-  "version": "4.0.0-beta.0",
+  "version": "4.0.0-beta.1",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/index.js",
   "scripts": {
@@ -93,13 +93,14 @@
       "ts-node/register"
     ],
     "reporter": [
-      "lcov", "text"
+      "lcov",
+      "text"
     ],
     "all": true,
     "check-coverage": true,
     "lines": 60,
     "branches": 60,
     "functions": 60,
-    "statements": 60    
+    "statements": 60
   }
 }
