@@ -32,11 +32,11 @@ import { select } from 'ng2-redux';
     pipes: [AsyncPipe],
     selector: 'counter-value-printed-many-times',
     template: `
-    <p>{counter$ | async}</p>
-    <p>{counter | async}</p>
-    <p>{counterSelectedWithString | async}</p>
-    <p>{counterSelectedWithFunction | async}</p>
-    <p>{counterSelectedWithFunctionAndMultipliedByTwo | async}</p>
+    <p>{{counter$ | async}}</p>
+    <p>{{counter | async}}</p>
+    <p>{{counterSelectedWithString | async}}</p>
+    <p>{{counterSelectedWithFunction | async}}</p>
+    <p>{{counterSelectedWithFunctionAndMultipliedByTwo | async}}</p>
     `
 })
 export class CounterValue {
