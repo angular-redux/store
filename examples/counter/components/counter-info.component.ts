@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { select } from 'ng2-redux';
+import { select as select } from 'ng2-redux';
 import 'rxjs/add/operator/combineLatest';
-
+//let select = select_x;
+export let x = state => state.counter;
+export let  y = state => state.counter * 2;
 interface ICoord {
   x: number;
   y: number;
@@ -21,9 +23,9 @@ interface ICoord {
 })
 export class CounterInfo {
 
-  @select(state => state.counter) funcCounter$: Observable<number>;
+  @select(x) funcCounter$: Observable<number>;
   @select('counter') stringKey$: Observable<number>;
-  @select(state => state.counter * 2) counterX2$: Observable<number>;
+  @select(y) counterX2$: Observable<number>;
   foo: ICoord;
 
   ngOnInit() {

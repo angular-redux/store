@@ -19,5 +19,8 @@
     "lib",
     "examples",
     "**/*.spec.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true
+  }
 }

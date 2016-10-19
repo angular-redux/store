@@ -4,7 +4,7 @@ import { counterReducer } from './counter.reducer';
 import { IPathDemoData, pathDemoReducer } from './path-demo.reducer';
 import { ISearchState, searchReducer } from './search.reducer';
 
-export interface IAppState {
+export class IAppState {
   counter?: number;
   pathDemo?: IPathDemoData;
   search?: ISearchState;

@@ -1,3 +1,92 @@
+# 4.0.0-beta.6
+
+### Fixes / Features 
+
+Sorry for the delay on this, was hoping to get AoT working for decorators also - but there seems to be some challenges around that.
+
+* Update build to use ngc - metadata.json is now produced
+* Fix `Unexpected value 'NgReduxModule' imported`
+* NgReduxModule
+
+### Using NgReduxModule 
+
+```js
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { NgReduxModule, NgRedux } from 'ng2-redux';
+import { IAppState } from './appstate';
+import { rootReducer } from './store';
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    NgReduxModule.forRoot(),
+    BrowserModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { 
+  constructor(ngRedux: NgRedux<IAppState>) {
+   
+    ngRedux.configureStore(rootReducer,{});
+  }
+}
+
+```
+
+### Dev Tools 
+
+The DevTools provider is not provider by default with the `NgReduxModule`, as you may not want to include this for production builds. To use `DevToolsExtension`, it is the same as before - and still need to include it in your providers.
+
+```js
+import { NgReduxModule, DevToolsExtension }
+
+@NgModule({
+  providerS: [DevToolsExtension]
+})
+export class AppModule {
+  constructor(ngRedux:NgRedux<IAppState>, devTools:DevToolsExtension) {
+    // config as before 
+  }
+}
+```
+
+**IMPORTANT NOTE ABOUT AOT**
+
+If using the ngc compiler and AoT compilation - `@select` decorators will not work. If you want to use the ngc compiler (either directly, or via angular-cli), and want to use the `@select` - you will need to use the `--aot false` flag. 
+
+If you want to use AoT - the build process will work, but decorators will silently stop working. If you want to use AoT.
+
+**before**
+
+```js 
+import { select } from 'ng2-redux';
+export class MyComponent {
+  @select() thing$:Observable<string>; 
+}
+```
+
+**after**
+
+```js
+import { NgRedux } from 'ng2-redux';
+export class MyComponent {
+  thing$:Observable<string>;
+  constructor(private ngRedux:NgRedux<MyAppState>) {
+
+  }
+  ngOnInit() {
+    this.thing$ = this.ngRedux.select (n => n.thing);
+  }
+}
+```
+
+We are big fans of how the `@select` works - and high priority to get this working, but it seems to possibly be a limitation of the compiler. Any feedback / help / suggestions to try and get this working with AoT would be greatly appreciated.
+
+
 # 3.3.9
 
 ### Fixes

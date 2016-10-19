@@ -25,5 +25,5 @@ export class Counter {
   @select([ 'pathDemo', 'foo' ]) foo$: Observable<Object>;
   @select([ 'pathDemo', 'foo', 'bar', 0 ]) bar$: Observable<number>;
 
-  constructor(private actions: CounterActions) {}
+  constructor(public actions: CounterActions) {}
 }

@@ -28,7 +28,7 @@ export class Search {
   keyword: string;
 
   constructor(
-    private actions: SearchActions,
+    public actions: SearchActions,
     private ngRedux: NgRedux<IAppState>) { }
 
   ngOnInit() {
