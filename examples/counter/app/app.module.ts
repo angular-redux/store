@@ -13,7 +13,7 @@ import { Search } from '../components/search.component';
   imports: [
     BrowserModule,
     CommonModule,
-    NgReduxModule,
+    NgReduxModule.forRoot(),
   ],
   declarations: [
     App,

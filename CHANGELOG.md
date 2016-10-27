@@ -54,11 +54,11 @@ export class AppModule {
 }
 ```
 
-**IMPORTANT NOTE ABOUT AOT**
+**IMPORTANT NOTE ABOUT AOT AND ANGULAR-CLI**
 
-If using the ngc compiler and AoT compilation - `@select` decorators will not work. If you want to use the ngc compiler (either directly, or via angular-cli), and want to use the `@select` - you will need to use the `--aot false` flag. 
+If using the angular-cli with the --aot option - `@select` decorators will not work. The build process will work, but decorators will silently stop working. 
 
-If you want to use AoT - the build process will work, but decorators will silently stop working. If you want to use AoT.
+If you need decorators and AoT, you'll need to use the raw ngc compiler directly from the command line.
 
 **before**
 

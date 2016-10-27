@@ -91,7 +91,7 @@ import { SessionEpics } from './epics';
 
 @NgModule({
   /* ... */
-  imports: [ /* ... */, NgReduxModule ],
+  imports: [ /* ... */, NgReduxModule.forRoot() ],
   providers: [
     SessionEpics,
     /* ... */

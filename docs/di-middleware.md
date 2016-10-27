@@ -43,7 +43,7 @@ import { LogRemoteName } from './middleware/log-remote-name';
 
 @NgModule({
   /* ... */
-  imports: [ /* ... */, NgReduxModule ],
+  imports: [ /* ... */, NgReduxModule.forRoot() ],
   providers: [
     LogRemoteName,
     /* ... */
