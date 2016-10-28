@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgReduxModule } from 'ng2-redux';
+import {NgReduxModule, DevToolsExtension} from 'ng2-redux';
 import { CounterActions } from '../actions/counter.actions';
 import { SearchActions } from '../actions/search.actions';
 import { App } from './app.component';
@@ -25,6 +25,7 @@ import { Search } from '../components/search.component';
   providers: [
     CounterActions,
     SearchActions,
+    DevToolsExtension,
   ]
 })
 export class AppModule {}
