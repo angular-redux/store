@@ -26,7 +26,7 @@ In addition, we are committed to providing insight on clean strategies for integ
 - [Examples](#examples)
 - [Resources](#resources)
 - [In Depth Usage](#in-depth-usage)
-- [API](#api)
+- [API](docs/api.md)
 
 ## Installation
 
