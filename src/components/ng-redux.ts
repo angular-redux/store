@@ -16,7 +16,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
-import { Injectable, Optional, ApplicationRef } from '@angular/core';
+import { Optional, ApplicationRef } from '@angular/core';
 
 import shallowEqual from '../utils/shallow-equal';
 import wrapActionCreators from '../utils/wrap-action-creators';
@@ -40,7 +40,6 @@ export type Comparator = (x: any, y: any) => boolean;
 // released.
 type RetypedCompose = (func: Function, ...funcs: Function[]) => Function;
 
-@Injectable()
 export class NgRedux<RootState> {
     private _store: Store<RootState> = null;
     private _store$: BehaviorSubject<RootState> = null;
