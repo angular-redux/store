@@ -1,14 +1,17 @@
-# 4.0.0-beta.6
+# 4.0.0
 
-### Fixes / Features 
+### Features 
 
-Sorry for the delay on this, was hoping to get AoT working for decorators also - but there seems to be some challenges around that.
+* Better support for Angular CLI
+* NgModule interface changes to better support Angular 2's ahead-of-time compiler (AoT)
+
+### Fixes
 
 * Update build to use ngc - metadata.json is now produced
-* Fix `Unexpected value 'NgReduxModule' imported`
-* NgReduxModule
+* Introduced NgReduxModule
+* Fix AoT related bugs #247, #235, #228
 
-### Using NgReduxModule 
+### Breaking Change: Using NgReduxModule 
 
 ```js
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +20,7 @@ import { AppComponent } from './app.component';
 import { NgReduxModule, NgRedux } from 'ng2-redux';
 import { IAppState } from './appstate';
 import { rootReducer } from './store';
+
 @NgModule({
   declarations: [
     AppComponent
