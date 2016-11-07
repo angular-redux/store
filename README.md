@@ -154,3 +154,4 @@ We also have a number of 'cookbooks' for specific Angular 2 topics:
 * [Managing Side-Effects with redux-observable Epics](docs/epics.md)
 * [Using the Redux DevTools Chrome Extension](docs/redux-dev-tools.md)
 * [Ng2Redux and ImmutableJS](docs/immutable-js.md)
+* [Strongy Typed Reducers](docs/strongly-typed-reducers.md)

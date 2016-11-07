@@ -53,5 +53,10 @@ describe('Utils', () => {
         )
       ).to.equal(false);
     });
+
+    it('should return true for two references to the same thing', () => {
+      const thing = { a: 1, b: 2, c: undefined };
+      expect(shallowEqual(thing, thing)).to.equal(true);
+    });
   });
 });
