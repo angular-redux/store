@@ -60,7 +60,7 @@ export class AppModule {
 
 **IMPORTANT NOTE ABOUT AOT AND ANGULAR-CLI**
 
-If using the angular-cli with the --aot option - `@select` decorators will not work. The build process will work, but decorators will silently stop working. 
+If using the angular-cli with the --aot option - `@select` decorators will not work. The build process will work, but decorators will silently stop working. This is due to angular/angular-cli/2799, which is on their roadmap already.
 
 If you need decorators and AoT, you'll need to use the raw ngc compiler directly from the command line.
 
@@ -78,7 +78,7 @@ export class MyComponent {
 ```js
 import { NgRedux } from 'ng2-redux';
 export class MyComponent {
-  thing$:Observable<string>;
+  thing$: Observable<string>;
   constructor(private ngRedux:NgRedux<MyAppState>) {
 
   }
@@ -87,9 +87,6 @@ export class MyComponent {
   }
 }
 ```
-
-We are big fans of how the `@select` works - and high priority to get this working, but it seems to possibly be a limitation of the compiler. Any feedback / help / suggestions to try and get this working with AoT would be greatly appreciated.
-
 
 # 3.3.9
 
