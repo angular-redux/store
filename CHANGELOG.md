@@ -48,23 +48,6 @@ export class AppModule {
 
 ```
 
-### Dev Tools 
-
-The DevTools provider is not provider by default with the `NgReduxModule`, as you may not want to include this for production builds. To use `DevToolsExtension`, it is the same as before - and still need to include it in your providers.
-
-```js
-import { NgReduxModule, DevToolsExtension }
-
-@NgModule({
-  providerS: [DevToolsExtension]
-})
-export class AppModule {
-  constructor(ngRedux:NgRedux<IAppState>, devTools:DevToolsExtension) {
-    // config as before 
-  }
-}
-```
-
 **IMPORTANT NOTE ABOUT AOT AND ANGULAR-CLI**
 
 If using the angular-cli with the --aot option - `@select` decorators will not work. The build process will work, but decorators will silently stop working. This is due to angular/angular-cli/2799, which is on their roadmap already.
