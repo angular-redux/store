@@ -1,3 +1,10 @@
+# 4.1.0
+
+### Fixes:
+
+* #228 ('generic' error with AoT)
+* #251 (No provider for DevToolsExtension)
+
 # 4.0.0
 
 ### Features 

@@ -38,8 +38,8 @@ export class DevToolsExtension {
       } else if (type === 'STOP') {
         subscription();
       }
-
     });
+
     return environment.devToolsExtension(options);
   }
 
