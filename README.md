@@ -30,8 +30,10 @@ In addition, we are committed to providing insight on clean strategies for integ
 
 ## Installation
 
+Ng2Redux has a peer dependency on redux, so we need to install it as well.
+
 ```sh
-npm install --save ng2-redux
+npm install --save redux ng2-redux
 ```
 
 ## Quick Start
