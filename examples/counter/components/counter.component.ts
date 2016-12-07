@@ -3,6 +3,7 @@ import { NgRedux, select } from 'ng2-redux';
 import { Observable } from 'rxjs/Observable';
 import { CounterActions } from '../actions/counter.actions';
 import { RandomNumberService } from '../services/random-number.service';
+import { IAppState } from '../store';
 
 @Component({
   selector: 'counter',
@@ -13,6 +14,7 @@ import { RandomNumberService } from '../services/random-number.service';
     <button (click)="actions.increment()">+</button>
     <button (click)="actions.decrement()">-</button>
     <button (click)="actions.incrementIfOdd()">Increment if odd</button>
+    <button (click)="onClickThunkyButton()">Increment if odd using thunk</button>
     <button (click)="actions.incrementAsync(2222)">Increment async</button>
     <button (click)="actions.randomize()">Set to random number</button>
   </p>
@@ -25,5 +27,12 @@ export class Counter {
   @select([ 'pathDemo', 'foo' ]) foo$: Observable<Object>;
   @select([ 'pathDemo', 'foo', 'bar', 0 ]) bar$: Observable<number>;
 
-  constructor(public actions: CounterActions) {}
+  constructor(
+    public actions: CounterActions,
+    private ngRedux: NgRedux<IAppState>) {}
+
+  onClickThunkyButton() {
+    this.ngRedux.dispatch(
+      this.actions.incrementIfOddUsingThunk());
+  }
 }

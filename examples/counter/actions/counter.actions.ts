@@ -27,6 +27,16 @@ export class CounterActions {
     this.ngRedux.dispatch({ type: CounterActions.DECREMENT_COUNTER });
   }
 
+  incrementIfOddUsingThunk() {
+    return (getState, dispatch) => {
+      const { counter } = getState();
+
+      if (counter % 2 !== 0) {
+        return { type: CounterActions.INCREMENT_COUNTER };
+      }
+    }
+  }
+
   incrementIfOdd(): void {
     const { counter } = this.ngRedux.getState();
     if (counter % 2 !== 0) {

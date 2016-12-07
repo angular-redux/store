@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgRedux, DevToolsExtension } from 'ng2-redux';
 import { IAppState, rootReducer, enhancers } from '../store/index';
 const createLogger = require('redux-logger');
+import thunk from 'redux-thunk';
 
 @Component({
   selector: 'root',
@@ -22,7 +23,7 @@ export class App {
     this.ngRedux.configureStore(
       rootReducer,
       {},
-      [ createLogger() ],
+      [ createLogger(), thunk ],
       [ ...enhancers, devTool.isEnabled() ? devTool.enhancer() : f => f]);
   }
 }

@@ -1,3 +1,9 @@
+# 4.2.0
+
+### Fixes:
+
+* #221 (type error with redux-thunk)
+
 # 4.1.0
 
 ### Fixes:

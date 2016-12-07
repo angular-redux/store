@@ -264,15 +264,16 @@ export class NgRedux<RootState> {
     /**
      * Dispatch an action to Redux
      */
-    dispatch = <A extends Action>(action: A): any => {
-        invariant(
-            !!this._store,
-            'Dispatch failed: did you forget to configure your store? ' +
-                'https://github.com/angular-redux/ng2-redux/blob/master/' +
-                'README.md#quick-start');
+    dispatch: Redux.Dispatch<RootState>
+        = <A extends Action>(action: A): any => {
+            invariant(
+                !!this._store,
+                'Dispatch failed: did you forget to configure your store? ' +
+                    'https://github.com/angular-redux/ng2-redux/blob/master/' +
+                    'README.md#quick-start');
 
-        return this._store.dispatch(action);
-    };
+            return this._store.dispatch(action);
+        };
 
     private updateTarget(target, StateSlice, dispatch) {
         if (isFunction(target)) {
