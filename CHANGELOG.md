@@ -1,3 +1,9 @@
+# 4.2.1
+
+### Fixes:
+
+* #281 (DevToolsExtension missing from providers list)
+
 # 4.2.0
 
 ### Fixes:
@@ -13,7 +19,7 @@
 
 # 4.0.0
 
-### Features 
+### Features
 
 * Better support for Angular CLI
 * NgModule interface changes to better support Angular 2's ahead-of-time compiler (AoT)
@@ -24,7 +30,7 @@
 * Introduced NgReduxModule
 * Fix AoT related bugs #247, #235, #228
 
-### Breaking Change: Using NgReduxModule 
+### Breaking Change: Using NgReduxModule
 
 ```js
 import { BrowserModule } from '@angular/platform-browser';
@@ -45,9 +51,9 @@ import { rootReducer } from './store';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
   constructor(ngRedux: NgRedux<IAppState>) {
-   
+
     ngRedux.configureStore(rootReducer,{});
   }
 }
@@ -62,10 +68,10 @@ If you need decorators and AoT, you'll need to use the raw ngc compiler directly
 
 **before**
 
-```js 
+```js
 import { select } from 'ng2-redux';
 export class MyComponent {
-  @select() thing$:Observable<string>; 
+  @select() thing$:Observable<string>;
 }
 ```
 
@@ -92,9 +98,9 @@ export class MyComponent {
 
 # 3.3.8
 
-### Fixes 
+### Fixes
 
-* Manual fix of build to remove chai type reference 
+* Manual fix of build to remove chai type reference
 
 # 3.3.7
 
@@ -118,51 +124,51 @@ export class MyComponent {
 
 ### Fixes
 
-* Update redux peer dependency to 3.5.0 
-  * observable shim which we depend on was introduced in 3.5.0, not 3.4.0 
+* Update redux peer dependency to 3.5.0
+  * observable shim which we depend on was introduced in 3.5.0, not 3.4.0
 
 # 3.3.4
 
-### Chore 
+### Chore
 
 * Update to RC5 (#184, fixes #183)
 * Include src in npm package (#182, fixes #180)
 
-### Fixes 
+### Fixes
 
 * Fix window in Universal (#185, fixes #172)
- 
+
 
 # 3.3.3
 
-### Fixes 
+### Fixes
 
 * Fix window is undefined in Universal (#178, fixes #172)
 
-# 3.3.2 
+# 3.3.2
 
-### Fixes 
+### Fixes
 
 * Change seamless immutable integration to not need conditional require (#169)
 
 # 3.3.1
 
-### Fixes 
+### Fixes
 
 * Argument to DevTools enhancer is now optional (#164)
-* Decorator deletes key on target, not `this`. (#168, fixes #166) 
+* Decorator deletes key on target, not `this`. (#168, fixes #166)
 
-# 3.3.0 
+# 3.3.0
 
-### Features 
+### Features
 
 * [DevToolsExtension - convience wrapper for dev tools](docs/redux-dev-tools.md) (#115)
 * [Select - seamless support for ImmutableJS](docs/immutable-js.md) (#160)
 
 
-### Fixes 
+### Fixes
 
-* Able to use `@select` in services 
+* Able to use `@select` in services
 * Behavior of `select` with chained dispatches, (fixes #149, #153)
 
 
