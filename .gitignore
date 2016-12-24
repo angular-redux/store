@@ -12,4 +12,3 @@ tmp/
 lib/
 .nyc_output/
 coverage/
-*.ngsummary.json
