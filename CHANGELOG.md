@@ -1,3 +1,11 @@
+# 5.0.0-beta.1
+
+Remove deprecations.
+
+* Removed support for the `connect` pattern: it's simply not a good fit for Angular.
+You should be using the `select` pattern now.
+* Remove deprecated constructor arg for `NgRedux`.
+
 # 5.0.0-beta.0
 
 Breaking changes associated with Angular 2.4+.
@@ -7,7 +15,7 @@ Breaking changes associated with Angular 2.4+.
 * Minimum Angular peer dependency is now 2.4.0
 * `NgReduxModule.forRoot` is no more, due to Angular API changes. Now just import `NgReduxModule` directly.
 
-** Old Way: **
+#### Old Way:
 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
@@ -30,7 +38,7 @@ class AppModule {
 }
 ```
 
-** New Way: **
+#### New Way:
 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';

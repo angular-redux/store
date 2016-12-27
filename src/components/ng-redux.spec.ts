@@ -14,112 +14,6 @@ function returnPojo() {
   return {};
 }
 
-describe('Connector', () => {
-  let ngRedux;
-  let targetObj;
-  let defaultState;
-  let rootReducer;
-  let mockAppRef;
-
-  beforeEach(() => {
-    defaultState = {
-      foo: 'bar',
-      baz: -1
-    };
-    rootReducer = (state = defaultState, action) => {
-      const newState = Object.assign({}, state, { baz: action.payload });
-      return newState;
-    };
-    targetObj = {};
-    mockAppRef = {
-      tick: sinon.spy()
-    };
-    ngRedux = new NgRedux();
-    ngRedux.configureStore(rootReducer, defaultState);
-  });
-
-  it('Should throw when target is not a Function or a plain object', () => {
-    expect(ngRedux.connect(returnPojo).bind(ngRedux, 15))
-      .to.throw(Error);
-    expect(ngRedux.connect(returnPojo).bind(ngRedux, undefined))
-      .to.throw(Error);
-    expect(ngRedux.connect(returnPojo).bind(ngRedux, 'test'))
-      .to.throw(Error);
-
-    expect(ngRedux.connect(returnPojo).bind(ngRedux, {}))
-      .not.to.throw(Error);
-    expect(ngRedux.connect(returnPojo).bind(ngRedux, returnPojo))
-      .not.to.throw(Error);
-  });
-
-  it('Should throw when selector does not return a plain object', () => {
-    expect(ngRedux.connect.bind(ngRedux, state => state.foo))
-      .to.throw(Error);
-  });
-
-  it('Should extend target (Object) with selected state once directly after ' +
-    'creation', () => {
-      ngRedux.connect(
-        () => ({
-          vm: { test: 1 }
-        }))(targetObj);
-
-      expect(targetObj.vm).to.deep.equal({ test: 1 });
-    });
-
-  it('Should update the target (Object) passed to connect when the store ' +
-    'updates', () => {
-      ngRedux.connect(state => state)(targetObj);
-      ngRedux.dispatch({ type: 'ACTION', payload: 0 });
-      expect(targetObj.baz).to.equal(0);
-      ngRedux.dispatch({ type: 'ACTION', payload: 7 });
-      expect(targetObj.baz).to.equal(7);
-    });
-
-  it('Should prevent unnecessary updates when state does not change ' +
-    '(shallowly)', () => {
-      ngRedux.connect(state => state)(targetObj);
-      ngRedux.dispatch({ type: 'ACTION', payload: 5 });
-
-      expect(targetObj.baz).to.equal(5);
-
-      targetObj.baz = 0;
-
-      // This should not replace our mutation, since the state didn't change.
-      ngRedux.dispatch({ type: 'ACTION', payload: 5 });
-
-      expect(targetObj.baz).to.equal(0);
-    });
-
-  it('Should extend target (object) with actionCreators', () => {
-    ngRedux.connect(returnPojo,
-      { ac1: returnPojo, ac2: () => { } })(targetObj);
-    expect(targetObj.ac1).to.be.a('Function');
-    expect(targetObj.ac2).to.be.a('Function');
-  });
-
-  it('Should return an unsubscribing function', () => {
-    const unsubscribe = ngRedux.connect(state => state)(targetObj);
-    ngRedux.dispatch({ type: 'ACTION', payload: 5 });
-
-    expect(targetObj.baz).to.equal(5);
-    unsubscribe();
-
-    ngRedux.dispatch({ type: 'ACTION', payload: 7 });
-
-    expect(targetObj.baz).to.equal(5);
-  });
-
-  it('Should provide dispatch to mapDispatchToTarget when receiving a ' +
-    'Function', () => {
-      let receivedDispatch;
-
-      ngRedux.connect(
-        returnPojo, dispatch => { receivedDispatch = dispatch; })(targetObj);
-      expect(receivedDispatch).to.be.a('Function');
-    });
-});
-
 describe('NgRedux Observable Store', () => {
   interface IAppState {
     foo: string;
@@ -127,13 +21,11 @@ describe('NgRedux Observable Store', () => {
     baz: number;
   };
 
-  let connector;
   let targetObj;
   let defaultState;
   let rootReducer;
   let store;
   let ngRedux;
-  let mockAppRef;
 
   beforeEach(() => {
     defaultState = {
@@ -318,7 +210,7 @@ describe('NgRedux Observable Store', () => {
           _ngRedux.select(n => n.baz).subscribe(baz => this.baz = baz);
         }
       }
-      ngRedux = new NgRedux<IAppState>(mockAppRef);
+      ngRedux = new NgRedux<IAppState>();
 
       let someService = new SomeService(ngRedux);
       ngRedux.configureStore(rootReducer, defaultState);
@@ -336,7 +228,7 @@ describe('NgRedux Observable Store', () => {
         @select() baz$: any;
 
       }
-      ngRedux = new NgRedux<IAppState>(mockAppRef);
+      ngRedux = new NgRedux<IAppState>();
 
       let someService = new SomeService();
       someService

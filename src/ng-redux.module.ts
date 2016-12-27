@@ -3,7 +3,7 @@ import { NgRedux } from './components/ng-redux';
 import { DevToolsExtension } from './components/dev-tools';
 
 export function _ngReduxFactory() {
-  return new NgRedux(null);
+  return new NgRedux();
 }
 
 @NgModule({

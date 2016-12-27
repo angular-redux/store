@@ -144,10 +144,12 @@ Here are some examples of Ng2Redux in action:
 
 ## In-Depth Usage
 
-Ng2Redux has two main usage patterns: the `select` pattern and the `connect` pattern.
+Ng2Redux uses an approach to redux based on RxJS Observables to `select` and transform
+data on its way out of the store and into your UI or side-effect handlers. Observables
+are an efficient analogue to `reselect` for the RxJS-heavy Angular world. 
 
+Read more here: 
 * [Select Pattern](docs/select-pattern.md)
-* [Connect Pattern](docs/connect-pattern.md)
 
 We also have a number of 'cookbooks' for specific Angular 2 topics:
 

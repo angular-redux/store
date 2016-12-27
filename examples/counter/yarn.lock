@@ -1249,9 +1249,9 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-ng2-redux@5.0.0-beta.0:
-  version "5.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/ng2-redux/-/ng2-redux-5.0.0-beta.0.tgz#ee3166e58aa0e1f5836d6e55ab71527023977685"
+ng2-redux@5.0.0-alpha.1:
+  version "5.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/ng2-redux/-/ng2-redux-5.0.0-alpha.1.tgz#efb792d34ed60172de93168a8943550ffac5750b"
 
 node-libs-browser@^0.5.2:
   version "0.5.3"
