@@ -1,1 +1,0 @@
-{"summaries":[{"symbol":{"__symbol":0},"metadata":{"__symbolic":"function","parameters":["selector","comparator"],"value":{"__symbolic":"error","message":"Function call not supported","line":25,"character":9}}}],"symbols":[{"__symbol":0,"name":"select","filePath":"/Users/sdavenpo/code/angular-redux/ng2-redux/src/decorators/select.d.ts"}]}
