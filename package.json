@@ -1,6 +1,6 @@
 {
   "name": "ng2-redux",
-  "version": "5.0.0-alpha.1",
+  "version": "5.0.0-beta.1",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/index.js",
   "scripts": {
