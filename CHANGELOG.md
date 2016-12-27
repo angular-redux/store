@@ -1,3 +1,8 @@
+# 4.2.1, 4.2.3
+
+Botched releases - don't use. Apologies; I've added a `prepublish` script to `npm`
+to prevent this from happening again.
+
 # 4.2.1
 
 ### Fixes:
