@@ -189,6 +189,10 @@ export class NgRedux<RootState> {
      * mapStateToTarget and mapDispatchToTarget as paramaters
      */
     connect = (mapStateToTarget: any, mapDispatchToTarget: any) => {
+        console.warn('The connect pattern is deprecated and will be removed ' +
+            ' in v5. Consider using the select pattern instead: ' +
+            'https://github.com/angular-redux/ng2-redux/blob/master/docs/' +
+            'select-pattern.md');
 
         const finalMapStateToTarget = mapStateToTarget
             || this._defaultMapStateToTarget;

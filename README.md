@@ -146,6 +146,9 @@ Here are some examples of Ng2Redux in action:
 
 Ng2Redux has two main usage patterns: the `select` pattern and the `connect` pattern.
 
+**Note:** The `connect` pattern is deprecated in v4.x and will be removed in
+v5.x. If you're starting a new project please use the `select` pattern.
+
 * [Select Pattern](docs/select-pattern.md)
 * [Connect Pattern](docs/connect-pattern.md)
 

@@ -1,3 +1,10 @@
+# 4.2.4
+
+Recovery release that restores the functionality of 4.2.2. Use this release
+if you're on Angular < 2.2. If your on Angular >= 2.3, you'll need to use
+ng2-redux@5.0.0-beta.0 (see v5.x branch for the changelog) to consume the
+fix for #282 (due to a breaking change in Angular).
+
 # 4.2.1, 4.2.3
 
 Botched releases - don't use. Apologies; I've added a `prepublish` script to `npm`
