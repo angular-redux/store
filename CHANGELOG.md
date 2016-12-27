@@ -1,9 +1,11 @@
 # 5.0.0-beta.0
 
+Breaking changes associated with Angular 2.4+.
+
 ### Breaking Changes
 
 * Minimum Angular peer dependency is now 2.4.0
-* `NgReduxModule.forRoot` is no more.
+* `NgReduxModule.forRoot` is no more, due to Angular API changes. Now just import `NgReduxModule` directly.
 
 ** Old Way: **
 
