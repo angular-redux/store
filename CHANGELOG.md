@@ -1,3 +1,8 @@
+# 5.0.0-beta.2
+
+Fix for the `ERROR in NgReduxModule is not an NgModule` error thrown by
+Angular CLI.
+
 # 5.0.0-beta.1
 
 Remove deprecations.
