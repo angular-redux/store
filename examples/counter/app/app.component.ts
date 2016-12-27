@@ -23,7 +23,7 @@ export class App {
     this.ngRedux.configureStore(
       rootReducer,
       {},
-      [ createLogger(), thunk ],
+      [ thunk, createLogger() ],
       [ ...enhancers, devTool.isEnabled() ? devTool.enhancer() : f => f]);
   }
 }

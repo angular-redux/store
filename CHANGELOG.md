@@ -1,3 +1,56 @@
+# 5.0.0-beta.0
+
+### Breaking Changes
+
+* Minimum Angular peer dependency is now 2.4.0
+* `NgReduxModule.forRoot` is no more.
+
+** Old Way: **
+
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { NgReduxModule } from 'ng2-redux';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    NgReduxModule.forRoot(),
+    BrowserModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+class AppModule {
+  // etc.
+}
+```
+
+** New Way: **
+
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { NgReduxModule } from 'ng2-redux';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    NgReduxModule,
+    BrowserModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+class AppModule {
+  // etc.
+}
+```
+
 # 4.2.1, 4.2.3
 
 Botched releases - don't use. Apologies; I've added a `prepublish` script to `npm`
@@ -50,7 +103,7 @@ import { rootReducer } from './store';
     AppComponent
   ],
   imports: [
-    NgReduxModule.forRoot(),
+    NgReduxModule,
     BrowserModule,
   ],
   providers: [],

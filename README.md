@@ -59,7 +59,7 @@ interface IAppState { /* ... */ };
 
 @NgModule({
   /* ... */
-  imports: [ /* ... */, NgReduxModule.forRoot() ]
+  imports: [ /* ... */, NgReduxModule ]
 })
 export class AppModule {
   constructor(ngRedux: NgRedux<IAppState>) {
@@ -91,7 +91,7 @@ export const store: Store<IAppState> = createStore(
 
 @NgModule({
   /* ... */
-  imports: [ /* ... */, NgReduxModule.forRoot() ]
+  imports: [ /* ... */, NgReduxModule ]
 })
 class AppModule {
   constructor(ngRedux: NgRedux<IAppState>) {
