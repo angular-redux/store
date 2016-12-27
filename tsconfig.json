@@ -21,7 +21,6 @@
     "**/*.spec.ts"
   ],
   "angularCompilerOptions": {
-    "strictMetadataEmit": true,
-    "genDir": "./lib"
+    "strictMetadataEmit": true
   }
 }
