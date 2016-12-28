@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NgRedux } from 'ng2-redux';
 import { IAppState } from '../store';
-import { RandomNumberService } from '../services/random-number.service';
+import { RandomNumberService } from '../common/random-number.service';
 
 /**
  * Action creators in Angular 2. We may as well adopt a more
@@ -25,16 +25,6 @@ export class CounterActions {
 
   decrement(): void {
     this.ngRedux.dispatch({ type: CounterActions.DECREMENT_COUNTER });
-  }
-
-  incrementIfOddUsingThunk() {
-    return (getState, dispatch) => {
-      const { counter } = getState();
-
-      if (counter % 2 !== 0) {
-        return { type: CounterActions.INCREMENT_COUNTER };
-      }
-    }
   }
 
   incrementIfOdd(): void {

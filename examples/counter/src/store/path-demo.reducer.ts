@@ -1,4 +1,4 @@
-import { CounterActions } from '../actions/counter.actions';
+import { CounterActions } from '../counter/counter.actions';
 
 export interface IPathDemoData {
   foo: {
