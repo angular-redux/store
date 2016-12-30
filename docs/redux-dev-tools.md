@@ -21,7 +21,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from 'ng2-redux';
 // when you initialize your root component:
 @NgModule({
   /* ... */
-  imports: [ /* ... */, NgReduxModule.forRoot() ]
+  imports: [ /* ... */, NgReduxModule ]
 })export class AppModule {
   constructor(
     private ngRedux: NgRedux,

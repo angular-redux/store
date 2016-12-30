@@ -2,9 +2,15 @@ import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { select as select } from 'ng2-redux';
 import 'rxjs/add/operator/combineLatest';
-//let select = select_x;
-export let x = state => state.counter;
-export let  y = state => state.counter * 2;
+
+export function x(state) {
+  return state.counter;
+}
+
+export function y(state) {
+  return state.counter * 2;
+}
+
 interface ICoord {
   x: number;
   y: number;
@@ -12,16 +18,9 @@ interface ICoord {
 
 @Component({
   selector: 'counter-info',
-  template: `
-  <ul>
-    <li>{{ funcCounter$ | async }}</li>
-    <li>{{ stringKey$ | async }}</li>
-    <li>{{ counterX2$ | async }}</li>
-    <li>{{ foo?.x }} - {{ foo?.y }}</li>
-  <ul>
-  `
+  templateUrl: './counter-info.component.html', 
 })
-export class CounterInfo {
+export class CounterInfoComponent {
 
   @select(x) funcCounter$: Observable<number>;
   @select('counter') stringKey$: Observable<number>;

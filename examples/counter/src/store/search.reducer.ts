@@ -1,5 +1,5 @@
 import { tassign } from 'tassign';
-import { SEARCH_ACTIONS } from '../actions/search.actions';
+import { SEARCH_ACTIONS } from '../search/search.actions';
 
 export interface ISearchState {
   onSearch: boolean;
