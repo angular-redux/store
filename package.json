@@ -1,5 +1,5 @@
 {
-  "name": "ng2-redux",
+  "name": "@angular-redux/core",
   "version": "5.0.0",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/index.js",
