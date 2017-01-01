@@ -61,7 +61,7 @@ describe('NgRedux Observable Store', () => {
 
   it('should get the initial state', (done) => {
     let state$ = ngRedux
-      .select(state => state)
+      .select()
       .subscribe(state => {
         expect(state.foo).to.equal('bar');
         expect(state.baz).to.equal(-1);
@@ -196,7 +196,7 @@ describe('NgRedux Observable Store', () => {
       'replaceReducer'
     );
     });
-  
+
   it('should wait until store is configured before emitting values',
     () => {
       class SomeService {
@@ -361,7 +361,7 @@ describe('Chained actions in subscriptions', () => {
       let lengthSpy = sinon.spy((n) => length = n);
       let lenSub;
       let keywordSub;
-      
+
       lenSub = length$.subscribe(lengthSpy);
       keywordSub = keyword$.
         filter(n => n !== '')
@@ -404,7 +404,7 @@ describe('Chained actions in subscriptions', () => {
           doFetch(n);
         });
 
-      
+
 
       expect(keyword).to.equal('');
       expect(length).to.equal(-1);

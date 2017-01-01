@@ -124,15 +124,18 @@ export class NgRedux<RootState> {
      * source Observable with distinct values.
      */
     select<S>(
-        selector: PropertySelector |
+        selector?: PropertySelector |
             PathSelector |
             FunctionSelector<RootState, S>,
         comparator?: Comparator): Observable<S> {
 
+        if (!selector) {
+            return this._store$.distinctUntilChanged(comparator);
+        }
+
         invariant(checkSelector(selector), ERROR_MESSAGE, selector);
 
         let result: Observable<S>;
-
         if (typeof selector === 'string' ||
             typeof selector === 'number' ||
             typeof selector === 'symbol') {
