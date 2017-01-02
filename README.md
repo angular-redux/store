@@ -128,7 +128,7 @@ Here are some examples of Ng2Redux in action:
 * [Trendy Brunch: multi-reducer example with redux-localstorage](https://github.com/e-schultz/ng2-camp-example)
 * [Plnkr: smart & presentational components example](https://plnkr.co/edit/XCGzzxoinM8cRAKp2huU?p=preview)
 * [Angular2-redux-starter from Rangle.io (with Epic, devtools)](https://github.com/rangle/angular2-redux-starter)
-* [Simple SystemJS Example](https://github.com/SethDavenport/ng2-redux-systemjs-example/blob/master/README.md)
+* [Simple SystemJS Example (Angular Quickstart)](https://github.com/angular-redux/system-js-example)
 
 ## Companion Packages
 
