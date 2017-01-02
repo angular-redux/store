@@ -5,16 +5,20 @@ import { CounterActions } from './counter.actions';
 import { RandomNumberService } from '../common/random-number.service';
 import { IAppState } from '../store';
 
+/**
+ * A component demonstraing a basic counter with actions and the
+ * select decorator.
+ */
 @Component({
   selector: 'counter',
   templateUrl: './counter.component.html',
 })
 export class CounterComponent {
-  @select('counter') counter$: Observable<number>;
-  @select([ 'pathDemo', 'foo' ]) foo$: Observable<Object>;
-  @select([ 'pathDemo', 'foo', 'bar', 0 ]) bar$: Observable<number>;
+  @select() counter$: Observable<number>;
+  @select('counter') counterByName$: Observable<number>;
 
   constructor(
     public actions: CounterActions,
     private ngRedux: NgRedux<IAppState>) {}
 }
+

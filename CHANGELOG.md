@@ -1,3 +1,30 @@
+# 5.1.0
+
+# Features
+
+You can now get an observable to the root state by passing no arguments to
+`ngRedux.select`:
+
+```typescript
+private this.rootState$: Observable<IAppState>;
+
+constructor(ngRedux: NgRedux) {
+  this.rootState$ = ngRedux.select();
+}
+```
+
+# Changes
+
+`ngRedux.dispatch()` has been tweaked to always run in the Angular zone. This
+should prevent unexpected weirdness when dispatching from callbacks to 3rd-party
+libraries. See #259 for further discussion.
+
+# Misc.
+
+* Refactored the example app a bit to split out the different selector demos instead
+of lumping most of them into the counter component.
+* Miscellaneous documentation updates.
+
 # 5.0.0
 
 * Fix for the `ERROR in NgReduxModule is not an NgModule` error thrown by Angular CLI.

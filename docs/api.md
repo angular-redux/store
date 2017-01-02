@@ -65,44 +65,31 @@ returns the slice you want to subscribe to for changes.
 
 e.g. see [the @select decorator](#the-select-decorator)
 
-## `connect(mapStateToTarget, mapDispatchToTarget)(target)`
+Passing no argument will bind the resulting observable to a top-level store
+property with the same name as the decorated variable.
 
-Connects an Angular component to Redux, and maps action creators and store
-properties onto the component instance.
+E.g. `@select() foo$` will create bind `this.foo$` to an Observable of `state.foo`.
 
-__Arguments:__
-* `mapStateToTarget` \(*Function*): connect will subscribe to Redux store
-updates. Any time it updates, mapStateToTarget will be called. Its result must
-be a plain object, and it will be merged into `target`. If you have a component
-which simply triggers actions without needing any state you can pass null to
-`mapStateToTarget`.
-* [`mapDispatchToTarget`] \(*Object* or *Function*): Optional. If an object is
-passed, each function inside it will be assumed to be a Redux action creator. An
-object with the same function names, but bound to a Redux store, will be merged
-onto `target`. If a function is passed, it will be given `dispatch`. It’s up to
-you to return an object that somehow uses `dispatch` to bind action creators in
-your own way. (Tip: you may use the
-[`bindActionCreators()`](http://gaearon.github.io/redux/docs/api/bindActionCreators.html)
-helper from Redux.).
+## .select(key | path | function)
 
-*You then need to invoke the function a second time, with `target` as parameter:*
-* `target` \(*Object* or *Function*): If passed an object, the results of
-`mapStateToTarget` and `mapDispatchToTarget` will be merged onto it. If passed a
-function, the function will receive the results of `mapStateToTarget` and
-`mapDispatchToTarget` as parameters.
+Non-decorator selector function. Does the same thing as `@select`, but with the
+following differences:
 
-e.g:
+* It's not a decorator; you call it explicitly on `ngRedux`:
+
 ```typescript
-connect(this.mapStateToThis, this.mapDispatchToThis)(this);
-//Or
-connect(this.mapState, this.mapDispatch)((selectedState, actions) => {/* ... */});
+class Foo {
+  constructor(ngRedux: NgRedux) {
+    this.myObservable = ngRedux.select(['foo', 'bar']);
+  }
+}
 ```
 
-__Remarks:__
-* The `mapStateToTarget` function takes a single argument of the entire Redux
-store’s state and returns an object to be passed as props. It is often called a
-selector. Use reselect to efficiently compose selectors and compute derived
-data.
+* Calling it with no arguments will give you an observable to the entire
+redux state.
+
+Use this version if you're uncomfortable with decorators or need to observe
+the full store.
 
 ## Store API
 All of redux's store methods (i.e. `dispatch`, `subscribe` and `getState`) are

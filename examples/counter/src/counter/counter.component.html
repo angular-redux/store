@@ -1,10 +1,11 @@
+<h1>Counter Demo</h1>
 <p>
-  Clicked: {{ counter$ | async }} times
   <button (click)="actions.increment()">+</button>
   <button (click)="actions.decrement()">-</button>
   <button (click)="actions.incrementIfOdd()">Increment if odd</button>
   <button (click)="actions.incrementAsync(2222)">Increment async</button>
   <button (click)="actions.randomize()">Set to random number</button>
+
+  Clicked: {{ counter$ | async }} times<br>
+  Clicked (selected by name): {{ counterByName$ | async }} times<br>
 </p>
-<p>foo$: {{ foo$ | async | json }}</p>
-<p>bar$: {{ bar$ | async }}</p>

@@ -16,6 +16,10 @@ interface ICoord {
   y: number;
 }
 
+/**
+ * A component demonstrating how you can use various methods to
+ * transform the data selected from the store.
+ */
 @Component({
   selector: 'counter-info',
   templateUrl: './counter-info.component.html', 

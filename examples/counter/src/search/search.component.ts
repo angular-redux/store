@@ -4,6 +4,10 @@ import { Observable } from 'rxjs/Rx';
 import { SearchActions } from './search.actions';
 import { IAppState } from '../store';
 
+/**
+ * Component that demonstrates merging input and selector streams
+ * to react to user input.
+ */
 @Component({
   selector: 'search',
   templateUrl: './search.component.html',

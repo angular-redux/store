@@ -199,7 +199,7 @@ export class NgRedux<RootState> {
         // Some apps dispatch actions from outside the angular zone; e.g. as
         // part of a 3rd-party callback, etc. When this happens, we need to
         // execute the dispatch in-zone or Angular2's UI won't update.
-        this.ngZone.run(() => this._store.dispatch(action));
+        return this.ngZone.run(() => this._store.dispatch(action));
     };
 
     private getStateSlice(state, mapStateToScope) {
