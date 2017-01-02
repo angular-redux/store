@@ -1,17 +1,27 @@
 import 'reflect-metadata';
 import 'es6-shim';
+import { NgZone } from '@angular/core';
 import { expect, use } from 'chai';
 import { createStore } from 'redux';
-import { NgRedux } from './ng-redux';
-import { select } from '../decorators/select';
+
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/combineLatest';
+
+import { NgRedux } from './ng-redux';
+import { select } from '../decorators/select';
+
 use(sinonChai);
 
 function returnPojo() {
   return {};
+}
+
+class MockNgZone {
+    run(fn) {
+        return fn();
+    }
 }
 
 describe('NgRedux Observable Store', () => {
@@ -26,6 +36,7 @@ describe('NgRedux Observable Store', () => {
   let rootReducer;
   let store;
   let ngRedux;
+  let mockNgZone = new MockNgZone() as NgZone;
 
   beforeEach(() => {
     defaultState = {
@@ -48,7 +59,7 @@ describe('NgRedux Observable Store', () => {
     };
 
     store = createStore(rootReducer);
-    ngRedux = new NgRedux<IAppState>();
+    ngRedux = new NgRedux<IAppState>(mockNgZone);
     ngRedux.configureStore(rootReducer, defaultState);
   });
 
@@ -210,7 +221,7 @@ describe('NgRedux Observable Store', () => {
           _ngRedux.select(n => n.baz).subscribe(baz => this.baz = baz);
         }
       }
-      ngRedux = new NgRedux<IAppState>();
+      ngRedux = new NgRedux<IAppState>(mockNgZone);
 
       let someService = new SomeService(ngRedux);
       ngRedux.configureStore(rootReducer, defaultState);
@@ -226,9 +237,9 @@ describe('NgRedux Observable Store', () => {
         @select() foo$: any;
         @select() bar$: any;
         @select() baz$: any;
-
       }
-      ngRedux = new NgRedux<IAppState>();
+
+      ngRedux = new NgRedux<IAppState>(mockNgZone);
 
       let someService = new SomeService();
       someService
@@ -255,9 +266,12 @@ describe('Chained actions in subscriptions', () => {
   let defaultState: IAppState;
   let rootReducer;
   let ngRedux;
+  let mockNgZone = new MockNgZone() as NgZone;
+
   let doSearch = (word) => {
     ngRedux.dispatch({ type: 'SEARCH', payload: word });
   };
+
   let doFetch = (word) => {
     ngRedux.dispatch({ type: 'SEARCH_RESULT', payload: word.length });
   };
@@ -266,7 +280,6 @@ describe('Chained actions in subscriptions', () => {
     defaultState = {
       keyword: '',
       keywordLength: -1
-
     };
 
     rootReducer = (state = defaultState, action) => {
@@ -280,7 +293,7 @@ describe('Chained actions in subscriptions', () => {
       }
     };
 
-    ngRedux = new NgRedux<IAppState>();
+    ngRedux = new NgRedux<IAppState>(mockNgZone);
     ngRedux.configureStore(rootReducer, defaultState);
   });
 

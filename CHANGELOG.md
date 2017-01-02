@@ -10,7 +10,8 @@
 * Removed support for the `connect` pattern: it's simply not a good fit for Angular.
 You should be using the `select` pattern now.
 * Remove deprecated constructor arg for `NgRedux`.
-* `NgReduxModule.forRoot` is no more, due to Angular API changes. Now just import `NgReduxModule` directly.
+* Minimum Angular peer dependency is now 2.4.0
+* `NgReduxModule.forRoot` is no more. Now just import `NgReduxModule` directly.
 
 #### Old Way:
 
@@ -189,8 +190,6 @@ export class MyComponent {
 
 * Upgrade to TypeScript 2 - #189, #190
 * Add Code Coverage - #193, #206, #207
-
-
 
 # 3.3.5
 

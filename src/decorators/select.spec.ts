@@ -1,5 +1,7 @@
 import 'reflect-metadata';
 import { expect, use } from 'chai';
+import { NgZone } from '@angular/core';
+
 import { NgRedux } from '../components/ng-redux';
 import { select } from './select';
 import * as sinon from 'sinon';
@@ -7,12 +9,18 @@ import * as sinonChai from 'sinon-chai';
 
 use(sinonChai);
 
+class MockNgZone {
+    run(fn) {
+        return fn();
+    }
+}
+
 describe('@select', () => {
   let ngRedux;
+  let mockNgZone = new MockNgZone() as NgZone;
   let targetObj;
   let defaultState;
   let rootReducer;
-  let mockAppRef;
 
   beforeEach(() => {
     defaultState = {
@@ -24,7 +32,7 @@ describe('@select', () => {
       return newState;
     };
     targetObj = {};
-    ngRedux = new NgRedux();
+    ngRedux = new NgRedux(mockNgZone);
     ngRedux.configureStore(rootReducer, defaultState);
   });
 

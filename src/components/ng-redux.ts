@@ -9,6 +9,7 @@ import {
     compose
 } from 'redux';
 
+import { NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
@@ -50,7 +51,8 @@ export class NgRedux<RootState> {
     /**
      * Creates an instance of NgRedux.
      */
-    constructor() {
+    constructor(
+        private ngZone: NgZone) {
         NgRedux.instance = this;
         this._store$ = new BehaviorSubject<RootState>(null)
             .filter(n => n !== null)
@@ -187,16 +189,18 @@ export class NgRedux<RootState> {
     /**
      * Dispatch an action to Redux
      */
-    dispatch: Redux.Dispatch<RootState>
-        = <A extends Action>(action: A): any => {
-            invariant(
-                !!this._store,
-                'Dispatch failed: did you forget to configure your store? ' +
-                    'https://github.com/angular-redux/ng2-redux/blob/master/' +
-                    'README.md#quick-start');
+    dispatch = <A extends Action>(action: A): any => {
+        invariant(
+            !!this._store,
+            'Dispatch failed: did you forget to configure your store? ' +
+                'https://github.com/angular-redux/ng2-redux/blob/master/' +
+                'README.md#quick-start');
 
-            return this._store.dispatch(action);
-        };
+        // Some apps dispatch actions from outside the angular zone; e.g. as
+        // part of a 3rd-party callback, etc. When this happens, we need to
+        // execute the dispatch in-zone or Angular2's UI won't update.
+        this.ngZone.run(() => this._store.dispatch(action));
+    };
 
     private getStateSlice(state, mapStateToScope) {
         const slice = mapStateToScope(state);
