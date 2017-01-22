@@ -132,7 +132,9 @@ export class NgRedux<RootState> {
         comparator?: Comparator): Observable<S> {
 
         if (!selector) {
-            return this._store$.distinctUntilChanged(comparator);
+            return (this
+                ._store$
+                .distinctUntilChanged(comparator) as any) as Observable<S>;
         }
 
         invariant(checkSelector(selector), ERROR_MESSAGE, selector);
