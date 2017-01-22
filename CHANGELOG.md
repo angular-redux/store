@@ -1,3 +1,12 @@
+# 5.1.1
+# 4.2.4
+# 3.3.10
+
+# Fixes 
+
+Applied fix addressing #309 - select function called even if state does not change.
+
+
 # 5.1.0
 
 # Features
