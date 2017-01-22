@@ -19,9 +19,9 @@ function returnPojo() {
 }
 
 class MockNgZone {
-    run(fn) {
-        return fn();
-    }
+  run(fn) {
+    return fn();
+  }
 }
 
 describe('NgRedux Observable Store', () => {
@@ -179,33 +179,51 @@ describe('NgRedux Observable Store', () => {
     expect(spy).to.have.been.calledThrice;
   });
 
+  it(`should only call provided select function if state changed`, () => {
+    let selectSpy = sinon.spy((state) => state.foo);
+    let results = [];
+    ngRedux.select(selectSpy).subscribe(result => {
+      results.push(result);
+    });
+
+    // called once to get the initial value 
+    expect(selectSpy).to.have.been.calledOnce;
+    // not called since no state was updated 
+    ngRedux.dispatch({ type: 'NOT_A_STATE_CHANGE' });
+    expect(selectSpy).to.have.been.calledOnce;
+    ngRedux.dispatch({ type: 'UPDATE_FOO', payload: 'update' });
+    expect(selectSpy).to.have.been.calledTwice;
+    ngRedux.dispatch({ type: 'NOT_A_STATE_CHANGE' });
+    expect(selectSpy).to.have.been.calledTwice;
+  });
+
   it('should throw when the store is provided after it has been configured',
     () => {
-    // Configured once in beforeEach, now we try to provide a store when
-    // we already have configured one.
+      // Configured once in beforeEach, now we try to provide a store when
+      // we already have configured one.
 
-    expect(ngRedux.provideStore.bind(store))
-      .to.throw(Error);
-  });
+      expect(ngRedux.provideStore.bind(store))
+        .to.throw(Error);
+    });
 
   it('should set the store when a store is provided',
     () => {
 
-    delete ngRedux._store;
-    delete ngRedux._$store;
+      delete ngRedux._store;
+      delete ngRedux._$store;
 
-    expect(ngRedux._store).to.be.undefined;
-    expect(ngRedux._$store).to.be.undefined;
+      expect(ngRedux._store).to.be.undefined;
+      expect(ngRedux._$store).to.be.undefined;
 
-    expect(ngRedux.provideStore.bind(ngRedux, store))
-      .to.not.throw(Error);
+      expect(ngRedux.provideStore.bind(ngRedux, store))
+        .to.not.throw(Error);
 
-    expect(ngRedux._store).to.have.all.keys(
-      'dispatch',
-      'subscribe',
-      'getState',
-      'replaceReducer'
-    );
+      expect(ngRedux._store).to.have.all.keys(
+        'dispatch',
+        'subscribe',
+        'getState',
+        'replaceReducer'
+      );
     });
 
   it('should wait until store is configured before emitting values',

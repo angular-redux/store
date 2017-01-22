@@ -20,7 +20,7 @@ import 'rxjs/add/operator/switchMap';
 
 import shallowEqual from '../utils/shallow-equal';
 import wrapActionCreators from '../utils/wrap-action-creators';
-import { isObject, isFunction, isPlainObject} from '../utils/type-checks';
+import { isObject, isFunction, isPlainObject } from '../utils/type-checks';
 import { omit } from '../utils/omit';
 import { invariant } from '../utils/invariant';
 import { getIn } from '../utils/get-in';
@@ -137,18 +137,20 @@ export class NgRedux<RootState> {
 
         invariant(checkSelector(selector), ERROR_MESSAGE, selector);
 
+
         let result: Observable<S>;
+        let changedStore = this._store$.distinctUntilChanged();
         if (typeof selector === 'string' ||
             typeof selector === 'number' ||
             typeof selector === 'symbol') {
 
-            result = this._store$
+            result = changedStore
                 .map(state => state[selector as PropertySelector]);
         } else if (Array.isArray(selector)) {
-            result = this._store$
+            result = changedStore
                 .map(state => getIn(state, selector as PathSelector));
         } else {
-            result = this._store$
+            result = changedStore
                 .map(selector as FunctionSelector<RootState, S>);
         }
 
@@ -193,8 +195,8 @@ export class NgRedux<RootState> {
         invariant(
             !!this._store,
             'Dispatch failed: did you forget to configure your store? ' +
-                'https://github.com/angular-redux/ng2-redux/blob/master/' +
-                'README.md#quick-start');
+            'https://github.com/angular-redux/ng2-redux/blob/master/' +
+            'README.md#quick-start');
 
         // Some apps dispatch actions from outside the angular zone; e.g. as
         // part of a 3rd-party callback, etc. When this happens, we need to
