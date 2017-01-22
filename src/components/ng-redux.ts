@@ -20,7 +20,7 @@ import { Injectable, Optional, ApplicationRef } from '@angular/core';
 
 import shallowEqual from '../utils/shallow-equal';
 import wrapActionCreators from '../utils/wrap-action-creators';
-import { isObject, isFunction, isPlainObject} from '../utils/type-checks';
+import { isObject, isFunction, isPlainObject } from '../utils/type-checks';
 import { omit } from '../utils/omit';
 import { invariant } from '../utils/invariant';
 import { getIn } from '../utils/get-in';
@@ -35,6 +35,7 @@ export type PropertySelector = string | number | symbol;
 export type PathSelector = (string | number)[];
 export type FunctionSelector<RootState, S> = ((s: RootState) => S);
 export type Comparator = (x: any, y: any) => boolean;
+type RetypedCompose = (func: Function, ...funcs: Function[]) => Function;
 
 @Injectable()
 export class NgRedux<RootState> {
@@ -51,7 +52,7 @@ export class NgRedux<RootState> {
      * The parameter is deprecated and left for backwards compatibility.
      * It doesn't do anything. It will be removed in a future major version.
      */
-    constructor(@Optional() deprecated?: ApplicationRef) {
+    constructor( @Optional() deprecated?: ApplicationRef) {
         NgRedux.instance = this;
         this._store$ = new BehaviorSubject<RootState>(null)
             .filter(n => n !== null)
@@ -80,8 +81,9 @@ export class NgRedux<RootState> {
 
         invariant(!this._store, 'Store already configured!');
 
+        const reTypedCompose = compose as RetypedCompose;
         const finalCreateStore
-            = <Redux.StoreEnhancerStoreCreator<RootState>>compose(
+            = <Redux.StoreEnhancerStoreCreator<RootState>>reTypedCompose(
                 applyMiddleware(...middleware),
                 ...enhancers
             )(createStore);
@@ -130,18 +132,19 @@ export class NgRedux<RootState> {
         invariant(checkSelector(selector), ERROR_MESSAGE, selector);
 
         let result: Observable<S>;
+        let changedStore = this._store$.distinctUntilChanged();
 
         if (typeof selector === 'string' ||
             typeof selector === 'number' ||
             typeof selector === 'symbol') {
 
-            result = this._store$
+            result = changedStore
                 .map(state => state[selector as PropertySelector]);
         } else if (Array.isArray(selector)) {
-            result = this._store$
+            result = changedStore
                 .map(state => getIn(state, selector as PathSelector));
         } else {
-            result = this._store$
+            result = changedStore
                 .map(selector as FunctionSelector<RootState, S>);
         }
 
@@ -262,8 +265,8 @@ export class NgRedux<RootState> {
         invariant(
             !!this._store,
             'Dispatch failed: did you forget to configure your store? ' +
-                'https://github.com/angular-redux/ng2-redux/blob/master/' +
-                'README.md#quick-start');
+            'https://github.com/angular-redux/ng2-redux/blob/master/' +
+            'README.md#quick-start');
 
         return this._store.dispatch(action);
     };
