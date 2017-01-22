@@ -276,6 +276,24 @@ describe('NgRedux Observable Store', () => {
     expect(spy).to.have.been.calledThrice;
   });
 
+  it(`should only call provided select function if state changed`, () => {
+    let selectSpy = sinon.spy((state) => state.foo);
+    let results = [];
+    ngRedux.select(selectSpy).subscribe(result => {
+      results.push(result);
+    });
+
+    // called once to get the initial value 
+    expect(selectSpy).to.have.been.calledOnce;
+    // not called since no state was updated 
+    ngRedux.dispatch({ type: 'NOT_A_STATE_CHANGE' });
+    expect(selectSpy).to.have.been.calledOnce;
+    ngRedux.dispatch({ type: 'UPDATE_FOO', payload: 'update' });
+    expect(selectSpy).to.have.been.calledTwice;
+    ngRedux.dispatch({ type: 'NOT_A_STATE_CHANGE' });
+    expect(selectSpy).to.have.been.calledTwice;
+  });
+
   it('should throw when the store is provided after it has been configured',
     () => {
     // Configured once in beforeEach, now we try to provide a store when

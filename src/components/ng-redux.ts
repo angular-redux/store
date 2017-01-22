@@ -20,7 +20,7 @@ import { Optional, ApplicationRef } from '@angular/core';
 
 import shallowEqual from '../utils/shallow-equal';
 import wrapActionCreators from '../utils/wrap-action-creators';
-import { isObject, isFunction, isPlainObject} from '../utils/type-checks';
+import { isObject, isFunction, isPlainObject } from '../utils/type-checks';
 import { omit } from '../utils/omit';
 import { invariant } from '../utils/invariant';
 import { getIn } from '../utils/get-in';
@@ -54,7 +54,7 @@ export class NgRedux<RootState> {
      * The parameter is deprecated and left for backwards compatibility.
      * It doesn't do anything. It will be removed in a future major version.
      */
-    constructor(@Optional() deprecated?: ApplicationRef) {
+    constructor( @Optional() deprecated?: ApplicationRef) {
         NgRedux.instance = this;
         this._store$ = new BehaviorSubject<RootState>(null)
             .filter(n => n !== null)
@@ -135,19 +135,20 @@ export class NgRedux<RootState> {
 
         invariant(checkSelector(selector), ERROR_MESSAGE, selector);
 
-        let result: Observable<S>;
 
+        let result: Observable<S>;
+        let changedStore = this._store$.distinctUntilChanged();
         if (typeof selector === 'string' ||
             typeof selector === 'number' ||
             typeof selector === 'symbol') {
 
-            result = this._store$
+            result = changedStore
                 .map(state => state[selector as PropertySelector]);
         } else if (Array.isArray(selector)) {
-            result = this._store$
+            result = changedStore
                 .map(state => getIn(state, selector as PathSelector));
         } else {
-            result = this._store$
+            result = changedStore
                 .map(selector as FunctionSelector<RootState, S>);
         }
 
@@ -265,15 +266,15 @@ export class NgRedux<RootState> {
      * Dispatch an action to Redux
      */
     dispatch: Redux.Dispatch<RootState>
-        = <A extends Action>(action: A): any => {
-            invariant(
-                !!this._store,
-                'Dispatch failed: did you forget to configure your store? ' +
-                    'https://github.com/angular-redux/ng2-redux/blob/master/' +
-                    'README.md#quick-start');
+    = <A extends Action>(action: A): any => {
+        invariant(
+            !!this._store,
+            'Dispatch failed: did you forget to configure your store? ' +
+            'https://github.com/angular-redux/ng2-redux/blob/master/' +
+            'README.md#quick-start');
 
-            return this._store.dispatch(action);
-        };
+        return this._store.dispatch(action);
+    };
 
     private updateTarget(target, StateSlice, dispatch) {
         if (isFunction(target)) {
