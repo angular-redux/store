@@ -60,7 +60,7 @@ export class SessionEpics {
 
   login = (action$: ActionsObservable) => {
     return action$.ofType(SessionActions.LOGIN_USER)
-      .flatMap(({payload}) => {
+      .mergeMap(({payload}) => {
         return this.http.post(`${BASE_URL}/auth/login`, payload)
           .map(result => ({
             type: SessionActions.LOGIN_USER_SUCCESS,
