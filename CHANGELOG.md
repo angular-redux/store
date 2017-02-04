@@ -2,7 +2,7 @@
 # 4.2.4
 # 3.3.10
 
-# Fixes 
+# Fixes
 
 Applied fix addressing #309 - select function called even if state does not change.
 
@@ -54,7 +54,7 @@ You should be using the `select` pattern now.
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgReduxModule } from '@angular-redux/core';
+import { NgReduxModule } from 'ng2-redux';
 
 @NgModule({
   declarations: [
@@ -77,7 +77,7 @@ class AppModule {
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgReduxModule } from '@angular-redux/core';
+import { NgReduxModule } from 'ng2-redux';
 
 @NgModule({
   declarations: [
@@ -145,7 +145,7 @@ to prevent this from happening again.
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { NgReduxModule, NgRedux } from '@angular-redux/core';
+import { NgReduxModule, NgRedux } from 'ng2-redux';
 import { IAppState } from './appstate';
 import { rootReducer } from './store';
 
@@ -169,16 +169,10 @@ export class AppModule {
 
 ```
 
-**IMPORTANT NOTE ABOUT AOT AND ANGULAR-CLI**
-
-If using the angular-cli with the --aot option - `@select` decorators will not work. The build process will work, but decorators will silently stop working. This is due to angular/angular-cli/2799, which is on their roadmap already.
-
-If you need decorators and AoT, you'll need to use the raw ngc compiler directly from the command line.
-
 **before**
 
 ```js
-import { select } from '@angular-redux/core';
+import { select } from 'ng2-redux';
 export class MyComponent {
   @select() thing$:Observable<string>;
 }
@@ -187,7 +181,7 @@ export class MyComponent {
 **after**
 
 ```js
-import { NgRedux } from '@angular-redux/core';
+import { NgRedux } from 'ng2-redux';
 export class MyComponent {
   thing$: Observable<string>;
   constructor(private ngRedux:NgRedux<MyAppState>) {
@@ -321,7 +315,7 @@ Create your App and call `provideStore` with your newly created store:
 ```typescript
 // app.ts
 
-import { NgRedux } from '@angular-redux/core';
+import { NgRedux } from 'ng2-redux';
 import { store } from './store.ts';
 
 interface IAppState {
@@ -385,7 +379,7 @@ for Redux DevTools to work; we do this automatically for you.
 
 #### Bootstrapping
 
-We've changed how bootstrapping `@angular-redux/core` works. The `provider`
+We've changed how bootstrapping `ng2-redux` works. The `provider`
 function has gone away in favour of making NgRedux a first-class
 `@Injectable`.
 
@@ -400,7 +394,7 @@ Angular 2 services, which previously was unnecessarily difficult.
 ```typescript
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { NgRedux } from '@angular-redux/core';
+import { NgRedux } from 'ng2-redux';
 const createLogger = require('redux-logger');
 const persistState = require('redux-localstorage');
 import { rootReducer } from './reducers';
@@ -420,7 +414,7 @@ bootstrap(App, [ provide(store) ])
 **app.ts**
 ```typescript
 import { Component } from '@angular/core';
-import { NgRedux } from '@angular-redux/core';
+import { NgRedux } from 'ng2-redux';
 
 @Component({
   // ...
@@ -435,7 +429,7 @@ export class App {
 **bootstrap.ts:**
 ```typescript
 import { bootstrap } from '@angular/platform-browser-dynamic';
-import { NgRedux } from '@angular-redux/core';
+import { NgRedux } from 'ng2-redux';
 import { App } from './app';
 
 bootstrap(App, [ Ng2Redux ]);
@@ -444,7 +438,7 @@ bootstrap(App, [ Ng2Redux ]);
 **app.ts**
 ```typescript
 import { Component } from '@angular/core';
-import { NgRedux } from '@angular-redux/core';
+import { NgRedux } from 'ng2-redux';
 import { reduxLogger } from 'redux-logger';
 import { initialState, rootReducer } from './reducers';
 
@@ -482,7 +476,7 @@ community: `redux-logger` and `redux-localstorage`.
   * `@Inject('ngRedux')` still works
 
 ```typescript
-import { NgRedux } from '@angular-redux/core';
+import { NgRedux } from 'ng2-redux';
 // ...
 export class MyComponent {
   constructor(private ngRedux: NgRedux) {}
@@ -498,7 +492,7 @@ select<S>(selector: string | number | symbol | ((state: RootState) => S), compar
 Example use:
 
 ```typescript
-import { NgRedux } from '@angular-redux/core';
+import { NgRedux } from 'ng2-redux';
 // ...
 export class MyComponent implements OnInit {
   countByKey$: Observable<number>;
@@ -515,7 +509,7 @@ Also have the ability to provide a custom compare function.
 
 ```typescript
 import { is, Map } from 'immutable';
-import { NgRedux } from '@angular-redux/core';
+import { NgRedux } from 'ng2-redux';
 
 // ...
 export class MyComponent implements OnInit {

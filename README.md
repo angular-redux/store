@@ -1,14 +1,14 @@
-# @angular-redux/core
+# @angular-redux/store
 
 Angular bindings for [Redux](https://github.com/reactjs/redux).
 
 For Angular 1 see [ng-redux](https://github.com/wbuchwalter/ng-redux)
 
-[![Join the chat at https://gitter.im/angular-redux/core](https://badges.gitter.im/angular-redux/@angular-redux/core.svg)](https://gitter.im/angular-redux/core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![CircleCI](https://img.shields.io/circleci/project/angular-redux/core/master.svg?maxAge=2592000)](https://circleci.com/gh/angular-redux/core/tree/master)
-[![npm version](https://img.shields.io/npm/v/@angular-redux/core.svg)](https://www.npmjs.com/package/@angular-redux/core)
+[![Join the chat at https://gitter.im/angular-redux/core](https://badges.gitter.im/angular-redux/@angular-redux/store.svg)](https://gitter.im/angular-redux/store?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![CircleCI](https://img.shields.io/circleci/project/angular-redux/store/master.svg?maxAge=2592000)](https://circleci.com/gh/angular-redux/store/tree/master)
+[![npm version](https://img.shields.io/npm/v/@angular-redux/store.svg)](https://www.npmjs.com/package/@angular-redux/store)
 
-`@angular-redux/core` lets you easily connect your Angular components with Redux, while still respecting the Angular idiom.
+`@angular-redux/store` lets you easily connect your Angular components with Redux, while still respecting the Angular idiom.
 
 Features include:
 * The ability to access slices of store state as `Observables`
@@ -16,7 +16,7 @@ Features include:
 * Compatibility with the existing Redux devtools Chrome extension
 * A rich, declarative selection syntax using the `@select` decorator
 
-In addition, we are committed to providing insight on clean strategies for integrating with Angular 2's change detection and other framework features.
+In addition, we are committed to providing insight on clean strategies for integrating with Angular's change detection and other framework features.
 
 ## Table of Contents
 
@@ -29,10 +29,10 @@ In addition, we are committed to providing insight on clean strategies for integ
 
 ## Installation
 
-Ng2Redux has a peer dependency on redux, so we need to install it as well.
+`@angular-redux/store` has a peer dependency on redux, so we need to install it as well.
 
 ```sh
-npm install --save redux @angular-redux/core
+npm install --save redux @angular-redux/store
 ```
 
 ## Quick Start
@@ -50,7 +50,7 @@ can configure your Redux store with reducers, initial state,
 and optionally middlewares and enhancers as you would in Redux directly.
 
 ```typescript
-import { NgReduxModule, NgRedux } from '@angular-redux/core';
+import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import reduxLogger from 'redux-logger';
 import { rootReducer } from './reducers';
 
@@ -78,7 +78,7 @@ import {
   compose,
   createStore
 } from 'redux';
-import { NgReduxModule, NgRedux } from '@angular-redux/core';
+import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import reduxLogger from 'redux-logger';
 import { rootReducer } from './reducers';
 
@@ -103,7 +103,7 @@ Now your Angular app has been reduxified! Use the `@select` decorator to
 access your store state, and `.dispatch()` to dispatch actions:
 
 ```typescript
-import { select } from '@angular-redux/core';
+import { select } from '@angular-redux/store';
 
 @Component({
   template: '<button (click)="onClick()">Clicked {{ count | async }} times</button>'
@@ -124,10 +124,8 @@ class App {
 Here are some examples of the `angular-redux` family of packages in action:
 
 * [Zoo Animals Combined Example App](https://github.com/angular-redux/example-app)
-* [Counter: basic select pattern example](examples/counter)
 * [Trendy Brunch: multi-reducer example with redux-localstorage](https://github.com/e-schultz/ng2-camp-example)
 * [Plnkr: smart & presentational components example](https://plnkr.co/edit/XCGzzxoinM8cRAKp2huU?p=preview)
-* [Angular2-redux-starter from Rangle.io (with Epic, devtools)](https://github.com/rangle/angular2-redux-starter)
 * [Simple SystemJS Example (Angular Quickstart)](https://github.com/angular-redux/system-js-example)
 
 ## Companion Packages
@@ -144,7 +142,7 @@ Here are some examples of the `angular-redux` family of packages in action:
 
 ## In-Depth Usage
 
-@angular-redux/core uses an approach to redux based on RxJS Observables to `select` and transform
+`@angular-redux/store` uses an approach to redux based on RxJS Observables to `select` and transform
 data on its way out of the store and into your UI or side-effect handlers. Observables
 are an efficient analogue to `reselect` for the RxJS-heavy Angular world.
 
@@ -156,5 +154,5 @@ We also have a number of 'cookbooks' for specific Angular topics:
 * [Using Angular's Dependency Injector with Middlewares](docs/di-middleware.md)
 * [Managing Side-Effects with redux-observable Epics](docs/epics.md)
 * [Using the Redux DevTools Chrome Extension](docs/redux-dev-tools.md)
-* [Ng2Redux and ImmutableJS](docs/immutable-js.md)
+* [@angular-redux/store and ImmutableJS](docs/immutable-js.md)
 * [Strongly Typed Reducers](docs/strongly-typed-reducers.md)

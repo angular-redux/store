@@ -16,7 +16,7 @@
   "typings": "./lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/angular-redux/core.git"
+    "url": "git+ssh://git@github.com/angular-redux/store.git"
   },
   "keywords": [
     "redux",
@@ -46,9 +46,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/angular-redux/core/issues"
+    "url": "https://github.com/angular-redux/store/issues"
   },
-  "homepage": "https://github.com/angular-redux/core#readme",
+  "homepage": "https://github.com/angular-redux/store#readme",
   "devDependencies": {
     "@angular/common": "^2.4.1",
     "@angular/compiler": "^2.4.1",

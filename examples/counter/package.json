@@ -21,7 +21,7 @@
     "@angular/platform-browser": "^2.3.1",
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
-    "@angular-redux/core": "^5.1.0",
+    "@angular-redux/store": "^5.1.0",
     "core-js": "^2.4.1",
     "redux": "^3.6.0",
     "redux-localstorage": "^0.4.1",

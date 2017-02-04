@@ -1,6 +1,6 @@
 # Side-Effect Management Using Epics
 
-`@angular-redux/core` also works well with the `Epic` feature of
+`@angular-redux/store` also works well with the `Epic` feature of
 [redux-observable](https://github.com/redux-observable). For
 example, a common use case for a side-effect is making an API call; while
 we can use asynchronous actions for this, epics provide a much cleaner
@@ -13,7 +13,7 @@ create some trivial actions:
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { NgRedux } from '@angular-redux/core';
+import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../reducers';
 
 @Injectable()
@@ -85,7 +85,7 @@ This allows us to configure our Redux store with the new epic as follows:
 
 ```typescript
 import { NgModule } from '@angular/core';
-import { NgReduxModule, NgRedux } from '@angular-redux/core';
+import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import { createEpicMiddleware } from 'redux-observable';
 import rootReducer from './reducers';
 import { SessionEpics } from './epics';

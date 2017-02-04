@@ -6,9 +6,9 @@
 provides efficient immutable data structures for JavaScript, and it's a great
 tool to help enforce immutability in your reducers.
 
-It provices two main structures, `Map` and `List`, which are analogues of
+It provides two main structures, `Map` and `List`, which are analogues of
 `Object` and `Array`. However they provide an efficiently-implemented
-copy-on-write semantic that can help you enfore immutability in your reducers
+copy-on-write semantic that can help you enforce immutability in your reducers
 without the performance problems of `Object.freeze` or the GC churn of
 `Object.assign`.
 
@@ -41,7 +41,7 @@ const immutableFoo: Map<string, any> = Immutable.fromJS({
 const foo: number = immutableFoo.get('foo');
 ```
 
-## Pre-Ng2Redux 3.3.0:
+## Pre 3.3.0:
 
 Previous to 3.3.0 we were forced to choose between the guarantees of ImmutableJS
 and the syntactic convenience of raw objects:
@@ -121,9 +121,9 @@ constructor() {
 }
 ```
 
-## Post-Ng2Redux 3.3.0:
+## Post 3.3.0:
 
-In Ng2Redux 3.3.0 we've allowed you to have your cake and eat it too: the
+In `@angular-redux/store` 3.3.0 we've allowed you to have your cake and eat it too: the
 `@select` decorator can now detect if the selected state is an ImmutableJS
 construct and call `.get` or `.getIn` for you.
 

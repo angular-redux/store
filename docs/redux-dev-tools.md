@@ -1,11 +1,11 @@
 # Using DevTools
 
-Ng2Redux is fully compatible with the Chrome extension version of the Redux dev
+`@angular-redux/store` is fully compatible with the Chrome extension version of the Redux dev
 tools:
 
 https://github.com/zalmoxisus/redux-devtools-extension
 
-However, due to peculiarities of Angular 2's change detection logic,
+However, due to peculiarities of Angular's change detection logic,
 events that come from external tools don't trigger a refresh in Angular's
 zone.
 
@@ -15,7 +15,7 @@ tools that handles this for you.
 Here's how to hook the extension up to your app:
 
 ```typescript
-import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/core';
+import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 
 // Add the dev tools enhancer your ngRedux.configureStore called
 // when you initialize your root component:

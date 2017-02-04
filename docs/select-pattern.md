@@ -2,8 +2,8 @@
 
 The select pattern allows you to get slices of your state as RxJS observables.
 
-These plug in very efficiently to Angular 2's change detection mechanism and this is the
-preferred approach to accessing store data in Angular 2.
+These plug in very efficiently to Angular's change detection mechanism and this is the
+preferred approach to accessing store data in Angular.
 
 ## The @select decorator
 
@@ -26,7 +26,7 @@ as a selector on the RxJs observable.
 import { Component } from '@angular2/core';
 import { AsyncPipe } from '@angular2/common';
 import { Observable } from 'rxjs/Observable';
-import { select } from '@angular-redux/core';
+import { select } from '@angular-redux/store';
 
 @Component({
     pipes: [AsyncPipe],
@@ -75,7 +75,7 @@ import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular2/common';
 import { Counter } from '../components/Counter';
 import * as CounterActions from '../actions/CounterActions';
-import { NgRedux } from '@angular-redux/core';
+import { NgRedux } from '@angular-redux/store';
 
 interface IAppState {
   counter: number;

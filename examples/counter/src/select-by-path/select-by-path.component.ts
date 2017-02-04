@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { select } from '@angular-redux/core';
+import { select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 
 /**

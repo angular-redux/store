@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { select as select } from '@angular-redux/core';
+import { select as select } from '@angular-redux/store';
 import 'rxjs/add/operator/combineLatest';
 
 export function x(state) {

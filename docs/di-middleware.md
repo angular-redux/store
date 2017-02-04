@@ -37,7 +37,7 @@ properly-bound function context.
 
 ```typescript
 import { NgModule } from '@angular/core';
-import { NgReduxModule, NgRedux } from '@angular-redux/core';
+import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import reduxLogger from 'redux-logger';
 import { LogRemoteName } from './middleware/log-remote-name';
 
