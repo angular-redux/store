@@ -125,7 +125,6 @@ Here are some examples of the `angular-redux` family of packages in action:
 
 * [Zoo Animals Combined Example App](https://github.com/angular-redux/example-app)
 * [Trendy Brunch: multi-reducer example with redux-localstorage](https://github.com/e-schultz/ng2-camp-example)
-* [Plnkr: smart & presentational components example](https://plnkr.co/edit/XCGzzxoinM8cRAKp2huU?p=preview)
 * [Simple SystemJS Example (Angular Quickstart)](https://github.com/angular-redux/system-js-example)
 
 ## Companion Packages
