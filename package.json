@@ -1,6 +1,6 @@
 {
   "name": "@angular-redux/store",
-  "version": "5.1.2",
+  "version": "6.0.0",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/index.js",
   "scripts": {
