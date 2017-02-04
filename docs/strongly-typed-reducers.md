@@ -17,7 +17,7 @@ defining types for the `state` arguments to your reducers:
 export type TFoo: string;
 
 // Being explicit about the state argument and return types ensures that all your
-// reducer's cases return the correct type. 
+// reducer's cases return the correct type.
 export const fooReducer = (state: TFoo, action): TFoo => {
   // ...
 };
@@ -32,7 +32,7 @@ export const barReducer = (state: IBar, action): IBar => {
 };
 ```
 
-Since most applications are composed of several reducers, you should compose 
+Since most applications are composed of several reducers, you should compose
 a global 'AppState' by composing the reducer types:
 
 ```typescript
@@ -50,7 +50,7 @@ export const rootReducer = combineReducers({
 This 'app state' is what you should use when injecting `NgRedux`:
 
 ```typescript
-import { Injectable } from 'ng2-redux';
+import { Injectable } from '@angular/core';
 import { IAppState } from './store';
 
 @Injectable()

@@ -8,7 +8,7 @@ import { CounterComponent } from '../counter/counter.component';
 import { SearchComponent } from '../search/search.component';
 import { SelectByPathComponent } from '../select-by-path/select-by-path.component';
 import { SelectRootStateComponent } from '../select-root-state/select-root-state.component';
-import { NgRedux, DevToolsExtension } from 'ng2-redux';
+import { NgRedux, DevToolsExtension } from '@angular-redux/core';
 import { CounterActions } from '../counter/counter.actions';
 import { SearchActions } from '../search/search.actions';
 import { RandomNumberService } from '../common/random-number.service';

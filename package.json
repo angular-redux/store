@@ -1,5 +1,5 @@
 {
-  "name": "ng2-redux",
+  "name": "@angular-redux/store",
   "version": "5.1.2",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/index.js",
@@ -16,7 +16,7 @@
   "typings": "./lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/wbuchwalter/ng2-redux.git"
+    "url": "git+ssh://git@github.com/angular-redux/core.git"
   },
   "keywords": [
     "redux",
@@ -46,9 +46,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/angular-redux/ng2-redux/issues"
+    "url": "https://github.com/angular-redux/core/issues"
   },
-  "homepage": "https://github.com/angular-redux/ng2-redux#readme",
+  "homepage": "https://github.com/angular-redux/core#readme",
   "devDependencies": {
     "@angular/common": "^2.4.1",
     "@angular/compiler": "^2.4.1",

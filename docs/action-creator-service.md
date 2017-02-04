@@ -1,7 +1,7 @@
-# Using Angular 2 Services in your Action Creators
+# Using Angular Services in your Action Creators
 
 In order to use services in action creators, we need to integrate
-them into Angular 2's dependency injector.
+them into Angular's dependency injector.
 
 We may as well adopt a more class-based approach to satisfy
 Angular 2's OOP idiom, and to allow us to
@@ -15,7 +15,7 @@ and a simple `RandomNumberService` to show a side effect.
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { NgRedux } from 'ng2-redux';
+import { NgRedux } from '@angular-redux/core';
 import * as Redux from 'redux';
 import { RootState } from '../store';
 import { RandomNumberService } from '../services/random-number';
@@ -68,7 +68,7 @@ them into our component:
 
 ```typescript
 import { Component } from '@angular/core';
-import { NgRedux, select } from 'ng2-redux';
+import { NgRedux, select } from '@angular-redux/core';
 import { CounterActions } from '../actions/counter-actions';
 import { RandomNumberService } from '../services/random-number';
 

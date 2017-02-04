@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgRedux, DevToolsExtension } from 'ng2-redux';
+import { NgRedux, DevToolsExtension } from '@angular-redux/core';
 import { IAppState, rootReducer, enhancers } from '../store/index';
 const createLogger = require('redux-logger');
 

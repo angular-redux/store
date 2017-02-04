@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NgRedux } from 'ng2-redux';
+import { NgRedux } from '@angular-redux/core';
 import { IAppState } from '../store';
 import { RandomNumberService } from '../common/random-number.service';
 
@@ -37,7 +37,7 @@ export class CounterActions {
   incrementAsync(delay: number = 1000): void {
     setTimeout(this.increment.bind(this), delay);
   }
-  
+
   randomize(): void {
     this.ngRedux.dispatch({
       type: CounterActions.RANDOMIZE_COUNTER,

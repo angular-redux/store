@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { select as select } from 'ng2-redux';
+import { select as select } from '@angular-redux/core';
 import 'rxjs/add/operator/combineLatest';
 
 export function x(state) {
@@ -22,7 +22,7 @@ interface ICoord {
  */
 @Component({
   selector: 'counter-info',
-  templateUrl: './counter-info.component.html', 
+  templateUrl: './counter-info.component.html',
 })
 export class CounterInfoComponent {
 

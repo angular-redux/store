@@ -10,7 +10,7 @@ pattern above.
 ```typescript
 import { Component } from '@angular/core';
 import { Counter } from '../components/Counter';
-import { NgRedux } from 'ng2-redux';
+import { NgRedux } from '@angular-redux/core';
 import { bindActionCreators } from 'redux';
 
 export interface IAppState {

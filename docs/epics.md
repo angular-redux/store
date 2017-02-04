@@ -1,6 +1,6 @@
 # Side-Effect Management Using Epics
 
-Ng2-Redux also works well with the `Epic` feature of
+`@angular-redux/core` also works well with the `Epic` feature of
 [redux-observable](https://github.com/redux-observable). For
 example, a common use case for a side-effect is making an API call; while
 we can use asynchronous actions for this, epics provide a much cleaner
@@ -13,7 +13,7 @@ create some trivial actions:
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { NgRedux } from 'ng2-redux';
+import { NgRedux } from '@angular-redux/core';
 import { IAppState } from '../reducers';
 
 @Injectable()
@@ -35,7 +35,7 @@ export class SessionActions {
   logoutUser() {
     this.ngRedux.dispatch({ type: SessionActions.LOGOUT_USER });
   };
-} 
+}
 ```
 
 Next, we create an `@Injectable SessionEpic` service:
@@ -85,7 +85,7 @@ This allows us to configure our Redux store with the new epic as follows:
 
 ```typescript
 import { NgModule } from '@angular/core';
-import { NgReduxModule, NgRedux } from 'ng2-redux';
+import { NgReduxModule, NgRedux } from '@angular-redux/core';
 import { createEpicMiddleware } from 'redux-observable';
 import rootReducer from './reducers';
 import { SessionEpics } from './epics';

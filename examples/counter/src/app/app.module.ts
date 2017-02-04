@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgReduxModule, DevToolsExtension } from 'ng2-redux';
+import { NgReduxModule, DevToolsExtension } from '@angular-redux/core';
 import { CounterActions } from '../counter/counter.actions';
 import { SearchActions } from '../search/search.actions';
 import { AppComponent } from './app.component';

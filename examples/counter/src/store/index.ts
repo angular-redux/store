@@ -17,6 +17,5 @@ export const rootReducer = combineReducers<IAppState>({
 });
 
 export const enhancers = [
-  persistState('counter', { key: 'ng2-redux/examples/counter' })
+  persistState('counter', { key: '@angular-redux/core/examples/counter' })
 ];
-

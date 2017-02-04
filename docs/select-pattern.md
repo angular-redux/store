@@ -26,7 +26,7 @@ as a selector on the RxJs observable.
 import { Component } from '@angular2/core';
 import { AsyncPipe } from '@angular2/common';
 import { Observable } from 'rxjs/Observable';
-import { select } from 'ng2-redux';
+import { select } from '@angular-redux/core';
 
 @Component({
     pipes: [AsyncPipe],
@@ -75,7 +75,7 @@ import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular2/common';
 import { Counter } from '../components/Counter';
 import * as CounterActions from '../actions/CounterActions';
-import { NgRedux } from 'ng2-redux';
+import { NgRedux } from '@angular-redux/core';
 
 interface IAppState {
   counter: number;

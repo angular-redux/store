@@ -1,4 +1,4 @@
-import { NgRedux } from 'ng2-redux';
+import { NgRedux } from '@angular-redux/core';
 
 export const SEARCH_ACTIONS = {
   SEARCH: 'SEARCH',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgRedux, select } from 'ng2-redux';
+import { NgRedux, select } from '@angular-redux/core';
 import { Observable } from 'rxjs/Observable';
 import { CounterActions } from './counter.actions';
 import { RandomNumberService } from '../common/random-number.service';
@@ -21,4 +21,3 @@ export class CounterComponent {
     public actions: CounterActions,
     private ngRedux: NgRedux<IAppState>) {}
 }
-

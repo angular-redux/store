@@ -15,7 +15,7 @@ tools that handles this for you.
 Here's how to hook the extension up to your app:
 
 ```typescript
-import { NgReduxModule, NgRedux, DevToolsExtension } from 'ng2-redux';
+import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/core';
 
 // Add the dev tools enhancer your ngRedux.configureStore called
 // when you initialize your root component:
