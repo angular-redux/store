@@ -22,7 +22,7 @@ and optionally middlewares and enhancers as you would in Redux directly.
 
 ```typescript
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
-import reduxLogger from 'redux-logger';
+import * createLogger from 'redux-logger';
 import { rootReducer } from './reducers';
 
 interface IAppState { /* ... */ };
@@ -69,6 +69,14 @@ class AppModule {
   }
 }
 ```
+
+> Note that we're also using a Redux middleware from the community here:
+> [redux-logger](https://www.npmjs.com/package/redux-logger). This is just to show
+> off that `@angular-redux/store` is indeed compatible with Redux middlewares as you
+> might expect.
+>
+> Note that to use it, you'll need to install it with `npm install --save redux-logger`
+> and type definitions for it with `npm install --save-dev @types/redux-logger`.
 
 Now your Angular app has been reduxified! Use the `@select` decorator to
 access your store state, and `.dispatch()` to dispatch actions:

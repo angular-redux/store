@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-redux/store": "^5.1.0",
     "@angular/common": "^2.3.1",
     "@angular/compiler": "^2.3.1",
     "@angular/core": "^2.3.1",
@@ -21,7 +22,6 @@
     "@angular/platform-browser": "^2.3.1",
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
-    "@angular-redux/store": "^5.1.0",
     "core-js": "^2.4.1",
     "redux": "^3.6.0",
     "redux-localstorage": "^0.4.1",
@@ -35,6 +35,7 @@
     "@angular/compiler-cli": "^2.3.1",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.42",
+    "@types/redux-logger": "^2.6.34",
     "angular-cli": "1.0.0-beta.24",
     "codelyzer": "~2.0.0-beta.1",
     "jasmine-core": "2.5.2",
