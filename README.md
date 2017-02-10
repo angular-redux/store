@@ -44,8 +44,8 @@ Here are some examples of the `angular-redux` family of packages in action:
 
 ## Companion Packages
 
-* [Reduxify your Routing with @angular-redux/router](https://github.com/@angular-redux/router)
-* [Reduxify your Forms with @angular-redux/form](https://github.com/@angular-redux/form)
+* [Reduxify your Routing with @angular-redux/router](https://github.com/angular-redux/router)
+* [Reduxify your Forms with @angular-redux/form](https://github.com/angular-redux/form)
 
 ## Resources
 
