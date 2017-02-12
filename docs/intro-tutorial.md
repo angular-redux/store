@@ -312,7 +312,7 @@ export class AppComponent {
   count: number;
 
   constructor(                          // <- New
-    private ngRedux: NgRedux            // <- New
+    private ngRedux: NgRedux<IAppState> // <- New
     private actions: CounterActions) {} // <- New
 
   increment() {
