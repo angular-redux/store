@@ -216,7 +216,7 @@ So, let's use the ingredients above to create a Redux store and hook it up to An
 ```typescript
 // ... imports as above
 
-import { rootReducer, IAppStore, INTIAL_STATE } from './store'; // < New
+import { rootReducer, IAppStore, INITIAL_STATE } from './store'; // < New
 import { CounterActions } from './app.actions'; // <- New
 
 @NgModule({
@@ -239,7 +239,7 @@ export class AppModule {
     // events.
     ngRedux.configureStore(
       rootReducer,
-      INTIAL_STATE);
+      INITIAL_STATE);
   }
 }
 ```
