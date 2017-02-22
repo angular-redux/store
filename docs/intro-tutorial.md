@@ -28,11 +28,11 @@ Now let's install Redux into your new app:
 npm install redux @angular-redux/store
 ```
 
-This installs Redux, and @angular-redux/store, the Redux bindings for Angular.
+This installs Redux and `@angular-redux/store` (the Redux bindings for Angular).
 
 ## Importing @angular-redux/store into your App.
 
-The first thing we need to do is tell Angular about the new redux functionality
+The first thing we need to do is tell Angular about the new Redux functionality
 we just installed. We do that by importing the `NgReduxModule` into our application.
 
 Open up your app's `src/app/app.module.ts` and add the following lines:
@@ -64,12 +64,12 @@ import { AppComponent } from './app.component';
 export class AppModule { }
 ```
 
-This will allow us to inject services from `@angular-redux` store into our app.
+This will allow us to inject services from `@angular-redux/store` into our app.
 
 ## A Concrete Example
 
 Let's build something in our app. We're going to make a simple piece of UI
-that can be used as a counter; it will have two buttons, one for incremenenting
+that can be used as a counter; it will have two buttons, one for incrementing
 a value, and one for decrementing it.
 
 Open up `src/app/app.component.html` and add the following code:
@@ -366,7 +366,7 @@ number update accordingly.
 
 ![](images/counter-hooked.png)
 
-## But wait... There's More!
+## But Wait... There's More!
 
 This is the essence of using `NgRedux`. However, one of the benefits of using Observables with Angular
 is that Angular has first-class, optimized support for rendering them via a construct called
@@ -415,7 +415,7 @@ unpacking its values as they come in:
 <!-- As before -->
 ```
 
-## But wait... There's Even More!
+## But Wait... There's Even More!
 
 `ngRedux.select` is a powerful way to get unfettered access to store Observables; allowing you
 to do lots of transformations with RxJS operators to massage the store data in to what more complex
@@ -530,6 +530,6 @@ displays your current state, and even allows you to rewind or play forward your 
 ## More to Explore
 
 Take a look at https://github.com/angular-redux/example-app for a more complex example, including
-redux integration with Angular's router and forms APIs.
+Redux integration with Angular's router and forms APIs.
 
 Also check out the [docs](docs) folder for deep-dives into specific subjects people have asked about.
