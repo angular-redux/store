@@ -44,9 +44,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { NgReduxModule, NgRedux } from 'angular-redux/store';
+import { NgReduxModule, NgRedux } from '@angular-redux/store'; // <-- New
 
-import { AppComponent } from './app.component'; // <-- New
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
