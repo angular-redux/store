@@ -23,13 +23,11 @@ as a selector on the RxJs observable.
 - If nothing is passed then the `@select` decorator will attempt to use the name of the class property to find a matching value in the Redux store. Note that a utility is in place here where any $ characters will be ignored from the class property's name.
 
 ```typescript
-import { Component } from '@angular2/core';
-import { AsyncPipe } from '@angular2/common';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { select } from '@angular-redux/store';
 
 @Component({
-    pipes: [AsyncPipe],
     selector: 'counter-value-printed-many-times',
     template: `
     <p>{{counter$ | async}}</p>
@@ -70,9 +68,8 @@ If you like RxJS, but aren't comfortable with decorators, you can also make
 store selections using the `ngRedux.select()` function.
 
 ```typescript
-import { Component } from '@angular2/core';
-import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular2/common';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Counter } from '../components/Counter';
 import * as CounterActions from '../actions/CounterActions';
 import { NgRedux } from '@angular-redux/store';
@@ -83,8 +80,6 @@ interface IAppState {
 
 @Component({
     selector: 'root',
-    directives: [Counter],
-    pipes: [AsyncPipe],
     template: `
   <counter [counter]="counter$| async"
     [increment]="increment"
