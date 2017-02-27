@@ -10,7 +10,7 @@ Let's start by generating a simple Angular application using the
 
 ```sh
 # Install Angular CLI
-npm install -g angular-cli
+npm install -g @angular/cli
 
 # Use it to spin up a new app.
 ng new angular-redux-quickstart
