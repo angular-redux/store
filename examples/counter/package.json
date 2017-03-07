@@ -14,6 +14,7 @@
   "private": true,
   "dependencies": {
     "@angular-redux/store": "^6.0.1",
+    "@angular/cli": "^1.0.0-rc.1",
     "@angular/common": "^2.3.1",
     "@angular/compiler": "^2.3.1",
     "@angular/core": "^2.3.1",
