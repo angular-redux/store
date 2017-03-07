@@ -103,4 +103,4 @@ ngRedux.subscribe(() => {
 ```
 
 This means that you are free to use Redux basic API in advanced cases where
-`connect`'s API would not fill your needs.
+`select`'s API would not fill your needs.
