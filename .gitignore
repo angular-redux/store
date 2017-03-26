@@ -13,3 +13,4 @@ lib/
 .nyc_output/
 coverage/
 *.ngsummary.json
+.DS_STORE

@@ -10,7 +10,8 @@
     "rootDir": "src",
     "outDir": "lib/",
     "noImplicitAny": false,
-    "declaration": true
+    "declaration": true,
+    "lib" : ["es2015", "es2015.iterable", "dom"]
   },
   "compileOnSave": false,
   "buildOnSave": false,

@@ -46,7 +46,7 @@ export class NgRedux<RootState> {
     private _defaultMapStateToTarget: Function;
     private _defaultMapDispatchToTarget: Function;
 
-    static instance;
+    static instance: NgRedux<any> = undefined;
 
     /**
      * Creates an instance of NgRedux.
