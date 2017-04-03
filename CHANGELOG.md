@@ -1,3 +1,8 @@
+# 6.1.0 - Angular 4 Support
+
+Both version 2 and 4 of Angular are now supported. However Angular 2 support
+is deprecated and will be removed in the next major version.
+
 # 6.0.1
 
 Documentation updates; no code change. Added a 'getting started' tutorial.
