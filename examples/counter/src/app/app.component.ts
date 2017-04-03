@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgRedux, DevToolsExtension } from '@angular-redux/store';
 import { IAppState, rootReducer, enhancers } from '../store/index';
-import * as createLogger from 'redux-logger';
+import createLogger from 'redux-logger';
 
 @Component({
   selector: 'app-root',
