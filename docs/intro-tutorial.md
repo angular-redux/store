@@ -300,7 +300,7 @@ they are dispatched when the user clicks the buttons:
 // Imports as before.
 
 import { NgRedux } from '@angular-redux/store'; // <- New
-import { CounterActions } from './app.actions.ts'; // <- New
+import { CounterActions } from './app.actions'; // <- New
 
 @Component({
   selector: 'app-root',
