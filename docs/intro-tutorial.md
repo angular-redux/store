@@ -44,7 +44,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { NgReduxModule, NgRedux } from '@angular-redux/store'; // <-- New
+import { NgReduxModule, NgRedux } from '@angular-redux/store'; // <- New
 
 import { AppComponent } from './app.component';
 
@@ -56,7 +56,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgReduxModule, // <-- New
+    NgReduxModule, // <- New
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -301,6 +301,8 @@ they are dispatched when the user clicks the buttons:
 
 import { NgRedux } from '@angular-redux/store'; // <- New
 import { CounterActions } from './app.actions'; // <- New
+import {IAppState} from "../store"; // <- New
+
 
 @Component({
   selector: 'app-root',
@@ -343,7 +345,7 @@ export class AppComponent {
   subscription; // <- New;
 
   constructor(
-    private ngRedux: NgRedux
+    private ngRedux: NgRedux<IAppState>,
     private actions: CounterActions) {
       this.subscription = ngRedux.select<number>('count') // <- New
         .subscribe(newCount => this.count = newCount);    // <- New
@@ -425,9 +427,11 @@ a property in the store.
 For simple cases like this, `@angular-redux/store` exposes a shorthand for selection in the form
 of the `@select` decorator. With `@select`, the whole component can be boiled down to the following:
 
+Make the following changes to `src/app/app.component.ts`.
+
 ```typescript
 import { Component } from '@angular/core';
-import { NgRedux, select } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store'; // <- Changed
 import { CounterActions } from './app.actions';
 import { IAppState } from '../store';
 import { Observable } from 'rxjs/Observable';
@@ -439,11 +443,11 @@ import { Observable } from 'rxjs/Observable';
 })
 export class AppComponent {
   title = 'app works!';
-  @select() readonly count$: Observable<number>;
+  @select() readonly count$: Observable<number>; // <- Changed
 
   constructor(
     private actions: CounterActions,
-    private ngRedux: NgRedux<IAppState>) {}
+    private ngRedux: NgRedux<IAppState>) {} // <- Changed
 
   increment() {
     this.ngRedux.dispatch(this.actions.increment());
@@ -495,7 +499,7 @@ Then, make a quick adjustment to enable them in your app:
 `app/app.module.ts`
 ```typescript
 // Other imports as before
-import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
+import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'; // <- Changed
 
 @NgModule({
   // Decorator as before
@@ -503,7 +507,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
 export class AppModule {
   constructor(
     ngRedux: NgRedux<IAppState>,
-    devTools: DevToolsExtension) {
+    devTools: DevToolsExtension) { // <- New
 
     const storeEnhancers = devTools.isEnabled() ? // <- New
       [ devTools.enhancer() ] : // <- New
