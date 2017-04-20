@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import shallowEqual from './shallow-equal';
 
 describe('Utils', () => {
@@ -9,14 +8,14 @@ describe('Utils', () => {
           { a: 1, b: 2, c: undefined },
           { a: 1, b: 2, c: undefined }
         )
-      ).to.equal(true);
+      ).toEqual(true);
 
       expect(
         shallowEqual(
           { a: 1, b: 2, c: 3 },
           { a: 1, b: 2, c: 3 }
         )
-      ).to.equal(true);
+      ).toEqual(true);
 
       const o = {};
       expect(
@@ -24,7 +23,7 @@ describe('Utils', () => {
           { a: 1, b: 2, c: o },
           { a: 1, b: 2, c: o }
         )
-      ).to.equal(true);
+      ).toEqual(true);
     });
 
     it('should return false if first argument has too many keys', () => {
@@ -33,7 +32,7 @@ describe('Utils', () => {
           { a: 1, b: 2, c: 3 },
           { a: 1, b: 2 }
         )
-      ).to.equal(false);
+      ).toEqual(false);
     });
 
     it('should return false if second argument has too many keys', () => {
@@ -42,7 +41,7 @@ describe('Utils', () => {
           { a: 1, b: 2 },
           { a: 1, b: 2, c: 3 }
         )
-      ).to.equal(false);
+      ).toEqual(false);
     });
 
     it('should return false if arguments have different keys', () => {
@@ -51,12 +50,12 @@ describe('Utils', () => {
           { a: 1, b: 2, c: undefined },
           { a: 1, bb: 2, c: undefined }
         )
-      ).to.equal(false);
+      ).toEqual(false);
     });
 
     it('should return true for two references to the same thing', () => {
       const thing = { a: 1, b: 2, c: undefined };
-      expect(shallowEqual(thing, thing)).to.equal(true);
+      expect(shallowEqual(thing, thing)).toEqual(true);
     });
   });
 });

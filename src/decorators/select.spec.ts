@@ -1,18 +1,13 @@
 import 'reflect-metadata';
-import { expect, use } from 'chai';
 import { NgZone } from '@angular/core';
 
 import { NgRedux } from '../components/ng-redux';
 import { select } from './select';
-import * as sinon from 'sinon';
-import * as sinonChai from 'sinon-chai';
-
-use(sinonChai);
 
 class MockNgZone {
-    run(fn) {
-        return fn();
-    }
+  run(fn) {
+    return fn();
+  }
 }
 
 describe('@select', () => {
@@ -54,7 +49,7 @@ describe('@select', () => {
 
       ngRedux.dispatch({type: 'nvm', payload: expectedValue});
 
-      expect(value).to.equal(expectedValue);
+      expect(value).toEqual(expectedValue);
     });
 
     it('attempts to bind by name ignoring any $ characters in the class ' +
@@ -74,7 +69,7 @@ describe('@select', () => {
 
       ngRedux.dispatch({type: 'nvm', payload: expectedValue});
 
-      expect(value).to.equal(expectedValue);
+      expect(value).toEqual(expectedValue);
     });
   });
 
@@ -96,7 +91,7 @@ describe('@select', () => {
 
       ngRedux.dispatch({type: 'nvm', payload: expectedValue});
 
-      expect(value).to.equal(expectedValue);
+      expect(value).toEqual(expectedValue);
     });
   });
 
@@ -118,7 +113,7 @@ describe('@select', () => {
 
       ngRedux.dispatch({type: 'nvm', payload: expectedValue / 2});
 
-      expect(value).to.equal(expectedValue);
+      expect(value).toEqual(expectedValue);
     });
   });
 
@@ -137,7 +132,7 @@ describe('@select', () => {
       const mockInstance = new MockClass();
 
       mockInstance.asdf.subscribe(val => {
-        expect(val).to.not.equal(1);
+        expect(val).not.toEqual(1);
       });
       ngRedux.dispatch({type: 'nvm', payload: 1});
     });
@@ -155,12 +150,11 @@ describe('@select', () => {
         value = val;
       });
       ngRedux.dispatch({type: 'nvm', payload: 2});
-      expect(value).to.equal(2);
+      expect(value).toEqual(2);
     });
 
     it('should receive previous and next value for comparison', () => {
-
-      const spy = sinon.spy();
+      const spy = jasmine.createSpy('spy');
 
       class MockClass {
         @select(state => state.baz, spy) asdf: any;
@@ -172,11 +166,8 @@ describe('@select', () => {
       ngRedux.dispatch({type: 'nvm', payload: 1});
       ngRedux.dispatch({type: 'nvm', payload: 2});
 
-      expect(spy.getCall(0).args[0]).to.equal(undefined);
-      expect(spy.getCall(0).args[1]).to.equal(1);
-
-      expect(spy.getCall(1).args[0]).to.equal(1);
-      expect(spy.getCall(1).args[1]).to.equal(2);
+      expect(spy).toHaveBeenCalledWith(undefined, 1);
+      expect(spy).toHaveBeenCalledWith(1, 2);
     });
   });
 });
