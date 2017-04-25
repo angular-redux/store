@@ -1,3 +1,18 @@
+# 6.2.0 - NgReduxTestingModule
+
+## Features
+
+* Added `NgReduxTestingModule`, `MockNgRedux` to help unit test components and
+services that select from the store. See [here](docs/intro-tutorial.md#unit-testing-selections)
+for details.
+* Expose `PathSelector`, `FunctionSelector`, and `PropertySelector` types in `index.d.ts`.
+
+## Misc.
+
+* Simplified build toolchain
+* Simplified unit testing toolchain
+* Consolidated repo-specific examples in to the [example-app](https://github.com/angular-redux/example-app) repo.
+
 # 6.1.0 - Angular 4 Support
 
 Both version 2 and 4 of Angular are now supported. However Angular 2 support

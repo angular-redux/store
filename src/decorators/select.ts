@@ -1,7 +1,5 @@
 import {
-  PropertySelector,
-  PathSelector,
-  FunctionSelector,
+  Selector,
   Comparator,
   NgRedux,
 } from '../components/ng-redux';
@@ -20,7 +18,7 @@ export type PropertyDecorator = (target: any, propertyKey: string) => void;
  * @param { Comparator } comparer function for this selector
  */
 export function select<T>(
-  selector?: PropertySelector | PathSelector | FunctionSelector<any, T>,
+  selector?: Selector<any, T>,
   comparator?: Comparator): PropertyDecorator {
 
   return function decorate(target: any, key: string): void {

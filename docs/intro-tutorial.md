@@ -474,6 +474,77 @@ class MyComponent {
 > There's actually quite a lot more you can do with `@select` and `ngRedux.select`. Check out the
 > [API docs](https://github.com/angular-redux/store/blob/master/docs/api.md#selectkey--path--function) for more info.
 
+## Unit Testing Selections
+
+Suppose you wanted your unit test your component above. We
+expose a mock class that can help you. Just pull
+`NgReduxTestingModule` into your Angular `TestBed` configuration:
+
+`my-component.spec.ts`:
+```typescript
+import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/toArray';
+
+import { MyComponent } from './my-component';
+import { IAppState } from '../store';
+
+describe('MyComponent', () => {
+  beforeEach(() => {
+    // Configure your testBed to use NgReduxTestingModule; this test the DI
+    // in the test environment to use mock versions of NgRedux and DevToolsExtension.
+    TestBed.configureTestingModule({
+      declarations: [MyComponent],
+      imports: [NgReduxTestingModule],
+    }).compileComponents();
+
+    // Reset the mock to start from a clean slate in each unit test.
+    MockNgRedux.reset();
+  });
+
+  it('Selects the current count value from Redux', done => {
+    // Create an instance of MyComponent using Angular's normal unit test features.
+    const fixture = TestBed.createComponent(MyComponent);
+    const componentUnderTest = fixture.debugElement.componentInstance;
+    
+    // Get a stub we can use to drive the `@select('count')` observable used by
+    // MyComponent (above). This stub will be supplied to any relevant `.select`
+    // or `@select` calls used by the component under test by MockNgRedux.
+    const countStub: Subject<number> = MockNgRedux.getSelectorStub<IAppState, number>('count');
+
+    // Determine a sequence of values we'd like to test the Redux store with.
+    const expectedValues = [ 1, 2, 3, 4, 3, 4, 3, 2, 1];
+
+    // Drive those values through our stub.
+    expectedValues.forEach(value => countStub.next(value));
+
+    // Make sure MyComponent's selected count$ variable receives these values.
+    componentUnderTest.count$
+      .toArray()
+      .subscribe(
+        actualValues => expect(actualValues).toEqual(expectedValues),
+        null,
+        done);
+  });
+```
+
+## Unit Testing Action Dispatches
+
+For testing that actions are dispatched, I prefer to use Jasmine.spy. MockNgRedux will help you
+hook into this as well:
+
+```typescript
+it('dispatches INCREMENT when ...', () => {
+  const spy = spyOn(MockNgRedux.mockInstance, 'dispatch');
+
+  // Run your test code ...
+
+  // Perform your expectations
+  expect(spy).toHaveBeenCalledWith({type: CounterActions.INCREMENT });
+  // ... etc.
+});
+```
+
 ## The Redux Community
 
 The Redux community has a lot of powerful extensions that can be plugged into your store to

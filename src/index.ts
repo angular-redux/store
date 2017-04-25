@@ -1,11 +1,4 @@
-import { NgRedux } from './components/ng-redux';
-import { DevToolsExtension } from './components/dev-tools';
-import { select } from './decorators/select';
-import { NgReduxModule } from './ng-redux.module';
- 
-export {
-  NgRedux,
-  NgReduxModule,
-  DevToolsExtension,
-  select,
-}
+export * from './components/ng-redux';
+export * from './components/dev-tools';
+export * from './decorators/select';
+export * from './ng-redux.module';

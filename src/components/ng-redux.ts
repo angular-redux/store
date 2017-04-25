@@ -34,6 +34,10 @@ const checkSelector = (s) => VALID_SELECTORS.indexOf(typeof s, 0) >= 0 ||
 export type PropertySelector = string | number | symbol;
 export type PathSelector = (string | number)[];
 export type FunctionSelector<RootState, S> = ((s: RootState) => S);
+export type Selector<RootState, S> = PropertySelector |
+    PathSelector |
+    FunctionSelector<RootState, S>;
+
 export type Comparator = (x: any, y: any) => boolean;
 
 // Workaround for Redux issue #1935 - remove once Redux 3.6.0 is
@@ -126,9 +130,7 @@ export class NgRedux<RootState> {
      * source Observable with distinct values.
      */
     select<S>(
-        selector?: PropertySelector |
-            PathSelector |
-            FunctionSelector<RootState, S>,
+        selector?: Selector<RootState, S>,
         comparator?: Comparator): Observable<S> {
 
         if (!selector) {
