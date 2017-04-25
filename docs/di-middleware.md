@@ -23,6 +23,7 @@ export class LogRemoteName {
       })
       .catch(err => console.log('get name failed:', err));
     }
+    return next(action);
 }
 ```
 
@@ -54,7 +55,7 @@ export class AppModule {
     private ngRedux: NgRedux<IAppState>,
     logRemoteName: LogRemoteName) {
 
-    const middleware = [ reduxLogger(), logRemoteName.middleware ];
+    const middleware = [ reduxLogger, logRemoteName.middleware ];
     this.ngRedux.configureStore(rootReducer, {}, middleware);
   }
 }
