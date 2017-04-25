@@ -7,6 +7,7 @@ For Angular 1 see [ng-redux](https://github.com/wbuchwalter/ng-redux)
 [![Join the chat at https://gitter.im/angular-redux/ng2-redux](https://badges.gitter.im/angular-redux/ng2-redux.svg)](https://gitter.im/angular-redux/ng2-redux?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![CircleCI](https://img.shields.io/circleci/project/github/angular-redux/store.svg)](https://github.com/angular-redux/store)
 [![npm version](https://img.shields.io/npm/v/@angular-redux/store.svg)](https://www.npmjs.com/package/@angular-redux/store)
+[![downloads per month](https://img.shields.io/npm/dm/@angular-redux/store.svg)](https://www.npmjs.com/package/@angular-redux/store)
 
 ## What is Redux?
 
@@ -50,7 +51,6 @@ Here are some examples of the `angular-redux` family of packages in action:
 ## Resources
 
 * [Using Redux with Angular - JS Toronto Meetup 2016-07-12](https://www.youtube.com/watch?v=s4xr2avwv3s)
-* [Angular and Redux from Rangle.io](http://ngcourse.rangle.io/handout/redux/)
 * [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux)
 * [Awesome Redux: Community Resources](https://github.com/xgrommx/awesome-redux)
 
