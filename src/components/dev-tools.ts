@@ -9,7 +9,8 @@ const environment: any = typeof window !== 'undefined' ? window : this;
  */
 @Injectable()
 export class DevToolsExtension {
-  constructor(private appRef: ApplicationRef,
+  constructor(
+    private appRef: ApplicationRef,
     private ngRedux: NgRedux<any>) { }
 
   /**
@@ -18,7 +19,7 @@ export class DevToolsExtension {
    * trigger Angular2's change detector.
    *
    * @argument { Object } options: dev tool options; same
-   * format as described here: 
+   * format as described here:
    * [zalmoxisus/redux-devtools-extension/blob/master/docs/API/Arguments.md]
    */
   enhancer = (options?: Object) => {
@@ -46,7 +47,5 @@ export class DevToolsExtension {
   /**
    * Returns true if the extension is installed and enabled.
    */
-  isEnabled() {
-    return environment && environment.devToolsExtension;
-  }
+  isEnabled = () => environment && environment.devToolsExtension
 }

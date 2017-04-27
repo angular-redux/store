@@ -1,18 +1,33 @@
 {
   "rules": {
+    "callable-types": true,
     "class-name": true,
-    "comment-format": [true, "check-space"],
+    "comment-format": [
+      true,
+      "check-space"
+    ],
     "curly": true,
     "eofline": true,
     "forin": true,
-    "indent": [true, "spaces"],
+    "indent": [
+      true,
+      "spaces"
+    ],
     "label-position": true,
-    "label-undefined": true,
-    "max-line-length": [true, 80],
+    "max-line-length": [
+      true,
+      140
+    ],
+    "member-access": false,
+    "member-ordering": [
+      true,
+      "static-before-instance",
+      "variables-before-functions"
+    ],
     "no-arg": true,
     "no-bitwise": true,
-    "no-console": [true,
-      "log",
+    "no-console": [
+      true,
       "debug",
       "info",
       "time",
@@ -21,33 +36,53 @@
     ],
     "no-construct": true,
     "no-debugger": true,
-    "no-duplicate-key": true,
     "no-duplicate-variable": true,
     "no-empty": false,
     "no-eval": true,
+    "no-inferrable-types": [true, "ignore-params"],
     "no-shadowed-variable": true,
-    "no-string-literal": true,
+    "no-string-literal": false,
+    "no-string-throw": true,
     "no-switch-case-fall-through": true,
-    "trailing-comma": false,
-    "no-trailing-whitespace": false,
+    "no-trailing-whitespace": true,
     "no-unused-expression": true,
-    "no-unused-variable": false,
-    "no-unreachable": true,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
-    "one-line": [true,
+    "object-literal-sort-keys": false,
+    "one-line": [
+      true,
       "check-open-brace",
       "check-catch",
       "check-else",
       "check-whitespace"
     ],
-    "quotemark": [true, "single"],
+    "prefer-const": true,
+    "quotemark": [
+      true,
+      "single"
+    ],
     "radix": true,
-    "semicolon": true,
-    "triple-equals": [true, "allow-null-check"],
-    "use-strict": true,
-    "variable-name": "allow-leading-underscore",
-    "whitespace": [true,
+    "semicolon": [
+      "always"
+    ],
+    "triple-equals": [
+      true,
+      "allow-null-check"
+    ],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }
+    ],
+    "typeof-compare": true,
+    "unified-signatures": true,
+    "variable-name": false,
+    "whitespace": [
+      true,
       "check-branch",
       "check-decl",
       "check-operator",

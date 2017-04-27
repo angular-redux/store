@@ -44,17 +44,14 @@ describe('getIn', () => {
     expect(getIn(test, [ 'foo', 'd' ])).toEqual(undefined);
   });
 
-  it('should not freak if the object is null', () => {
-    expect(getIn(null, [ 'foo', 'd' ])).toEqual(null);
-  });
+  it('should not freak if the object is null', () =>
+    expect(getIn(null, [ 'foo', 'd' ])).toEqual(null));
 
-  it('should not freak if the object is undefined', () => {
-    expect(getIn(undefined, [ 'foo', 'd' ])).toEqual(undefined);
-  });
+  it('should not freak if the object is undefined', () =>
+    expect(getIn(undefined, [ 'foo', 'd' ])).toEqual(undefined));
 
-  it('should not freak if the object is a primitive', () => {
-    expect(getIn(42, [ 'foo', 'd' ])).toEqual(undefined);
-  });
+  it('should not freak if the object is a primitive', () =>
+    expect(getIn(42, [ 'foo', 'd' ])).toEqual(undefined));
 
   it('should return undefined for a nonexistent prop', () => {
     const test = { foo: 1 };
