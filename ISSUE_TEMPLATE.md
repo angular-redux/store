@@ -1,10 +1,10 @@
-# This is a...
+### This is a...
 
 * [ ] feature request
 * [ ] bug report
 * [ ] usage question
 
-# What toolchain are you using for transpilation/bundling?
+### What toolchain are you using for transpilation/bundling?
 
 * [ ] @angular/cli
 * [ ] Custom @ngTools/webpack
@@ -13,7 +13,7 @@
 * [ ] Rollup
 * [ ] Other
 
-# Environment
+### Environment
 
 NodeJS Version:
 Typescript Version:
@@ -22,10 +22,21 @@ Angular Version:
 @angular/cli version: (if applicable)
 OS:
 
-# Expected Behaviour:
+### Link to repo showing the issus
+(optional, but helps _a lot_)
 
-# Actual Behaviour:
+### Expected Behaviour:
 
-# Stack Trace/Error Message:
 
-# Additional Notes:
+
+### Actual Behaviour:
+
+
+
+### Stack Trace/Error Message:
+
+
+
+### Additional Notes:
+(optional)
+
