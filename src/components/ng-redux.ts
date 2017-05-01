@@ -19,7 +19,6 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 
 import shallowEqual from '../utils/shallow-equal';
-import { omit } from '../utils/omit';
 import { getIn } from '../utils/get-in';
 
 export type PropertySelector = string | number | symbol;
@@ -40,8 +39,6 @@ export class NgRedux<RootState> {
 
   private _store: Store<RootState> = null;
   private _store$: BehaviorSubject<RootState> = null;
-  private _defaultMapStateToTarget: Function;
-  private _defaultMapDispatchToTarget: Function;
 
   /**
    * Creates an instance of NgRedux.
@@ -188,13 +185,5 @@ export class NgRedux<RootState> {
   private setStore(store: Store<RootState>) {
     this._store = store;
     this._store$.next(store as any);
-    this._defaultMapStateToTarget = () => ({});
-    this._defaultMapDispatchToTarget = dispatch => ({ dispatch });
-    const cleanedStore = omit(store, [
-      'dispatch',
-      'getState',
-      'subscribe',
-      'replaceReducer']);
-    Object.assign(this, cleanedStore);
   }
 };
