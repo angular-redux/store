@@ -1,9 +1,11 @@
-import * as Redux from 'redux';
-
 import {
   Store,
   Action,
   Reducer,
+  Middleware,
+  StoreEnhancer,
+  StoreEnhancerStoreCreator,
+  Unsubscribe,
   createStore,
   applyMiddleware,
   compose
@@ -18,7 +20,6 @@ import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 
-import shallowEqual from '../utils/shallow-equal';
 import { getIn } from '../utils/get-in';
 
 export type PropertySelector = string | number | symbol;
@@ -63,17 +64,17 @@ export class NgRedux<RootState> {
    * @param enhancers Optional Redux store enhancers
    */
   configureStore(
-    reducer: Redux.Reducer<RootState>,
+    reducer: Reducer<RootState>,
     initState: RootState,
-    middleware: Redux.Middleware[] = [],
-    enhancers: Redux.StoreEnhancer<RootState>[] = []) {
+    middleware: Middleware[] = [],
+    enhancers: StoreEnhancer<RootState>[] = []) {
 
     if (this._store) {
       throw new Error('Store already configured!');
     }
 
     const reTypedCompose = compose as RetypedCompose;
-    const finalCreateStore = <Redux.StoreEnhancerStoreCreator<RootState>>reTypedCompose(
+    const finalCreateStore = <StoreEnhancerStoreCreator<RootState>>reTypedCompose(
         applyMiddleware(...middleware),
         ...enhancers
     )(createStore);
@@ -148,7 +149,7 @@ export class NgRedux<RootState> {
    * @param listener A callback to invoke when the state is updated
    * @returns A function to unsubscribe
    */
-  subscribe = (listener: () => void) => this._store.subscribe(listener)
+  subscribe = (listener: () => void): Unsubscribe => this._store.subscribe(listener)
 
   /**
    * Replaces the reducer currently used by the store to calculate the state.

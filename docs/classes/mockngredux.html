@@ -925,9 +925,6 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a href="mockngredux.html#subscribe" class="tsd-kind-icon">subscribe</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-					<a href="mockngredux.html#instance" class="tsd-kind-icon">instance</a>
-				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a href="mockngredux.html#mockinstance" class="tsd-kind-icon">mock<wbr>Instance</a>
 				</li>
@@ -1024,7 +1021,6 @@ img { max-width: 100%; }
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="mockngredux.html#getstate" class="tsd-kind-icon">get<wbr>State</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="mockngredux.html#replacereducer" class="tsd-kind-icon">replace<wbr>Reducer</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="mockngredux.html#subscribe" class="tsd-kind-icon">subscribe</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="mockngredux.html#instance" class="tsd-kind-icon">instance</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="mockngredux.html#mockinstance" class="tsd-kind-icon">mock<wbr>Instance</a></li>
 						</ul>
 					</section>
@@ -1051,7 +1047,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from NgRedux.getState</p>
 					<ul>
-						<li>Defined in lib/src/components/ng-redux.d.ts:68</li>
+						<li>Defined in lib/src/components/ng-redux.d.ts:63</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1060,7 +1056,7 @@ img { max-width: 100%; }
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>returns</dt>
-						<dd><p>the application state</p>
+						<dd><p>The application state</p>
 						</dd>
 					</dl>
 				</div>
@@ -1087,7 +1083,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from NgRedux.replaceReducer</p>
 					<ul>
-						<li>Defined in lib/src/components/ng-redux.d.ts:85</li>
+						<li>Defined in lib/src/components/ng-redux.d.ts:80</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1108,14 +1104,14 @@ img { max-width: 100%; }
 					<ul class="tsd-parameters">
 						<li class="tsd-parameter-siganture">
 							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>nextReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Redux.Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>nextReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 							</ul>
 							<ul class="tsd-descriptions">
 								<li class="tsd-description">
 									<h4 class="tsd-parameters-title">Parameters</h4>
 									<ul class="tsd-parameters">
 										<li>
-											<h5>nextReducer: <span class="tsd-signature-type">Redux.Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span></h5>
+											<h5>nextReducer: <span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span></h5>
 										</li>
 									</ul>
 									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1132,7 +1128,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from NgRedux.subscribe</p>
 					<ul>
-						<li>Defined in lib/src/components/ng-redux.d.ts:75</li>
+						<li>Defined in lib/src/components/ng-redux.d.ts:70</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1141,10 +1137,10 @@ img { max-width: 100%; }
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>param</dt>
-						<dd><p>callback to invoke when the state is updated</p>
+						<dd><p>A callback to invoke when the state is updated</p>
 						</dd>
 						<dt>returns</dt>
-						<dd><p>a function to unsubscribe</p>
+						<dd><p>A function to unsubscribe</p>
 						</dd>
 					</dl>
 				</div>
@@ -1182,24 +1178,13 @@ img { max-width: 100%; }
 					</ul>
 				</div>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-				<a name="instance" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagStatic">Static</span> instance</h3>
-				<div class="tsd-signature tsd-kind-icon">instance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NgRedux</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
-				<aside class="tsd-sources">
-					<p>Inherited from NgRedux.instance</p>
-					<ul>
-						<li>Defined in lib/src/components/ng-redux.d.ts:17</li>
-					</ul>
-				</aside>
-			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 				<a name="mockinstance" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagStatic">Static</span> mock<wbr>Instance</h3>
 				<div class="tsd-signature tsd-kind-icon">mock<wbr>Instance<span class="tsd-signature-symbol">:</span> <a href="mockngredux.html" class="tsd-signature-type">MockNgRedux</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/5704067/testing/ng-redux.mock.ts#L27">testing/ng-redux.mock.ts:27</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/testing/ng-redux.mock.ts#L27">testing/ng-redux.mock.ts:27</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1210,14 +1195,14 @@ img { max-width: 100%; }
 				<a name="configurestore" class="tsd-anchor"></a>
 				<h3>configure<wbr>Store</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<li class="tsd-signature tsd-kind-icon">configure<wbr>Store<span class="tsd-signature-symbol">(</span>reducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Redux.Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span>, initState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RootState</span>, middleware<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Middleware</span><span class="tsd-signature-symbol">[]</span>, enhancers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Redux.StoreEnhancer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					<li class="tsd-signature tsd-kind-icon">configure<wbr>Store<span class="tsd-signature-symbol">(</span>reducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span>, initState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RootState</span>, middleware<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Middleware</span><span class="tsd-signature-symbol">[]</span>, enhancers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">StoreEnhancer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Inherited from NgRedux.configureStore</p>
 							<ul>
-								<li>Defined in lib/src/components/ng-redux.d.ts:36</li>
+								<li>Defined in lib/src/components/ng-redux.d.ts:34</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1231,7 +1216,7 @@ img { max-width: 100%; }
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>reducer: <span class="tsd-signature-type">Redux.Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>reducer: <span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<p>Your app&#39;s root reducer</p>
 								</div>
@@ -1249,7 +1234,10 @@ img { max-width: 100%; }
 								</div>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> enhancers: <span class="tsd-signature-type">Redux.StoreEnhancer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> enhancers: <span class="tsd-signature-type">StoreEnhancer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Optional Redux store enhancers</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1267,7 +1255,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Overrides NgRedux.dispatch</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/5704067/testing/ng-redux.mock.ts#L72">testing/ng-redux.mock.ts:72</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/testing/ng-redux.mock.ts#L72">testing/ng-redux.mock.ts:72</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -1285,7 +1273,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from NgRedux.provideStore</p>
 							<ul>
-								<li>Defined in lib/src/components/ng-redux.d.ts:47</li>
+								<li>Defined in lib/src/components/ng-redux.d.ts:45</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1321,7 +1309,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Overrides NgRedux.select</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/5704067/testing/ng-redux.mock.ts#L74">testing/ng-redux.mock.ts:74</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/testing/ng-redux.mock.ts#L74">testing/ng-redux.mock.ts:74</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1353,7 +1341,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/5704067/testing/ng-redux.mock.ts#L37">testing/ng-redux.mock.ts:37</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/testing/ng-redux.mock.ts#L37">testing/ng-redux.mock.ts:37</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1397,7 +1385,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/5704067/testing/ng-redux.mock.ts#L46">testing/ng-redux.mock.ts:46</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/testing/ng-redux.mock.ts#L46">testing/ng-redux.mock.ts:46</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

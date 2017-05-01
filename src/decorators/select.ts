@@ -4,6 +4,7 @@ import {
   NgRedux,
 } from '../components/ng-redux';
 
+/** @hidden */
 export type PropertyDecorator = (target: any, propertyKey: string) => void;
 
 /**
