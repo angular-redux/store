@@ -1,16 +1,17 @@
 {
   "name": "@angular-redux/store",
-  "version": "6.2.0",
+  "version": "6.2.1",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/src/index.js",
   "scripts": {
     "prebuild": "rimraf ./lib",
-    "build": "npm run build:src && npm run build:testing && npm doc",
+    "build": "npm run build:src && npm run build:testing",
     "build:src": "ngc -p tsconfig.json",
     "build:testing": "ngc -p tsconfig.testing.json",
     "lint": "tslint 'src/**/*.ts'",
-    "prepublish": "npm test && npm run build",
+    "prepublish": "npm run lint && npm test && npm run build",
     "test": "nyc node tests.js",
+    "ci": "npm run lint && npm test",
     "predoc": "rm -rf docs",
     "doc": "typedoc --out docs --excludeExternals --excludePrivate --excludeNotExported -theme minimal --name @angular-redux/store --mode file --module commonjs --tsconfig tsconfig.docs.json"
   },

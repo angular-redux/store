@@ -1,3 +1,14 @@
+# 6.2.1
+
+## Fixes
+
+Issue #370
+
+## Misc.
+
+* More code cleanup
+* Auto-generated API documentation.
+
 # 6.2.0 - NgReduxTestingModule
 
 ## Features
