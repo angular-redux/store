@@ -7,7 +7,9 @@ examples
 coverage/
 .vscode/
 docs/
+articles/
 yarn.lock
 circle.yml
 npm-debug.log
 .compiled
+ISSUE_TEMPLATE.md

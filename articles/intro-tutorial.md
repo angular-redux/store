@@ -372,7 +372,7 @@ number update accordingly.
 
 This is the essence of using `NgRedux`. However, one of the benefits of using Observables with Angular
 is that Angular has first-class, optimized support for rendering them via a construct called
-[async pipe](https://angular.io/docs/ts/latest/api/common/index/AsyncPipe-pipe.html).
+[async pipe](https://angular.io/articles/ts/latest/api/common/index/AsyncPipe-pipe.html).
 
 Instead of manually subscribing to our selected observable, and then remembering to unsubscribe,
 we can use `| async` in our template. This causes Angular to manage the subscription, and also allows
@@ -472,7 +472,7 @@ class MyComponent {
 ```
 
 > There's actually quite a lot more you can do with `@select` and `ngRedux.select`. Check out the
-> [API docs](https://github.com/angular-redux/store/blob/master/docs/api.md#selectkey--path--function) for more info.
+> [API docs](angular-redux.github.io/store/classes/ngredux.html#select) for more info.
 
 ## Unit Testing Selections
 

@@ -10,12 +10,12 @@ export type PropertyDecorator = (target: any, propertyKey: string) => void;
  * Selects an observable from the store, and attaches it to the decorated
  * property.
  *
- * @param { PropertySelector | PathSelector | FunctionSelector } selector
- * An Rxjs selector function, property name string, or property name path
+ * @param selector
+ * A selector function, property name string, or property name path
  * (array of strings/array indices) that locates the store data to be
  * selected
  *
- * @param { Comparator } comparer function for this selector
+ * @param comparator Function used to determine if this selector has changed.
  */
 export function select<T>(
   selector?: Selector<any, T>,

@@ -31,10 +31,10 @@ with some of Angular's advanced features, including:
 
 ## Getting Started
 
-* I already know what Redux and RxJS are. [Give me the TL;DR](docs/quickstart.md).
-* I'm just learning about Redux. [Break it down for me](docs/intro-tutorial.md)!
+* I already know what Redux and RxJS are. [Give me the TL;DR](articles/quickstart.md).
+* I'm just learning about Redux. [Break it down for me](articles/intro-tutorial.md)!
 * Talk is cheap. [Show me a complete code example](https://github.com/angular-redux/example-app).
-* Take me to the [API docs](docs/api.md).
+* Take me to the [API docs](angular-redux.github.io/store).
 
 ## Examples
 
@@ -60,13 +60,13 @@ Here are some examples of the `angular-redux` family of packages in action:
 data on its way out of the store and into your UI or side-effect handlers. Observables
 are an efficient analogue to `reselect` for the RxJS-heavy Angular world.
 
-Read more here: [Select Pattern](docs/select-pattern.md)
+Read more here: [Select Pattern](articles/select-pattern.md)
 
 We also have a number of 'cookbooks' for specific Angular topics:
 
-* [Using Angular's Dependency Injector with Action Creators](docs/action-creator-service.md)
-* [Using Angular's Dependency Injector with Middlewares](docs/di-middleware.md)
-* [Managing Side-Effects with redux-observable Epics](docs/epics.md)
-* [Using the Redux DevTools Chrome Extension](docs/redux-dev-tools.md)
-* [@angular-redux/store and ImmutableJS](docs/immutable-js.md)
-* [Strongly Typed Reducers](docs/strongly-typed-reducers.md)
+* [Using Angular's Dependency Injector with Action Creators](articles/action-creator-service.md)
+* [Using Angular's Dependency Injector with Middlewares](articles/di-middleware.md)
+* [Managing Side-Effects with redux-observable Epics](articles/epics.md)
+* [Using the Redux DevTools Chrome Extension](articles/redux-dev-tools.md)
+* [@angular-redux/store and ImmutableJS](articles/immutable-js.md)
+* [Strongly Typed Reducers](articles/strongly-typed-reducers.md)

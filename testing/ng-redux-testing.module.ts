@@ -6,6 +6,7 @@ import { MockDevToolsExtension } from './dev-tools.mock';
 // Needs to be initialized early so @select's use the mocked version too.
 const mockNgRedux = new MockNgRedux();
 
+/** @hidden */
 export function _mockNgReduxFactory() {
   return mockNgRedux;
 }

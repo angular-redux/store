@@ -5,12 +5,14 @@
   "main": "./lib/src/index.js",
   "scripts": {
     "prebuild": "rimraf ./lib",
-    "build": "npm run build:src && npm run build:testing",
+    "build": "npm run build:src && npm run build:testing && npm doc",
     "build:src": "ngc -p tsconfig.json",
     "build:testing": "ngc -p tsconfig.testing.json",
     "lint": "tslint 'src/**/*.ts'",
     "prepublish": "npm test && npm run build",
-    "test": "nyc node tests.js"
+    "test": "nyc node tests.js",
+    "predoc": "rm -rf docs",
+    "doc": "typedoc --out docs --excludeExternals --excludePrivate --excludeNotExported -theme minimal --name @angular-redux/store --mode file --module commonjs --tsconfig tsconfig.docs.json"
   },
   "typings": "./lib/src/index.d.ts",
   "repository": {
@@ -70,6 +72,7 @@
     "symbol-observable": "^1.0.1",
     "ts-node": "^3.0.2",
     "tslint": "^5.1.0",
+    "typedoc": "^0.6.0",
     "typescript": "^2.1.0",
     "zone.js": "^0.8.4"
   },

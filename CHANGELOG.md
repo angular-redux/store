@@ -3,7 +3,7 @@
 ## Features
 
 * Added `NgReduxTestingModule`, `MockNgRedux` to help unit test components and
-services that select from the store. See [here](docs/intro-tutorial.md#unit-testing-selections)
+services that select from the store. See [here](articles/intro-tutorial.md#unit-testing-selections)
 for details.
 * Expose `PathSelector`, `FunctionSelector`, and `PropertySelector` types in `index.d.ts`.
 
@@ -323,8 +323,8 @@ export class MyComponent {
 
 ### Features
 
-* [DevToolsExtension - convience wrapper for dev tools](docs/redux-dev-tools.md) (#115)
-* [Select - seamless support for ImmutableJS](docs/immutable-js.md) (#160)
+* [DevToolsExtension - convience wrapper for dev tools](articles/redux-dev-tools.md) (#115)
+* [Select - seamless support for ImmutableJS](articles/immutable-js.md) (#160)
 
 
 ### Fixes

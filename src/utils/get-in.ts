@@ -1,6 +1,8 @@
-/*
+/**
  * Gets a deeply-nested property value from an object, given a 'path'
  * of property names or array indices.
+ *
+ * @hidden
  */
 export function getIn(v, pathElems: (string | number)[]): any {
   if (!v) {

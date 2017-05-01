@@ -35,14 +35,13 @@ export type Comparator = (x: any, y: any) => boolean;
 type RetypedCompose = (func: Function, ...funcs: Function[]) => Function;
 
 export class NgRedux<RootState> {
+  /** @hidden */
   static instance: NgRedux<any> = undefined;
 
   private _store: Store<RootState> = null;
   private _store$: BehaviorSubject<RootState> = null;
 
-  /**
-   * Creates an instance of NgRedux.
-   */
+  /** @hidden */
   constructor(
     private ngZone: NgZone) {
     NgRedux.instance = this;
@@ -58,10 +57,10 @@ export class NgRedux<RootState> {
    * This should only be called once for the lifetime of your app, for
    * example in the constructor of your root component.
    *
-   * @param {Redux.Reducer<RootState>} reducer Your app's root reducer
-   * @param {RootState} initState Your app's initial state
-   * @param {Redux.Middleware[]} middleware Optional Redux middlewares
-   * @param {Redux.StoreEnhancer<RootState>[]} Optional Redux store enhancers
+   * @param reducer Your app's root reducer
+   * @param initState Your app's initial state
+   * @param middleware Optional Redux middlewares
+   * @param enhancers Optional Redux store enhancers
    */
   configureStore(
     reducer: Redux.Reducer<RootState>,
@@ -91,7 +90,7 @@ export class NgRedux<RootState> {
    * example in the constructor of your root component. If configureStore
    * has been used this cannot be used.
    *
-   * @param {Redux.Store} store Your app's store
+   * @param store Your app's store
    */
   provideStore(store: Store<RootState>) {
     if (this._store) {
@@ -104,16 +103,13 @@ export class NgRedux<RootState> {
   /**
    * Select a slice of state to expose as an observable.
    *
-   * @template S
-   * @param { PropertySelector |
-   *  PathSelector |
-   *  FunctionSelector<RootState, S>}
-   * selector key or function to select a part of the state
-   * @param { Comparator } [comparer] Optional
+   * @typeparam S
+   * @param selector key or function to select a part of the state
+   * @param [comparer] Optional
    * comparison function called to test if an item is distinct
    * from the previous item in the source.
    *
-   * @returns {Observable<S>} an Observable that emits items from the
+   * @returns An Observable that emits items from the
    * source Observable with distinct values.
    */
   select<S>(
@@ -142,15 +138,15 @@ export class NgRedux<RootState> {
 
   /**
    * Get the current state of the application
-   * @returns {RootState} the application state
+   * @returns The application state
    */
   getState = (): RootState => this._store.getState()
 
   /**
    * Subscribe to the Redux store changes
    *
-   * @param {() => void} listener callback to invoke when the state is updated
-   * @returns a function to unsubscribe
+   * @param listener A callback to invoke when the state is updated
+   * @returns A function to unsubscribe
    */
   subscribe = (listener: () => void) => this._store.subscribe(listener)
 

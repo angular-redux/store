@@ -61,7 +61,8 @@ export class MockNgRedux<RootState> extends NgRedux<RootState> {
     return record;
   }
 
-  public constructor() {
+  /** @hidden */
+  constructor() {
     super(null);
 
     NgRedux.instance = this; // This hooks the mock up to @select.

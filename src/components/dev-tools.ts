@@ -9,6 +9,7 @@ const environment: any = typeof window !== 'undefined' ? window : this;
  */
 @Injectable()
 export class DevToolsExtension {
+  /** @hidden */
   constructor(
     private appRef: ApplicationRef,
     private ngRedux: NgRedux<any>) { }
@@ -18,7 +19,7 @@ export class DevToolsExtension {
    * Makes sure state changes triggered by the extension
    * trigger Angular2's change detector.
    *
-   * @argument { Object } options: dev tool options; same
+   * @argument options: dev tool options; same
    * format as described here:
    * [zalmoxisus/redux-devtools-extension/blob/master/docs/API/Arguments.md]
    */
