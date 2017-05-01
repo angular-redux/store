@@ -472,7 +472,7 @@ class MyComponent {
 ```
 
 > There's actually quite a lot more you can do with `@select` and `ngRedux.select`. Check out the
-> [API docs](angular-redux.github.io/store/classes/ngredux.html#select) for more info.
+> [API docs](https://angular-redux.github.io/store/classes/ngredux.html#select) for more info.
 
 ## Unit Testing Selections
 
@@ -607,4 +607,4 @@ displays your current state, and even allows you to rewind or play forward your 
 Take a look at https://github.com/angular-redux/example-app for a more complex example, including
 Redux integration with Angular's router and forms APIs.
 
-Also check out the [docs](docs) folder for deep-dives into specific subjects people have asked about.
+Also check out the [articles](articles) folder for deep-dives into specific subjects people have asked about.
