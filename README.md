@@ -31,8 +31,8 @@ with some of Angular's advanced features, including:
 
 ## Getting Started
 
-* I already know what Redux and RxJS are. [Give me the TL;DR](articles/quickstart.md).
-* I'm just learning about Redux. [Break it down for me](articles/intro-tutorial.md)!
+* I already know what Redux and RxJS are. [Give me the TL;DR](https://github.com/angular-redux/store/blob/master/articles/quickstart.md).
+* I'm just learning about Redux. [Break it down for me](https://github.com/angular-redux/store/blob/master/articles/intro-tutorial.md)!
 * Talk is cheap. [Show me a complete code example](https://github.com/angular-redux/example-app).
 * Take me to the [API docs](https://angular-redux.github.io/store).
 
@@ -60,13 +60,13 @@ Here are some examples of the `angular-redux` family of packages in action:
 data on its way out of the store and into your UI or side-effect handlers. Observables
 are an efficient analogue to `reselect` for the RxJS-heavy Angular world.
 
-Read more here: [Select Pattern](articles/select-pattern.md)
+Read more here: [Select Pattern](https://github.com/angular-redux/store/blob/master/articles/select-pattern.md)
 
 We also have a number of 'cookbooks' for specific Angular topics:
 
-* [Using Angular's Dependency Injector with Action Creators](articles/action-creator-service.md)
-* [Using Angular's Dependency Injector with Middlewares](articles/di-middleware.md)
-* [Managing Side-Effects with redux-observable Epics](articles/epics.md)
-* [Using the Redux DevTools Chrome Extension](articles/redux-dev-tools.md)
-* [@angular-redux/store and ImmutableJS](articles/immutable-js.md)
-* [Strongly Typed Reducers](articles/strongly-typed-reducers.md)
+* [Using Angular's Dependency Injector with Action Creators](https://github.com/angular-redux/store/blob/master/articles/action-creator-service.md)
+* [Using Angular's Dependency Injector with Middlewares](https://github.com/angular-redux/store/blob/master/articles/di-middleware.md)
+* [Managing Side-Effects with redux-observable Epics](https://github.com/angular-redux/store/blob/master/articles/epics.md)
+* [Using the Redux DevTools Chrome Extension](https://github.com/angular-redux/store/blob/master/articles/redux-dev-tools.md)
+* [@angular-redux/store and ImmutableJS](https://github.com/angular-redux/store/blob/master/articles/immutable-js.md)
+* [Strongly Typed Reducers](https://github.com/angular-redux/store/blob/master/articles/strongly-typed-reducers.md)

@@ -506,7 +506,7 @@ describe('MyComponent', () => {
     // Create an instance of MyComponent using Angular's normal unit test features.
     const fixture = TestBed.createComponent(MyComponent);
     const componentUnderTest = fixture.debugElement.componentInstance;
-    
+
     // Get a stub we can use to drive the `@select('count')` observable used by
     // MyComponent (above). This stub will be supplied to any relevant `.select`
     // or `@select` calls used by the component under test by MockNgRedux.
@@ -607,4 +607,4 @@ displays your current state, and even allows you to rewind or play forward your 
 Take a look at https://github.com/angular-redux/example-app for a more complex example, including
 Redux integration with Angular's router and forms APIs.
 
-Also check out the [articles](articles) folder for deep-dives into specific subjects people have asked about.
+Also check out the [https://github.com/angular-redux/store/blob/master/articles](articles) folder for deep-dives into specific subjects people have asked about.
