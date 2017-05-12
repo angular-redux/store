@@ -124,13 +124,10 @@ describe('Select decorators', () => {
   });
 
   describe('@select$', () => {
-    it('applies a transformer to the observable', done => {
-      class MockClass {
-        @select$(state$ => state$
-          .map(state => state.baz)
-          .map(baz => baz * 2)) baz$: Observable<number>;
-      }
+    const transformer = baz$ => baz$.map(baz => 2 * baz);
 
+    it('applies a transformer to the observable', done => {
+      class MockClass { @select$('baz', transformer) baz$: Observable<number>; }
       const mockInstance = new MockClass();
 
       mockInstance.baz$
@@ -145,8 +142,7 @@ describe('Select decorators', () => {
 
     describe('when passed a comparator', () => {
       const comparator = (x: any, y: any): boolean => y === 1;
-      const transformer = state$ => state$.map(state => state.baz);
-      class MockClass { @select$(transformer, comparator) baz$: Observable<number> }
+      class MockClass { @select$('baz', transformer, comparator) baz$: Observable<number> }
 
       it('should only trigger next when the comparator returns true', done => {
         const mockInstance = new MockClass();
@@ -154,7 +150,7 @@ describe('Select decorators', () => {
           .take(2)
           .toArray()
           .subscribe(
-            values => expect(values).toEqual([-1, 2]),
+            values => expect(values).toEqual([-2, 2]),
             null,
             done);
         ngRedux.dispatch({type: 'nvm', payload: 1});
@@ -163,7 +159,7 @@ describe('Select decorators', () => {
 
       it('should receive previous and next value for comparison', done => {
         const spy = jasmine.createSpy('spy');
-        class SpyClass { @select$(transformer, spy) baz$: Observable<number> };
+        class SpyClass { @select$('baz', transformer, spy) baz$: Observable<number> };
 
         const mockInstance = new SpyClass();
         mockInstance.baz$
@@ -173,8 +169,8 @@ describe('Select decorators', () => {
         ngRedux.dispatch({type: 'nvm', payload: 1});
         ngRedux.dispatch({type: 'nvm', payload: 2});
 
-        expect(spy).toHaveBeenCalledWith(-1, 1);
-        expect(spy).toHaveBeenCalledWith(1, 2);
+        expect(spy).toHaveBeenCalledWith(-2, 2);
+        expect(spy).toHaveBeenCalledWith(2, 4);
       });
     });
   });
