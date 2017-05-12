@@ -70,3 +70,23 @@ We also have a number of 'cookbooks' for specific Angular topics:
 * [Using the Redux DevTools Chrome Extension](https://github.com/angular-redux/store/blob/master/articles/redux-dev-tools.md)
 * [@angular-redux/store and ImmutableJS](https://github.com/angular-redux/store/blob/master/articles/immutable-js.md)
 * [Strongly Typed Reducers](https://github.com/angular-redux/store/blob/master/articles/strongly-typed-reducers.md)
+
+## Hacking on angular-redux/store
+
+Want to hack on angular-redux/store or any of the related packages? Feel free to do so, but please test your changes before making any PRs.
+
+Here's how to do that:
+
+1. Write unit tests. You can check that they work by running
+`npm test`.
+2. Run the linter. If your editor doesn't do it automatically, do it
+manually with `npm run lint`.
+3. Test your changes in a 'real world scenario'. We use the [example-app](https://github.com/angular-redux/example-app) for this, using some npm
+fakery to 'publish the package locally':
+
+* clone the example app (`git clone https://github.com/angular-redux/example-app.git`)
+* generate a 'local package' (`cd` to your `angular-redux/store` clone and run `npm pack`). This will create a `.tgz` file.
+* hook your 'local package' up to your example-app (`cd` to your example-app clone and run `npm install --save /path/to/the/tgz/file/from/above`)
+* run `ng serve --aot`
+
+Please make sure your changes pass Angular's AoT compiler, because it's a bit finicky with TS syntax.
