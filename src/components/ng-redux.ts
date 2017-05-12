@@ -80,7 +80,6 @@ export class NgRedux<RootState> {
         ...enhancers
     )(createStore);
     const store = finalCreateStore(reducer, initState);
-
     this.setStore(store);
   }
 

@@ -1,144 +1,181 @@
 import 'reflect-metadata';
 import { NgZone } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
+import 'rxjs/add/operator/toArray';
+import 'rxjs/add/operator/take';
 import { NgRedux } from '../components/ng-redux';
-import { select } from './select';
+import { select, select$ } from './select';
 
-class MockNgZone {
-  run = fn => fn()
-}
+class MockNgZone { run = fn => fn() }
 
-describe('@select', () => {
+describe('Select decorators', () => {
   let ngRedux;
-  const mockNgZone = new MockNgZone() as NgZone;
   let targetObj;
-  let defaultState;
-  let rootReducer;
+
+  const mockNgZone = new MockNgZone() as NgZone;
+  const defaultState = { foo: 'bar', baz: -1 };
+
+  const rootReducer = (state = defaultState, action) =>
+    action.payload ?
+      Object.assign({}, state, { baz: action.payload }) :
+      state;
 
   beforeEach(() => {
-    defaultState = {
-      foo: 'bar',
-      baz: -1
-    };
-    rootReducer = (state = defaultState, action) => {
-      const newState = Object.assign({}, state, { baz: action.payload });
-      return newState;
-    };
     targetObj = {};
     ngRedux = new NgRedux(mockNgZone);
     ngRedux.configureStore(rootReducer, defaultState);
   });
 
-  describe('when passed no arguments', () => {
-    it('automatically attempts to bind to a store property that matches the' +
-       ' name of the class property', () => {
-      class MockClass {
-        @select() baz: any;
-      }
+  describe('@select', () => {
+    describe('when passed no arguments', () => {
+      it('binds to a store property that matches the name of the class property', done => {
+        class MockClass { @select() baz: Observable<number>; }
+        const mockInstance = new MockClass();
 
-      const mockInstance = new MockClass();
-      let value;
-      const expectedValue = 1;
+        mockInstance.baz
+          .take(2)
+          .toArray()
+          .subscribe(values => expect(values).toEqual([-1, 1]),
+            null,
+            done);
+        ngRedux.dispatch({type: 'nvm', payload: 1});
+      });
 
-      mockInstance.baz.subscribe((val) => value = val);
-      ngRedux.dispatch({type: 'nvm', payload: expectedValue});
-      expect(value).toEqual(expectedValue);
+      it('binds by name ignoring any $ characters in the class property name', done => {
+        class MockClass { @select() baz$: Observable<number>; }
+        const mockInstance = new MockClass();
+
+        mockInstance.baz$
+          .take(2)
+          .toArray()
+          .subscribe(values => expect(values).toEqual([-1, 4]),
+            null,
+            done);
+        ngRedux.dispatch({type: 'nvm', payload: 4});
+      });
     });
 
-    it('attempts to bind by name ignoring any $ characters in the class ' +
-       'property name', () => {
-      class MockClass {
-        @select() baz$: any;
-      }
+    describe('when passed a string', () => {
+      it('binds to the store property whose name matches the string value', done => {
+        class MockClass { @select('baz') obs$: Observable<number>; }
+        const mockInstance = new MockClass();
 
-      const mockInstance = new MockClass();
-      let value;
-      const expectedValue = 2;
+        mockInstance.obs$
+          .take(2)
+          .toArray()
+          .subscribe(values => expect(values).toEqual([-1, 3]),
+            null,
+            done);
+        ngRedux.dispatch({type: 'nvm', payload: 3});
+      });
+    });
 
-      mockInstance.baz$.subscribe(val => value = val);
-      ngRedux.dispatch({type: 'nvm', payload: expectedValue});
-      expect(value).toEqual(expectedValue);
+    describe('when passed a function', () => {
+      it('attempts to use that function as the selector function', done => {
+        const selector = state => state.baz * 2;
+        class MockClass { @select(selector) obs$: Observable<number>; }
+        const mockInstance = new MockClass();
+
+        mockInstance.obs$
+          .take(2)
+          .toArray()
+          .subscribe(values => expect(values).toEqual([-2, 10]),
+            null,
+            done);
+        ngRedux.dispatch({type: 'nvm', payload: 5});
+      });
+    });
+
+    describe('when passed a comparator', () => {
+      const comparator = (x: any, y: any): boolean => y === 1;
+      class MockClass { @select('baz', comparator) baz$: Observable<number> };
+
+      it('should only trigger next when comparator returns true', done => {
+        const mockInstance = new MockClass();
+        mockInstance.baz$
+          .take(2)
+          .toArray()
+          .subscribe(
+            values => expect(values).toEqual([-1, 2]),
+            null,
+            done);
+        ngRedux.dispatch({type: 'nvm', payload: 1});
+        ngRedux.dispatch({type: 'nvm', payload: 2});
+      });
+
+      it('should receive previous and next value for comparison', done => {
+        const spy = jasmine.createSpy('spy');
+        class MockClass { @select('baz', spy) baz$: Observable<number>; }
+
+        const mockInstance = new MockClass();
+        mockInstance
+          .baz$
+          .take(3)
+          .subscribe(null, null, done);
+
+        ngRedux.dispatch({type: 'nvm', payload: 1});
+        ngRedux.dispatch({type: 'nvm', payload: 2});
+
+        expect(spy).toHaveBeenCalledWith(-1, 1);
+        expect(spy).toHaveBeenCalledWith(1, 2);
+      });
     });
   });
 
-  describe('when passed a string', () => {
-    it('attempts to bind to the store property whose name matches the ' +
-       'string value', () => {
+  describe('@select$', () => {
+    it('applies a transformer to the observable', done => {
       class MockClass {
-        @select('baz') asdf: any;
+        @select$(state$ => state$
+          .map(state => state.baz)
+          .map(baz => baz * 2)) baz$: Observable<number>;
       }
 
       const mockInstance = new MockClass();
-      let value;
-      const expectedValue = 3;
 
-      mockInstance.asdf.subscribe(val => value = val);
-      ngRedux.dispatch({type: 'nvm', payload: expectedValue});
-      expect(value).toEqual(expectedValue);
-    });
-  });
-
-  describe('when passed a function', () => {
-
-    it('attempts to use that function as the selector function', () => {
-      class MockClass {
-        @select(state => state.baz * 2) asdf: any;
-      }
-
-      const mockInstance = new MockClass();
-      let value;
-      const expectedValue = 10;
-
-      mockInstance.asdf.subscribe(val => value = val);
-      ngRedux.dispatch({type: 'nvm', payload: expectedValue / 2});
-      expect(value).toEqual(expectedValue);
-    });
-  });
-
-  describe('when passed a comparer', () => {
-
-    function comparer(x: any, y: any): boolean {
-      return y === 1;
-    }
-
-    it('should not trigger next when comparer returns true', () => {
-      class MockClass {
-        @select(state => state.baz, comparer) asdf: any;
-      }
-
-      const mockInstance = new MockClass();
-      mockInstance.asdf.subscribe(val => expect(val).not.toEqual(1));
-      ngRedux.dispatch({type: 'nvm', payload: 1});
+      mockInstance.baz$
+        .take(2)
+        .toArray()
+        .subscribe(
+          values => expect(values).toEqual([-2, 10]),
+          null,
+          done);
+      ngRedux.dispatch({type: 'nvm', payload: 5});
     });
 
-    it('should trigger next when comparer returns false', () => {
-      class MockClass {
-        @select(state => state.baz, comparer) asdf: any;
-      }
+    describe('when passed a comparator', () => {
+      const comparator = (x: any, y: any): boolean => y === 1;
+      const transformer = state$ => state$.map(state => state.baz);
+      class MockClass { @select$(transformer, comparator) baz$: Observable<number> }
 
-      const mockInstance = new MockClass();
-      let value;
+      it('should only trigger next when the comparator returns true', done => {
+        const mockInstance = new MockClass();
+        mockInstance.baz$
+          .take(2)
+          .toArray()
+          .subscribe(
+            values => expect(values).toEqual([-1, 2]),
+            null,
+            done);
+        ngRedux.dispatch({type: 'nvm', payload: 1});
+        ngRedux.dispatch({type: 'nvm', payload: 2});
+      });
 
-      mockInstance.asdf.subscribe(val => value = val);
-      ngRedux.dispatch({type: 'nvm', payload: 2});
-      expect(value).toEqual(2);
-    });
+      it('should receive previous and next value for comparison', done => {
+        const spy = jasmine.createSpy('spy');
+        class SpyClass { @select$(transformer, spy) baz$: Observable<number> };
 
-    it('should receive previous and next value for comparison', () => {
-      const spy = jasmine.createSpy('spy');
+        const mockInstance = new SpyClass();
+        mockInstance.baz$
+          .take(3)
+          .subscribe(null, null, done);
 
-      class MockClass {
-        @select(state => state.baz, spy) asdf: any;
-      }
+        ngRedux.dispatch({type: 'nvm', payload: 1});
+        ngRedux.dispatch({type: 'nvm', payload: 2});
 
-      const mockInstance = new MockClass();
-      mockInstance.asdf.subscribe(val => null);
-
-      ngRedux.dispatch({type: 'nvm', payload: 1});
-      ngRedux.dispatch({type: 'nvm', payload: 2});
-
-      expect(spy).toHaveBeenCalledWith(undefined, 1);
-      expect(spy).toHaveBeenCalledWith(1, 2);
+        expect(spy).toHaveBeenCalledWith(-1, 1);
+        expect(spy).toHaveBeenCalledWith(1, 2);
+      });
     });
   });
 });
