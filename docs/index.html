@@ -935,16 +935,19 @@ img { max-width: 100%; }
 			<a href="globals.html#pathselector" class="tsd-kind-icon">Path<wbr>Selector</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
-			<a href="globals.html#propertydecorator" class="tsd-kind-icon">Property<wbr>Decorator</a>
-		</li>
-		<li class=" tsd-kind-type-alias">
 			<a href="globals.html#propertyselector" class="tsd-kind-icon">Property<wbr>Selector</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="globals.html#selector" class="tsd-kind-icon">Selector</a>
 		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="globals.html#transformer" class="tsd-kind-icon">Transformer</a>
+		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter">
 			<a href="globals.html#select" class="tsd-kind-icon">select</a>
+		</li>
+		<li class=" tsd-kind-function tsd-has-type-parameter">
+			<a href="globals.html#select_" class="tsd-kind-icon">select$</a>
 		</li>
 	</ul>
 </nav>
@@ -977,8 +980,8 @@ img { max-width: 100%; }
 			</ul>
 			<h2 id="getting-started">Getting Started</h2>
 			<ul>
-				<li>I already know what Redux and RxJS are. <a href="articles/quickstart.md">Give me the TL;DR</a>.</li>
-				<li>I&#39;m just learning about Redux. <a href="articles/intro-tutorial.md">Break it down for me</a>!</li>
+				<li>I already know what Redux and RxJS are. <a href="https://github.com/angular-redux/store/blob/master/articles/quickstart.md">Give me the TL;DR</a>.</li>
+				<li>I&#39;m just learning about Redux. <a href="https://github.com/angular-redux/store/blob/master/articles/intro-tutorial.md">Break it down for me</a>!</li>
 				<li>Talk is cheap. <a href="https://github.com/angular-redux/example-app">Show me a complete code example</a>.</li>
 				<li>Take me to the <a href="https://angular-redux.github.io/store">API docs</a>.</li>
 			</ul>
@@ -1003,16 +1006,34 @@ img { max-width: 100%; }
 			<p><code>@angular-redux/store</code> uses an approach to redux based on RxJS Observables to <code>select</code> and transform
 				data on its way out of the store and into your UI or side-effect handlers. Observables
 			are an efficient analogue to <code>reselect</code> for the RxJS-heavy Angular world.</p>
-			<p>Read more here: <a href="articles/select-pattern.md">Select Pattern</a></p>
+			<p>Read more here: <a href="https://github.com/angular-redux/store/blob/master/articles/select-pattern.md">Select Pattern</a></p>
 			<p>We also have a number of &#39;cookbooks&#39; for specific Angular topics:</p>
 			<ul>
-				<li><a href="articles/action-creator-service.md">Using Angular&#39;s Dependency Injector with Action Creators</a></li>
-				<li><a href="articles/di-middleware.md">Using Angular&#39;s Dependency Injector with Middlewares</a></li>
-				<li><a href="articles/epics.md">Managing Side-Effects with redux-observable Epics</a></li>
-				<li><a href="articles/redux-dev-tools.md">Using the Redux DevTools Chrome Extension</a></li>
-				<li><a href="articles/immutable-js.md">@angular-redux/store and ImmutableJS</a></li>
-				<li><a href="articles/strongly-typed-reducers.md">Strongly Typed Reducers</a></li>
+				<li><a href="https://github.com/angular-redux/store/blob/master/articles/action-creator-service.md">Using Angular&#39;s Dependency Injector with Action Creators</a></li>
+				<li><a href="https://github.com/angular-redux/store/blob/master/articles/di-middleware.md">Using Angular&#39;s Dependency Injector with Middlewares</a></li>
+				<li><a href="https://github.com/angular-redux/store/blob/master/articles/epics.md">Managing Side-Effects with redux-observable Epics</a></li>
+				<li><a href="https://github.com/angular-redux/store/blob/master/articles/redux-dev-tools.md">Using the Redux DevTools Chrome Extension</a></li>
+				<li><a href="https://github.com/angular-redux/store/blob/master/articles/immutable-js.md">@angular-redux/store and ImmutableJS</a></li>
+				<li><a href="https://github.com/angular-redux/store/blob/master/articles/strongly-typed-reducers.md">Strongly Typed Reducers</a></li>
 			</ul>
+			<h2 id="hacking-on-angular-redux-store">Hacking on angular-redux/store</h2>
+			<p>Want to hack on angular-redux/store or any of the related packages? Feel free to do so, but please test your changes before making any PRs.</p>
+			<p>Here&#39;s how to do that:</p>
+			<ol>
+				<li>Write unit tests. You can check that they work by running
+				<code>npm test</code>.</li>
+				<li>Run the linter. If your editor doesn&#39;t do it automatically, do it
+				manually with <code>npm run lint</code>.</li>
+				<li><p>Test your changes in a &#39;real world scenario&#39;. We use the <a href="https://github.com/angular-redux/example-app">example-app</a> for this, using some npm
+					fakery to &#39;publish the package locally&#39;:</p>
+				</li>
+				<li><p>clone the example app (<code>git clone https://github.com/angular-redux/example-app.git</code>)</p>
+				</li>
+				<li>generate a &#39;local package&#39; (<code>cd</code> to your <code>angular-redux/store</code> clone and run <code>npm pack</code>). This will create a <code>.tgz</code> file.</li>
+				<li>hook your &#39;local package&#39; up to your example-app (<code>cd</code> to your example-app clone and run <code>npm install --save /path/to/the/tgz/file/from/above</code>)</li>
+				<li>run <code>ng serve --aot</code></li>
+			</ol>
+			<p>Please make sure your changes pass Angular&#39;s AoT compiler, because it&#39;s a bit finicky with TS syntax.</p>
 		</div>
 		<div style="position:relative;"><a name="typedoc-main-index" class="tsd-anchor"></a></div>
 		<section class="tsd-panel-group tsd-index-group">
@@ -1036,15 +1057,16 @@ img { max-width: 100%; }
 							<li class="tsd-kind-type-alias"><a href="globals.html#comparator" class="tsd-kind-icon">Comparator</a></li>
 							<li class="tsd-kind-type-alias"><a href="globals.html#functionselector" class="tsd-kind-icon">Function<wbr>Selector</a></li>
 							<li class="tsd-kind-type-alias"><a href="globals.html#pathselector" class="tsd-kind-icon">Path<wbr>Selector</a></li>
-							<li class="tsd-kind-type-alias"><a href="globals.html#propertydecorator" class="tsd-kind-icon">Property<wbr>Decorator</a></li>
 							<li class="tsd-kind-type-alias"><a href="globals.html#propertyselector" class="tsd-kind-icon">Property<wbr>Selector</a></li>
 							<li class="tsd-kind-type-alias"><a href="globals.html#selector" class="tsd-kind-icon">Selector</a></li>
+							<li class="tsd-kind-type-alias"><a href="globals.html#transformer" class="tsd-kind-icon">Transformer</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#select" class="tsd-kind-icon">select</a></li>
+							<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#select_" class="tsd-kind-icon">select$</a></li>
 						</ul>
 					</section>
 				</div>
@@ -1058,7 +1080,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">Comparator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/components/ng-redux.ts#L32">src/components/ng-redux.ts:32</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/components/ng-redux.ts#L33">src/components/ng-redux.ts:33</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1092,7 +1114,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">Function<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/components/ng-redux.ts#L27">src/components/ng-redux.ts:27</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/components/ng-redux.ts#L28">src/components/ng-redux.ts:28</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1123,43 +1145,9 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">Path<wbr>Selector<span class="tsd-signature-symbol">:</span>             <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/components/ng-redux.ts#L26">src/components/ng-redux.ts:26</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/components/ng-redux.ts#L27">src/components/ng-redux.ts:27</a></li>
 					</ul>
 				</aside>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-type-alias">
-				<a name="propertydecorator" class="tsd-anchor"></a>
-				<h3>Property<wbr>Decorator</h3>
-				<div class="tsd-signature tsd-kind-icon">Property<wbr>Decorator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/decorators/select.ts#L7">src/decorators/select.ts:7</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-type-declaration">
-					<h4>Type declaration</h4>
-					<ul class="tsd-parameters">
-						<li class="tsd-parameter-siganture">
-							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
-								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, propertyKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-							</ul>
-							<ul class="tsd-descriptions">
-								<li class="tsd-description">
-									<h4 class="tsd-parameters-title">Parameters</h4>
-									<ul class="tsd-parameters">
-										<li>
-											<h5>target: <span class="tsd-signature-type">any</span></h5>
-										</li>
-										<li>
-											<h5>propertyKey: <span class="tsd-signature-type">string</span></h5>
-										</li>
-									</ul>
-									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-type-alias">
 				<a name="propertyselector" class="tsd-anchor"></a>
@@ -1167,7 +1155,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">Property<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/components/ng-redux.ts#L25">src/components/ng-redux.ts:25</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/components/ng-redux.ts#L26">src/components/ng-redux.ts:26</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1177,9 +1165,40 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">Selector<span class="tsd-signature-symbol">:</span> <a href="globals.html#propertyselector" class="tsd-signature-type">PropertySelector</a><span class="tsd-signature-symbol"> | </span><a href="globals.html#pathselector" class="tsd-signature-type">PathSelector</a><span class="tsd-signature-symbol"> | </span><a href="globals.html#functionselector" class="tsd-signature-type">FunctionSelector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/components/ng-redux.ts#L28">src/components/ng-redux.ts:28</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/components/ng-redux.ts#L29">src/components/ng-redux.ts:29</a></li>
 					</ul>
 				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-type-alias">
+				<a name="transformer" class="tsd-anchor"></a>
+				<h3>Transformer</h3>
+				<div class="tsd-signature tsd-kind-icon">Transformer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/decorators/select.ts#L43">src/decorators/select.ts:43</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-type-declaration">
+					<h4>Type declaration</h4>
+					<ul class="tsd-parameters">
+						<li class="tsd-parameter-siganture">
+							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>store$<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">V</span><span class="tsd-signature-symbol">&gt;</span></li>
+							</ul>
+							<ul class="tsd-descriptions">
+								<li class="tsd-description">
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameters">
+										<li>
+											<h5>store$: <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span></h5>
+										</li>
+									</ul>
+									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">V</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
@@ -1188,13 +1207,13 @@ img { max-width: 100%; }
 				<a name="select" class="tsd-anchor"></a>
 				<h3>select</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
-					<li class="tsd-signature tsd-kind-icon">select&lt;T&gt;<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">?: </span><a href="globals.html#selector" class="tsd-signature-type">Selector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, comparator<span class="tsd-signature-symbol">?: </span><a href="globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="globals.html#propertydecorator" class="tsd-signature-type">PropertyDecorator</a></li>
+					<li class="tsd-signature tsd-kind-icon">select&lt;T&gt;<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">?: </span><a href="globals.html#selector" class="tsd-signature-type">Selector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, comparator<span class="tsd-signature-symbol">?: </span><a href="globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">decorate</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/decorators/select.ts#L20">src/decorators/select.ts:20</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/decorators/select.ts#L16">src/decorators/select.ts:16</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1226,7 +1245,52 @@ img { max-width: 100%; }
 								</div>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="globals.html#propertydecorator" class="tsd-signature-type">PropertyDecorator</a></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">decorate</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+				<a name="select_" class="tsd-anchor"></a>
+				<h3>select$</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">select$&lt;T&gt;<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><a href="globals.html#selector" class="tsd-signature-type">Selector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, transformer<span class="tsd-signature-symbol">: </span><a href="globals.html#transformer" class="tsd-signature-type">Transformer</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, comparator<span class="tsd-signature-symbol">?: </span><a href="globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">decorate</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/decorators/select.ts#L54">src/decorators/select.ts:54</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Selects an observable using the given path selector, and runs it through the given
+									transformer function. A transformer function takes the store observable as an input and
+									returns a derived observable from it. That derived observable is run through
+								distinctUntilChanges with the given optional comparator and attached to the store property.</p>
+							</div>
+							<p>Think of a Transformer as a FunctionSelector that operates on observables instead of
+							values.</p>
+						</div>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>selector: <a href="globals.html#selector" class="tsd-signature-type">Selector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>transformer: <a href="globals.html#transformer" class="tsd-signature-type">Transformer</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> comparator: <a href="globals.html#comparator" class="tsd-signature-type">Comparator</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">decorate</span></h4>
 					</li>
 				</ul>
 			</section>

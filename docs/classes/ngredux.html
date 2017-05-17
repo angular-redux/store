@@ -922,7 +922,7 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="ngredux.html#configurestore" class="tsd-kind-icon">configure<wbr>Store</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="ngredux.html#dispatch" class="tsd-kind-icon">dispatch</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -958,16 +958,19 @@ img { max-width: 100%; }
 			<a href="../globals.html#pathselector" class="tsd-kind-icon">Path<wbr>Selector</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
-			<a href="../globals.html#propertydecorator" class="tsd-kind-icon">Property<wbr>Decorator</a>
-		</li>
-		<li class=" tsd-kind-type-alias">
 			<a href="../globals.html#propertyselector" class="tsd-kind-icon">Property<wbr>Selector</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="../globals.html#selector" class="tsd-kind-icon">Selector</a>
 		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="../globals.html#transformer" class="tsd-kind-icon">Transformer</a>
+		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter">
 			<a href="../globals.html#select" class="tsd-kind-icon">select</a>
+		</li>
+		<li class=" tsd-kind-function tsd-has-type-parameter">
+			<a href="../globals.html#select_" class="tsd-kind-icon">select$</a>
 		</li>
 	</ul>
 </nav>
@@ -997,7 +1000,7 @@ img { max-width: 100%; }
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="ngredux.html#configurestore" class="tsd-kind-icon">configure<wbr>Store</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="ngredux.html#dispatch" class="tsd-kind-icon">dispatch</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="ngredux.html#dispatch" class="tsd-kind-icon">dispatch</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="ngredux.html#getstate" class="tsd-kind-icon">get<wbr>State</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="ngredux.html#providestore" class="tsd-kind-icon">provide<wbr>Store</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="ngredux.html#replacereducer" class="tsd-kind-icon">replace<wbr>Reducer</a></li>
@@ -1020,7 +1023,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/components/ng-redux.ts#L66">src/components/ng-redux.ts:66</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/components/ng-redux.ts#L67">src/components/ng-redux.ts:67</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1062,17 +1065,17 @@ img { max-width: 100%; }
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="dispatch" class="tsd-anchor"></a>
 				<h3>dispatch</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-					<li class="tsd-signature tsd-kind-icon">dispatch&lt;A&gt;<span class="tsd-signature-symbol">(</span>action<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">dispatch<span class="tsd-signature-symbol">(</span>action<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/components/ng-redux.ts#L169">src/components/ng-redux.ts:169</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/components/ng-redux.ts#L169">src/components/ng-redux.ts:169</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1080,16 +1083,10 @@ img { max-width: 100%; }
 								<p>Dispatch an action to Redux</p>
 							</div>
 						</div>
-						<h4 class="tsd-type-parameters-title">Type parameters</h4>
-						<ul class="tsd-type-parameters">
-							<li>
-								<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Action</span></h4>
-							</li>
-						</ul>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>action: <span class="tsd-signature-type">A</span></h5>
+								<h5>action: <span class="tsd-signature-type">any</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -1106,7 +1103,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/components/ng-redux.ts#L144">src/components/ng-redux.ts:144</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/components/ng-redux.ts#L144">src/components/ng-redux.ts:144</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1129,7 +1126,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/components/ng-redux.ts#L96">src/components/ng-redux.ts:96</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/components/ng-redux.ts#L96">src/components/ng-redux.ts:96</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1164,7 +1161,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/components/ng-redux.ts#L163">src/components/ng-redux.ts:163</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/components/ng-redux.ts#L163">src/components/ng-redux.ts:163</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1200,7 +1197,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/components/ng-redux.ts#L116">src/components/ng-redux.ts:116</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/components/ng-redux.ts#L116">src/components/ng-redux.ts:116</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1242,7 +1239,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/551cd4c/src/components/ng-redux.ts#L152">src/components/ng-redux.ts:152</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/beeced7/src/components/ng-redux.ts#L152">src/components/ng-redux.ts:152</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
