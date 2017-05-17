@@ -22,7 +22,7 @@ and optionally middlewares and enhancers as you would in Redux directly.
 
 ```typescript
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
-import createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import { rootReducer } from './reducers';
 
 interface IAppState { /* ... */ };
@@ -50,7 +50,7 @@ import {
   createStore
 } from 'redux';
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
-import createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import { rootReducer } from './reducers';
 
 interface IAppState { /* ... */ };
