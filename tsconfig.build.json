@@ -29,7 +29,8 @@
   ],
   "exclude": [
     "node_modules",
-    "lib"
+    "lib",
+    "**/*.spec.ts"
   ],
   "angularCompilerOptions": {
     "strictMetadataEmit": true,

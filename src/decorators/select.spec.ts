@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/toArray';
 import 'rxjs/add/operator/take';
+
 import { NgRedux } from '../components/ng-redux';
 import { select, select$ } from './select';
 
