@@ -17,7 +17,6 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
-import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 
@@ -47,9 +46,9 @@ export class NgRedux<RootState> {
   constructor(
     private ngZone: NgZone) {
     NgRedux.instance = this;
-    this._store$ = new BehaviorSubject<RootState>(null)
-      .filter(n => n !== null)
-      .switchMap(n => Observable.from(n as any)) as BehaviorSubject<RootState>;
+    this._store$ = new BehaviorSubject<RootState>(undefined)
+      .filter(n => n !== undefined)
+      .switchMap(n => this.storeToObservable(n as any)) as BehaviorSubject<RootState>;
   }
 
   /**
@@ -183,4 +182,10 @@ export class NgRedux<RootState> {
     this._store = store;
     this._store$.next(store as any);
   }
+
+  private storeToObservable = (store: Store<RootState>): Observable<RootState> =>
+    new Observable<RootState>(observer => {
+      observer.next(store.getState());
+      store.subscribe(() => observer.next(store.getState()));
+    });
 };
