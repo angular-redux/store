@@ -1,3 +1,51 @@
+# 6.3.0
+
+## Fixes
+
+* Fixed issues with middlewares that allow dispatching of things other than just raw actions
+(e.g. redux-thunk) [#386, #264].
+* Fixed issues with enhancers that chage the way `Store.subscribe` and listeners work (e.g. redux-batch) [#372]
+
+## Features
+
+* Added the `@select$` decorator which allows you to attach observable operator chains
+directly to `@select`. For example:
+
+```typescript
+import { select$ } from 'angular-redux/store';
+
+export const debounceAndTriple = obs$ => obs$
+  .debounce(300)
+  .map(x => 3 * x);
+
+class Foo {
+  @select$(['foo', 'bar'], debounceAndTriple)
+  readonly debouncedFooBar$: Observable<number>;
+}
+```
+
+* Added the `@dispatch` decorator which allows auto-dispatch for your action creators.
+For example:
+
+```typescript
+import { Injectable } from '@angular/core';
+import { Action } from 'redux';
+
+@Injectable()
+export class AnimalActions {
+  static readonly LOAD_ANIMALS = 'LOAD_ANIMALS';
+
+  // Calling loadAnimals will now automagically dispatch the action.
+  @dispatch()
+  loadAnimals = (animalType: AnimalType): Action => ({
+    type: AnimalActions.LOAD_ANIMALS,
+    meta: { animalType },
+  })
+
+  // ...
+}
+```
+
 # 6.2.1
 
 ## Fixes

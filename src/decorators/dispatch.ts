@@ -1,7 +1,11 @@
-import {
-  NgRedux,
-} from '../components/ng-redux';
+import { NgRedux } from '../components/ng-redux';
 
+/**
+ * Auto-dispatches the return value of the decorated function.
+ *
+ * Decorate a function creator method with @dispatch and its return
+ * value will automatically be passed to ngRedux.dispatch() for you.
+ */
 export function dispatch(): void | any {
   return function dispatchDecorator(target: object, key: string | symbol | number, descriptor?: PropertyDescriptor) {
     let originalMethod: Function;
@@ -26,6 +30,5 @@ export function dispatch(): void | any {
       descriptor.value = wrapped;
       return descriptor;
     }
-
   }
 }
