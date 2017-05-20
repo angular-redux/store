@@ -83,7 +83,7 @@ is a widely-used convention for defining the shape of actions. You can import
 in into your project and use it:
 
 ```sh
-npm install --save flux-standard-action @types/flux-standard-action
+npm install --save flux-standard-action
 ```
 
 Flux standard actions take 'payload', and 'error' parameters in addition to the
