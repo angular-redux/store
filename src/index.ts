@@ -1,11 +1,13 @@
 import {
   NgRedux,
+  Comparator,
+} from './components/ng-redux';
+import {
   Selector,
   PathSelector,
   PropertySelector,
   FunctionSelector,
-  Comparator,
-} from './components/ng-redux';
+} from './components/selectors';
 import { DevToolsExtension } from './components/dev-tools';
 import { select, select$ } from './decorators/select';
 import { dispatch } from './decorators/dispatch';

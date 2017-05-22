@@ -71,7 +71,7 @@ export class MockNgRedux<RootState> extends NgRedux<RootState> {
 
   public dispatch = () => null;
 
-  public select<S>(selector?: Selector<RootState, S>, comparator?: Comparator): Observable<any> {
+  public select = <S>(selector?: Selector<RootState, S>, comparator?: Comparator): Observable<any> => {
     const stub = MockNgRedux.initSelectorStub<RootState, S>(selector, comparator);
     return stub.comparator ?
       stub.subject.distinctUntilChanged(stub.comparator) :

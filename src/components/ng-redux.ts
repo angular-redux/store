@@ -4,7 +4,6 @@ import {
   Reducer,
   Middleware,
   StoreEnhancer,
-  StoreEnhancerStoreCreator,
   Unsubscribe,
   createStore,
   applyMiddleware,
@@ -19,21 +18,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
-
-import { getIn } from '../utils/get-in';
-
-export type PropertySelector = string | number | symbol;
-export type PathSelector = (string | number)[];
-export type FunctionSelector<RootState, S> = ((s: RootState) => S);
-export type Selector<RootState, S> = PropertySelector |
-  PathSelector |
-  FunctionSelector<RootState, S>;
+import { Selector, resolveToFunctionSelector } from './selectors';
+import { assert } from '../utils/assert';
 
 export type Comparator = (x: any, y: any) => boolean;
-
-// Workaround for Redux issue #1935 - remove once Redux 3.6.0 is
-// released.
-type RetypedCompose = (func: Function, ...funcs: Function[]) => Function;
 
 export class NgRedux<RootState> {
   /** @hidden */
@@ -43,8 +31,7 @@ export class NgRedux<RootState> {
   private _store$: BehaviorSubject<RootState> = null;
 
   /** @hidden */
-  constructor(
-    private ngZone: NgZone) {
+  constructor(private ngZone: NgZone) {
     NgRedux.instance = this;
     this._store$ = new BehaviorSubject<RootState>(undefined)
       .filter(n => n !== undefined)
@@ -58,28 +45,23 @@ export class NgRedux<RootState> {
    * This should only be called once for the lifetime of your app, for
    * example in the constructor of your root component.
    *
-   * @param reducer Your app's root reducer
+   * @param rootReducer Your app's root reducer
    * @param initState Your app's initial state
    * @param middleware Optional Redux middlewares
    * @param enhancers Optional Redux store enhancers
    */
   configureStore(
-    reducer: Reducer<RootState>,
+    rootReducer: Reducer<RootState>,
     initState: RootState,
     middleware: Middleware[] = [],
-    enhancers: StoreEnhancer<RootState>[] = []) {
+    enhancers: StoreEnhancer<RootState>[] = []): void {
+    assert(!this._store, 'Store already configured!');
 
-    if (this._store) {
-      throw new Error('Store already configured!');
-    }
-
-    const reTypedCompose = compose as RetypedCompose;
-    const finalCreateStore = <StoreEnhancerStoreCreator<RootState>>reTypedCompose(
-        applyMiddleware(...middleware),
-        ...enhancers
-    )(createStore);
-    const store = finalCreateStore(reducer, initState);
-    this.setStore(store);
+    // Variable-arity compose in typescript FTW.
+    this.setStore(
+      compose.apply(null,
+        [ applyMiddleware(...middleware), ...enhancers ])(createStore)
+        (rootReducer, initState));
   }
 
   /**
@@ -93,10 +75,7 @@ export class NgRedux<RootState> {
    * @param store Your app's store
    */
   provideStore(store: Store<RootState>) {
-    if (this._store) {
-      throw new Error('Store already configured!');
-    }
-
+    assert(!this._store, 'Store already configured!');
     this.setStore(store);
   };
 
@@ -105,36 +84,20 @@ export class NgRedux<RootState> {
    *
    * @typeparam S
    * @param selector key or function to select a part of the state
-   * @param [comparer] Optional
+   * @param [comparator] Optional
    * comparison function called to test if an item is distinct
    * from the previous item in the source.
    *
    * @returns An Observable that emits items from the
    * source Observable with distinct values.
    */
-  select<S>(
+  select = <S>(
     selector?: Selector<RootState, S>,
-    comparator?: Comparator): Observable<S> {
-
-    let result: Observable<S>;
-    const changedStore = this._store$.distinctUntilChanged();
-
-    if (!selector) {
-      return this._store$.distinctUntilChanged(comparator);
-    } else if (
-      typeof selector === 'string' ||
-      typeof selector === 'number' ||
-      typeof selector === 'symbol') {
-
-      result = changedStore.map(state => state[selector as PropertySelector]);
-    } else if (Array.isArray(selector)) {
-      result = changedStore.map(state => getIn(state, selector as PathSelector));
-    } else {
-      result = changedStore.map(selector as FunctionSelector<RootState, S>);
-    }
-
-    return result.distinctUntilChanged(comparator);
-  }
+    comparator?: Comparator): Observable<S> =>
+      this._store$
+        .distinctUntilChanged()
+        .map(resolveToFunctionSelector(selector))
+        .distinctUntilChanged(comparator);
 
   /**
    * Get the current state of the application
@@ -148,7 +111,8 @@ export class NgRedux<RootState> {
    * @param listener A callback to invoke when the state is updated
    * @returns A function to unsubscribe
    */
-  subscribe = (listener: () => void): Unsubscribe => this._store.subscribe(listener)
+  subscribe = (listener: () => void): Unsubscribe =>
+    this._store.subscribe(listener)
 
   /**
    * Replaces the reducer currently used by the store to calculate the state.
@@ -163,18 +127,17 @@ export class NgRedux<RootState> {
     this._store.replaceReducer(nextReducer)
 
   /**
-   * Dispatch an action to Redux
+   * Dispatch an action to Redux.
+   *
+   * Ensures that dispatch happens inside the Angular Zone.
    */
   dispatch: Dispatch<RootState> = action => {
-    if (!this._store) {
-      throw new Error('Dispatch failed: did you forget to configure your store? ' +
+    assert(
+      !!this._store,
+      'Dispatch failed: did you forget to configure your store? ' +
         'https://github.com/angular-redux/@angular-redux/core/blob/master/' +
         'README.md#quick-start');
-    }
 
-    // Some apps dispatch actions from outside the angular zone; e.g. as
-    // part of a 3rd-party callback, etc. When this happens, we need to
-    // execute the dispatch in-zone or Angular2's UI won't update.
     return this.ngZone.run(() => this._store.dispatch(action));
   };
 
