@@ -23,8 +23,8 @@ export interface SelectorStubMap {
   [selector: string]: SelectorStubRecord;
 }
 
-export /** @hidden */
-interface SubStoreStubMap {
+/** @hidden */
+export interface SubStoreStubMap {
   [basePath: string]: MockObservableStore<any>
 }
 
