@@ -49,7 +49,7 @@ export const userComponentReducer = (state, action) =>
     <p>name: {{ name$ |async }}</p>
     <p>occupation: {{ occupation$ | async }}</p>
     <p>lines of code: {{ loc$ | async }}</p>
-    <button (click)=accCode(100)>Add 100 lines of code</button>
+    <button (click)=addCode(100)>Add 100 lines of code</button>
   `,
 })
 export class UserComponent implements NgOnInit {
