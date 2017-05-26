@@ -36,7 +36,6 @@ describe('Substore', () => {
     subSubStore.select('quux').subscribe(quux =>
       expect(quux).toEqual(3));
 
-    // TODO: fix.
     expect(subSubStore.dispatch({ type: 'MY_ACTION' }))
       .toEqual({
         type: 'MY_ACTION',

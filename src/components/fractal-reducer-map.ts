@@ -9,10 +9,12 @@ const composeReducers = (...reducers: Reducer<any>[]): Reducer<any> =>
   (state, action) =>
     reducers.reduce((subState, reducer) => reducer(subState, action), state);
 
+/** @hidden */
 export function enableFractalReducers(rootReducer: Reducer<any>) {
   return composeReducers(rootFractalReducer, rootReducer);
 }
 
+/** @hidden */
 export function registerFractalReducer(
   basePath: PathSelector,
   localReducer: Reducer<any>): void {
@@ -24,6 +26,7 @@ export function registerFractalReducer(
     reducerMap[JSON.stringify(basePath)] = localReducer;
   }
 
+/** @hidden */
 export function replaceLocalReducer(
   basePath: PathSelector,
   nextLocalReducer: Reducer<any>): void {

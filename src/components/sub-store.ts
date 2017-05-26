@@ -13,6 +13,7 @@ import { NgRedux } from './ng-redux';
 import { ObservableStore, Comparator } from './observable-store';
 import { registerFractalReducer, replaceLocalReducer } from './fractal-reducer-map';
 
+/** @hidden */
 export class SubStore<State> implements ObservableStore<State> {
   constructor(
     private rootStore: NgRedux<any>,

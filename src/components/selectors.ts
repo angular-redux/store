@@ -7,6 +7,7 @@ export type Selector<RootState, S> = PropertySelector |
   PathSelector |
   FunctionSelector<RootState, S>;
 
+/** @hidden */
 export const sniffSelectorType = <RootState, S>(selector?: Selector<RootState, S>) =>
   !selector ?
     'nil' :
@@ -16,6 +17,7 @@ export const sniffSelectorType = <RootState, S>(selector?: Selector<RootState, S
         'function' :
         'property';
 
+/** @hidden */
 export const resolver = <RootState, S>(selector: Selector<RootState, S>) => ({
   property: state => state[selector as PropertySelector],
   path: state => getIn(state, selector as PathSelector),
@@ -23,5 +25,6 @@ export const resolver = <RootState, S>(selector: Selector<RootState, S>) => ({
   nil: state => state,
 });
 
+/** @hidden */
 export const resolveToFunctionSelector = <RootState, S>(selector: Selector<RootState, S>) =>
   resolver(selector)[sniffSelectorType(selector)];
