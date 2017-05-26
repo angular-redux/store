@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/let'
-import { Comparator, NgRedux } from '../components/ng-redux';
+import { NgRedux } from '../components/ng-redux';
 import { Selector } from '../components/selectors';
+import { Comparator } from '../components/observable-store';
 
 /**
  * Selects an observable from the store, and attaches it to the decorated

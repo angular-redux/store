@@ -1,3 +1,23 @@
+# 6.4.0
+
+## Features
+
+* Added 'fractal store' support.
+
+You can now create an encapsulated 'sub-store' that only operates on a section of the global Redux store:
+
+```typescript
+const subStore = ngRedux.configureSubStore(
+  ['path', 'to', 'somewhere'],
+  localReducer)
+```
+
+Substore has the same interface as `NgRedux`: `select`, `dispatch` etc;
+however when these functions are called on a substore instance, they
+are scoped to the data under `path.to.somewhere`.
+
+See [the docs](https://github.com/angular-redux/store/blob/master/articles/fractal-store.md) for more info.
+
 # 6.3.0
 
 ## Fixes

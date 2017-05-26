@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DevToolsExtension | @angular-redux/store</title>
+	<title>ObservableStore | @angular-redux/store</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -907,40 +907,52 @@ img { max-width: 100%; }
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
-		<li class="current tsd-kind-class">
-			<a href="devtoolsextension.html" class="tsd-kind-icon">Dev<wbr>Tools<wbr>Extension</a>
+		<li class=" tsd-kind-class">
+			<a href="../classes/devtoolsextension.html" class="tsd-kind-icon">Dev<wbr>Tools<wbr>Extension</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="../classes/mockdevtoolsextension.html" class="tsd-kind-icon">Mock<wbr>Dev<wbr>Tools<wbr>Extension</a>
+		</li>
+		<li class=" tsd-kind-class tsd-has-type-parameter">
+			<a href="../classes/mockngredux.html" class="tsd-kind-icon">Mock<wbr>NgRedux</a>
+		</li>
+		<li class=" tsd-kind-class tsd-has-type-parameter">
+			<a href="../classes/ngredux.html" class="tsd-kind-icon">Ng<wbr>Redux</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="../classes/ngreduxmodule.html" class="tsd-kind-icon">Ng<wbr>Redux<wbr>Module</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="../classes/ngreduxtestingmodule.html" class="tsd-kind-icon">Ng<wbr>Redux<wbr>Testing<wbr>Module</a>
+		</li>
+		<li class=" tsd-kind-class tsd-has-type-parameter">
+			<a href="../classes/substore.html" class="tsd-kind-icon">Sub<wbr>Store</a>
+		</li>
+		<li class="current tsd-kind-interface tsd-has-type-parameter">
+			<a href="observablestore.html" class="tsd-kind-icon">Observable<wbr>Store</a>
 			<ul>
-				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="devtoolsextension.html#enhancer" class="tsd-kind-icon">enhancer</a>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="observablestore.html#configuresubstore" class="tsd-kind-icon">configure<wbr>Sub<wbr>Store</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="devtoolsextension.html#isenabled" class="tsd-kind-icon">is<wbr>Enabled</a>
+				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a href="observablestore.html#dispatch" class="tsd-kind-icon">dispatch</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="observablestore.html#select" class="tsd-kind-icon">select</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+					<a href="observablestore.html#getstate" class="tsd-kind-icon">get<wbr>State</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+					<a href="observablestore.html#replacereducer" class="tsd-kind-icon">replace<wbr>Reducer</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+					<a href="observablestore.html#subscribe" class="tsd-kind-icon">subscribe</a>
 				</li>
 			</ul>
 		</li>
-		<li class=" tsd-kind-class">
-			<a href="mockdevtoolsextension.html" class="tsd-kind-icon">Mock<wbr>Dev<wbr>Tools<wbr>Extension</a>
-		</li>
-		<li class=" tsd-kind-class tsd-has-type-parameter">
-			<a href="mockngredux.html" class="tsd-kind-icon">Mock<wbr>NgRedux</a>
-		</li>
-		<li class=" tsd-kind-class tsd-has-type-parameter">
-			<a href="ngredux.html" class="tsd-kind-icon">Ng<wbr>Redux</a>
-		</li>
-		<li class=" tsd-kind-class">
-			<a href="ngreduxmodule.html" class="tsd-kind-icon">Ng<wbr>Redux<wbr>Module</a>
-		</li>
-		<li class=" tsd-kind-class">
-			<a href="ngreduxtestingmodule.html" class="tsd-kind-icon">Ng<wbr>Redux<wbr>Testing<wbr>Module</a>
-		</li>
-		<li class=" tsd-kind-class tsd-has-type-parameter">
-			<a href="substore.html" class="tsd-kind-icon">Sub<wbr>Store</a>
-		</li>
-		<li class=" tsd-kind-interface tsd-has-type-parameter">
-			<a href="../interfaces/observablestore.html" class="tsd-kind-icon">Observable<wbr>Store</a>
-		</li>
 		<li class=" tsd-kind-interface">
-			<a href="../interfaces/substorestubmap.html" class="tsd-kind-icon">Sub<wbr>Store<wbr>Stub<wbr>Map</a>
+			<a href="substorestubmap.html" class="tsd-kind-icon">Sub<wbr>Store<wbr>Stub<wbr>Map</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
 			<a href="../globals.html#comparator" class="tsd-kind-icon">Comparator</a>
@@ -997,16 +1009,40 @@ img { max-width: 100%; }
 		<section class="tsd-panel tsd-comment">
 			<div class="tsd-comment tsd-typography">
 				<div class="lead">
-					<p>An angular-2-ified version of the Redux DevTools chrome extension.</p>
+					<p>This interface represents the glue that connects the
+						subscription-oriented Redux Store with the RXJS Observable-oriented
+					Angular component world.</p>
 				</div>
+				<p>Augments the basic Redux store interface with methods to
+				enable selection and fractalization.</p>
 			</div>
+		</section>
+		<section class="tsd-panel tsd-type-parameters">
+			<h3>Type parameters</h3>
+			<ul class="tsd-type-parameters">
+				<li>
+					<h4>StateType</h4>
+				</li>
+			</ul>
 		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">DevToolsExtension</span>
+					<span class="tsd-signature-type">Store</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StateType</span><span class="tsd-signature-symbol">&gt;</span>
+					<ul class="tsd-hierarchy">
+						<li>
+							<span class="target">ObservableStore</span>
+						</li>
+					</ul>
 				</li>
+			</ul>
+		</section>
+		<section class="tsd-panel">
+			<h3>Implemented by</h3>
+			<ul class="tsd-hierarchy">
+				<li><a href="../classes/ngredux.html" class="tsd-signature-type">NgRedux</a></li>
+				<li><a href="../classes/substore.html" class="tsd-signature-type">SubStore</a></li>
 			</ul>
 		</section>
 		<section class="tsd-panel-group tsd-index-group">
@@ -1014,66 +1050,300 @@ img { max-width: 100%; }
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
+						<h3>Properties</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="observablestore.html#configuresubstore" class="tsd-kind-icon">configure<wbr>Sub<wbr>Store</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="observablestore.html#dispatch" class="tsd-kind-icon">dispatch</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="observablestore.html#select" class="tsd-kind-icon">select</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section tsd-is-inherited">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="devtoolsextension.html#enhancer" class="tsd-kind-icon">enhancer</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="devtoolsextension.html#isenabled" class="tsd-kind-icon">is<wbr>Enabled</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="observablestore.html#getstate" class="tsd-kind-icon">get<wbr>State</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="observablestore.html#replacereducer" class="tsd-kind-icon">replace<wbr>Reducer</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="observablestore.html#subscribe" class="tsd-kind-icon">subscribe</a></li>
 						</ul>
 					</section>
 				</div>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Properties</h2>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="configuresubstore" class="tsd-anchor"></a>
+				<h3>configure<wbr>Sub<wbr>Store</h3>
+				<div class="tsd-signature tsd-kind-icon">configure<wbr>Sub<wbr>Store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/ed38cb1/src/components/observable-store.ts#L43">src/components/observable-store.ts:43</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Carves off a &#39;subStore&#39; or &#39;fractal&#39; store from this one.</p>
+					</div>
+					<p>The returned object is itself an observable store, however any
+						selections, dispatches, or invocations of localReducer will be
+						specific to that substore and will not know about the parent
+					ObservableStore from which it was created.</p>
+					<p>This is handy for encapsulating component or module state while
+					still benefiting from time-travel, etc.</p>
+				</div>
+				<div class="tsd-type-declaration">
+					<h4>Type declaration</h4>
+					<ul class="tsd-parameters">
+						<li class="tsd-parameter-siganture">
+							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-has-type-parameter tsd-is-not-exported">
+								<li class="tsd-signature tsd-kind-icon">&lt;SubState&gt;<span class="tsd-signature-symbol">(</span>basePath<span class="tsd-signature-symbol">: </span><a href="../globals.html#pathselector" class="tsd-signature-type">PathSelector</a>, localReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SubState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="observablestore.html" class="tsd-signature-type">ObservableStore</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SubState</span><span class="tsd-signature-symbol">&gt;</span></li>
+							</ul>
+							<ul class="tsd-descriptions">
+								<li class="tsd-description">
+									<h4 class="tsd-type-parameters-title">Type parameters</h4>
+									<ul class="tsd-type-parameters">
+										<li>
+											<h4>SubState</h4>
+										</li>
+									</ul>
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameters">
+										<li>
+											<h5>basePath: <a href="../globals.html#pathselector" class="tsd-signature-type">PathSelector</a></h5>
+										</li>
+										<li>
+											<h5>localReducer: <span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SubState</span><span class="tsd-signature-symbol">&gt;</span></h5>
+										</li>
+									</ul>
+									<h4 class="tsd-returns-title">Returns <a href="observablestore.html" class="tsd-signature-type">ObservableStore</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SubState</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+				<a name="dispatch" class="tsd-anchor"></a>
+				<h3>dispatch</h3>
+				<div class="tsd-signature tsd-kind-icon">dispatch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StateType</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<aside class="tsd-sources">
+					<p>Inherited from Store.dispatch</p>
+					<ul>
+						<li>Defined in node_modules/redux/index.d.ts:141</li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Dispatches an action. It is the only way to trigger a state change.</p>
+					</div>
+					<p>The <code>reducer</code> function, used to create the store, will be called with the
+						current state tree and the given <code>action</code>. Its return value will be
+						considered the <strong>next</strong> state of the tree, and the change listeners will
+					be notified.</p>
+					<p>The base implementation only supports plain object actions. If you want
+						to dispatch a Promise, an Observable, a thunk, or something else, you
+						need to wrap your store creating function into the corresponding
+						middleware. For example, see the documentation for the <code>redux-thunk</code>
+						package. Even the middleware will eventually dispatch plain object
+					actions using this method.</p>
+					<dl class="tsd-comment-tags">
+						<dt>param</dt>
+						<dd><p>A plain object representing “what changed”. It is a good
+								idea to keep actions serializable so you can record and replay user
+								sessions, or use the time travelling <code>redux-devtools</code>. An action must
+								have a <code>type</code> property which may not be <code>undefined</code>. It is a good idea
+							to use string constants for action types.</p>
+						</dd>
+						<dt>returns</dt>
+						<dd><p>For convenience, the same action object you dispatched.</p>
+							<p>Note that, if you use a custom middleware, it may wrap <code>dispatch()</code> to
+							return something else (for example, a Promise you can await).</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="select" class="tsd-anchor"></a>
+				<h3>select</h3>
+				<div class="tsd-signature tsd-kind-icon">select<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/ed38cb1/src/components/observable-store.ts#L28">src/components/observable-store.ts:28</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Select a slice of state to expose as an observable.</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>typeparam</dt>
+						<dd></dd>
+						<dt>param</dt>
+						<dd><p>key or function to select a part of the state</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>comparison function called to test if an item is distinct
+							from the previous item in the source.</p>
+						</dd>
+						<dt>returns</dt>
+						<dd><p>An Observable that emits items from the
+							source Observable with distinct values.</p>
+						</dd>
+					</dl>
+				</div>
+				<div class="tsd-type-declaration">
+					<h4>Type declaration</h4>
+					<ul class="tsd-parameters">
+						<li class="tsd-parameter-siganture">
+							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-has-type-parameter tsd-is-not-exported">
+								<li class="tsd-signature tsd-kind-icon">&lt;SelectedType&gt;<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><a href="../globals.html#selector" class="tsd-signature-type">Selector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StateType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">SelectedType</span><span class="tsd-signature-symbol">&gt;</span>, comparator<span class="tsd-signature-symbol">?: </span><a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SelectedType</span><span class="tsd-signature-symbol">&gt;</span></li>
+							</ul>
+							<ul class="tsd-descriptions">
+								<li class="tsd-description">
+									<h4 class="tsd-type-parameters-title">Type parameters</h4>
+									<ul class="tsd-type-parameters">
+										<li>
+											<h4>SelectedType</h4>
+										</li>
+									</ul>
+									<h4 class="tsd-parameters-title">Parameters</h4>
+									<ul class="tsd-parameters">
+										<li>
+											<h5>selector: <a href="../globals.html#selector" class="tsd-signature-type">Selector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StateType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">SelectedType</span><span class="tsd-signature-symbol">&gt;</span></h5>
+										</li>
+										<li>
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> comparator: <a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a></h5>
+										</li>
+									</ul>
+									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SelectedType</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 			<h2>Methods</h2>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="enhancer" class="tsd-anchor"></a>
-				<h3>enhancer</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">enhancer<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+				<a name="getstate" class="tsd-anchor"></a>
+				<h3>get<wbr>State</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>State<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">StateType</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
+							<p>Inherited from Store.getState</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/ed38cb1/src/components/dev-tools.ts#L26">src/components/dev-tools.ts:26</a></li>
+								<li>Defined in node_modules/redux/index.d.ts:148</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>A wrapper for the Chrome Extension Redux DevTools.
-									Makes sure state changes triggered by the extension
-								trigger Angular2&#39;s change detector.</p>
+								<p>Reads the state tree managed by the store.</p>
 							</div>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">StateType</span></h4>
+						<p>The current state tree of your application.</p>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+				<a name="replacereducer" class="tsd-anchor"></a>
+				<h3>replace<wbr>Reducer</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">replace<wbr>Reducer<span class="tsd-signature-symbol">(</span>nextReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StateType</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from Store.replaceReducer</p>
+							<ul>
+								<li>Defined in node_modules/redux/index.d.ts:185</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Replaces the reducer currently used by the store to calculate the state.</p>
+							</div>
+							<p>You might need this if your app implements code splitting and you want to
+								load some of the reducers dynamically. You might also need this if you
+							implement a hot reloading mechanism for Redux.</p>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">Object</span></h5>
+								<h5>nextReducer: <span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StateType</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>The reducer for the store to use instead.</p>
+								</div>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="isenabled" class="tsd-anchor"></a>
-				<h3>is<wbr>Enabled</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">is<wbr>Enabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+				<a name="subscribe" class="tsd-anchor"></a>
+				<h3>subscribe</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">subscribe<span class="tsd-signature-symbol">(</span>listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Unsubscribe</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
+							<p>Inherited from Store.subscribe</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/ed38cb1/src/components/dev-tools.ts#L51">src/components/dev-tools.ts:51</a></li>
+								<li>Defined in node_modules/redux/index.d.ts:174</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Returns true if the extension is installed and enabled.</p>
+								<p>Adds a change listener. It will be called any time an action is
+									dispatched, and some part of the state tree may potentially have changed.
+									You may then call <code>getState()</code> to read the current state tree inside the
+								callback.</p>
 							</div>
+							<p>You may call <code>dispatch()</code> from a change listener, with the following
+							caveats:</p>
+							<ol>
+								<li><p>The subscriptions are snapshotted just before every <code>dispatch()</code> call.
+										If you subscribe or unsubscribe while the listeners are being invoked,
+										this will not have any effect on the <code>dispatch()</code> that is currently in
+										progress. However, the next <code>dispatch()</code> call, whether nested or not,
+									will use a more recent snapshot of the subscription list.</p>
+								</li>
+								<li><p>The listener should not expect to see all states changes, as the state
+										might have been updated multiple times during a nested <code>dispatch()</code> before
+										the listener is called. It is, however, guaranteed that all subscribers
+										registered before the <code>dispatch()</code> started will be called with the latest
+									state by the time it exits.</p>
+								</li>
+							</ol>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>listener: <span class="tsd-signature-type">function</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>A callback to be invoked on every dispatch.</p>
+								</div>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-siganture">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Unsubscribe</span></h4>
+						<p>A function to remove this change listener.</p>
 					</li>
 				</ul>
 			</section>
