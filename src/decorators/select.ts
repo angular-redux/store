@@ -20,6 +20,7 @@ export function select<T>(
   comparator?: Comparator) {
 
   return function decorate(target: any, key: string): void {
+    let result;
     let bindingKey = selector;
     if (!selector) {
       bindingKey = (key.lastIndexOf('$') === key.length - 1) ?
@@ -28,7 +29,10 @@ export function select<T>(
     }
 
     function getter() {
-      return NgRedux.instance.select(bindingKey, comparator);
+      if (NgRedux.instance && !result) {
+        result = NgRedux.instance.select(bindingKey, comparator);
+      }
+      return result;
     }
 
     // Replace decorated property with a getter that returns the observable.
@@ -59,10 +63,14 @@ export function select$<T>(
   comparator?: Comparator) {
 
   return function decorate(target: any, key: string): void {
+    let result;
     function getter() {
-      return NgRedux.instance.select(selector)
-        .let(transformer)
-        .distinctUntilChanged(comparator);
+      if (NgRedux.instance && !result) {
+        result = NgRedux.instance.select(selector)
+          .let(transformer)
+          .distinctUntilChanged(comparator);
+      }
+      return result;
     }
 
     // Replace decorated property with a getter that returns the observable.
