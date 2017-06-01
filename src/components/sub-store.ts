@@ -7,10 +7,11 @@ import {
   Selector,
   PropertySelector,
   FunctionSelector,
+  Comparator,
   resolveToFunctionSelector,
 } from './selectors';
 import { NgRedux } from './ng-redux';
-import { ObservableStore, Comparator } from './observable-store';
+import { ObservableStore, } from './observable-store';
 import { registerFractalReducer, replaceLocalReducer } from './fractal-reducer-map';
 
 /** @hidden */

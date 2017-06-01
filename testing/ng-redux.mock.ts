@@ -4,6 +4,7 @@ import {
   Comparator,
   ObservableStore,
   PathSelector,
+  selectionMap,
 } from '@angular-redux/store';
 import { Reducer, Action } from 'redux';
 import { Observable } from 'rxjs/Observable';
@@ -53,6 +54,7 @@ export class MockNgRedux<RootState> extends MockObservableStore<RootState> {
    */
   static reset(): void {
     MockNgRedux.mockInstance.reset();
+    selectionMap.reset();
   }
 
   /** @hidden */

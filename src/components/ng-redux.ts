@@ -18,11 +18,11 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
-import { Selector, PathSelector, resolveToFunctionSelector } from './selectors';
+import { Selector, PathSelector, Comparator, resolveToFunctionSelector } from './selectors';
 import { assert } from '../utils/assert';
 import { SubStore } from './sub-store';
 import { enableFractalReducers } from './fractal-reducer-map';
-import { ObservableStore, Comparator } from './observable-store';
+import { ObservableStore } from './observable-store';
 
 export class NgRedux<RootState> implements ObservableStore<RootState> {
   /** @hidden */

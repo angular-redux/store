@@ -1,8 +1,6 @@
 import { Store, Reducer } from 'redux';
 import { Observable } from 'rxjs/Observable';
-import { Selector, PathSelector } from './selectors';
-
-export type Comparator = (x: any, y: any) => boolean;
+import { Selector, PathSelector, Comparator } from './selectors';
 
 /**
  * This interface represents the glue that connects the

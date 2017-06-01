@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/let'
 import { NgRedux } from '../components/ng-redux';
-import { Selector } from '../components/selectors';
-import { Comparator } from '../components/observable-store';
+import { Selector, Comparator, Transformer } from '../components/selectors';
+import { selectionMap } from '../utils/selection-map';
 
 /**
  * Selects an observable from the store, and attaches it to the decorated
@@ -20,7 +20,6 @@ export function select<T>(
   comparator?: Comparator) {
 
   return function decorate(target: any, key: string): void {
-    let result;
     let bindingKey = selector;
     if (!selector) {
       bindingKey = (key.lastIndexOf('$') === key.length - 1) ?
@@ -29,10 +28,12 @@ export function select<T>(
     }
 
     function getter() {
-      if (NgRedux.instance && !result) {
-        result = NgRedux.instance.select(bindingKey, comparator);
+      let selection = selectionMap.get(bindingKey, null, comparator);
+      if (NgRedux.instance && !selection) {
+        selection = NgRedux.instance.select(bindingKey, comparator);
+        selectionMap.set(bindingKey, null, comparator, selection);
       }
-      return result;
+      return selection;
     }
 
     // Replace decorated property with a getter that returns the observable.
@@ -45,8 +46,6 @@ export function select<T>(
     }
   };
 }
-
-export type Transformer<RootState, V> = (store$: Observable<RootState>) => Observable<V>
 
 /**
  * Selects an observable using the given path selector, and runs it through the given
@@ -63,14 +62,15 @@ export function select$<T>(
   comparator?: Comparator) {
 
   return function decorate(target: any, key: string): void {
-    let result;
     function getter() {
-      if (NgRedux.instance && !result) {
-        result = NgRedux.instance.select(selector)
+      let selection = selectionMap.get(selector, transformer, comparator);
+      if (NgRedux.instance && !selection) {
+        selection = NgRedux.instance.select(selector)
           .let(transformer)
           .distinctUntilChanged(comparator);
+        selectionMap.set(selector, transformer, comparator, selection);
       }
-      return result;
+      return selection;
     }
 
     // Replace decorated property with a getter that returns the observable.

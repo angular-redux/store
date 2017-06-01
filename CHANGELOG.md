@@ -1,3 +1,7 @@
+# 6.4.2
+
+* Fixed some issues with MockNgRedux and the select dectorators. See https://github.com/angular-redux/store/issues/413 for details.
+
 # 6.4.1
 
 * Fixed a memory leak with `@select`, `@select$`. See https://github.com/angular-redux/example-app/issues/34 for details.

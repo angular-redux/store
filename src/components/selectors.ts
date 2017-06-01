@@ -1,5 +1,8 @@
 import { getIn } from '../utils/get-in';
+import { Observable } from 'rxjs/Observable';
 
+export type Comparator = (x: any, y: any) => boolean;
+export type Transformer<RootState, V> = (store$: Observable<RootState>) => Observable<V>
 export type PropertySelector = string | number | symbol;
 export type PathSelector = (string | number)[];
 export type FunctionSelector<RootState, S> = ((s: RootState) => S);

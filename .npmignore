@@ -13,3 +13,4 @@ circle.yml
 npm-debug.log
 .compiled
 ISSUE_TEMPLATE.md
+*.tgz

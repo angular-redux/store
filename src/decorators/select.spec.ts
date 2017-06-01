@@ -7,6 +7,7 @@ import 'rxjs/add/operator/take';
 
 import { NgRedux } from '../components/ng-redux';
 import { select, select$ } from './select';
+import { selectionMap } from '../utils/selection-map';
 
 class MockNgZone { run = fn => fn() }
 
@@ -24,6 +25,7 @@ describe('Select decorators', () => {
 
   beforeEach(() => {
     targetObj = {};
+    selectionMap.reset();
     ngRedux = new NgRedux(mockNgZone);
     ngRedux.configureStore(rootReducer, defaultState);
   });
