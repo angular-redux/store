@@ -1,3 +1,7 @@
+# 6.4.3
+
+* Reset `MockNgRedux.mockInstance` as part of `MockNgRedux.reset()`.
+
 # 6.4.2
 
 * Fixed some issues with MockNgRedux and the select dectorators. See https://github.com/angular-redux/store/issues/413 for details.
@@ -73,6 +77,10 @@ export class AnimalActions {
   // ...
 }
 ```
+
+# 6.2.2
+
+* Reset `MockNgRedux.mockInstance` as part of `MockNgRedux.reset()`.
 
 # 6.2.1
 

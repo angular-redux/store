@@ -55,6 +55,7 @@ export class MockNgRedux<RootState> extends MockObservableStore<RootState> {
   static reset(): void {
     MockNgRedux.mockInstance.reset();
     selectionMap.reset();
+    NgRedux.instance = MockNgRedux.mockInstance;
   }
 
   /** @hidden */
