@@ -1,3 +1,7 @@
+# 6.2.2
+
+* Reset `MockNgRedux.mockInstance` when `MockNgRedux.reset()` is called.
+
 # 6.2.1
 
 ## Fixes

@@ -45,6 +45,7 @@ export class MockNgRedux<RootState> extends NgRedux<RootState> {
    */
   public static reset(): void {
     MockNgRedux.selections = {};
+    NgRedux.instance = MockNgRedux.mockInstance;
   }
 
   private static initSelectorStub<R, S>(
