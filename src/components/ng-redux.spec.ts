@@ -173,8 +173,7 @@ describe('NgRedux Observable Store', () => {
       .createSpy('selectSpy')
       .and.callFake(state => state.foo);
 
-    const results = [];
-    ngRedux.select(selectSpy).subscribe(result => results.push(result));
+    ngRedux.select().subscribe(selectSpy);
 
     // called once to get the initial value
     expect(selectSpy.calls.count()).toEqual(1);

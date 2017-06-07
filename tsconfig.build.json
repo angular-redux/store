@@ -20,7 +20,8 @@
       "@angular-redux/store": [
         "./src"
       ]
-    }
+    },
+    "strict": true
   },
   "compileOnSave": false,
   "buildOnSave": false,

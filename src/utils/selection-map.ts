@@ -1,13 +1,13 @@
 import { Observable } from 'rxjs/Observable';
 import { Selector, Comparator, Transformer } from '../components/selectors';
 
-const toKey = (val: Object | Array<any> | Function | String) =>
+const toKey = (val?: Object | Array<any> | Function | String) =>
   val ? val.toString() : '';
 
 const computeKey = (
   selector: Selector<any, any>,
-  transformer: Transformer<any, any>,
-  comparator: Comparator) =>
+  transformer?: Transformer<any, any>,
+  comparator?: Comparator) =>
   `s:${toKey(selector)}:t:${toKey(transformer)}:c:${toKey(comparator)}`;
 
 /**
@@ -19,18 +19,18 @@ export class SelectionMap {
   private _map: { [id: string]: Observable<any> } = {};
 
   set(
+    selection: Observable<any>,
     selector: Selector<any, any>,
-    transformer: Transformer<any, any>,
-    comparator: Comparator,
-    selection: Observable<any>): void {
+    transformer?: Transformer<any, any>,
+    comparator?: Comparator): void {
     const key = computeKey(selector, transformer, comparator);
     this._map[key] = selection;
   }
 
   get(
     selector: Selector<any, any>,
-    transformer: Transformer<any, any>,
-    comparator: Comparator): Observable<any> {
+    transformer?: Transformer<any, any>,
+    comparator?: Comparator): Observable<any> {
     const key = computeKey(selector, transformer, comparator);
     return this._map[key];
   }

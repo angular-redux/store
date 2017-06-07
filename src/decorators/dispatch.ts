@@ -11,10 +11,11 @@ export function dispatch(): void | any {
     let originalMethod: Function;
 
     descriptor = descriptor || Object.getOwnPropertyDescriptor(target, key);
-    const wrapped = function (...args) {
-
+    const wrapped = function (this: any, ...args) {
       const result = originalMethod.apply(this, args);
-      NgRedux.instance.dispatch(result);
+      if (NgRedux.instance) {
+        NgRedux.instance.dispatch(result);
+      }
       return result;
     }
 

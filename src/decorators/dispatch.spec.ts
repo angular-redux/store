@@ -34,7 +34,6 @@ describe('@dispatch', () => {
   });
 
   it('should call dispatch with the result of the function', () => {
-
     spyOn(NgRedux.instance, 'dispatch');
     const instance = new TestClass();
     const result = instance.classMethod('class method');
@@ -48,7 +47,9 @@ describe('@dispatch', () => {
     expect(result.type).toBe('TEST');
     expect(result.payload.value).toBe('class method');
     expect(result.payload.instanceProperty).toBe('test');
-    expect(NgRedux.instance.dispatch).toHaveBeenCalledWith(expectedArgs)
+    expect(NgRedux.instance).toBeTruthy();
+    expect(NgRedux.instance && NgRedux.instance.dispatch)
+      .toHaveBeenCalledWith(expectedArgs)
   });
 
   it('should work with property initalizers', () => {
@@ -66,12 +67,25 @@ describe('@dispatch', () => {
     expect(result.type).toBe('TEST');
     expect(result.payload.value).toBe('bound property');
     expect(result.payload.instanceProperty).toBe('test');
-    expect(NgRedux.instance.dispatch).toHaveBeenCalledWith(expectedArgs)
+    expect(NgRedux.instance).toBeTruthy();
+    expect(NgRedux.instance && NgRedux.instance.dispatch)
+      .toHaveBeenCalledWith(expectedArgs)
   })
 
   it('work with properties bound to function defined outside of the class', () => {
     spyOn(NgRedux.instance, 'dispatch');
+    const instanceProperty = 'test';
+    function externalFunction(value) {
+      return {
+        type: 'TEST',
+        payload: {
+          value,
+          instanceProperty,
+        }
+      }
+    }
     const instance = new TestClass();
+    instance.externalFunction = externalFunction;
     const result = instance.externalFunction('external function');
     const expectedArgs = {
       type: 'TEST',
@@ -83,24 +97,15 @@ describe('@dispatch', () => {
     expect(result.type).toBe('TEST');
     expect(result.payload.value).toBe('external function');
     expect(result.payload.instanceProperty).toBe('test');
-    expect(NgRedux.instance.dispatch).toHaveBeenCalledWith(expectedArgs);
+    expect(NgRedux.instance).toBeTruthy();
+    expect(NgRedux.instance && NgRedux.instance.dispatch)
+      .toHaveBeenCalledWith(expectedArgs)
   })
 
-
-
-  function externalFunction(value) {
-    return {
-      type: 'TEST',
-      payload: {
-        value,
-        instanceProperty: this.instanceProperty
-      }
-    }
-  }
   class TestClass {
     instanceProperty = 'test'
     @dispatch()
-    externalFunction = externalFunction
+    externalFunction;
     @dispatch()
     classMethod(value) {
       return {

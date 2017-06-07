@@ -20,18 +20,16 @@ export function select<T>(
   comparator?: Comparator) {
 
   return function decorate(target: any, key: string): void {
-    let bindingKey = selector;
-    if (!selector) {
-      bindingKey = (key.lastIndexOf('$') === key.length - 1) ?
-        key.substring(0, key.length - 1) :
-        key;
-    }
+    const bindingKey = selector ||
+      ((key.lastIndexOf('$') === key.length - 1) ?
+          key.substring(0, key.length - 1) :
+          key);
 
     function getter() {
-      let selection = selectionMap.get(bindingKey, null, comparator);
+      let selection = selectionMap.get(bindingKey, undefined, comparator);
       if (NgRedux.instance && !selection) {
         selection = NgRedux.instance.select(bindingKey, comparator);
-        selectionMap.set(bindingKey, null, comparator, selection);
+        selectionMap.set(selection, bindingKey, undefined, comparator);
       }
       return selection;
     }
@@ -68,7 +66,7 @@ export function select$<T>(
         selection = NgRedux.instance.select(selector)
           .let(transformer)
           .distinctUntilChanged(comparator);
-        selectionMap.set(selector, transformer, comparator, selection);
+        selectionMap.set(selection, selector, transformer, comparator);
       }
       return selection;
     }

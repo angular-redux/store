@@ -2,7 +2,7 @@ import { Injectable, ApplicationRef } from '@angular/core';
 import { NgRedux } from './ng-redux';
 import { NgZone } from '@angular/core';
 declare const window: any;
-const environment: any = typeof window !== 'undefined' ? window : this;
+const environment: any = typeof window !== 'undefined' ? window : {};
 
 /**
  * An angular-2-ified version of the Redux DevTools chrome extension.

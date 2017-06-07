@@ -26,15 +26,15 @@ import { ObservableStore } from './observable-store';
 
 export class NgRedux<RootState> implements ObservableStore<RootState> {
   /** @hidden */
-  static instance: ObservableStore<any> = undefined;
+  static instance?: ObservableStore<any> = undefined;
 
-  private _store: Store<RootState> = null;
-  private _store$: BehaviorSubject<RootState> = null;
+  private _store: Store<RootState>;
+  private _store$: BehaviorSubject<RootState>;
 
   /** @hidden */
   constructor(private ngZone: NgZone) {
     NgRedux.instance = this;
-    this._store$ = new BehaviorSubject<RootState>(undefined)
+    this._store$ = new BehaviorSubject<RootState | undefined>(undefined)
       .filter(n => n !== undefined)
       .switchMap(n => this.storeToObservable(n as any)) as BehaviorSubject<RootState>;
   }

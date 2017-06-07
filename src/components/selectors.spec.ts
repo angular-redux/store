@@ -16,9 +16,6 @@ describe('Selectors', () => {
   it('sniffs a path selector', () =>
     expect(sniffSelectorType(['one', 'two'])).toBe('path'));
 
-  it('sniffs a nil selector (null)', () =>
-    expect(sniffSelectorType(null)).toBe('nil'));
-
   it('sniffs a nil selector (undefined)', () =>
     expect(sniffSelectorType()).toBe('nil'));
 });
