@@ -1,0 +1,5 @@
+{
+  "name": "@angular-redux/store/testing",
+  "typings": "../lib/testing/index.d.ts",
+  "main": "../lib/testing/index.js"
+}
