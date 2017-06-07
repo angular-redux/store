@@ -1,3 +1,7 @@
+# 6.4.4
+
+* Improve packaging of `testing` submodule for people working in strict mode (thanks @ialibhay)!
+
 # 6.4.3
 
 * Reset `MockNgRedux.mockInstance` as part of `MockNgRedux.reset()`.
