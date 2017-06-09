@@ -1,3 +1,11 @@
+# 6.4.5
+
+* Fix a boundary condition where `MockNgRedux` could get instantiated
+twice under certain conditions.
+* Adjust exposed interfaces of `MockNgRedux` and `NgRedux` to make them
+structurally compatible (both assignable to the `NgRedux` type) (issue #419)
+* Update to TypeScript 2.3.4
+
 # 6.4.4
 
 * Improve packaging of `testing` submodule for people working in strict mode (thanks @ialibhay)!

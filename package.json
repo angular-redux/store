@@ -1,6 +1,6 @@
 {
   "name": "@angular-redux/store",
-  "version": "6.4.5-alpha.0",
+  "version": "6.4.5",
   "description": "Angular 2 bindings for Redux",
   "main": "./lib/src/index.js",
   "scripts": {
@@ -74,7 +74,7 @@
     "ts-node": "^3.0.2",
     "tslint": "^5.1.0",
     "typedoc": "^0.6.0",
-    "typescript": "^2.3.0",
+    "typescript": "^2.3.4",
     "zone.js": "^0.8.4"
   },
   "peerDependencies": {

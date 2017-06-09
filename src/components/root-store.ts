@@ -25,11 +25,11 @@ import { SubStore } from './sub-store';
 import { enableFractalReducers } from './fractal-reducer-map';
 import { ObservableStore } from './observable-store';
 
+/** @hidden */
 export class RootStore<RootState> extends NgRedux<RootState> {
   private _store: Store<RootState>;
   private _store$: BehaviorSubject<RootState>;
 
-  /** @hidden */
   constructor(private ngZone: NgZone) {
     super();
     NgRedux.instance = this;
