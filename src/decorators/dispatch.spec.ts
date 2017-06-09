@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import { NgZone } from '@angular/core';
 import { NgRedux } from '../components/ng-redux';
+import { RootStore } from '../components/root-store';
 import { dispatch } from './dispatch';
-
 
 class MockNgZone {
   run = fn => fn()
@@ -29,7 +29,7 @@ describe('@dispatch', () => {
       }
 
     };
-    ngRedux = new NgRedux(mockNgZone);
+    ngRedux = new RootStore(mockNgZone);
     ngRedux.configureStore(rootReducer, defaultState);
   });
 

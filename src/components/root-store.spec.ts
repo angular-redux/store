@@ -5,6 +5,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/combineLatest';
 
 import { NgRedux } from './ng-redux';
+import { RootStore } from './root-store';
 import { select } from '../decorators/select';
 
 const returnPojo = () => ({});
@@ -47,7 +48,7 @@ describe('NgRedux Observable Store', () => {
     };
 
     store = createStore(rootReducer);
-    ngRedux = new NgRedux<IAppState>(mockNgZone);
+    ngRedux = new RootStore<IAppState>(mockNgZone);
     ngRedux.configureStore(rootReducer, defaultState);
   });
 
@@ -219,7 +220,7 @@ describe('NgRedux Observable Store', () => {
         _ngRedux.select(n => n.baz).subscribe(baz => this.baz = baz);
       }
     }
-    ngRedux = new NgRedux<IAppState>(mockNgZone);
+    ngRedux = new RootStore<IAppState>(mockNgZone);
 
     const someService = new SomeService(ngRedux);
     ngRedux.configureStore(rootReducer, defaultState);
@@ -235,7 +236,7 @@ describe('NgRedux Observable Store', () => {
       @select() baz$: any;
     }
 
-    ngRedux = new NgRedux<IAppState>(mockNgZone);
+    ngRedux = new RootStore<IAppState>(mockNgZone);
 
     const someService = new SomeService();
     someService
@@ -283,7 +284,7 @@ describe('Chained actions in subscriptions', () => {
       }
     };
 
-    ngRedux = new NgRedux<IAppState>(mockNgZone);
+    ngRedux = new RootStore<IAppState>(mockNgZone);
     ngRedux.configureStore(rootReducer, defaultState);
   });
 

@@ -29,7 +29,7 @@ export interface SubStoreStubMap {
 }
 
 /** @hidden */
-export class MockObservableStore<State> implements ObservableStore<null> {
+export class MockObservableStore<State> implements ObservableStore<any> {
   selections: SelectorStubMap = {};
   subStores: SubStoreStubMap = {};
 
@@ -62,7 +62,7 @@ export class MockObservableStore<State> implements ObservableStore<null> {
     basePath: PathSelector,
     localReducer: Reducer<SubState>): MockObservableStore<SubState> =>
       this.initSubStore<SubState>(basePath)
-  
+
   getSubStore = (...pathSelectors: PathSelector[]): MockObservableStore<any> => {
     const [ first, ...rest ] = pathSelectors;
     return first ?

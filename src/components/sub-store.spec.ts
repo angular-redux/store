@@ -1,12 +1,12 @@
 import { NgZone } from '@angular/core';
 import { async } from '@angular/core/testing'
-import { NgRedux } from './ng-redux';
+import { RootStore } from './root-store';
 
 class MockNgZone { run = fn => fn() }
 
 describe('Substore', () => {
   const defaultReducer = (state, action) => state;
-  const ngRedux = new NgRedux(new MockNgZone() as NgZone);
+  const ngRedux = new RootStore(new MockNgZone() as NgZone);
   ngRedux.configureStore(defaultReducer, {
     foo: {
       bar: { wat: { quux: 3 } },
