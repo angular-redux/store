@@ -1,3 +1,8 @@
+# 6.5.0
+
+* Enabled fractal store features for the decorator interface. See
+https://github.com/angular-redux/store/blob/master/articles/fractal-store.md for details.
+
 # 6.4.5
 
 * Fix a boundary condition where `MockNgRedux` could get instantiated

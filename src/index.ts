@@ -9,10 +9,11 @@ import {
 } from './components/selectors';
 import { ObservableStore } from './components/observable-store';
 import { DevToolsExtension } from './components/dev-tools';
+import { enableFractalReducers } from './components/fractal-reducer-map';
 import { select, select$ } from './decorators/select';
 import { dispatch } from './decorators/dispatch';
+import { WithSubStore } from './decorators/with-sub-store';
 import { NgReduxModule } from './ng-redux.module';
-import { selectionMap } from './utils/selection-map';
 
 // Warning: don't do this:
 //  export * from './foo'
@@ -28,9 +29,10 @@ export {
   Transformer,
   NgReduxModule,
   DevToolsExtension,
+  enableFractalReducers,
   select,
   select$,
   dispatch,
+  WithSubStore,
   ObservableStore,
-  selectionMap,
 };

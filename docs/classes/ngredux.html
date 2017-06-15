@@ -951,6 +951,9 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-class">
 			<a href="ngreduxtestingmodule.html" class="tsd-kind-icon">Ng<wbr>Redux<wbr>Testing<wbr>Module</a>
 		</li>
+		<li class=" tsd-kind-interface">
+			<a href="../interfaces/ifractalstoreoptions.html" class="tsd-kind-icon">IFractal<wbr>Store<wbr>Options</a>
+		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
 			<a href="../interfaces/observablestore.html" class="tsd-kind-icon">Observable<wbr>Store</a>
 		</li>
@@ -973,7 +976,13 @@ img { max-width: 100%; }
 			<a href="../globals.html#transformer" class="tsd-kind-icon">Transformer</a>
 		</li>
 		<li class=" tsd-kind-function">
+			<a href="../globals.html#withsubstore" class="tsd-kind-icon">With<wbr>Sub<wbr>Store</a>
+		</li>
+		<li class=" tsd-kind-function">
 			<a href="../globals.html#dispatch" class="tsd-kind-icon">dispatch</a>
+		</li>
+		<li class=" tsd-kind-function">
+			<a href="../globals.html#enablefractalreducers" class="tsd-kind-icon">enable<wbr>Fractal<wbr>Reducers</a>
 		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter">
 			<a href="../globals.html#select" class="tsd-kind-icon">select</a>
@@ -1007,6 +1016,11 @@ img { max-width: 100%; }
 			<ul class="tsd-hierarchy">
 				<li>
 					<span class="target">NgRedux</span>
+					<ul class="tsd-hierarchy">
+						<li>
+							<a href="mockngredux.html" class="tsd-signature-type">MockNgRedux</a>
+						</li>
+					</ul>
 				</li>
 			</ul>
 		</section>
@@ -1044,7 +1058,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">configure<wbr>Store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/src/components/ng-redux.ts#L34">src/components/ng-redux.ts:34</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/src/components/ng-redux.ts#L34">src/components/ng-redux.ts:34</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1107,7 +1121,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#configuresubstore">configureSubStore</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/src/components/ng-redux.ts#L62">src/components/ng-redux.ts:62</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/src/components/ng-redux.ts#L62">src/components/ng-redux.ts:62</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1148,7 +1162,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#dispatch">dispatch</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/src/components/ng-redux.ts#L53">src/components/ng-redux.ts:53</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/src/components/ng-redux.ts#L53">src/components/ng-redux.ts:53</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1159,7 +1173,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#getstate">getState</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/src/components/ng-redux.ts#L54">src/components/ng-redux.ts:54</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/src/components/ng-redux.ts#L54">src/components/ng-redux.ts:54</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1184,7 +1198,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">provide<wbr>Store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/src/components/ng-redux.ts#L50">src/components/ng-redux.ts:50</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/src/components/ng-redux.ts#L50">src/components/ng-redux.ts:50</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1230,7 +1244,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#replacereducer">replaceReducer</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/src/components/ng-redux.ts#L56">src/components/ng-redux.ts:56</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/src/components/ng-redux.ts#L56">src/components/ng-redux.ts:56</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1262,7 +1276,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#select">select</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/src/components/ng-redux.ts#L59">src/components/ng-redux.ts:59</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/src/components/ng-redux.ts#L59">src/components/ng-redux.ts:59</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1270,7 +1284,7 @@ img { max-width: 100%; }
 					<ul class="tsd-parameters">
 						<li class="tsd-parameter-siganture">
 							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-has-type-parameter tsd-is-not-exported">
-								<li class="tsd-signature tsd-kind-icon">&lt;SelectedType&gt;<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><a href="../globals.html#selector" class="tsd-signature-type">Selector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">SelectedType</span><span class="tsd-signature-symbol">&gt;</span>, comparator<span class="tsd-signature-symbol">?: </span><a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SelectedType</span><span class="tsd-signature-symbol">&gt;</span></li>
+								<li class="tsd-signature tsd-kind-icon">&lt;SelectedType&gt;<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">?: </span><a href="../globals.html#selector" class="tsd-signature-type">Selector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">SelectedType</span><span class="tsd-signature-symbol">&gt;</span>, comparator<span class="tsd-signature-symbol">?: </span><a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SelectedType</span><span class="tsd-signature-symbol">&gt;</span></li>
 							</ul>
 							<ul class="tsd-descriptions">
 								<li class="tsd-description">
@@ -1283,7 +1297,7 @@ img { max-width: 100%; }
 									<h4 class="tsd-parameters-title">Parameters</h4>
 									<ul class="tsd-parameters">
 										<li>
-											<h5>selector: <a href="../globals.html#selector" class="tsd-signature-type">Selector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">SelectedType</span><span class="tsd-signature-symbol">&gt;</span></h5>
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> selector: <a href="../globals.html#selector" class="tsd-signature-type">Selector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">SelectedType</span><span class="tsd-signature-symbol">&gt;</span></h5>
 										</li>
 										<li>
 											<h5><span class="tsd-flag ts-flagOptional">Optional</span> comparator: <a href="../globals.html#comparator" class="tsd-signature-type">Comparator</a></h5>
@@ -1303,7 +1317,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#subscribe">subscribe</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/src/components/ng-redux.ts#L55">src/components/ng-redux.ts:55</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/src/components/ng-redux.ts#L55">src/components/ng-redux.ts:55</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">

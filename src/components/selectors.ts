@@ -22,10 +22,10 @@ export const sniffSelectorType = <RootState, S>(selector?: Selector<RootState, S
 
 /** @hidden */
 export const resolver = <RootState, S>(selector?: Selector<RootState, S>) => ({
-  property: state => state[selector as PropertySelector],
-  path: state => getIn(state, selector as PathSelector),
+  property: (state: any) => state[selector as PropertySelector],
+  path: (state: RootState) => getIn(state, selector as PathSelector),
   function: selector as FunctionSelector<RootState, S>,
-  nil: state => state,
+  nil: (state: RootState) => state,
 });
 
 /** @hidden */

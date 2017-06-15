@@ -6,9 +6,9 @@
  * @hidden
  */
 export const setIn = (
-  obj: Object,
+  obj: any,
   [ firstElem, ...restElems ]: (string | number)[],
-  value): Object => ({
+  value: any): Object => ({
     ...obj,
     [firstElem]: restElems.length === 0 ?
       value :

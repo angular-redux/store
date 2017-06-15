@@ -44,7 +44,7 @@ export class MockObservableStore<State> implements ObservableStore<any> {
     this.subStores = {};
   }
 
-  dispatch = action => action;
+  dispatch = (action: Action) => action;
   replaceReducer = () => null;
   getState = () => null;
   subscribe = () => () => null;

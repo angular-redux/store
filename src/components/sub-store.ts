@@ -1,5 +1,8 @@
 import { Dispatch, Reducer, Action } from 'redux';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/distinctUntilChanged';
+
 import { getIn } from '../utils/get-in';
 import { setIn } from '../utils/set-in';
 import {
@@ -42,13 +45,12 @@ export class SubStore<State> implements ObservableStore<State> {
 
   select = <SelectedState>(
     selector?: Selector<State, SelectedState>,
-    comparator?: Comparator): Observable<SelectedState> =>
-      this.rootStore
-        .select(this.basePath)
-        .map(resolveToFunctionSelector(selector))
-        .distinctUntilChanged(comparator)
+    comparator?: Comparator): Observable<SelectedState> => this.rootStore
+      .select(this.basePath)
+      .map(resolveToFunctionSelector(selector))
+      .distinctUntilChanged(comparator)
 
-  subscribe = (listener): () => void => {
+  subscribe = (listener: () => void): () => void => {
     const subscription = this.select().subscribe(listener);
     return () => subscription.unsubscribe();
   }

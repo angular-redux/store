@@ -91,7 +91,7 @@ describe('getIn', () => {
   it('should defer to a native getIn function if it exists on the data', () => {
     const testPath = [ 'foo', 'bar' ];
     const test = {
-      getIn: path => path === testPath ? 42 : undefined,
+      getIn: (path: (string | number)[]) => path === testPath ? 42 : undefined,
     };
 
     expect(getIn(test, testPath)).toEqual(42);

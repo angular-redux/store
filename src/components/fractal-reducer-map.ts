@@ -3,14 +3,19 @@ import { PathSelector } from './selectors';
 import { setIn } from '../utils/set-in';
 import { getIn } from '../utils/get-in';
 
-const reducerMap: { [id: string]: Reducer<any> } = {};
+let reducerMap: { [id: string]: Reducer<any> } = {};
 
 const composeReducers = (...reducers: Reducer<any>[]): Reducer<any> =>
-  (state, action) =>
+  (state: any, action: Action) =>
     reducers.reduce((subState, reducer) => reducer(subState, action), state);
 
-/** @hidden */
+/**
+ * @param rootReducer Call this on your root reducer to enable SubStore functionality for
+ * pre-configured stores (e.g. when using NgRedux.provideStore()).  NgRedux.configureStore
+ * does it for you under the hood.
+ */
 export function enableFractalReducers(rootReducer: Reducer<any>) {
+  reducerMap = {};
   return composeReducers(rootFractalReducer, rootReducer);
 }
 

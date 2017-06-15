@@ -12,6 +12,7 @@ import {
 } from 'redux';
 
 import { NgZone } from '@angular/core';
+import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
@@ -66,7 +67,7 @@ export class RootStore<RootState> extends NgRedux<RootState> {
     this._store.replaceReducer(nextReducer)
   }
 
-  dispatch: Dispatch<RootState> = action => {
+  dispatch: Dispatch<RootState> = (action: Action) => {
     assert(
       !!this._store,
       'Dispatch failed: did you forget to configure your store? ' +
@@ -95,7 +96,7 @@ export class RootStore<RootState> extends NgRedux<RootState> {
   }
 
   private storeToObservable = (store: Store<RootState>): Observable<RootState> =>
-    new Observable<RootState>(observer => {
+    new Observable<RootState>((observer: Observer<RootState>) => {
       observer.next(store.getState());
       store.subscribe(() => observer.next(store.getState()));
     });

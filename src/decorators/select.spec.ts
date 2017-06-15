@@ -1,32 +1,39 @@
-import 'reflect-metadata';
 import { NgZone } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Action } from 'redux';
 
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toArray';
 import 'rxjs/add/operator/take';
 
+import { NgRedux } from '../components/ng-redux';
 import { RootStore } from '../components/root-store';
 import { select, select$ } from './select';
-import { selectionMap } from '../utils/selection-map';
 
-class MockNgZone { run = fn => fn() }
+interface IAppState {
+  foo: string;
+  baz: number;
+}
+
+type PayloadAction = Action & { payload: any };
+
+class MockNgZone { run = (fn: Function) => fn() }
 
 describe('Select decorators', () => {
-  let ngRedux;
+  let ngRedux: NgRedux<IAppState>;
   let targetObj;
 
   const mockNgZone = new MockNgZone() as NgZone;
   const defaultState = { foo: 'bar', baz: -1 };
 
-  const rootReducer = (state = defaultState, action) =>
+  const rootReducer = (state = defaultState, action: PayloadAction) =>
     action.payload ?
       Object.assign({}, state, { baz: action.payload }) :
       state;
 
   beforeEach(() => {
     targetObj = {};
-    selectionMap.reset();
-    ngRedux = new RootStore(mockNgZone);
+    ngRedux = new RootStore<IAppState>(mockNgZone);
+    NgRedux.instance = ngRedux;
     ngRedux.configureStore(rootReducer, defaultState);
   });
 
@@ -76,7 +83,7 @@ describe('Select decorators', () => {
 
     describe('when passed a function', () => {
       it('attempts to use that function as the selector function', done => {
-        const selector = state => state.baz * 2;
+        const selector = (state: IAppState) => state.baz * 2;
         class MockClass { @select(selector) obs$: Observable<number>; }
         const mockInstance = new MockClass();
 
@@ -127,7 +134,7 @@ describe('Select decorators', () => {
   });
 
   describe('@select$', () => {
-    const transformer = baz$ => baz$.map(baz => 2 * baz);
+    const transformer = (baz$: Observable<number>) => baz$.map(baz => 2 * baz);
 
     it('applies a transformer to the observable', done => {
       class MockClass { @select$('baz', transformer) baz$: Observable<number>; }

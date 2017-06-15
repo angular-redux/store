@@ -99,6 +99,63 @@ existing subStore.
 
 ## What about @select, @select$, @dispatch?
 
-We don't have decorator support for the fractal store yet. These decorators
-act on the global store only right now. We're thinking about a clean way
-of doing fractal decorators for a future release.
+As of 6.5.0, the decorator interface has been expanded to support fractal
+stores as well.
+
+Tag your component or service with the `@WithSubStore` decorator, and a substore will be
+configured behind the scenes; instance of that class's `@select`, `@select$`, and `@dispatch` decorators will now operate on that substore instead of the root store. Reworking the
+example above with the decorator interface looks like this:
+
+```typescript
+interface IUser {
+  name: string,
+  occupation: string,
+  loc: number,
+};
+
+export const userComponentReducer = (state, action) =>
+  action.type === 'ADD_LOC' ?
+  { ...state, loc: state.loc + action.payload } :
+  state;
+
+export const defaultToZero = (obs$: Observable<number>) =>
+  obs$.map(n => n || 0);
+
+@Component({
+  selector: 'user',
+  template: `
+    <p>name: {{ name$ |async }}</p>
+    <p>occupation: {{ occupation$ | async }}</p>
+    <p>lines of code: {{ loc$ | async }}</p>
+    <button (click)=addCode(100)>Add 100 lines of code</button>
+  `,
+})
+@WithSubStore({
+  basePathMethodName: 'getBasePath',
+  localReducer: userComponentReducer,
+})
+export class UserComponent implements NgOnInit {
+  @Input() userId: String;
+
+  // The substore will be created at the first non-falsy path returned
+  // from this function.
+  getBasePath(): PathSelector | null {
+    return this.userId ? ['users', userId] : null;
+  }
+
+  // These selections are now scoped to the portion of the store rooted
+  // at ['users', userId];
+  @select('name')                readonly name$: Observable<string>;
+  @select('occupation')          readonly occupation$: Observable<string>;
+  @select$('loc', defaultToZero) readonly loc$: Observable<number>;
+
+  // These dispatches will be scoped to the substore as well, as if you
+  // had called ngRedux.configureSubStore(...).dispatch(numLines).
+  @dispatch()
+  addCode(numLines) {
+    // Dispatching from the sub-store ensures this component instance's
+    // subStore only sees the 'ADD_LOC' action.
+    return { type: 'ADD_LOC', payload: numLines };
+  }
+}
+```

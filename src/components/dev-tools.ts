@@ -24,13 +24,13 @@ export class DevToolsExtension {
    * [zalmoxisus/redux-devtools-extension/blob/master/docs/API/Arguments.md]
    */
   enhancer = (options?: Object) => {
-    let subscription;
+    let subscription: Function;
     if (!this.isEnabled()) {
       return null;
     }
 
     // Make sure changes from dev tools update angular's view.
-    environment.devToolsExtension.listen(({type}) => {
+    environment.devToolsExtension.listen(({type}: any) => {
       if (type === 'START') {
         subscription = this.ngRedux.subscribe(() => {
           if (!NgZone.isInAngularZone()) {

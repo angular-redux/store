@@ -966,6 +966,9 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-class">
 			<a href="ngreduxtestingmodule.html" class="tsd-kind-icon">Ng<wbr>Redux<wbr>Testing<wbr>Module</a>
 		</li>
+		<li class=" tsd-kind-interface">
+			<a href="../interfaces/ifractalstoreoptions.html" class="tsd-kind-icon">IFractal<wbr>Store<wbr>Options</a>
+		</li>
 		<li class=" tsd-kind-interface tsd-has-type-parameter">
 			<a href="../interfaces/observablestore.html" class="tsd-kind-icon">Observable<wbr>Store</a>
 		</li>
@@ -988,7 +991,13 @@ img { max-width: 100%; }
 			<a href="../globals.html#transformer" class="tsd-kind-icon">Transformer</a>
 		</li>
 		<li class=" tsd-kind-function">
+			<a href="../globals.html#withsubstore" class="tsd-kind-icon">With<wbr>Sub<wbr>Store</a>
+		</li>
+		<li class=" tsd-kind-function">
 			<a href="../globals.html#dispatch" class="tsd-kind-icon">dispatch</a>
+		</li>
+		<li class=" tsd-kind-function">
+			<a href="../globals.html#enablefractalreducers" class="tsd-kind-icon">enable<wbr>Fractal<wbr>Reducers</a>
 		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter">
 			<a href="../globals.html#select" class="tsd-kind-icon">select</a>
@@ -1012,7 +1021,7 @@ img { max-width: 100%; }
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="tsd-signature-type">NgRedux</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>
+					<a href="ngredux.html" class="tsd-signature-type">NgRedux</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>
 					<ul class="tsd-hierarchy">
 						<li>
 							<span class="target">MockNgRedux</span>
@@ -1024,7 +1033,7 @@ img { max-width: 100%; }
 		<section class="tsd-panel">
 			<h3>Implements</h3>
 			<ul class="tsd-hierarchy">
-				<li><span class="tsd-signature-type">ObservableStore</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<li><a href="../interfaces/observablestore.html" class="tsd-signature-type">ObservableStore</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 			</ul>
 		</section>
 		<section class="tsd-panel-group tsd-index-group">
@@ -1064,9 +1073,10 @@ img { max-width: 100%; }
 				<h3>configure<wbr>Sub<wbr>Store</h3>
 				<div class="tsd-signature tsd-kind-icon">configure<wbr>Sub<wbr>Store<span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type">configureSubStore</a><span class="tsd-signature-symbol"> =&nbsp;this.mockRootStore.configureSubStore</span></div>
 				<aside class="tsd-sources">
-					<p>Overrides NgRedux.configureSubStore</p>
+					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#configuresubstore">configureSubStore</a></p>
+					<p>Overrides <a href="ngredux.html">NgRedux</a>.<a href="ngredux.html#configuresubstore">configureSubStore</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/testing/ng-redux.mock.ts#L83">testing/ng-redux.mock.ts:83</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/testing/ng-redux.mock.ts#L81">testing/ng-redux.mock.ts:81</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1075,9 +1085,10 @@ img { max-width: 100%; }
 				<h3>dispatch</h3>
 				<div class="tsd-signature tsd-kind-icon">dispatch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;this.mockRootStore.dispatch as Dispatch&lt;any&gt;</span></div>
 				<aside class="tsd-sources">
-					<p>Overrides NgRedux.dispatch</p>
+					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#dispatch">dispatch</a></p>
+					<p>Overrides <a href="ngredux.html">NgRedux</a>.<a href="ngredux.html#dispatch">dispatch</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/testing/ng-redux.mock.ts#L86">testing/ng-redux.mock.ts:86</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/testing/ng-redux.mock.ts#L84">testing/ng-redux.mock.ts:84</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1086,9 +1097,10 @@ img { max-width: 100%; }
 				<h3>get<wbr>State</h3>
 				<div class="tsd-signature tsd-kind-icon">get<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol"> =&nbsp;this.mockRootStore.getState</span></div>
 				<aside class="tsd-sources">
-					<p>Overrides NgRedux.getState</p>
+					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#getstate">getState</a></p>
+					<p>Overrides <a href="ngredux.html">NgRedux</a>.<a href="ngredux.html#getstate">getState</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/testing/ng-redux.mock.ts#L87">testing/ng-redux.mock.ts:87</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/testing/ng-redux.mock.ts#L85">testing/ng-redux.mock.ts:85</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1097,9 +1109,10 @@ img { max-width: 100%; }
 				<h3>replace<wbr>Reducer</h3>
 				<div class="tsd-signature tsd-kind-icon">replace<wbr>Reducer<span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type">replaceReducer</a><span class="tsd-signature-symbol"> =&nbsp;this.mockRootStore.replaceReducer</span></div>
 				<aside class="tsd-sources">
-					<p>Overrides NgRedux.replaceReducer</p>
+					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#replacereducer">replaceReducer</a></p>
+					<p>Overrides <a href="ngredux.html">NgRedux</a>.<a href="ngredux.html#replacereducer">replaceReducer</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/testing/ng-redux.mock.ts#L89">testing/ng-redux.mock.ts:89</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/testing/ng-redux.mock.ts#L87">testing/ng-redux.mock.ts:87</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1108,9 +1121,10 @@ img { max-width: 100%; }
 				<h3>select</h3>
 				<div class="tsd-signature tsd-kind-icon">select<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol"> =&nbsp;this.mockRootStore.select</span></div>
 				<aside class="tsd-sources">
-					<p>Overrides NgRedux.select</p>
+					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#select">select</a></p>
+					<p>Overrides <a href="ngredux.html">NgRedux</a>.<a href="ngredux.html#select">select</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/testing/ng-redux.mock.ts#L84">testing/ng-redux.mock.ts:84</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/testing/ng-redux.mock.ts#L82">testing/ng-redux.mock.ts:82</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1119,9 +1133,10 @@ img { max-width: 100%; }
 				<h3>subscribe</h3>
 				<div class="tsd-signature tsd-kind-icon">subscribe<span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type">subscribe</a><span class="tsd-signature-symbol"> =&nbsp;this.mockRootStore.subscribe</span></div>
 				<aside class="tsd-sources">
-					<p>Overrides NgRedux.subscribe</p>
+					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#subscribe">subscribe</a></p>
+					<p>Overrides <a href="ngredux.html">NgRedux</a>.<a href="ngredux.html#subscribe">subscribe</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/testing/ng-redux.mock.ts#L88">testing/ng-redux.mock.ts:88</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/testing/ng-redux.mock.ts#L86">testing/ng-redux.mock.ts:86</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1131,7 +1146,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">mock<wbr>Instance<span class="tsd-signature-symbol">:</span> <a href="mockngredux.html" class="tsd-signature-type">MockNgRedux</a><span class="tsd-signature-symbol"> =&nbsp;undefined</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/testing/ng-redux.mock.ts#L23">testing/ng-redux.mock.ts:23</a></li>
+						<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/testing/ng-redux.mock.ts#L22">testing/ng-redux.mock.ts:22</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1154,9 +1169,9 @@ img { max-width: 100%; }
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Overrides NgRedux.configureStore</p>
+							<p>Overrides <a href="ngredux.html">NgRedux</a>.<a href="ngredux.html#configurestore">configureStore</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/testing/ng-redux.mock.ts#L77">testing/ng-redux.mock.ts:77</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/testing/ng-redux.mock.ts#L75">testing/ng-redux.mock.ts:75</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1187,9 +1202,9 @@ img { max-width: 100%; }
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Overrides NgRedux.provideStore</p>
+							<p>Overrides <a href="ngredux.html">NgRedux</a>.<a href="ngredux.html#providestore">provideStore</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/testing/ng-redux.mock.ts#L76">testing/ng-redux.mock.ts:76</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/testing/ng-redux.mock.ts#L74">testing/ng-redux.mock.ts:74</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1212,7 +1227,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/testing/ng-redux.mock.ts#L71">testing/ng-redux.mock.ts:71</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/testing/ng-redux.mock.ts#L69">testing/ng-redux.mock.ts:69</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1235,7 +1250,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/testing/ng-redux.mock.ts#L34">testing/ng-redux.mock.ts:34</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/testing/ng-redux.mock.ts#L33">testing/ng-redux.mock.ts:33</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1279,7 +1294,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/testing/ng-redux.mock.ts#L52">testing/ng-redux.mock.ts:52</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/testing/ng-redux.mock.ts#L51">testing/ng-redux.mock.ts:51</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1319,7 +1334,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0584dc5/testing/ng-redux.mock.ts#L61">testing/ng-redux.mock.ts:61</a></li>
+								<li>Defined in <a href="https://github.com/SethDavenport/ng2-redux/blob/0dbbb4f/testing/ng-redux.mock.ts#L60">testing/ng-redux.mock.ts:60</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

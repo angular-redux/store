@@ -4,7 +4,7 @@
  *
  * @hidden
  */
-export function getIn(v, pathElems: (string | number)[]): any {
+export function getIn(v: any | undefined, pathElems: (string | number)[]): any | undefined {
   if (!v) {
     return v;
   }

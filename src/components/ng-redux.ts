@@ -57,7 +57,7 @@ export abstract class NgRedux<RootState> implements ObservableStore<RootState> {
 
   // ObservableStore methods.
   abstract select: <SelectedType>(
-    selector: Selector<RootState, SelectedType>,
+    selector?: Selector<RootState, SelectedType>,
     comparator?: Comparator) => Observable<SelectedType>
   abstract configureSubStore: <SubState>(
     basePath: PathSelector,
