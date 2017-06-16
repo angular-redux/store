@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import { NgRedux } from '../components/ng-redux';
 import { ObservableStore } from '../components/observable-store';
-import { Selector, Comparator, Transformer } from '../components/selectors';
+import { Selector, PathSelector, Comparator, Transformer } from '../components/selectors';
 
 import 'rxjs/add/operator/let';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -17,9 +17,7 @@ export interface IFractalStoreOptions {
   /**
    * The name of an instance method that will define the
    * base path for the subStore. This method is expected to return an array
-   * of property names or undefined/null. The substore will be created from the
-   * first non-falsy value that gets returned. Return values from subsequent
-   * invocations will be ignored.
+   * of property names or undefined/null.
    */
   basePathMethodName: string;
 
@@ -49,6 +47,12 @@ const OPTIONS_KEY = '@angular-redux::substore::class::options';
 const INSTANCE_SUBSTORE_KEY = '@angular-redux::substore::instance::store';
 const INSTANCE_SELECTIONS_KEY = '@angular-redux::substore::instance::selections';
 
+/**
+ * Used to detect when the base path changes - this allows components to dynamically adjust
+ * their selections if necessary.
+ */
+const INSTANCE_BASE_PATH_KEY = '@angular-redux::substore::instance::basepath';
+
 const getClassOptions = (decoratedInstance: any): IFractalStoreOptions =>
   decoratedInstance.constructor[OPTIONS_KEY];
 
@@ -75,27 +79,54 @@ const getInstanceSelectionMap = (decoratedInstance: any) => {
   return map;
 }
 
+const hasBasePathChanged = (decoratedInstance: any, basePath?: PathSelector): boolean =>
+  decoratedInstance[INSTANCE_BASE_PATH_KEY] !== (basePath || []).toString();
+
+const setInstanceBasePath = (decoratedInstance: any, basePath?: PathSelector): void => {
+  decoratedInstance[INSTANCE_BASE_PATH_KEY] = (basePath || []).toString();
+}
+
+const clearInstanceState = (decoratedInstance: any) => {
+  decoratedInstance[INSTANCE_SELECTIONS_KEY] = null;
+  decoratedInstance[INSTANCE_SUBSTORE_KEY] = null;
+  decoratedInstance[INSTANCE_BASE_PATH_KEY] = null;
+}
+
 /**
  * Gets the store associated with a decorated instance (e.g. a
  * component or service)
  * @hidden
  */
-export const getBaseStore = (decoratedInstance: any) => {
+export const getBaseStore = (decoratedInstance: any): ObservableStore<any> | undefined => {
+  // The root store hasn't been set up yet.
+  if (!NgRedux.instance) {
+    return undefined;
+  }
+
+  const options = getClassOptions(decoratedInstance);
+
+  // This is not decorated with `@WithSubStore`. Return the root store.
+  if (!options) {
+    return NgRedux.instance;
+  }
+
+  // Dynamic base path support:
+  const basePath = decoratedInstance[options.basePathMethodName]();
+  if (hasBasePathChanged(decoratedInstance, basePath)) {
+    clearInstanceState(decoratedInstance);
+    setInstanceBasePath(decoratedInstance, basePath);
+  }
+
+  if (!basePath) {
+    return NgRedux.instance;
+  }
+
   const store = getInstanceStore(decoratedInstance);
   if (!store) {
-    const options = getClassOptions(decoratedInstance);
-
-    if (!options) {
-      setInstanceStore(decoratedInstance, NgRedux.instance);
-    } else {
-      const basePath = decoratedInstance[options.basePathMethodName]();
-      setInstanceStore(decoratedInstance,
-        basePath && NgRedux.instance ?
-          NgRedux.instance.configureSubStore(
-            basePath,
-            options.localReducer) :
-          undefined);
-    }
+    setInstanceStore(decoratedInstance,
+      NgRedux.instance.configureSubStore(
+        basePath,
+        options.localReducer));
   }
 
   return getInstanceStore(decoratedInstance);

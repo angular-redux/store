@@ -137,8 +137,7 @@ export const defaultToZero = (obs$: Observable<number>) =>
 export class UserComponent implements NgOnInit {
   @Input() userId: String;
 
-  // The substore will be created at the first non-falsy path returned
-  // from this function.
+  // The substore will be created from the return value of this function.
   getBasePath(): PathSelector | null {
     return this.userId ? ['users', userId] : null;
   }

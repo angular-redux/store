@@ -1,3 +1,11 @@
+# 6.5.2
+
+* Docgen updates.
+
+# 6.5.1
+
+* Allow `@WithSubStore`'s base path to be dynamic.
+
 # 6.5.0
 
 * Enabled fractal store features for the decorator interface. See
