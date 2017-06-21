@@ -128,6 +128,26 @@ describe('@WithSubStore', () => {
       // instance.
       expect(testInstance.obs$ === testInstance.obs$).toEqual(true);
     });
+
+    it('handle a base path with no extant store data', () => {
+      const iDontExistYetReducer =
+        (state: any, action: Action & { newValue: string }) =>
+          ({ ...state, nonexistentkey: action.newValue });
+
+      @WithSubStore({ basePathMethodName, localReducer: iDontExistYetReducer })
+      class TestClass {
+        @select('nonexistentkey') obs$: Observable<string>;
+        getSubStorePath = (): PathSelector => [ 'I', 'don\'t', 'exist', 'yet' ];
+        @dispatch() makeItExist = (newValue: string) => ({ type: 'nvm', newValue });
+      };
+
+      const testInstance = new TestClass();
+      testInstance.obs$
+        .take(2)
+        .toArray()
+        .subscribe(v => expect(v).toEqual([ undefined, 'now I exist' ]));
+      testInstance.makeItExist('now I exist');
+    });
   });
 
   describe('on the class causes @select$ to', () => {

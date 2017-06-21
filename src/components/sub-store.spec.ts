@@ -4,6 +4,8 @@ import { Action } from 'redux';
 import { RootStore } from './root-store';
 import { NgRedux } from './ng-redux';
 import { ObservableStore } from './observable-store';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/toArray';
 
 class MockNgZone { run = (fn: Function) => fn() }
 
@@ -50,6 +52,39 @@ describe('Substore', () => {
   it('selects based on base path', () =>
     subStore.select('wat').subscribe(wat =>
       expect(wat).toEqual({ quux: 3 })));
+
+  it('handles property selection on a base path that doesn\'t exist yet', () => {
+    const nonExistentSubStore = ngRedux.configureSubStore(
+      ['sure', 'whatever'],
+      (state: any, action: any) => ({ ...state, value: action.newValue }));
+    nonExistentSubStore.select('value')
+      .take(2)
+      .toArray()
+      .subscribe(v => expect(v).toEqual([ undefined, 'now I exist' ]));
+    nonExistentSubStore.dispatch({ type: 'nvm', newValue: 'now I exist' });
+  });
+
+  it('handles path selection on a base path that doesn\'t exist yet', () => {
+    const nonExistentSubStore = ngRedux.configureSubStore(
+      ['sure', 'whatever'],
+      (state: any, action: any) => ({ ...state, value: action.newValue }));
+    nonExistentSubStore.select([ 'value' ])
+      .take(2)
+      .toArray()
+      .subscribe(v => expect(v).toEqual([ undefined, 'now I exist' ]));
+    nonExistentSubStore.dispatch({ type: 'nvm', newValue: 'now I exist' });
+  });
+
+  it('handles function selection on a base path that doesn\'t exist yet', () => {
+    const nonExistentSubStore = ngRedux.configureSubStore(
+      ['sure', 'whatever'],
+      (state: any, action: any) => ({ ...state, value: action.newValue }));
+    nonExistentSubStore.select(s => s ? s.value : s)
+      .take(2)
+      .toArray()
+      .subscribe(v => expect(v).toEqual([ undefined, 'now I exist' ]));
+    nonExistentSubStore.dispatch({ type: 'nvm', newValue: 'now I exist' });
+  });
 
   it('can create its own sub-store', () => {
     const subSubStore = subStore.configureSubStore(['wat'], defaultReducer);

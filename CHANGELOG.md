@@ -1,3 +1,8 @@
+# 6.5.3
+
+* Handle `@WithSubStore`, `.configureSubStore` boundary cases for when the base path
+doesn't exist in the store yet.
+
 # 6.5.2
 
 * Docgen updates.
