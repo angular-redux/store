@@ -1,3 +1,9 @@
+# 6.5.4
+
+* Fix for https://github.com/angular-redux/store/issues/427: memory leaks introduced in 6.3.0.
+
+** You'll want to grab this update! **
+
 # 6.5.3
 
 * Handle `@WithSubStore`, `.configureSubStore` boundary cases for when the base path
@@ -66,7 +72,7 @@ See [the docs](https://github.com/angular-redux/store/blob/master/articles/fract
 
 * Fixed issues with middlewares that allow dispatching of things other than just raw actions
 (e.g. redux-thunk) [#386, #264].
-* Fixed issues with enhancers that chage the way `Store.subscribe` and listeners work (e.g. redux-batch) [#372]
+* Fixed issues with enhancers that change the way `Store.subscribe` and listeners work (e.g. redux-batch) [#372]
 
 ## Features
 

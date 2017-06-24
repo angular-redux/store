@@ -36,7 +36,7 @@ export class RootStore<RootState> extends NgRedux<RootState> {
     NgRedux.instance = this;
     this._store$ = new BehaviorSubject<RootState | undefined>(undefined)
       .filter(n => n !== undefined)
-      .switchMap(n => this.storeToObservable(n as any)) as BehaviorSubject<RootState>;
+      .switchMap(observableStore => observableStore as any) as BehaviorSubject<RootState>;
   }
 
   configureStore = (
@@ -92,12 +92,17 @@ export class RootStore<RootState> extends NgRedux<RootState> {
 
   private setStore(store: Store<RootState>) {
     this._store = store;
-    this._store$.next(store as any);
+    const storeServable = this.storeToObservable(store);
+    this._store$.next(storeServable as any);
   }
 
   private storeToObservable = (store: Store<RootState>): Observable<RootState> =>
     new Observable<RootState>((observer: Observer<RootState>) => {
       observer.next(store.getState());
-      store.subscribe(() => observer.next(store.getState()));
+      const unsubscribeFromRedux = store.subscribe(() => observer.next(store.getState()));
+      return () => {
+        unsubscribeFromRedux();
+        observer.complete();
+      };
     });
 };
