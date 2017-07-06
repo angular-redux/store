@@ -488,6 +488,7 @@ import 'rxjs/add/operator/toArray';
 
 import { MyComponent } from './my-component';
 import { IAppState } from '../store';
+import { CounterActions } from './app.actions';
 
 describe('MyComponent', () => {
   beforeEach(() => {
@@ -495,8 +496,9 @@ describe('MyComponent', () => {
     // in the test environment to use mock versions of NgRedux and DevToolsExtension.
     TestBed.configureTestingModule({
       declarations: [MyComponent],
-      imports: [NgReduxTestingModule],
-    }).compileComponents();
+      imports: [NgReduxTestingModule],
+      providers: [CounterActions]
+    }).compileComponents();
 
     // Reset the mock to start from a clean slate in each unit test.
     MockNgRedux.reset();
