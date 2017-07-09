@@ -26,7 +26,7 @@ export class SubStore<State> implements ObservableStore<State> {
       registerFractalReducer(basePath, localReducer);
   }
 
-  dispatch: Dispatch<State> = (action: Action) =>
+  dispatch: Dispatch<State> = action =>
     this.rootStore.dispatch(
       Object.assign({},
       action,

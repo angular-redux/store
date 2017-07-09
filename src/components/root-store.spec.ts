@@ -15,13 +15,7 @@ class MockNgZone {
   run = (fn: Function) => fn()
 }
 
-interface IAppState {
-  foo: string;
-  bar: string;
-  baz: number;
-}
-
-type PayloadAction = Action & { payload: string | number };
+type PayloadAction = Action & { payload?: string | number };
 
 describe('NgRedux Observable Store', () => {
   interface IAppState {

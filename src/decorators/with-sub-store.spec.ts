@@ -3,6 +3,7 @@ import { Action } from 'redux';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/toArray';
 
 import { WithSubStore } from './with-sub-store';
 import { select, select$ } from './select';
@@ -131,7 +132,7 @@ describe('@WithSubStore', () => {
 
     it('handle a base path with no extant store data', () => {
       const iDontExistYetReducer =
-        (state: any, action: Action & { newValue: string }) =>
+        (state: any, action: Action & { newValue?: string }) =>
           ({ ...state, nonexistentkey: action.newValue });
 
       @WithSubStore({ basePathMethodName, localReducer: iDontExistYetReducer })

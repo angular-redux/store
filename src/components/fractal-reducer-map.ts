@@ -40,10 +40,10 @@ export function replaceLocalReducer(
 
 function rootFractalReducer(
   state: {} = {},
-  action: Action & { '@angular-redux::fractalkey': string }) {
+  action: Action & { '@angular-redux::fractalkey'?: string }) {
     const fractalKey = action['@angular-redux::fractalkey'];
     const fractalPath = fractalKey ? JSON.parse(fractalKey) : [];
-    const localReducer = reducerMap[fractalKey];
+    const localReducer = reducerMap[fractalKey || ''];
     return fractalKey && localReducer ?
       setIn(
         state,

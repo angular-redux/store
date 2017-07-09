@@ -18,7 +18,8 @@
     "paths": {
       "@angular-redux/store": ["src/index.ts"]
     },
-    "strict": true
+    "strict": true,
+    "skipLibCheck": true
   },
   "compileOnSave": false,
   "buildOnSave": false,

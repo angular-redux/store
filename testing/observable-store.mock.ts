@@ -7,7 +7,7 @@ import {
 } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { Reducer, Action } from 'redux';
+import { Reducer, Action, Dispatch } from 'redux';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -44,9 +44,9 @@ export class MockObservableStore<State> implements ObservableStore<any> {
     this.subStores = {};
   }
 
-  dispatch = (action: Action) => action;
+  dispatch: Dispatch<State> = action => action;
   replaceReducer = () => null;
-  getState = () => null;
+  getState = () => ({} as State);
   subscribe = () => () => null;
 
   select = <SelectedState>(
@@ -63,11 +63,11 @@ export class MockObservableStore<State> implements ObservableStore<any> {
     localReducer: Reducer<SubState>): MockObservableStore<SubState> =>
       this.initSubStore<SubState>(basePath)
 
-  getSubStore = (...pathSelectors: PathSelector[]): MockObservableStore<any> => {
+  getSubStore = <SubState>(...pathSelectors: PathSelector[]): MockObservableStore<any> => {
     const [ first, ...rest ] = pathSelectors;
-    return first ?
+    return (first ?
       this.initSubStore(first).getSubStore(...rest) :
-      this;
+      this) as MockObservableStore<SubState>;
   }
 
   private initSubStore<SubState>(basePath: PathSelector) {

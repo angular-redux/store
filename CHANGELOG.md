@@ -1,3 +1,8 @@
+# 6.5.5
+
+* Update toolchain to typescript 2.4.
+* Fix for https://github.com/angular-redux/store/issues/434.
+
 # 6.5.4
 
 * Fix for https://github.com/angular-redux/store/issues/427: memory leaks introduced in 6.3.0.

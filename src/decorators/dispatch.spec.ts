@@ -14,7 +14,7 @@ interface IAppState {
   instanceProperty?: string;
 }
 
-type PayloadAction = Action & { payload: IAppState };
+type PayloadAction = Action & { payload?: IAppState };
 
 describe('@dispatch', () => {
   let ngRedux;
@@ -31,7 +31,7 @@ describe('@dispatch', () => {
     rootReducer = (state = defaultState, action: PayloadAction) => {
       switch (action.type) {
         case 'TEST':
-          const { value, instanceProperty } = action.payload;
+          const { value = null, instanceProperty = null } = action.payload || {};
           return Object.assign({}, state, { value, instanceProperty });
         default:
           return state;
@@ -78,8 +78,8 @@ describe('@dispatch', () => {
         }
       };
       expect(result.type).toBe('TEST');
-      expect(result.payload.value).toBe('class method');
-      expect(result.payload.instanceProperty).toBe('test');
+      expect(result.payload && result.payload.value).toBe('class method');
+      expect(result.payload && result.payload.instanceProperty).toBe('test');
       expect(NgRedux.instance).toBeTruthy();
       expect(NgRedux.instance && NgRedux.instance.dispatch)
         .toHaveBeenCalledWith(expectedArgs)
@@ -95,8 +95,8 @@ describe('@dispatch', () => {
         }
       }
       expect(result.type).toBe('TEST');
-      expect(result.payload.value).toBe('bound property');
-      expect(result.payload.instanceProperty).toBe('test');
+      expect(result.payload && result.payload.value).toBe('bound property');
+      expect(result.payload && result.payload.instanceProperty).toBe('test');
       expect(NgRedux.instance).toBeTruthy();
       expect(NgRedux.instance && NgRedux.instance.dispatch)
         .toHaveBeenCalledWith(expectedArgs)
@@ -123,8 +123,8 @@ describe('@dispatch', () => {
         }
       }
       expect(result.type).toBe('TEST');
-      expect(result.payload.value).toBe('external function');
-      expect(result.payload.instanceProperty).toBe('test');
+      expect(result.payload && result.payload.value).toBe('external function');
+      expect(result.payload && result.payload.instanceProperty).toBe('test');
       expect(NgRedux.instance).toBeTruthy();
       expect(NgRedux.instance && NgRedux.instance.dispatch)
         .toHaveBeenCalledWith(expectedArgs)
