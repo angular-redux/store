@@ -1,3 +1,8 @@
+# 6.5.6
+
+* Turn tsconfig checks to 11.
+* Minor code cleanup - no feature changes.
+
 # 6.5.5
 
 * Update toolchain to typescript 2.4.
