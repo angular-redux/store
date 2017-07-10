@@ -1,5 +1,4 @@
 import { NgZone } from '@angular/core';
-import { async } from '@angular/core/testing'
 import { Action } from 'redux';
 import { RootStore } from './root-store';
 import { NgRedux } from './ng-redux';
@@ -22,7 +21,7 @@ interface IAppState {
 }
 
 describe('Substore', () => {
-  const defaultReducer = (state: any, action: Action) => state;
+  const defaultReducer = (state: any, _: Action) => state;
 
   const basePath = ['foo', 'bar'];
   let ngRedux: NgRedux<IAppState>;

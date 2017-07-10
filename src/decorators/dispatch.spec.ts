@@ -132,7 +132,7 @@ describe('@dispatch', () => {
   });
 
   describe('On a substore', () => {
-    const localReducer = (state: any, action: Action) => state;
+    const localReducer = (state: any, _: Action) => state;
     @WithSubStore({
       basePathMethodName: 'getBasePath',
       localReducer,

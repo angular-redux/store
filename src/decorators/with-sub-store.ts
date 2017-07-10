@@ -1,4 +1,3 @@
-import { Reducer } from 'redux';
 import { IFractalStoreOptions, setClassOptions } from './helpers';
 
 /**

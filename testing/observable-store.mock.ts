@@ -1,5 +1,4 @@
 import {
-  NgRedux,
   Selector,
   Comparator,
   ObservableStore,
@@ -7,7 +6,7 @@ import {
 } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { Reducer, Action, Dispatch } from 'redux';
+import { Reducer, Dispatch } from 'redux';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -60,7 +59,7 @@ export class MockObservableStore<State> implements ObservableStore<any> {
 
   configureSubStore = <SubState>(
     basePath: PathSelector,
-    localReducer: Reducer<SubState>): MockObservableStore<SubState> =>
+    _: Reducer<SubState>): MockObservableStore<SubState> =>
       this.initSubStore<SubState>(basePath)
 
   getSubStore = <SubState>(...pathSelectors: PathSelector[]): MockObservableStore<any> => {

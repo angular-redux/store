@@ -98,7 +98,7 @@ describe('Select decorators', () => {
     });
 
     describe('when passed a comparator', () => {
-      const comparator = (x: any, y: any): boolean => y === 1;
+      const comparator = (_: any, y: any): boolean => y === 1;
       class MockClass { @select('baz', comparator) baz$: Observable<number> };
 
       it('should only trigger next when comparator returns true', done => {
@@ -151,7 +151,7 @@ describe('Select decorators', () => {
     });
 
     describe('when passed a comparator', () => {
-      const comparator = (x: any, y: any): boolean => y === 1;
+      const comparator = (_: any, y: any): boolean => y === 1;
       class MockClass { @select$('baz', transformer, comparator) baz$: Observable<number> }
 
       it('should only trigger next when the comparator returns true', done => {

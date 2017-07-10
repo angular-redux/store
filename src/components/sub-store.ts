@@ -1,15 +1,12 @@
-import { Dispatch, Reducer, Action } from 'redux';
+import { Dispatch, Reducer } from 'redux';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import { getIn } from '../utils/get-in';
-import { setIn } from '../utils/set-in';
 import {
   PathSelector,
   Selector,
-  PropertySelector,
-  FunctionSelector,
   Comparator,
   resolveToFunctionSelector,
 } from './selectors';

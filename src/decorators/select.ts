@@ -1,10 +1,6 @@
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/let'
-import { NgRedux } from '../components/ng-redux';
-import { ObservableStore } from '../components/observable-store';
 import { Selector, Comparator, Transformer } from '../components/selectors';
-import { IFractalStoreOptions, getInstanceSelection } from './helpers';
+import { getInstanceSelection } from './helpers';
 
 /**
  * Selects an observable from the store, and attaches it to the decorated

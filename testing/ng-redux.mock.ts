@@ -2,13 +2,11 @@ import {
   NgRedux,
   Selector,
   Comparator,
-  ObservableStore,
   PathSelector,
 } from '@angular-redux/store';
-import { Reducer, Action, Dispatch, Middleware, Store, StoreEnhancer } from 'redux';
+import { Reducer, Dispatch, Middleware, Store, StoreEnhancer } from 'redux';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { MockObservableStore } from './observable-store.mock';
@@ -71,16 +69,18 @@ export class MockNgRedux extends NgRedux<any> {
     return MockNgRedux.mockInstance;
   }
 
-  provideStore = (store: Store<any>): void  => {};
+  provideStore = (_: Store<any>): void  => {};
   configureStore = (
-    rootReducer: Reducer<any>,
-    initState: any,
-    middleware?: Middleware[],
-    enhancers?: StoreEnhancer<any>[]): void => {};
+    _: Reducer<any>,
+    __: any,
+    ___?: Middleware[],
+    ____?: StoreEnhancer<any>[]): void => {};
 
   configureSubStore = this.mockRootStore.configureSubStore;
-  select = this.mockRootStore.select;
-
+  select: <SelectedType>(
+    selector: Selector<any, SelectedType>,
+    comparator?: Comparator) => Observable<SelectedType> = this.mockRootStore.select;
+  
   dispatch = this.mockRootStore.dispatch as Dispatch<any>;
   getState = this.mockRootStore.getState;
   subscribe = this.mockRootStore.subscribe;

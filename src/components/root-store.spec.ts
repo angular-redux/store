@@ -9,8 +9,6 @@ import { NgRedux } from './ng-redux';
 import { RootStore } from './root-store';
 import { select } from '../decorators/select';
 
-const returnPojo = () => ({});
-
 class MockNgZone {
   run = (fn: Function) => fn()
 }
@@ -122,7 +120,7 @@ describe('NgRedux Observable Store', () => {
     const spy = jasmine
       .createSpy('spy')
       .and.callFake((foo: string) => { fooData = foo; });
-    const foo$ = ngRedux
+    ngRedux
       .select(state => `${state.foo}-${state.baz}`)
       .subscribe(spy);
 
@@ -153,7 +151,7 @@ describe('NgRedux Observable Store', () => {
       .and.callFake((data: IRecord) => fooData = data);
     const cmp = (a: IRecord, b: IRecord) => a.data === b.data;
 
-    const foo$ = ngRedux
+    ngRedux
       .select(state => ({ data: `${state.foo}-${state.baz}` }), cmp)
       .subscribe(spy);
 
@@ -203,7 +201,7 @@ describe('NgRedux Observable Store', () => {
       bar: string;
       baz: number;
 
-      constructor(private _ngRedux: NgRedux<any>) {
+      constructor(_ngRedux: NgRedux<any>) {
         _ngRedux.select(n => n.foo).subscribe(foo => this.foo = foo);
         _ngRedux.select(n => n.bar).subscribe(bar => this.bar = bar);
         _ngRedux.select(n => n.baz).subscribe(baz => this.baz = baz);

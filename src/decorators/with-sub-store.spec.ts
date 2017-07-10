@@ -16,7 +16,7 @@ class MockNgZone { run = (fn: Function) => fn() }
 
 describe('@WithSubStore', () => {
   let ngRedux: NgRedux<any>;
-  const localReducer = (state: any, action: Action) => state;
+  const localReducer = (state: any, _: Action) => state;
   const basePathMethodName = 'getSubStorePath';
 
   beforeEach(() => {
@@ -30,7 +30,7 @@ describe('@WithSubStore', () => {
     ngRedux = new RootStore(new MockNgZone() as NgZone);
     NgRedux.instance = ngRedux;
     ngRedux.configureStore(
-      (state: any, action: Action) => state,
+      (state: any, _: Action) => state,
       defaultState);
   });
 
