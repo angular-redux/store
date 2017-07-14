@@ -49,7 +49,7 @@ export class RootStore<RootState> extends NgRedux<RootState> {
     // Variable-arity compose in typescript FTW.
     this.setStore(
       compose.apply(null,
-        [ applyMiddleware(...middleware), ...enhancers ])(createStore)
+        [applyMiddleware(...middleware), ...enhancers])(createStore)
         (enableFractalReducers(rootReducer), initState));
   }
 
@@ -71,24 +71,28 @@ export class RootStore<RootState> extends NgRedux<RootState> {
     assert(
       !!this._store,
       'Dispatch failed: did you forget to configure your store? ' +
-        'https://github.com/angular-redux/@angular-redux/core/blob/master/' +
-        'README.md#quick-start');
+      'https://github.com/angular-redux/@angular-redux/core/blob/master/' +
+      'README.md#quick-start');
 
-    return this.ngZone.run(() => this._store.dispatch(action));
+    if (!NgZone.isInAngularZone()) {
+      return this.ngZone.run(() => this._store.dispatch(action));
+    } else {
+      return this._store.dispatch(action);
+    }
   };
 
   select = <S>(
     selector?: Selector<RootState, S>,
     comparator?: Comparator): Observable<S> =>
-      this._store$
-        .distinctUntilChanged()
-        .map(resolveToFunctionSelector(selector))
-        .distinctUntilChanged(comparator);
+    this._store$
+      .distinctUntilChanged()
+      .map(resolveToFunctionSelector(selector))
+      .distinctUntilChanged(comparator);
 
   configureSubStore = <SubState>(
     basePath: PathSelector,
     localReducer: Reducer<SubState>): ObservableStore<SubState> =>
-      new SubStore<SubState>(this, basePath, localReducer);
+    new SubStore<SubState>(this, basePath, localReducer);
 
   private setStore(store: Store<RootState>) {
     this._store = store;
