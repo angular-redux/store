@@ -1,3 +1,7 @@
+# 6.5.7
+
+* Fixed issue with AppRef.tick being called recurisvly [#443](https://github.com/angular-redux/store/pull/443)
+
 # 6.5.6
 
 * Turn tsconfig checks to 11.
