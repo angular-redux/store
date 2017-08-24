@@ -522,6 +522,9 @@ describe('MyComponent', () => {
     // Drive those values through our stub.
     expectedValues.forEach(value => countStub.next(value));
 
+    // toArray only deals with completed streams
+    countStub.complete();
+
     // Make sure MyComponent's selected count$ variable receives these values.
     componentUnderTest.count$
       .toArray()
