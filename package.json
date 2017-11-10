@@ -14,20 +14,17 @@
     "test:watch": "nodemon tests.js -w src -w testing -e ts",
     "ci": "npm run lint && npm run build && npm test",
     "predoc": "rm -rf docs",
-    "doc": "typedoc --out docs --excludeExternals --excludePrivate --excludeNotExported -theme minimal --name @angular-redux/store --mode file --module commonjs --tsconfig tsconfig.docs.json"
+    "doc":
+      "typedoc --out docs --excludeExternals --excludePrivate --excludeNotExported -theme minimal --name @angular-redux/store --mode file --module commonjs --tsconfig tsconfig.docs.json"
   },
   "typings": "./lib/src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/angular-redux/store.git"
   },
-  "keywords": [
-    "redux",
-    "ng2",
-    "angular2",
-    "angular"
-  ],
-  "author": "William Buchwalter <wbuchwalter@gmail.com> (http://github.com/wbuchwalter)",
+  "keywords": ["redux", "ng2", "angular2", "angular"],
+  "author":
+    "William Buchwalter <wbuchwalter@gmail.com> (http://github.com/wbuchwalter)",
   "contributors": [
     {
       "name": "Evan Schultz",
@@ -81,19 +78,12 @@
     "zone.js": "^0.8.18"
   },
   "peerDependencies": {
-    "@angular/core": "^2.4.0 || ^4.0.0 || ^5.0.0",
+    "@angular/core": "^5.0.0",
     "redux": "^3.5.0"
   },
   "nyc": {
-    "extension": [
-      ".ts"
-    ],
-    "exclude": [
-      "**/*.spec.ts"
-    ],
-    "include": [
-      "src/**/*.ts",
-      "testing/**/*.ts"
-    ]
+    "extension": [".ts"],
+    "exclude": ["**/*.spec.ts"],
+    "include": ["src/**/*.ts", "testing/**/*.ts"]
   }
 }

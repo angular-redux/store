@@ -6,6 +6,9 @@ import {
   FunctionSelector,
   Comparator,
   Transformer,
+  sniffSelectorType,
+  resolver,
+  resolveToFunctionSelector
 } from './components/selectors';
 import { ObservableStore } from './components/observable-store';
 import { DevToolsExtension } from './components/dev-tools';
@@ -35,4 +38,7 @@ export {
   dispatch,
   WithSubStore,
   ObservableStore,
+  sniffSelectorType,
+  resolver,
+  resolveToFunctionSelector
 };
