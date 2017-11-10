@@ -16,9 +16,9 @@ import { MockObservableStore } from './observable-store.mock';
  * Convenience mock to make it easier to control selector
  * behaviour in unit tests.
  */
-export class MockNgRedux<T = {}> extends NgRedux<T> {
+export class MockNgRedux<T = {}> extends NgRedux<any> {
   /** @deprecated Use MockNgRedux.getInstance() instead. */
-  static mockInstance?: MockNgRedux = undefined;
+  static mockInstance?: MockNgRedux<any> = undefined;
 
   private mockRootStore = new MockObservableStore<T>();
 
@@ -34,7 +34,7 @@ export class MockNgRedux<T = {}> extends NgRedux<T> {
     comparator?: Comparator
   ): Subject<S> {
     return MockNgRedux.getInstance().mockRootStore.getSelectorStub<S>(
-      selector as any,
+      selector,
       comparator
     );
   }
