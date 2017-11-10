@@ -1,3 +1,7 @@
+# 6.6.0-1
+
+* Update peer dependency to include Angular 5 
+
 # 6.5.7
 
 * Fixed issue with AppRef.tick being called recurisvly [#443](https://github.com/angular-redux/store/pull/443)
