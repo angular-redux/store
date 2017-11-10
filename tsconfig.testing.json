@@ -27,6 +27,7 @@
   "exclude": ["node_modules", "lib", "**/*.spec.ts"],
   "angularCompilerOptions": {
     "strictInjectionParameters": true,
+    "annotationsAs": "decorators",
     "generateCodeForLibraries": false,
     "strictMetadataEmit": true,
     "genDir": ".compiled"
