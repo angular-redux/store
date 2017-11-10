@@ -2,7 +2,7 @@ import {
   NgRedux,
   Selector,
   Comparator,
-  PathSelector,
+  PathSelector
 } from '@angular-redux/store';
 import { Reducer, Dispatch, Middleware, Store, StoreEnhancer } from 'redux';
 import { Observable } from 'rxjs/Observable';
@@ -10,16 +10,17 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { MockObservableStore } from './observable-store.mock';
+// tslint:disable:member-ordering
 
 /**
  * Convenience mock to make it easier to control selector
  * behaviour in unit tests.
  */
-export class MockNgRedux extends NgRedux<any> {
+export class MockNgRedux<T = {}> extends NgRedux<T> {
   /** @deprecated Use MockNgRedux.getInstance() instead. */
   static mockInstance?: MockNgRedux = undefined;
 
-  private mockRootStore = new MockObservableStore<any>();
+  private mockRootStore = new MockObservableStore<T>();
 
   /**
    * Returns a subject that's connected to any observable returned by the
@@ -30,11 +31,12 @@ export class MockNgRedux extends NgRedux<any> {
    */
   static getSelectorStub<R, S>(
     selector?: Selector<R, S>,
-    comparator?: Comparator): Subject<S> {
-      return MockNgRedux
-        .getInstance()
-        .mockRootStore
-        .getSelectorStub<S>(selector, comparator);
+    comparator?: Comparator
+  ): Subject<S> {
+    return MockNgRedux.getInstance().mockRootStore.getSelectorStub<S>(
+      selector as any,
+      comparator
+    );
   }
 
   /**
@@ -46,10 +48,12 @@ export class MockNgRedux extends NgRedux<any> {
    * the nested substores out.
    * @param pathSelectors
    */
-  static getSubStore<S>(...pathSelectors: PathSelector[]): MockObservableStore<S> {
-    return pathSelectors.length ?
-      MockNgRedux.getInstance().mockRootStore.getSubStore(...pathSelectors) :
-      MockNgRedux.getInstance().mockRootStore;
+  static getSubStore<S>(
+    ...pathSelectors: PathSelector[]
+  ): MockObservableStore<S> {
+    return pathSelectors.length
+      ? MockNgRedux.getInstance().mockRootStore.getSubStore(...pathSelectors)
+      : MockNgRedux.getInstance().mockRootStore;
   }
 
   /**
@@ -69,18 +73,20 @@ export class MockNgRedux extends NgRedux<any> {
     return MockNgRedux.mockInstance;
   }
 
-  provideStore = (_: Store<any>): void  => {};
+  provideStore = (_: Store<any>): void => {};
   configureStore = (
     _: Reducer<any>,
     __: any,
     ___?: Middleware[],
-    ____?: StoreEnhancer<any>[]): void => {};
+    ____?: StoreEnhancer<any>[]
+  ): void => {};
 
   configureSubStore = this.mockRootStore.configureSubStore;
   select: <SelectedType>(
-    selector: Selector<any, SelectedType>,
-    comparator?: Comparator) => Observable<SelectedType> = this.mockRootStore.select;
-  
+    selector?: Selector<T, SelectedType>,
+    comparator?: Comparator
+  ) => Observable<SelectedType> = this.mockRootStore.select;
+
   dispatch = this.mockRootStore.dispatch as Dispatch<any>;
   getState = this.mockRootStore.getState;
   subscribe = this.mockRootStore.subscribe;

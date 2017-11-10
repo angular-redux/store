@@ -25,7 +25,8 @@ export interface ObservableStore<StateType> extends Store<StateType> {
    */
   select: <SelectedType>(
     selector: Selector<StateType, SelectedType>,
-    comparator?: Comparator) => Observable<SelectedType>
+    comparator?: Comparator
+  ) => Observable<SelectedType>;
 
   /**
    * Carves off a 'subStore' or 'fractal' store from this one.
@@ -40,5 +41,6 @@ export interface ObservableStore<StateType> extends Store<StateType> {
    */
   configureSubStore: <SubState>(
     basePath: PathSelector,
-    localReducer: Reducer<SubState>) => ObservableStore<SubState>;
+    localReducer: Reducer<SubState>
+  ) => ObservableStore<SubState>;
 }

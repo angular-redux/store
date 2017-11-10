@@ -8,7 +8,7 @@ import {
   createStore,
   applyMiddleware,
   compose,
-  Dispatch,
+  Dispatch
 } from 'redux';
 
 import { NgZone } from '@angular/core';
@@ -20,7 +20,12 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import { NgRedux } from './ng-redux';
-import { Selector, PathSelector, Comparator, resolveToFunctionSelector } from './selectors';
+import {
+  Selector,
+  PathSelector,
+  Comparator,
+  resolveToFunctionSelector
+} from './selectors';
 import { assert } from '../utils/assert';
 import { SubStore } from './sub-store';
 import { enableFractalReducers } from './fractal-reducer-map';
@@ -36,22 +41,26 @@ export class RootStore<RootState> extends NgRedux<RootState> {
     NgRedux.instance = this;
     this._store$ = new BehaviorSubject<RootState | undefined>(undefined)
       .filter(n => n !== undefined)
-      .switchMap(observableStore => observableStore as any) as BehaviorSubject<RootState>;
+      .switchMap(observableStore => observableStore as any) as BehaviorSubject<
+      RootState
+    >;
   }
 
   configureStore = (
     rootReducer: Reducer<RootState>,
     initState: RootState,
     middleware: Middleware[] = [],
-    enhancers: StoreEnhancer<RootState>[] = []): void => {
+    enhancers: StoreEnhancer<RootState>[] = []
+  ): void => {
     assert(!this._store, 'Store already configured!');
 
     // Variable-arity compose in typescript FTW.
     this.setStore(
-      compose.apply(null,
-        [applyMiddleware(...middleware), ...enhancers])(createStore)
-        (enableFractalReducers(rootReducer), initState));
-  }
+      compose.apply(null, [applyMiddleware(...middleware), ...enhancers])(
+        createStore
+      )(enableFractalReducers(rootReducer), initState)
+    );
+  };
 
   provideStore = (store: Store<RootState>) => {
     assert(!this._store, 'Store already configured!');
@@ -64,26 +73,28 @@ export class RootStore<RootState> extends NgRedux<RootState> {
     this._store.subscribe(listener);
 
   replaceReducer = (nextReducer: Reducer<RootState>): void => {
-    this._store.replaceReducer(nextReducer)
-  }
+    this._store.replaceReducer(nextReducer);
+  };
 
-  dispatch: Dispatch<RootState> = (action: Action) => {
+  dispatch: Dispatch<RootState> = <A extends Action>(action: A): A => {
     assert(
       !!this._store,
       'Dispatch failed: did you forget to configure your store? ' +
-      'https://github.com/angular-redux/@angular-redux/core/blob/master/' +
-      'README.md#quick-start');
+        'https://github.com/angular-redux/@angular-redux/core/blob/master/' +
+        'README.md#quick-start'
+    );
 
     if (!NgZone.isInAngularZone()) {
-      return this.ngZone.run(() => this._store.dispatch(action));
+      return this.ngZone.run(() => this._store.dispatch<A>(action));
     } else {
-      return this._store.dispatch(action);
+      return this._store.dispatch<A>(action);
     }
   };
 
-  select = <S>(
-    selector?: Selector<RootState, S>,
-    comparator?: Comparator): Observable<S> =>
+  select = <SelectedType>(
+    selector?: Selector<RootState, SelectedType>,
+    comparator?: Comparator
+  ): Observable<SelectedType> =>
     this._store$
       .distinctUntilChanged()
       .map(resolveToFunctionSelector(selector))
@@ -91,7 +102,8 @@ export class RootStore<RootState> extends NgRedux<RootState> {
 
   configureSubStore = <SubState>(
     basePath: PathSelector,
-    localReducer: Reducer<SubState>): ObservableStore<SubState> =>
+    localReducer: Reducer<SubState>
+  ): ObservableStore<SubState> =>
     new SubStore<SubState>(this, basePath, localReducer);
 
   private setStore(store: Store<RootState>) {
@@ -100,13 +112,17 @@ export class RootStore<RootState> extends NgRedux<RootState> {
     this._store$.next(storeServable as any);
   }
 
-  private storeToObservable = (store: Store<RootState>): Observable<RootState> =>
+  private storeToObservable = (
+    store: Store<RootState>
+  ): Observable<RootState> =>
     new Observable<RootState>((observer: Observer<RootState>) => {
       observer.next(store.getState());
-      const unsubscribeFromRedux = store.subscribe(() => observer.next(store.getState()));
+      const unsubscribeFromRedux = store.subscribe(() =>
+        observer.next(store.getState())
+      );
       return () => {
         unsubscribeFromRedux();
         observer.complete();
       };
     });
-};
+}

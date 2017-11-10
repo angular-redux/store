@@ -1,4 +1,4 @@
-import 'rxjs/add/operator/let'
+import 'rxjs/add/operator/let';
 import { Selector, Comparator, Transformer } from '../components/selectors';
 import { getInstanceSelection } from './helpers';
 
@@ -15,13 +15,14 @@ import { getInstanceSelection } from './helpers';
  */
 export function select<T>(
   selector?: Selector<any, T>,
-  comparator?: Comparator): PropertyDecorator {
-  return (target: any, key: string): void => {
-    const adjustedSelector = selector ?
-      selector :
-      (key.lastIndexOf('$') === key.length - 1) ?
-        key.substring(0, key.length - 1) :
-        key;
+  comparator?: Comparator
+): PropertyDecorator {
+  return (target: any, key: string | symbol): void => {
+    const adjustedSelector = selector
+      ? selector
+      : typeof key === 'string' && key.lastIndexOf('$') === key.length - 1
+        ? key.substring(0, key.length - 1)
+        : key;
     decorate(adjustedSelector, undefined, comparator)(target, key);
   };
 }
@@ -38,22 +39,19 @@ export function select<T>(
 export function select$<T>(
   selector: Selector<any, T>,
   transformer: Transformer<any, T>,
-  comparator?: Comparator): PropertyDecorator {
+  comparator?: Comparator
+): PropertyDecorator {
   return decorate(selector, transformer, comparator);
 }
 
 function decorate(
   selector: Selector<any, any>,
   transformer?: Transformer<any, any>,
-  comparator?: Comparator): PropertyDecorator {
+  comparator?: Comparator
+): PropertyDecorator {
   return function decorator(target: any, key): void {
     function getter(this: any) {
-      return getInstanceSelection(
-        this,
-        key,
-        selector,
-        transformer,
-        comparator);
+      return getInstanceSelection(this, key, selector, transformer, comparator);
     }
 
     // Replace decorated property with a getter that returns the observable.
@@ -64,5 +62,5 @@ function decorate(
         configurable: true
       });
     }
-  }
+  };
 }
