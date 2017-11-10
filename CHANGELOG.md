@@ -1,6 +1,8 @@
 # 6.6.0-1
 
-* Update peer dependency to include Angular 5 
+* Update peer dependency to include Angular 5, *note* - this is a beta release, if you run into any issues with Angular 5 please let me know. This release is still using an older version of angular to build / compile, but seems to work with Angular 5.
+
+Working on a V7 release that upgrades to be built/use Angular 5 core/compiler/etc which produces builds that are not backwards compatable with Angular 4. More details will be available soon.
 
 # 6.5.7
 
