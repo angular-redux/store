@@ -8,7 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
-    "outDir": "lib",
+    "outDir": "lib/src",
     "declaration": true,
     "lib": ["es2015", "es2015.iterable", "dom"],
     "strict": true,
@@ -26,6 +26,8 @@
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "lib", "**/*.spec.ts"],
   "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "generateCodeForLibraries": false,
     "strictMetadataEmit": true,
     "genDir": ".compiled"
   }
