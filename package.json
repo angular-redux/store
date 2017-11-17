@@ -1,6 +1,6 @@
 {
   "name": "@angular-redux/store",
-  "version": "7.0.0-3",
+  "version": "7.0.0",
   "description": "Angular bindings for Redux",
   "main": "./lib/src/index.js",
   "scripts": {
