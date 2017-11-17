@@ -10,7 +10,7 @@
     "removeComments": false,
     "outDir": "lib/testing/",
     "declaration": true,
-    "lib" : ["es2015", "es2015.iterable", "dom"],
+    "lib": ["es2015", "es2015.iterable", "dom"],
     "paths": {
       "@angular-redux/store": ["./lib/src"]
     },
@@ -26,6 +26,9 @@
   "include": ["testing/**/*.ts"],
   "exclude": ["node_modules", "lib", "**/*.spec.ts"],
   "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "annotationsAs": "decorators",
+    "generateCodeForLibraries": false,
     "strictMetadataEmit": true,
     "genDir": ".compiled"
   }
