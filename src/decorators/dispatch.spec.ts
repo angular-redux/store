@@ -138,7 +138,7 @@ describe('@dispatch', () => {
       localReducer,
     })
     class TestClass {
-      getBasePath = () => [ 'bar', 'foo' ]
+      getBasePath = () => ['bar', 'foo']
 
       @dispatch() decoratedActionCreator(value: string): PayloadAction {
         return {
@@ -164,5 +164,61 @@ describe('@dispatch', () => {
           '@angular-redux::fractalkey': '["bar","foo"]',
         });
     });
+  });
+
+  describe('With class inheritence', () => {
+    abstract class Base {
+      public abstract getName(): string;
+
+      @dispatch()
+      public doAction() {
+        return `${this.getName()} ${this.constructor.name}`;
+
+      }
+    }
+
+    class AAction extends Base {
+      public getName() {
+        return 'FOO';
+      }
+    }
+
+    class BAction extends Base {
+      public getName() {
+        return 'Bar';
+      }
+    }
+
+    class CAction extends BAction {
+      public getName() {
+        return 'Baz';
+      }
+    }
+
+    class DAction extends BAction {
+      public getName() {
+        return super.getName() + 'Baz';
+      }
+    }
+
+    fit('should call the call the method on the implemented class', () => {
+      const a = new AAction();
+      const b = new BAction();
+      const c = new CAction();
+      const d = new DAction();
+      a.doAction();
+      expect(NgRedux.instance && NgRedux.instance.dispatch)
+        .toHaveBeenCalledWith('FOO AAction');
+      b.doAction();
+      expect(NgRedux.instance && NgRedux.instance.dispatch)
+        .toHaveBeenCalledWith('Bar BAction');
+      c.doAction();
+      expect(NgRedux.instance && NgRedux.instance.dispatch)
+        .toHaveBeenCalledWith('Baz CAction');
+      d.doAction();
+      expect(NgRedux.instance && NgRedux.instance.dispatch)
+        .toHaveBeenCalledWith('BarBaz DAction');
+    });
+
   });
 });
