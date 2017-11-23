@@ -14,7 +14,7 @@
     "test:watch": "nodemon tests.js -w src -w testing -e ts",
     "ci": "npm run lint && npm run build && npm test",
     "predoc": "rm -rf docs",
-    "doc": "typedoc --out docs --excludeExternals --excludePrivate --excludeNotExported -theme minimal --name @angular-redux/store --mode file --module commonjs --tsconfig tsconfig.docs.json"
+    "doc": "typedoc --out docs --excludeExternals --excludePrivate --excludeNotExported -theme minimal --name @angular-redux/store --mode file --module commonjs --tsconfig tsconfig.docs.json src"
   },
   "typings": "./lib/src/index.d.ts",
   "repository": {
