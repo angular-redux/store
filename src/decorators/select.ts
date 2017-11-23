@@ -5,6 +5,14 @@ import { getInstanceSelection } from './helpers';
  * Selects an observable from the store, and attaches it to the decorated
  * property.
  *
+ * ```ts
+ *  import { select } from '@angular-redux/store';
+ *
+ *  class SomeClass {
+ *    @select(['foo','bar']) foo$: Observable<string>
+ * }
+ * ```
+ *
  * @param selector
  * A selector function, property name string, or property name path
  * (array of strings/array indices) that locates the store data to be
@@ -34,6 +42,19 @@ export function select<T>(
  *
  * Think of a Transformer as a FunctionSelector that operates on observables instead of
  * values.
+ *
+ * ```ts
+ * import { select$ } from 'angular-redux/store';
+ *
+ * export const debounceAndTriple = obs$ => obs$
+ *  .debounce(300)
+ *  .map(x => 3 * x);
+ *
+ * class Foo {
+ *  @select$(['foo', 'bar'], debounceAndTriple)
+ *  readonly debouncedFooBar$: Observable<number>;
+ * }
+ * ```
  */
 export function select$<T>(
   selector: Selector<any, T>,
