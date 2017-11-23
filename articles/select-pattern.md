@@ -108,3 +108,20 @@ export class Counter {
 `ngRedux.select` can take a property name or a function which transforms a property.
 Since it's an observable, you can also transform data using observable operators like
 `.map`, `.filter`, etc.
+
+## The @sselect$ decorator
+
+The `@select$` decorator works similar to `@select`, however you are able to specify observable chains to execute on the selected result.
+
+```typescript
+import { select$ } from 'angular-redux/store';
+
+export const debounceAndTriple = obs$ => obs$
+  .debounce(300)
+  .map(x => 3 * x);
+
+class Foo {
+  @select$(['foo', 'bar'], debounceAndTriple)
+  readonly debouncedFooBar$: Observable<number>;
+}
+```
