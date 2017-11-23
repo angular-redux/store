@@ -1,6 +1,16 @@
 import { getIn } from '../utils/get-in';
 import { Observable } from 'rxjs/Observable';
 
+/**
+* Custom equality checker that can be used with `.select` and `@select`.
+* ```ts
+* const customCompare: Comparator = (x: any, y: any) => {
+*  return x.id === y.id
+* }
+*
+* @select(selector, customCompare)
+* ```
+*/
 export type Comparator = (x: any, y: any) => boolean;
 export type Transformer<RootState, V> = (store$: Observable<RootState>) => Observable<V>
 export type PropertySelector = string | number | symbol;
