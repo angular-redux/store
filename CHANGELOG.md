@@ -1,3 +1,7 @@
+# 6.6.0 - Angular 5 Support 
+
+* Add Angular 5+ as peer dependency 
+
 # 7.0.0 - Angular 5 Upgrade
 
 * Update dependencies to Angular 5 
