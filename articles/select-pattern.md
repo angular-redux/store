@@ -109,7 +109,7 @@ export class Counter {
 Since it's an observable, you can also transform data using observable operators like
 `.map`, `.filter`, etc.
 
-## The @sselect$ decorator
+## The @select$ decorator
 
 The `@select$` decorator works similar to `@select`, however you are able to specify observable chains to execute on the selected result.
 
