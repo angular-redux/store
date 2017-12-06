@@ -5,32 +5,35 @@ import 'rxjs/add/operator/toArray';
 
 import { MockNgRedux } from './ng-redux.mock';
 import { NgRedux, select, select$ } from '../src';
+// import { _mockNgReduxFactory } from './ng-redux-testing.module';
 
-@Component( {
-  template: 'whatever',
-  selector: 'test-component',
-})
-class TestComponent {
-  @select('foo')
-  readonly obs$: Observable<number>;
-  
-  @select$('bar', obs$ => obs$.map(x => 2 * x))
-  readonly barTimesTwo$: Observable<number>;
-  
-  readonly baz$: Observable<number>;
 
-  constructor(ngRedux: NgRedux<any>) {
-    this.baz$ = ngRedux.select('baz');
-  }
-}
 
 describe('NgReduxMock', () => {
+  // _mockNgReduxFactory();
+  @Component({
+    template: 'whatever',
+    selector: 'test-component',
+  })
+  class TestComponent {
+    @select('foo')
+    readonly obs$: Observable<number>;
+
+    @select$('bar', obs$ => obs$.map(x => 2 * x))
+    readonly barTimesTwo$: Observable<number>;
+
+    readonly baz$: Observable<number>;
+
+    constructor(ngRedux: NgRedux<any>) {
+      this.baz$ = ngRedux.select('baz');
+    }
+  }
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      providers: [ { provide: NgRedux, useFactory: MockNgRedux.getInstance } ]
+      providers: [{ provide: NgRedux, useFactory: MockNgRedux.getInstance }]
     }).compileComponents();
-
+    // NgRedux.instance = MockNgRedux.getInstance();
     MockNgRedux.reset();
   });
 

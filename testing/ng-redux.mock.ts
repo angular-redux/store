@@ -31,10 +31,10 @@ export class MockNgRedux extends NgRedux<any> {
   static getSelectorStub<R, S>(
     selector?: Selector<R, S>,
     comparator?: Comparator): Subject<S> {
-      return MockNgRedux
-        .getInstance()
-        .mockRootStore
-        .getSelectorStub<S>(selector, comparator);
+    return MockNgRedux
+      .getInstance()
+      .mockRootStore
+      .getSelectorStub<S>(selector, comparator);
   }
 
   /**
@@ -69,18 +69,18 @@ export class MockNgRedux extends NgRedux<any> {
     return MockNgRedux.mockInstance;
   }
 
-  provideStore = (_: Store<any>): void  => {};
+  provideStore = (_: Store<any>): void => { };
   configureStore = (
     _: Reducer<any>,
     __: any,
     ___?: Middleware[],
-    ____?: StoreEnhancer<any>[]): void => {};
+    ____?: StoreEnhancer<any>[]): void => { };
 
   configureSubStore = this.mockRootStore.configureSubStore;
   select: <SelectedType>(
     selector: Selector<any, SelectedType>,
     comparator?: Comparator) => Observable<SelectedType> = this.mockRootStore.select;
-  
+
   dispatch = this.mockRootStore.dispatch as Dispatch<any>;
   getState = this.mockRootStore.getState;
   subscribe = this.mockRootStore.subscribe;
@@ -90,6 +90,8 @@ export class MockNgRedux extends NgRedux<any> {
   private constructor() {
     super();
     // This hooks the mock up to @select.
-    NgRedux.instance = this;
+    if (!NgRedux.instance) {
+      NgRedux.instance = this;
+    }
   }
 }
