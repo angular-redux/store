@@ -5,11 +5,11 @@
   "main": "./lib/src/index.js",
   "scripts": {
     "prebuild": "rimraf ./lib",
-    "build": "npm run build:src && npm run build:testing",
+    "build": "yarn run build:src && yarn run build:testing",
     "build:src": "ngc -p tsconfig.build.json",
     "build:testing": "ngc -p tsconfig.testing.json",
     "lint": "tslint 'src/**/*.ts'",
-    "prepublish": "npm run lint && npm run build && npm test",
+    "prepublish": "yarn run lint && yarn run build && yarn test",
     "test": "nyc node tests.js",
     "test:watch": "nodemon tests.js -w src -w testing -e ts",
     "ci": "npm run lint && npm run build && npm test",
