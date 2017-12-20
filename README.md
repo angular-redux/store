@@ -1,3 +1,22 @@
+
+# Which Version to use?
+
+## Angular 5+
+
+Use `@angular-redux/store@^7` - this version supports Angular 5, and also changes to using lettable operators.
+
+Any new major releases will released on the v7 branch and with the `@latest` tag for final publishes. 
+
+## Angular 4 or lower 
+
+Use `@angular-redux/store@^6` - This supports Angular 4 and earlier.
+
+# Support for `@angular-redux/store@6`?
+
+Where possible, I will be maintaining and applying any fixes / enhancements for v7 into v6 where it does not introduce a breaking change.
+
+I made a few mistakes trying to publish fixes / etc to two major versions, which caused some releases to get tagged incorrectly and caused some confusion. Sorry for any confusion this has caused, and will do better on avoiding this in the future, and being more transparent with the releases that are going out.
+
 # @angular-redux/store
 
 Angular bindings for [Redux](https://github.com/reactjs/redux).
