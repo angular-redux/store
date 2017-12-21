@@ -10,9 +10,7 @@ const environment: any = typeof window !== 'undefined' ? window : {};
 @Injectable()
 export class DevToolsExtension {
   /** @hidden */
-  constructor(
-    private appRef: ApplicationRef,
-    private ngRedux: NgRedux<any>) { }
+  constructor(private appRef: ApplicationRef, private ngRedux: NgRedux<any>) {}
 
   /**
    * A wrapper for the Chrome Extension Redux DevTools.
@@ -30,7 +28,7 @@ export class DevToolsExtension {
     }
 
     // Make sure changes from dev tools update angular's view.
-    environment.devToolsExtension.listen(({type}: any) => {
+    environment.devToolsExtension.listen(({ type }: any) => {
       if (type === 'START') {
         subscription = this.ngRedux.subscribe(() => {
           if (!NgZone.isInAngularZone()) {
@@ -43,10 +41,10 @@ export class DevToolsExtension {
     });
 
     return environment.devToolsExtension(options);
-  }
+  };
 
   /**
    * Returns true if the extension is installed and enabled.
    */
-  isEnabled = () => environment && environment.devToolsExtension
+  isEnabled = () => environment && environment.devToolsExtension;
 }

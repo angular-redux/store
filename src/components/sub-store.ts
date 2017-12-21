@@ -8,13 +8,13 @@ import {
   PathSelector,
   Selector,
   Comparator,
-  resolveToFunctionSelector
+  resolveToFunctionSelector,
 } from './selectors';
 import { NgRedux } from './ng-redux';
 import { ObservableStore } from './observable-store';
 import {
   registerFractalReducer,
-  replaceLocalReducer
+  replaceLocalReducer,
 } from './fractal-reducer-map';
 
 /** @hidden */
@@ -30,7 +30,7 @@ export class SubStore<State> implements ObservableStore<State> {
   dispatch: Dispatch<State> = action =>
     this.rootStore.dispatch(
       Object.assign({}, action, {
-        '@angular-redux::fractalkey': JSON.stringify(this.basePath)
+        '@angular-redux::fractalkey': JSON.stringify(this.basePath),
       })
     );
 

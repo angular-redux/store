@@ -8,7 +8,7 @@ import {
   createStore,
   applyMiddleware,
   compose,
-  Dispatch
+  Dispatch,
 } from 'redux';
 
 import { NgZone } from '@angular/core';
@@ -24,7 +24,7 @@ import {
   Selector,
   PathSelector,
   Comparator,
-  resolveToFunctionSelector
+  resolveToFunctionSelector,
 } from './selectors';
 import { assert } from '../utils/assert';
 import { SubStore } from './sub-store';
@@ -42,7 +42,8 @@ export class RootStore<RootState> extends NgRedux<RootState> {
     this._store$ = new BehaviorSubject<RootState | undefined>(undefined).pipe(
       filter(n => n !== undefined),
       switchMap(observableStore => observableStore as any)
-    ) as BehaviorSubject<RootState>; // TODO: fix this? needing to explicitly cast this is wrong
+      // TODO: fix this? needing to explicitly cast this is wrong
+    ) as BehaviorSubject<RootState>;
   }
 
   configureStore = (

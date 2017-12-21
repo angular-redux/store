@@ -7,10 +7,12 @@
  */
 export const setIn = (
   obj: any,
-  [ firstElem, ...restElems ]: (string | number)[],
-  value: any): Object => ({
-    ...obj,
-    [firstElem]: restElems.length === 0 ?
-      value :
-      setIn(obj[firstElem] || {}, restElems, value)
-    });
+  [firstElem, ...restElems]: (string | number)[],
+  value: any
+): Object => ({
+  ...obj,
+  [firstElem]:
+    restElems.length === 0
+      ? value
+      : setIn(obj[firstElem] || {}, restElems, value),
+});

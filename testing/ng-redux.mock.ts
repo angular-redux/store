@@ -2,7 +2,7 @@ import {
   NgRedux,
   Selector,
   Comparator,
-  PathSelector
+  PathSelector,
 } from '@angular-redux/store';
 import { Reducer, Dispatch, Middleware, Store, StoreEnhancer } from 'redux';
 import { Observable } from 'rxjs/Observable';

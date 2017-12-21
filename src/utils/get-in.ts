@@ -4,7 +4,10 @@
  *
  * @hidden
  */
-export function getIn(v: any | undefined, pathElems: (string | number)[]): any | undefined {
+export function getIn(
+  v: any | undefined,
+  pathElems: (string | number)[]
+): any | undefined {
   if (!v) {
     return v;
   }
@@ -14,7 +17,7 @@ export function getIn(v: any | undefined, pathElems: (string | number)[]): any |
     return v.getIn(pathElems);
   }
 
-  const [ firstElem, ...restElems] = pathElems;
+  const [firstElem, ...restElems] = pathElems;
 
   if (undefined === v[firstElem]) {
     return undefined;

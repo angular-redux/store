@@ -5,7 +5,7 @@ import {
   Selector,
   PathSelector,
   Comparator,
-  Transformer
+  Transformer,
 } from '../components/selectors';
 import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
 
@@ -31,29 +31,31 @@ export interface IFractalStoreOptions {
 }
 
 /**
- * OPTIONS_KEY: this is per-class (static) and holds the config from the @SubStore
- * decorator.
+ * OPTIONS_KEY: this is per-class (static) and holds the config from the
+ * @SubStore decorator.
  */
 const OPTIONS_KEY = '@angular-redux::substore::class::options';
 
 /**
- * INSTANCE_SUBSTORE_KEY, INSTANCE_SELECTIONS_KEY: these are per-instance (non-static) and
- * holds references to the substores/selected observables to be used by an instance of a
- * decorated class. I'm not using reflect-metadata here because I want
+ * INSTANCE_SUBSTORE_KEY, INSTANCE_SELECTIONS_KEY: these are per-instance
+ * (non-static) and holds references to the substores/selected observables
+ * to be used by an instance of a decorated class. I'm not using
+ * reflect-metadata here because I want
  *
- * 1. different instances to have different substores in the case where `basePathMethodName`
- * is dynamic.
- * 2. the instance substore to be garbage collected when the instance is no longer reachable.
- *
- * This is therefore an own-property on the actual instance of the decorated class.
+ * 1. different instances to have different substores in the case where
+ * `basePathMethodName` is dynamic.
+ * 2. the instance substore to be garbage collected when the instance is no
+ * longer reachable.
+ * This is therefore an own-property on the actual instance of the decorated
+ * class.
  */
 const INSTANCE_SUBSTORE_KEY = '@angular-redux::substore::instance::store';
 const INSTANCE_SELECTIONS_KEY =
   '@angular-redux::substore::instance::selections';
 
 /**
- * Used to detect when the base path changes - this allows components to dynamically adjust
- * their selections if necessary.
+ * Used to detect when the base path changes - this allows components to
+ * dynamically adjust their selections if necessary.
  */
 const INSTANCE_BASE_PATH_KEY = '@angular-redux::substore::instance::basepath';
 

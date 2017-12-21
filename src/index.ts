@@ -18,6 +18,7 @@ import { NgReduxModule } from './ng-redux.module';
 // Warning: don't do this:
 //  export * from './foo'
 // ... because it breaks rollup. See
+// tslint:disable-next-line:max-line-length
 // https://github.com/rollup/rollup/wiki/Troubleshooting#name-is-not-exported-by-module
 export {
   NgRedux,
