@@ -6,17 +6,16 @@ import 'rxjs/add/operator/toArray';
 import { MockNgRedux } from './ng-redux.mock';
 import { NgRedux, select, select$ } from '../src';
 
-@Component( {
+@Component({
   template: 'whatever',
   selector: 'test-component',
 })
 class TestComponent {
-  @select('foo')
-  readonly obs$: Observable<number>;
-  
+  @select('foo') readonly obs$: Observable<number>;
+
   @select$('bar', obs$ => obs$.map(x => 2 * x))
   readonly barTimesTwo$: Observable<number>;
-  
+
   readonly baz$: Observable<number>;
 
   constructor(ngRedux: NgRedux<any>) {
@@ -28,20 +27,18 @@ describe('NgReduxMock', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      providers: [ { provide: NgRedux, useFactory: MockNgRedux.getInstance } ]
+      providers: [{ provide: NgRedux, useFactory: MockNgRedux.getInstance }],
     }).compileComponents();
 
     MockNgRedux.reset();
   });
 
   it('should reset stubs used by @select', () => {
-    const instance = TestBed
-      .createComponent(TestComponent)
-      .debugElement
+    const instance = TestBed.createComponent(TestComponent).debugElement
       .componentInstance;
 
     const stub1 = MockNgRedux.getSelectorStub('foo');
-    stub1.next(1)
+    stub1.next(1);
     stub1.next(2);
     stub1.complete();
 
@@ -53,7 +50,7 @@ describe('NgReduxMock', () => {
 
     // Reset should result in a new stub getting created.
     const stub2 = MockNgRedux.getSelectorStub('foo');
-    expect(stub1 === stub2).toBe(false)
+    expect(stub1 === stub2).toBe(false);
 
     stub2.next(3);
     stub2.complete();
@@ -64,13 +61,11 @@ describe('NgReduxMock', () => {
   });
 
   it('should reset stubs used by @select$', () => {
-    const instance = TestBed
-      .createComponent(TestComponent)
-      .debugElement
+    const instance = TestBed.createComponent(TestComponent).debugElement
       .componentInstance;
 
     const stub1 = MockNgRedux.getSelectorStub('bar');
-    stub1.next(1)
+    stub1.next(1);
     stub1.next(2);
     stub1.complete();
 
@@ -82,7 +77,7 @@ describe('NgReduxMock', () => {
 
     // Reset should result in a new stub getting created.
     const stub2 = MockNgRedux.getSelectorStub('bar');
-    expect(stub1 === stub2).toBe(false)
+    expect(stub1 === stub2).toBe(false);
 
     stub2.next(3);
     stub2.complete();
@@ -93,13 +88,11 @@ describe('NgReduxMock', () => {
   });
 
   it('should reset stubs used by .select', () => {
-    const instance = TestBed
-      .createComponent(TestComponent)
-      .debugElement
+    const instance = TestBed.createComponent(TestComponent).debugElement
       .componentInstance;
 
     const stub1 = MockNgRedux.getSelectorStub('baz');
-    stub1.next(1)
+    stub1.next(1);
     stub1.next(2);
     stub1.complete();
 
@@ -111,7 +104,7 @@ describe('NgReduxMock', () => {
 
     // Reset should result in a new stub getting created.
     const stub2 = MockNgRedux.getSelectorStub('baz');
-    expect(stub1 === stub2).toBe(false)
+    expect(stub1 === stub2).toBe(false);
 
     stub2.next(3);
     stub2.complete();

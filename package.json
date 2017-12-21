@@ -4,11 +4,13 @@
   "description": "Angular bindings for Redux",
   "main": "./lib/src/index.js",
   "scripts": {
+    "precommit": "lint-staged",
     "prebuild": "rimraf ./lib",
     "build": "npm run build:src && npm run build:testing",
     "build:src": "ngc -p tsconfig.build.json",
     "build:testing": "ngc -p tsconfig.testing.json",
     "lint": "tslint 'src/**/*.ts'",
+    "prettier": "prettier --parser typescript --single-quote --trailing-comma es5 --write \"**/*.ts\"",
     "prepublish": "npm run lint && npm run build && npm test",
     "test": "nyc node tests.js",
     "test:watch": "nodemon tests.js -w src -w testing -e ts",
@@ -65,9 +67,12 @@
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.36",
     "core-js": "^2.4.1",
+    "husky": "^0.14.3",
     "jasmine": "^2.5.3",
+    "lint-staged": "^6.0.0",
     "nodemon": "^1.11.0",
     "nyc": "^10.2.0",
+    "prettier": "1.9.2",
     "redux": "^3.7.2",
     "reflect-metadata": "0.1.10",
     "rimraf": "^2.5.2",
@@ -94,6 +99,12 @@
     "include": [
       "src/**/*.ts",
       "testing/**/*.ts"
+    ]
+  },
+  "lint-staged": {
+    "*.ts": [
+      "yarn prettier",
+      "git add"
     ]
   }
 }

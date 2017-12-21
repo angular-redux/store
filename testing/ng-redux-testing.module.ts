@@ -4,7 +4,7 @@ import { MockNgRedux } from './ng-redux.mock';
 import { MockDevToolsExtension } from './dev-tools.mock';
 
 // Needs to be initialized early so @select's use the mocked version too.
-const mockNgRedux = MockNgRedux.getInstance() ;
+const mockNgRedux = MockNgRedux.getInstance();
 
 /** @hidden */
 export function _mockNgReduxFactory() {

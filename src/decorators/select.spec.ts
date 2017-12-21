@@ -38,6 +38,7 @@ describe('Select decorators', () => {
 
   describe('@select', () => {
     describe('when passed no arguments', () => {
+      // tslint:disable-next-line:max-line-length
       it('binds to a store property that matches the name of the class property', done => {
         class MockClass {
           @select() baz: Observable<number>;
@@ -55,6 +56,7 @@ describe('Select decorators', () => {
         ngRedux.dispatch({ type: 'nvm', payload: 1 });
       });
 
+      // tslint:disable-next-line:max-line-length
       it('binds by name ignoring any $ characters in the class property name', done => {
         class MockClass {
           @select() baz$: Observable<number>;
@@ -74,6 +76,7 @@ describe('Select decorators', () => {
     });
 
     describe('when passed a string', () => {
+      // tslint:disable-next-line:max-line-length
       it('binds to the store property whose name matches the string value', done => {
         class MockClass {
           @select('baz') obs$: Observable<number>;

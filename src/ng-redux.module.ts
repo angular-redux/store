@@ -11,7 +11,7 @@ export function _ngReduxFactory(ngZone: NgZone) {
 @NgModule({
   providers: [
     DevToolsExtension,
-    { provide: NgRedux, useFactory: _ngReduxFactory, deps: [ NgZone ] }
-  ]
+    { provide: NgRedux, useFactory: _ngReduxFactory, deps: [NgZone] },
+  ],
 })
-export class NgReduxModule { };
+export class NgReduxModule {}
