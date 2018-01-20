@@ -13,7 +13,8 @@ import { Observable } from 'rxjs/Observable';
  */
 export type Comparator = (x: any, y: any) => boolean;
 export type Transformer<RootState, V> = (
-  store$: Observable<RootState>
+  store$: Observable<RootState>,
+  scope: any
 ) => Observable<V>;
 export type PropertySelector = string | number | symbol;
 export type PathSelector = (string | number)[];
