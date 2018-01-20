@@ -1,3 +1,31 @@
+# 7.1.0 
+
+## Features
+
+* Add a way to return a false value from a method decorted with `@dispatch` to allow conditionally preventing a dispatch. [PR#497](https://github.com/angular-redux/store/pull/497) 
+
+
+```ts
+@dispatch()
+selectTab(tab) {
+ return this.active.id !== tab.id ? { type: .... } : false;
+}
+```
+
+* Add a way to access the decoratde instance inside of transformer for `@select$` [PR#500](https://github.com/angular-redux/store/pull/500)
+
+```ts
+@Input() public anotherInput: string;
+
+@select$(['selector'], (obs$, inst) => obs$.filter(x => x.name === inst.anotherInput))
+public selectedObs: Observable<any>;
+```
+
+Shout out to contributers:
+
+* [@rart](https://github.com/rart)
+* [@MaKCbIMKo](https://github.com/MaKCbIMKo)
+
 # 7.0.2 - Fixing Publish
 
 * There are no functional changes / fixes in this release. 
