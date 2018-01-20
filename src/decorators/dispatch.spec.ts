@@ -34,6 +34,8 @@ describe('@dispatch', () => {
           const { value = null, instanceProperty = null } =
             action.payload || {};
           return Object.assign({}, state, { value, instanceProperty });
+        case 'CONDITIONAL_DISPATCH_TEST':
+          return { ...state, ...action.payload };
         default:
           return state;
       }
@@ -56,6 +58,23 @@ describe('@dispatch', () => {
           type: 'TEST',
           payload: { value, instanceProperty: this.instanceProperty },
         };
+      }
+
+      @dispatch()
+      conditionalDispatchMethod(
+        shouldDispatch: boolean
+      ): PayloadAction | false {
+        if (shouldDispatch) {
+          return {
+            type: 'CONDITIONAL_DISPATCH_TEST',
+            payload: {
+              value: 'Conditional Dispatch Action',
+              instanceProperty: this.instanceProperty,
+            },
+          };
+        } else {
+          return false;
+        }
       }
 
       @dispatch()
@@ -87,6 +106,35 @@ describe('@dispatch', () => {
       expect(
         NgRedux.instance && NgRedux.instance.dispatch
       ).toHaveBeenCalledWith(expectedArgs);
+    });
+
+    it('should not call dispatch', () => {
+      const stateBeforeAction = NgRedux.instance && NgRedux.instance.getState();
+      const result = instance.conditionalDispatchMethod(false);
+      expect(result).toBe(false);
+      expect(NgRedux.instance).toBeTruthy();
+      expect(NgRedux.instance && NgRedux.instance.getState()).toEqual(
+        stateBeforeAction
+      );
+    });
+
+    it('should call dispatch with result of function normally', () => {
+      const result = <PayloadAction>instance.conditionalDispatchMethod(true);
+      expect(result.type).toBe('CONDITIONAL_DISPATCH_TEST');
+      expect(result.payload && result.payload.value).toBe(
+        'Conditional Dispatch Action'
+      );
+      expect(result.payload && result.payload.instanceProperty).toBe('test');
+      expect(NgRedux.instance).toBeTruthy();
+      expect(
+        NgRedux.instance && NgRedux.instance.dispatch
+      ).toHaveBeenCalledWith({
+        type: 'CONDITIONAL_DISPATCH_TEST',
+        payload: {
+          value: 'Conditional Dispatch Action',
+          instanceProperty: 'test',
+        },
+      });
     });
 
     it('should work with property initalizers', () => {

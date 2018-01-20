@@ -17,9 +17,11 @@ export function dispatch(): PropertyDecorator {
 
     const wrapped = function(this: any, ...args: any[]) {
       const result = originalMethod.apply(this, args);
-      const store = getBaseStore(this) || NgRedux.instance;
-      if (store) {
-        store.dispatch(result);
+      if (result !== false) {
+        const store = getBaseStore(this) || NgRedux.instance;
+        if (store) {
+          store.dispatch(result);
+        }
       }
       return result;
     };
