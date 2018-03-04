@@ -9,10 +9,12 @@ export const setIn = (
   obj: any,
   [firstElem, ...restElems]: (string | number)[],
   value: any
-): Object => ({
+): Object => typeof (obj[ firstElem ] || {}).setIn === 'function' ? {
+  ...obj, [ firstElem ]: obj[ firstElem ].setIn(restElems, value)
+} : {
   ...obj,
   [firstElem]:
     restElems.length === 0
       ? value
       : setIn(obj[firstElem] || {}, restElems, value),
-});
+};
