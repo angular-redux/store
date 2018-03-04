@@ -83,7 +83,7 @@ export class MockNgRedux<T = {}> extends NgRedux<T> {
   configureSubStore = this.mockRootStore.configureSubStore;
 
   select: <SelectedType>(
-    selector: Selector<T, SelectedType>,
+    selector?: Selector<T, SelectedType>,
     comparator?: Comparator
   ) => Observable<SelectedType> = this.mockRootStore.select;
 
