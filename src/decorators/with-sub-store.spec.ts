@@ -1,19 +1,21 @@
 import { NgZone, Component, Injectable } from '@angular/core';
 import { Action } from 'redux';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/take';
-import 'rxjs/add/operator/toArray';
+import { Observable } from 'rxjs';
+import { map, take, toArray } from 'rxjs/operators';
 
 import { WithSubStore } from './with-sub-store';
 import { select, select$ } from './select';
 import { dispatch } from './dispatch';
 import { PathSelector } from '../components/selectors';
+import { ObservableStore } from '../components/observable-store';
 import { NgRedux } from '../components/ng-redux';
 import { RootStore } from '../components/root-store';
 
-class MockNgZone {
-  run = (fn: Function) => fn();
+class MockNgZone extends NgZone {
+  run<T>(fn: (...args: any[]) => T): T {
+    return fn() as T;
+  }
 }
 
 describe('@WithSubStore', () => {
@@ -29,7 +31,9 @@ describe('@WithSubStore', () => {
       },
     };
 
-    ngRedux = new RootStore(new MockNgZone() as NgZone);
+    ngRedux = new RootStore(new MockNgZone({
+      enableLongStackTrace: false,
+    }) as NgZone);
     NgRedux.instance = ngRedux;
     ngRedux.configureStore((state: any, _: Action) => state, defaultState);
   });
@@ -43,7 +47,7 @@ describe('@WithSubStore', () => {
       }
 
       const testInstance = new TestClass();
-      testInstance.foo.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.foo.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     it('use a substore for inferred-name selections with $ on the end', () => {
@@ -54,7 +58,7 @@ describe('@WithSubStore', () => {
       }
 
       const testInstance = new TestClass();
-      testInstance.foo$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.foo$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     it('use a substore for a property selector', () => {
@@ -65,7 +69,7 @@ describe('@WithSubStore', () => {
       }
 
       const testInstance = new TestClass();
-      testInstance.obs$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.obs$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     it('use a substore for a function selector', () => {
@@ -77,7 +81,7 @@ describe('@WithSubStore', () => {
       }
 
       const testInstance = new TestClass();
-      testInstance.obs$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.obs$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     it('use a substore for a path selector', () => {
@@ -89,7 +93,7 @@ describe('@WithSubStore', () => {
       }
 
       const testInstance = new TestClass();
-      testInstance.obs$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.obs$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     it('use a substore for a property selector with a comparator', () => {
@@ -101,7 +105,7 @@ describe('@WithSubStore', () => {
       }
 
       const testInstance = new TestClass();
-      testInstance.obs$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.obs$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     it('return a stable reference for the decorated property', () => {
@@ -137,9 +141,10 @@ describe('@WithSubStore', () => {
 
       const testInstance = new TestClass();
       testInstance.obs$
-        .take(2)
-        .toArray()
-        .subscribe(v => expect(v).toEqual([undefined, 'now I exist']));
+        .pipe(take(2), toArray())
+        .subscribe((v: Array<any>) =>
+          expect(v).toEqual([undefined, 'now I exist'])
+        );
       testInstance.makeItExist('now I exist');
     });
   });
@@ -148,55 +153,58 @@ describe('@WithSubStore', () => {
     it('use a substore for a property selector', () => {
       @WithSubStore({ basePathMethodName, localReducer })
       class TestClass {
-        @select$('foo', o$ => o$.map(x => x))
+        @select$('foo', o$ => o$.pipe(map((x: any) => x)))
         obs$: Observable<string>;
         getSubStorePath = (): PathSelector => ['a', 'b'];
       }
 
       const testInstance = new TestClass();
-      testInstance.obs$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.obs$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     it('use a substore for a function selector', () => {
       @WithSubStore({ basePathMethodName, localReducer })
       class TestClass {
-        @select$(s => s.foo, o$ => o$.map(x => x))
+        @select$(s => s.foo, o$ => o$.pipe(map((x: any) => x)))
         obs$: Observable<string>;
         getSubStorePath = (): PathSelector => ['a', 'b'];
       }
 
       const testInstance = new TestClass();
-      testInstance.obs$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.obs$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     it('use a substore for a path selector', () => {
       @WithSubStore({ basePathMethodName, localReducer })
       class TestClass {
-        @select$(['b', 'foo'], o$ => o$.map(x => x))
+        @select$(['b', 'foo'], o$ => o$.pipe(map((x: any) => x)))
         obs$: Observable<string>;
         getSubStorePath = (): PathSelector => ['a'];
       }
 
       const testInstance = new TestClass();
-      testInstance.obs$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.obs$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     it('use a substore for a property selector with a comparator', () => {
       @WithSubStore({ basePathMethodName, localReducer })
       class TestClass {
-        @select$('foo', o$ => o$.map(x => x), (x, y) => x !== y)
+        @select$('foo', o$ => o$.pipe(map((x: any) => x)), (x, y) => x !== y)
         obs$: Observable<string>;
         getSubStorePath = (): PathSelector => ['a', 'b'];
       }
 
       const testInstance = new TestClass();
-      testInstance.obs$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.obs$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
   });
 
   describe('on the class causes @dispatch to', () => {
     it('scope dispatches to substore', () => {
-      spyOn(NgRedux.instance, 'dispatch');
+      spyOn(
+        NgRedux.instance as ObservableStore<any>,
+        'dispatch'
+      );
 
       @WithSubStore({ basePathMethodName, localReducer })
       class TestClass {
@@ -222,7 +230,7 @@ describe('@WithSubStore', () => {
       }
 
       const testInstance = new TestClass();
-      testInstance.foo$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.foo$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     it('@Component the other way round', () => {
@@ -234,7 +242,7 @@ describe('@WithSubStore', () => {
       }
 
       const testInstance = new TestClass();
-      testInstance.foo$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.foo$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     it('@Injectable', () => {
@@ -246,7 +254,7 @@ describe('@WithSubStore', () => {
       }
 
       const testInstance = new TestClass();
-      testInstance.foo$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.foo$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     it('@Injectable in the other order', () => {
@@ -258,7 +266,7 @@ describe('@WithSubStore', () => {
       }
 
       const testInstance = new TestClass();
-      testInstance.foo$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.foo$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
   });
 
@@ -275,7 +283,7 @@ describe('@WithSubStore', () => {
       }
 
       const testInstance = new SubClass();
-      testInstance.foo$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.foo$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     // tslint:disable-next-line:max-line-length
@@ -290,7 +298,7 @@ describe('@WithSubStore', () => {
       }
 
       const testInstance = new SubClass();
-      testInstance.foo$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testInstance.foo$.pipe(take(1)).subscribe(v => expect(v).toEqual('Foo!'));
     });
 
     it('modifies behaviour of superclass selects in the subclass only', () => {
@@ -304,11 +312,13 @@ describe('@WithSubStore', () => {
       }
 
       const testSubInstance = new SubClass();
-      testSubInstance.foo$.take(1).subscribe(v => expect(v).toEqual('Foo!'));
+      testSubInstance.foo$
+        .pipe(take(1))
+        .subscribe(v => expect(v).toEqual('Foo!'));
 
       const testSuperInstance = new SuperClass();
       testSuperInstance.foo$
-        .take(1)
+        .pipe(take(1))
         .subscribe(v => expect(v).toEqual('Root Foo!'));
     });
   });

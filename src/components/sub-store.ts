@@ -1,7 +1,6 @@
-import { Dispatch, Reducer } from 'redux';
-import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators/map';
-import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
+import { AnyAction, Dispatch, Reducer } from 'redux';
+import { Observable } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
 import { getIn } from '../utils/get-in';
 import {
@@ -22,12 +21,12 @@ export class SubStore<State> implements ObservableStore<State> {
   constructor(
     private rootStore: NgRedux<any>,
     private basePath: PathSelector,
-    localReducer: Reducer<State>
+    localReducer: Reducer<State, AnyAction>
   ) {
     registerFractalReducer(basePath, localReducer);
   }
 
-  dispatch: Dispatch<State> = action =>
+  dispatch: Dispatch<AnyAction> = action =>
     this.rootStore.dispatch(
       Object.assign({}, action, {
         '@angular-redux::fractalkey': JSON.stringify(this.basePath),
@@ -38,7 +37,7 @@ export class SubStore<State> implements ObservableStore<State> {
 
   configureSubStore = <SubState>(
     basePath: PathSelector,
-    localReducer: Reducer<SubState>
+    localReducer: Reducer<SubState, AnyAction>
   ): ObservableStore<SubState> =>
     new SubStore<SubState>(
       this.rootStore,
@@ -51,7 +50,7 @@ export class SubStore<State> implements ObservableStore<State> {
     comparator?: Comparator
   ): Observable<SelectedState> =>
     this.rootStore
-      .select(this.basePath)
+      .select<State>(this.basePath)
       .pipe(
         map(resolveToFunctionSelector(selector)),
         distinctUntilChanged(comparator)
@@ -62,6 +61,6 @@ export class SubStore<State> implements ObservableStore<State> {
     return () => subscription.unsubscribe();
   };
 
-  replaceReducer = (nextLocalReducer: Reducer<State>) =>
+  replaceReducer = (nextLocalReducer: Reducer<State, AnyAction>) =>
     replaceLocalReducer(this.basePath, nextLocalReducer);
 }

@@ -954,7 +954,7 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-type-alias">
 			<a href="../globals.html#comparator" class="tsd-kind-icon">Comparator</a>
 		</li>
-		<li class=" tsd-kind-type-alias">
+		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="../globals.html#functionselector" class="tsd-kind-icon">Function<wbr>Selector</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
@@ -963,10 +963,10 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-type-alias">
 			<a href="../globals.html#propertyselector" class="tsd-kind-icon">Property<wbr>Selector</a>
 		</li>
-		<li class=" tsd-kind-type-alias">
+		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="../globals.html#selector" class="tsd-kind-icon">Selector</a>
 		</li>
-		<li class=" tsd-kind-type-alias">
+		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="../globals.html#transformer" class="tsd-kind-icon">Transformer</a>
 		</li>
 		<li class=" tsd-kind-function">
@@ -1044,11 +1044,11 @@ img { max-width: 100%; }
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="configurestore" class="tsd-anchor"></a>
-				<h3>configure<wbr>Store</h3>
+				<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> configure<wbr>Store</h3>
 				<div class="tsd-signature tsd-kind-icon">configure<wbr>Store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/ng-redux.ts#L34">components/ng-redux.ts:34</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/ng-redux.ts#L35">components/ng-redux.ts:35</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1078,14 +1078,14 @@ img { max-width: 100%; }
 					<ul class="tsd-parameters">
 						<li class="tsd-parameter-siganture">
 							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>rootReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span>, initState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RootState</span>, middleware<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Middleware</span><span class="tsd-signature-symbol">[]</span>, enhancers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">StoreEnhancer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>rootReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">&gt;</span>, initState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RootState</span>, middleware<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Middleware</span><span class="tsd-signature-symbol">[]</span>, enhancers<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">StoreEnhancer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 							</ul>
 							<ul class="tsd-descriptions">
 								<li class="tsd-description">
 									<h4 class="tsd-parameters-title">Parameters</h4>
 									<ul class="tsd-parameters">
 										<li>
-											<h5>rootReducer: <span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span></h5>
+											<h5>rootReducer: <span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">&gt;</span></h5>
 										</li>
 										<li>
 											<h5>initState: <span class="tsd-signature-type">RootState</span></h5>
@@ -1106,12 +1106,12 @@ img { max-width: 100%; }
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="configuresubstore" class="tsd-anchor"></a>
-				<h3>configure<wbr>Sub<wbr>Store</h3>
+				<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> configure<wbr>Sub<wbr>Store</h3>
 				<div class="tsd-signature tsd-kind-icon">configure<wbr>Sub<wbr>Store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#configuresubstore">configureSubStore</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/ng-redux.ts#L62">components/ng-redux.ts:62</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/ng-redux.ts#L65">components/ng-redux.ts:65</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1119,7 +1119,7 @@ img { max-width: 100%; }
 					<ul class="tsd-parameters">
 						<li class="tsd-parameter-siganture">
 							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-has-type-parameter tsd-is-not-exported">
-								<li class="tsd-signature tsd-kind-icon">&lt;SubState&gt;<span class="tsd-signature-symbol">(</span>basePath<span class="tsd-signature-symbol">: </span><a href="../globals.html#pathselector" class="tsd-signature-type">PathSelector</a>, localReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SubState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/observablestore.html" class="tsd-signature-type">ObservableStore</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SubState</span><span class="tsd-signature-symbol">&gt;</span></li>
+								<li class="tsd-signature tsd-kind-icon">&lt;SubState&gt;<span class="tsd-signature-symbol">(</span>basePath<span class="tsd-signature-symbol">: </span><a href="../globals.html#pathselector" class="tsd-signature-type">PathSelector</a>, localReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SubState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/observablestore.html" class="tsd-signature-type">ObservableStore</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SubState</span><span class="tsd-signature-symbol">&gt;</span></li>
 							</ul>
 							<ul class="tsd-descriptions">
 								<li class="tsd-description">
@@ -1135,7 +1135,7 @@ img { max-width: 100%; }
 											<h5>basePath: <a href="../globals.html#pathselector" class="tsd-signature-type">PathSelector</a></h5>
 										</li>
 										<li>
-											<h5>localReducer: <span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SubState</span><span class="tsd-signature-symbol">&gt;</span></h5>
+											<h5>localReducer: <span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SubState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">&gt;</span></h5>
 										</li>
 									</ul>
 									<h4 class="tsd-returns-title">Returns <a href="../interfaces/observablestore.html" class="tsd-signature-type">ObservableStore</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SubState</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1147,23 +1147,23 @@ img { max-width: 100%; }
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="dispatch" class="tsd-anchor"></a>
-				<h3>dispatch</h3>
-				<div class="tsd-signature tsd-kind-icon">dispatch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> dispatch</h3>
+				<div class="tsd-signature tsd-kind-icon">dispatch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#dispatch">dispatch</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/ng-redux.ts#L53">components/ng-redux.ts:53</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/ng-redux.ts#L55">components/ng-redux.ts:55</a></li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="getstate" class="tsd-anchor"></a>
-				<h3>get<wbr>State</h3>
+				<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>State</h3>
 				<div class="tsd-signature tsd-kind-icon">get<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#getstate">getState</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/ng-redux.ts#L54">components/ng-redux.ts:54</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/ng-redux.ts#L56">components/ng-redux.ts:56</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1184,11 +1184,11 @@ img { max-width: 100%; }
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="providestore" class="tsd-anchor"></a>
-				<h3>provide<wbr>Store</h3>
+				<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> provide<wbr>Store</h3>
 				<div class="tsd-signature tsd-kind-icon">provide<wbr>Store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/ng-redux.ts#L50">components/ng-redux.ts:50</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/ng-redux.ts#L52">components/ng-redux.ts:52</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1229,12 +1229,12 @@ img { max-width: 100%; }
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="replacereducer" class="tsd-anchor"></a>
-				<h3>replace<wbr>Reducer</h3>
+				<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> replace<wbr>Reducer</h3>
 				<div class="tsd-signature tsd-kind-icon">replace<wbr>Reducer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#replacereducer">replaceReducer</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/ng-redux.ts#L56">components/ng-redux.ts:56</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/ng-redux.ts#L58">components/ng-redux.ts:58</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1242,14 +1242,14 @@ img { max-width: 100%; }
 					<ul class="tsd-parameters">
 						<li class="tsd-parameter-siganture">
 							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>nextReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>nextReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 							</ul>
 							<ul class="tsd-descriptions">
 								<li class="tsd-description">
 									<h4 class="tsd-parameters-title">Parameters</h4>
 									<ul class="tsd-parameters">
 										<li>
-											<h5>nextReducer: <span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span></h5>
+											<h5>nextReducer: <span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">&gt;</span></h5>
 										</li>
 									</ul>
 									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1261,12 +1261,12 @@ img { max-width: 100%; }
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="select" class="tsd-anchor"></a>
-				<h3>select</h3>
+				<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> select</h3>
 				<div class="tsd-signature tsd-kind-icon">select<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#select">select</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/ng-redux.ts#L59">components/ng-redux.ts:59</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/ng-redux.ts#L61">components/ng-redux.ts:61</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1302,12 +1302,12 @@ img { max-width: 100%; }
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="subscribe" class="tsd-anchor"></a>
-				<h3>subscribe</h3>
+				<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> subscribe</h3>
 				<div class="tsd-signature tsd-kind-icon">subscribe<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<p>Implementation of <a href="../interfaces/observablestore.html">ObservableStore</a>.<a href="../interfaces/observablestore.html#subscribe">subscribe</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/ng-redux.ts#L55">components/ng-redux.ts:55</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/ng-redux.ts#L57">components/ng-redux.ts:57</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1350,7 +1350,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">instance<span class="tsd-signature-symbol">:</span> <a href="../interfaces/observablestore.html" class="tsd-signature-type">ObservableStore</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;undefined</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/ng-redux.ts#L20">components/ng-redux.ts:20</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/ng-redux.ts#L21">components/ng-redux.ts:21</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">

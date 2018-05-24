@@ -19,7 +19,8 @@
     "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "pretty": true
+    "pretty": true,
+	"strictPropertyInitialization": false
   },
   "compileOnSave": false,
   "buildOnSave": false,
@@ -29,6 +30,7 @@
     "generateCodeForLibraries": false,
     "strictMetadataEmit": true,
     "genDir": ".compiled",
-    "annotationsAs": "decorators"
+    "annotationsAs": "decorators",
+	"disableTypeScriptVersionCheck": true
   }
 }

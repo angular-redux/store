@@ -23,7 +23,8 @@
     "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "pretty": true
+    "pretty": true,
+	"strictPropertyInitialization": false
   },
   "compileOnSave": false,
   "buildOnSave": false,
@@ -37,6 +38,7 @@
   ],
   "angularCompilerOptions": {
     "strictMetadataEmit": true,
-    "genDir": ".compiled"
+    "genDir": ".compiled",
+	"disableTypeScriptVersionCheck": true
   }
 }

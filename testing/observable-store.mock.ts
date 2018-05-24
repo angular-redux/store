@@ -4,12 +4,9 @@ import {
   ObservableStore,
   PathSelector,
 } from '@angular-redux/store';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { Reducer, Dispatch } from 'redux';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import 'rxjs/add/observable/from';
-import 'rxjs/add/operator/distinctUntilChanged';
+import { AnyAction, Reducer, Dispatch } from 'redux';
+import { Observable, Subject, ReplaySubject } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 /** @hidden */
 export interface SelectorStubRecord {
@@ -44,7 +41,7 @@ export class MockObservableStore<State> implements ObservableStore<any> {
     this.subStores = {};
   };
 
-  dispatch: Dispatch<State> = action => action;
+  dispatch: Dispatch<AnyAction> = action => action;
   replaceReducer = () => null;
   getState = () => ({} as State);
   subscribe = () => () => null;
@@ -55,13 +52,13 @@ export class MockObservableStore<State> implements ObservableStore<any> {
   ): Observable<any> => {
     const stub = this.initSelectorStub<SelectedState>(selector, comparator);
     return stub.comparator
-      ? stub.subject.distinctUntilChanged(stub.comparator)
+      ? stub.subject.pipe(distinctUntilChanged(stub.comparator))
       : stub.subject;
   };
 
   configureSubStore = <SubState>(
     basePath: PathSelector,
-    _: Reducer<SubState>
+    _: Reducer<SubState, AnyAction>
   ): MockObservableStore<SubState> => this.initSubStore<SubState>(basePath);
 
   getSubStore = <SubState>(

@@ -24,11 +24,11 @@ export function select<T>(
   selector?: Selector<any, T>,
   comparator?: Comparator
 ): PropertyDecorator {
-  return (target: any, key: string): void => {
+  return (target: any, key: string | symbol): void => {
     const adjustedSelector = selector
       ? selector
-      : key.lastIndexOf('$') === key.length - 1
-        ? key.substring(0, key.length - 1)
+      : String(key).lastIndexOf('$') === String(key).length - 1
+        ? String(key).substring(0, String(key).length - 1)
         : key;
     decorate(adjustedSelector, undefined, comparator)(target, key);
   };

@@ -1,5 +1,5 @@
-import { Store, Reducer } from 'redux';
-import { Observable } from 'rxjs/Observable';
+import { Store, Reducer, AnyAction } from 'redux';
+import { Observable } from 'rxjs';
 import { Selector, PathSelector, Comparator } from './selectors';
 
 /**
@@ -41,6 +41,6 @@ export interface ObservableStore<StateType> extends Store<StateType> {
    */
   configureSubStore: <SubState>(
     basePath: PathSelector,
-    localReducer: Reducer<SubState>
+    localReducer: Reducer<SubState, AnyAction>
   ) => ObservableStore<SubState>;
 }

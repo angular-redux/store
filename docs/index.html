@@ -925,7 +925,7 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-type-alias">
 			<a href="globals.html#comparator" class="tsd-kind-icon">Comparator</a>
 		</li>
-		<li class=" tsd-kind-type-alias">
+		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="globals.html#functionselector" class="tsd-kind-icon">Function<wbr>Selector</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
@@ -934,10 +934,10 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-type-alias">
 			<a href="globals.html#propertyselector" class="tsd-kind-icon">Property<wbr>Selector</a>
 		</li>
-		<li class=" tsd-kind-type-alias">
+		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="globals.html#selector" class="tsd-kind-icon">Selector</a>
 		</li>
-		<li class=" tsd-kind-type-alias">
+		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="globals.html#transformer" class="tsd-kind-icon">Transformer</a>
 		</li>
 		<li class=" tsd-kind-function">
@@ -960,6 +960,15 @@ img { max-width: 100%; }
 <div class="container container-main">
 	<div class="content-wrap">
 		<div class="tsd-panel tsd-typography">
+			<h1 id="which-version-to-use-">Which Version to use?</h1>
+			<h2 id="angular-5-">Angular 5+</h2>
+			<p>Use <code>@angular-redux/store@^7</code> - this version supports Angular 5, and also changes to using lettable operators.</p>
+			<p>Any new major releases will released on the v7 branch and with the <code>@latest</code> tag for final publishes. </p>
+			<h2 id="angular-4-or-lower">Angular 4 or lower</h2>
+			<p>Use <code>@angular-redux/store@^6</code> - This supports Angular 4 and earlier.</p>
+			<h1 id="support-for-angular-redux-store-6-">Support for <code>@angular-redux/store@6</code>?</h1>
+			<p>Where possible, I will be maintaining and applying any fixes / enhancements for v7 into v6 where it does not introduce a breaking change.</p>
+			<p>I made a few mistakes trying to publish fixes / etc to two major versions, which caused some releases to get tagged incorrectly and caused some confusion. Sorry for any confusion this has caused, and will do better on avoiding this in the future, and being more transparent with the releases that are going out.</p>
 			<h1 id="-angular-redux-store">@angular-redux/store</h1>
 			<p>Angular bindings for <a href="https://github.com/reactjs/redux">Redux</a>.</p>
 			<p>For Angular 1 see <a href="https://github.com/wbuchwalter/ng-redux">ng-redux</a></p>
@@ -1065,11 +1074,11 @@ img { max-width: 100%; }
 						<h3>Type aliases</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-type-alias"><a href="globals.html#comparator" class="tsd-kind-icon">Comparator</a></li>
-							<li class="tsd-kind-type-alias"><a href="globals.html#functionselector" class="tsd-kind-icon">Function<wbr>Selector</a></li>
+							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#functionselector" class="tsd-kind-icon">Function<wbr>Selector</a></li>
 							<li class="tsd-kind-type-alias"><a href="globals.html#pathselector" class="tsd-kind-icon">Path<wbr>Selector</a></li>
 							<li class="tsd-kind-type-alias"><a href="globals.html#propertyselector" class="tsd-kind-icon">Property<wbr>Selector</a></li>
-							<li class="tsd-kind-type-alias"><a href="globals.html#selector" class="tsd-kind-icon">Selector</a></li>
-							<li class="tsd-kind-type-alias"><a href="globals.html#transformer" class="tsd-kind-icon">Transformer</a></li>
+							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#selector" class="tsd-kind-icon">Selector</a></li>
+							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#transformer" class="tsd-kind-icon">Transformer</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
@@ -1093,23 +1102,19 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">Comparator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/selectors.ts#L14">components/selectors.ts:14</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/selectors.ts#L14">components/selectors.ts:14</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>Custom equality checker that can be used with <code>.select</code> and <code>@select</code>.
-							```ts
+							<code>`</code>ts
 							const customCompare: Comparator = (x: any, y: any) =&gt; {
 							return x.id === y.id
 						}</p>
 					</div>
-					<dl class="tsd-comment-tags">
-						<dt>select(selector,</dt>
-						<dd><p>customCompare)
-							```</p>
-						</dd>
-					</dl>
+					<p>@select(selector, customCompare)
+					<code>`</code></p>
 				</div>
 				<div class="tsd-type-declaration">
 					<h4>Type declaration</h4>
@@ -1136,13 +1141,13 @@ img { max-width: 100%; }
 					</ul>
 				</div>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-type-alias">
+			<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
 				<a name="functionselector" class="tsd-anchor"></a>
 				<h3>Function<wbr>Selector</h3>
 				<div class="tsd-signature tsd-kind-icon">Function<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/selectors.ts#L18">components/selectors.ts:18</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/selectors.ts#L21">components/selectors.ts:21</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1173,7 +1178,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">Path<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/selectors.ts#L17">components/selectors.ts:17</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/selectors.ts#L20">components/selectors.ts:20</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -1183,27 +1188,27 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">Property<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/selectors.ts#L16">components/selectors.ts:16</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/selectors.ts#L19">components/selectors.ts:19</a></li>
 					</ul>
 				</aside>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-type-alias">
+			<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
 				<a name="selector" class="tsd-anchor"></a>
 				<h3>Selector</h3>
 				<div class="tsd-signature tsd-kind-icon">Selector<span class="tsd-signature-symbol">:</span> <a href="globals.html#propertyselector" class="tsd-signature-type">PropertySelector</a><span class="tsd-signature-symbol"> | </span><a href="globals.html#pathselector" class="tsd-signature-type">PathSelector</a><span class="tsd-signature-symbol"> | </span><a href="globals.html#functionselector" class="tsd-signature-type">FunctionSelector</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/selectors.ts#L19">components/selectors.ts:19</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/selectors.ts#L22">components/selectors.ts:22</a></li>
 					</ul>
 				</aside>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-type-alias">
+			<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
 				<a name="transformer" class="tsd-anchor"></a>
 				<h3>Transformer</h3>
 				<div class="tsd-signature tsd-kind-icon">Transformer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/selectors.ts#L15">components/selectors.ts:15</a></li>
+						<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/selectors.ts#L15">components/selectors.ts:15</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1211,7 +1216,7 @@ img { max-width: 100%; }
 					<ul class="tsd-parameters">
 						<li class="tsd-parameter-siganture">
 							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
-								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>store$<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">V</span><span class="tsd-signature-symbol">&gt;</span></li>
+								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>store$<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span>, scope<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">V</span><span class="tsd-signature-symbol">&gt;</span></li>
 							</ul>
 							<ul class="tsd-descriptions">
 								<li class="tsd-description">
@@ -1219,6 +1224,9 @@ img { max-width: 100%; }
 									<ul class="tsd-parameters">
 										<li>
 											<h5>store$: <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RootState</span><span class="tsd-signature-symbol">&gt;</span></h5>
+										</li>
+										<li>
+											<h5>scope: <span class="tsd-signature-type">any</span></h5>
 										</li>
 									</ul>
 									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">V</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1241,7 +1249,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/decorators/with-sub-store.ts#L10">decorators/with-sub-store.ts:10</a></li>
+								<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/decorators/with-sub-store.ts#L11">decorators/with-sub-store.ts:11</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1249,7 +1257,8 @@ img { max-width: 100%; }
 								<p>Modifies the behaviour of any <code>@select</code>, <code>@select$</code>, or <code>@dispatch</code>
 								decorators to operate on a substore defined by the IFractalStoreOptions.</p>
 							</div>
-							<p>See <a href="https://github.com/angular-redux/store/blob/master/articles/fractal-store.md">https://github.com/angular-redux/store/blob/master/articles/fractal-store.md</a>
+							<p>See:
+								<a href="https://github.com/angular-redux/store/blob/master/articles/fractal-store.md">https://github.com/angular-redux/store/blob/master/articles/fractal-store.md</a>
 							for more information about SubStores.</p>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1274,7 +1283,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/decorators/dispatch.ts#L10">decorators/dispatch.ts:10</a></li>
+								<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/decorators/dispatch.ts#L10">decorators/dispatch.ts:10</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1292,13 +1301,13 @@ img { max-width: 100%; }
 				<a name="enablefractalreducers" class="tsd-anchor"></a>
 				<h3>enable<wbr>Fractal<wbr>Reducers</h3>
 				<ul class="tsd-signatures tsd-kind-function">
-					<li class="tsd-signature tsd-kind-icon">enable<wbr>Fractal<wbr>Reducers<span class="tsd-signature-symbol">(</span>rootReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></li>
+					<li class="tsd-signature tsd-kind-icon">enable<wbr>Fractal<wbr>Reducers<span class="tsd-signature-symbol">(</span>rootReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/components/fractal-reducer-map.ts#L17">components/fractal-reducer-map.ts:17</a></li>
+								<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/components/fractal-reducer-map.ts#L19">components/fractal-reducer-map.ts:19</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1306,10 +1315,11 @@ img { max-width: 100%; }
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>rootReducer: <span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>rootReducer: <span class="tsd-signature-type">Reducer</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								<div class="tsd-comment tsd-typography">
-									<p>Call this on your root reducer to enable SubStore functionality for
-										pre-configured stores (e.g. when using NgRedux.provideStore()).  NgRedux.configureStore
+									<p>Call this on your root reducer to enable SubStore
+										functionality for pre-configured stores (e.g. using NgRedux.provideStore()).
+										NgRedux.configureStore
 									does it for you under the hood.</p>
 								</div>
 							</li>
@@ -1318,17 +1328,17 @@ img { max-width: 100%; }
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S</span>, action<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, action<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>state: <span class="tsd-signature-type">S</span></h5>
+												<h5>state: <span class="tsd-signature-type">S</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 											</li>
 											<li>
-												<h5>action: <span class="tsd-signature-type">AnyAction</span></h5>
+												<h5>action: <span class="tsd-signature-type">A</span></h5>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">S</span></h4>
@@ -1349,7 +1359,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/decorators/select.ts#L23">decorators/select.ts:23</a></li>
+								<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/decorators/select.ts#L23">decorators/select.ts:23</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1401,18 +1411,19 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/angular-redux/store/blob/a1927b0/src/decorators/select.ts#L59">decorators/select.ts:59</a></li>
+								<li>Defined in <a href="https://github.com/angular-redux/store/blob/master/src/decorators/select.ts#L60">decorators/select.ts:60</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Selects an observable using the given path selector, and runs it through the given
-									transformer function. A transformer function takes the store observable as an input and
-									returns a derived observable from it. That derived observable is run through
-								distinctUntilChanges with the given optional comparator and attached to the store property.</p>
+								<p>Selects an observable using the given path selector, and runs it through the
+									given transformer function. A transformer function takes the store
+									observable as an input and returns a derived observable from it. That derived
+									observable is run through distinctUntilChanges with the given optional
+								comparator and attached to the store property.</p>
 							</div>
-							<p>Think of a Transformer as a FunctionSelector that operates on observables instead of
-							values.</p>
+							<p>Think of a Transformer as a FunctionSelector that operates on observables
+							instead of values.</p>
 							<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { select$ } <span class="hljs-keyword">from</span> <span class="hljs-string">'angular-redux/store'</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> debounceAndTriple = obs$ =&gt; obs$

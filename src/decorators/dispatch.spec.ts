@@ -1,12 +1,15 @@
-import { Reducer, Action } from 'redux';
+import { Reducer, Action, AnyAction } from 'redux';
 import { NgZone } from '@angular/core';
 import { NgRedux } from '../components/ng-redux';
+import { ObservableStore } from '../components/observable-store';
 import { RootStore } from '../components/root-store';
 import { dispatch } from './dispatch';
 import { WithSubStore } from './with-sub-store';
 
-class MockNgZone {
-  run = (fn: Function) => fn();
+class MockNgZone extends NgZone {
+  run<T>(fn: (...args: any[]) => T): T {
+    return fn() as T;
+  }
 }
 
 interface IAppState {
@@ -18,9 +21,9 @@ type PayloadAction = Action & { payload?: IAppState };
 
 describe('@dispatch', () => {
   let ngRedux;
-  const mockNgZone = new MockNgZone() as NgZone;
+  const mockNgZone = new MockNgZone({ enableLongStackTrace: false }) as NgZone;
   let defaultState: IAppState;
-  let rootReducer: Reducer<IAppState>;
+  let rootReducer: Reducer<IAppState, AnyAction>;
 
   beforeEach(() => {
     defaultState = {
@@ -41,9 +44,12 @@ describe('@dispatch', () => {
       }
     };
 
-    ngRedux = new RootStore(mockNgZone);
+    ngRedux = new RootStore<any>(mockNgZone);
     ngRedux.configureStore(rootReducer, defaultState);
-    spyOn(NgRedux.instance, 'dispatch');
+    spyOn(
+      NgRedux.instance as ObservableStore<any>,
+      'dispatch'
+    );
   });
 
   describe('on the RootStore', () => {

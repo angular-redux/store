@@ -1,6 +1,6 @@
 {
   "name": "@angular-redux/store",
-  "version": "7.1.1",
+  "version": "9.0.0",
   "description": "Angular bindings for Redux",
   "main": "./lib/src/index.js",
   "scripts": {
@@ -15,8 +15,8 @@
     "test": "nyc node tests.js",
     "test:watch": "nodemon tests.js -w src -w testing -e ts",
     "ci": "npm run lint && npm run build && npm test",
-    "predoc": "rm -rf docs",
-    "doc": "typedoc --out docs --excludeExternals --excludePrivate --excludeNotExported -theme minimal --name @angular-redux/store --mode file --module commonjs --tsconfig tsconfig.docs.json src"
+    "predoc": "rimraf docs",
+    "doc": "typedoc --out docs --excludeExternals --excludePrivate --excludeNotExported -theme minimal --sourcefile-url-prefix \"https://github.com/angular-redux/store/blob/master/src/\" --name @angular-redux/store --mode file --module commonjs --tsconfig tsconfig.docs.json src"
   },
   "typings": "./lib/src/index.d.ts",
   "repository": {
@@ -47,6 +47,10 @@
     {
       "name": "Cosmin Ronnin",
       "url": "https://github.com/kosz"
+    },
+    {
+      "name": "Gabriel Schuster",
+      "url": "https://github.com/actra-development-oss"
     }
   ],
   "license": "MIT",
@@ -55,39 +59,40 @@
   },
   "homepage": "https://github.com/angular-redux/store#readme",
   "devDependencies": {
-    "@angular/animations": "^5.0.1",
-    "@angular/common": "^5.0.1",
-    "@angular/compiler": "^5.0.1",
-    "@angular/compiler-cli": "^5.0.1",
-    "@angular/core": "^5.0.1",
-    "@angular/http": "^5.0.1",
-    "@angular/platform-browser": "^5.0.1",
-    "@angular/platform-browser-dynamic": "^5.0.1",
-    "@angular/platform-server": "^5.0.1",
+    "@angular/animations": "^6.0.1",
+    "@angular/common": "^6.0.1",
+    "@angular/compiler": "^6.0.1",
+    "@angular/compiler-cli": "^6.0.1",
+    "@angular/core": "^6.0.1",
+    "@angular/http": "^6.0.1",
+    "@angular/platform-browser": "^6.0.1",
+    "@angular/platform-browser-dynamic": "^6.0.1",
+    "@angular/platform-server": "^6.0.1",
     "@types/jasmine": "2.5.38",
-    "@types/node": "^6.0.36",
-    "core-js": "^2.4.1",
+    "@types/node": "^10.0.3",
+    "core-js": "^2.5.6",
     "husky": "^0.14.3",
     "jasmine": "^2.5.3",
     "lint-staged": "^6.0.0",
-    "nodemon": "^1.11.0",
+    "nodemon": "^1.10.0",
     "nyc": "^10.2.0",
     "prettier": "1.9.2",
-    "redux": "^3.7.2",
-    "reflect-metadata": "0.1.10",
-    "rimraf": "^2.5.2",
-    "rxjs": "^5.5.2",
-    "symbol-observable": "^1.0.1",
-    "ts-node": "^3.3.0",
-    "tsconfig-paths": "^2.3.0",
-    "tslint": "^5.8.0",
-    "typedoc": "^0.9.0",
-    "typescript": "2.4.2",
-    "zone.js": "^0.8.18"
+    "redux": "^4.0.0",
+    "reflect-metadata": "0.1.12",
+    "rimraf": "^2.6.2",
+    "rxjs": "^6.1.0",
+    "symbol-observable": "^1.2.0",
+    "ts-node": "^6.0.3",
+    "tsconfig-paths": "^3.3.2",
+    "tslint": "^5.10.0",
+    "typedoc": "^0.11.1",
+    "typedoc-plugin-sourcefile-url": "^1.0.3",
+    "typescript": "2.7.2",
+    "zone.js": "^0.8.26"
   },
   "peerDependencies": {
-    "@angular/core": "^5.0.0",
-    "redux": "^3.5.0"
+    "@angular/core": "^6.0.1",
+    "redux": "^4.0.0"
   },
   "nyc": {
     "extension": [

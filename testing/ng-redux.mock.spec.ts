@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/toArray';
+import { map, toArray } from 'rxjs/operators';
 
 import { MockNgRedux } from './ng-redux.mock';
 import { NgRedux, select, select$ } from '../src';
@@ -13,7 +13,7 @@ import { NgRedux, select, select$ } from '../src';
 class TestComponent {
   @select('foo') readonly obs$: Observable<number>;
 
-  @select$('bar', obs$ => obs$.map(x => 2 * x))
+  @select$('bar', obs$ => obs$.pipe(map((x: any) => 2 * x)))
   readonly barTimesTwo$: Observable<number>;
 
   readonly baz$: Observable<number>;
@@ -43,7 +43,7 @@ describe('NgReduxMock', () => {
     stub1.complete();
 
     instance.obs$
-      .toArray()
+      .pipe(toArray())
       .subscribe((values: number[]) => expect(values).toEqual([1, 2]));
 
     MockNgRedux.reset();
@@ -56,7 +56,7 @@ describe('NgReduxMock', () => {
     stub2.complete();
 
     instance.obs$
-      .toArray()
+      .pipe(toArray())
       .subscribe((values: number[]) => expect(values).toEqual([3]));
   });
 
@@ -70,7 +70,7 @@ describe('NgReduxMock', () => {
     stub1.complete();
 
     instance.barTimesTwo$
-      .toArray()
+      .pipe(toArray())
       .subscribe((values: number[]) => expect(values).toEqual([2, 4]));
 
     MockNgRedux.reset();
@@ -83,7 +83,7 @@ describe('NgReduxMock', () => {
     stub2.complete();
 
     instance.obs$
-      .toArray()
+      .pipe(toArray())
       .subscribe((values: number[]) => expect(values).toEqual([6]));
   });
 
@@ -97,7 +97,7 @@ describe('NgReduxMock', () => {
     stub1.complete();
 
     instance.baz$
-      .toArray()
+      .pipe(toArray())
       .subscribe((values: number[]) => expect(values).toEqual([1, 2]));
 
     MockNgRedux.reset();
@@ -110,7 +110,7 @@ describe('NgReduxMock', () => {
     stub2.complete();
 
     instance.obs$
-      .toArray()
+      .pipe(toArray())
       .subscribe((values: number[]) => expect(values).toEqual([3]));
   });
 });

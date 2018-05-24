@@ -1,6 +1,6 @@
 import {
   Store,
-  Action,
+  AnyAction,
   Reducer,
   Middleware,
   StoreEnhancer,
@@ -12,13 +12,8 @@ import {
 } from 'redux';
 
 import { NgZone } from '@angular/core';
-import { Observer } from 'rxjs/Observer';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { map } from 'rxjs/operators/map';
-import { filter } from 'rxjs/operators/filter';
-import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
-import { switchMap } from 'rxjs/operators/switchMap';
+import { BehaviorSubject, Observable, Observer } from 'rxjs';
+import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { NgRedux } from './ng-redux';
 import {
   Selector,
@@ -33,11 +28,12 @@ import { ObservableStore } from './observable-store';
 
 /** @hidden */
 export class RootStore<RootState> extends NgRedux<RootState> {
-  private _store: Store<RootState>;
+  private _store: Store<RootState> | undefined = undefined;
   private _store$: BehaviorSubject<RootState>;
 
   constructor(private ngZone: NgZone) {
     super();
+
     NgRedux.instance = this;
     this._store$ = new BehaviorSubject<RootState | undefined>(undefined).pipe(
       filter(n => n !== undefined),
@@ -47,7 +43,7 @@ export class RootStore<RootState> extends NgRedux<RootState> {
   }
 
   configureStore = (
-    rootReducer: Reducer<RootState>,
+    rootReducer: Reducer<RootState, AnyAction>,
     initState: RootState,
     middleware: Middleware[] = [],
     enhancers: StoreEnhancer<RootState>[] = []
@@ -67,16 +63,16 @@ export class RootStore<RootState> extends NgRedux<RootState> {
     this.setStore(store);
   };
 
-  getState = (): RootState => this._store.getState();
+  getState = (): RootState => this._store!.getState();
 
   subscribe = (listener: () => void): Unsubscribe =>
-    this._store.subscribe(listener);
+    this._store!.subscribe(listener);
 
-  replaceReducer = (nextReducer: Reducer<RootState>): void => {
-    this._store.replaceReducer(nextReducer);
+  replaceReducer = (nextReducer: Reducer<RootState, AnyAction>): void => {
+    this._store!.replaceReducer(nextReducer);
   };
 
-  dispatch: Dispatch<RootState> = <A extends Action>(action: A): A => {
+  dispatch: Dispatch<AnyAction> = <A extends AnyAction>(action: A): A => {
     assert(
       !!this._store,
       'Dispatch failed: did you forget to configure your store? ' +
@@ -85,9 +81,9 @@ export class RootStore<RootState> extends NgRedux<RootState> {
     );
 
     if (!NgZone.isInAngularZone()) {
-      return this.ngZone.run(() => this._store.dispatch(action));
+      return this.ngZone.run(() => this._store!.dispatch(action));
     } else {
-      return this._store.dispatch(action);
+      return this._store!.dispatch(action);
     }
   };
 
@@ -103,7 +99,7 @@ export class RootStore<RootState> extends NgRedux<RootState> {
 
   configureSubStore = <SubState>(
     basePath: PathSelector,
-    localReducer: Reducer<SubState>
+    localReducer: Reducer<SubState, AnyAction>
   ): ObservableStore<SubState> =>
     new SubStore<SubState>(this, basePath, localReducer);
 

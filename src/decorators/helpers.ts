@@ -1,4 +1,4 @@
-import { Reducer } from 'redux';
+import { Reducer, AnyAction } from 'redux';
 import { NgRedux } from '../components/ng-redux';
 import { ObservableStore } from '../components/observable-store';
 import {
@@ -7,7 +7,7 @@ import {
   Comparator,
   Transformer,
 } from '../components/selectors';
-import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 /**
  * Used with the `@WithSubStore` class decorator to define a SubStore (AKA a
@@ -27,7 +27,7 @@ export interface IFractalStoreOptions {
   /**
    * The localReducer for the substore in question.
    */
-  localReducer: Reducer<any>;
+  localReducer: Reducer<any, AnyAction>;
 }
 
 /**

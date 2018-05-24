@@ -4,11 +4,15 @@ import {
   Comparator,
   PathSelector,
 } from '@angular-redux/store';
-import { Reducer, Dispatch, Middleware, Store, StoreEnhancer } from 'redux';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/observable/from';
-import 'rxjs/add/operator/distinctUntilChanged';
+import {
+  AnyAction,
+  Reducer,
+  Dispatch,
+  Middleware,
+  Store,
+  StoreEnhancer,
+} from 'redux';
+import { Observable, Subject } from 'rxjs';
 import { MockObservableStore } from './observable-store.mock';
 // tslint:disable:member-ordering
 /**
@@ -74,7 +78,7 @@ export class MockNgRedux<T = {}> extends NgRedux<T> {
 
   provideStore = (_: Store<any>): void => {};
   configureStore = (
-    _: Reducer<any>,
+    _: Reducer<any, AnyAction>,
     __: any,
     ___?: Middleware[],
     ____?: StoreEnhancer<any>[]

@@ -53,7 +53,7 @@ describe('setIn', () => {
     }
 
     const original = {
-      root: new TestClass()
+      root: new TestClass(),
     };
     setIn(original, ['root', 'a', 'b', 'c'], 123);
     expect(setInCalled).toEqual(true);
