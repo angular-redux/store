@@ -15,3 +15,4 @@ coverage/
 *.ngsummary.json
 .DS_STORE
 .compiled
+*.log
