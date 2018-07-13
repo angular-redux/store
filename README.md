@@ -1,3 +1,6 @@
+# ****REPO DEPRECATED****
+
+Please note that this repo has been deprecated. Code and issues are being migrated to a monorepo at https://github.com/angular-redux/platform where we are beginning work on a new and improved v10. To file any new issues or see the state of the current code base, we would love to see you there! Thanks for your support!
 
 # Which Version to use?
 
